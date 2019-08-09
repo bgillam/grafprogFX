@@ -1,1 +1,2 @@
-# grafprogFX
+# GrafProg
+A Simple Graphing Program
