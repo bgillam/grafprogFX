@@ -1,0 +1,120 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ComboBox?>
+<BorderPane fx:controller="sample.Controller"
+            xmlns:fx="http://javafx.com/fxml" >
+
+        <top>
+        <VBox spacing = "5" >
+            <padding>
+                <Insets left="10" top="10"  right="10"   bottom="10"/>
+            </padding>
+            <HBox spacing = "5" >
+
+                <Label text = "choicetype"/>
+                <ComboBox value = "column or fstring"></ComboBox>
+            </HBox>
+            <HBox spacing = "5">
+                <Label text = "f(x)=" minWidth="30"/>
+                <TextField id = "Functionstring" minWidth = "250"/>
+            </HBox>
+            <Separator orientation="HORIZONTAL"/>
+            <HBox spacing="5">
+
+                <Label text ="x1" minWidth="15"/>
+                <TextField id = "X1" maxWidth="30"/>
+                <Label text = "|" minWidth = "10"/>
+                <Label text ="y1" minWidth="15"/>
+                <TextField id = "y1" maxWidth = "30"/>
+                <Label text = "|" minWidth = "10"/>
+                <Label text ="n" minWidth="15"/>
+                <TextField id = "N" maxWidth = "30"/>
+            </HBox>
+            <HBox spacing ="5">
+                <Label text ="x2" minWidth="15"/>
+                <TextField id = "X2" maxWidth = "30"/>
+                <Label text = "|" minWidth = "10"/>
+                <Label text ="y2" minWidth="15"/>
+                <TextField id = "y2" maxWidth = "30"/>
+            </HBox>
+            <Separator orientation="HORIZONTAL"/>
+        </VBox>
+    </top>
+    <left>
+
+        <VBox spacing = "5">
+            <padding>
+                <Insets left="10" top="10"  right="10"   bottom="10"/>
+            </padding>
+            <HBox spacing = "5">
+                <Label text = "mark:" maxWidth="100"/>
+                <fx:define>
+                    <ToggleGroup fx:id="markToggleGroup"/>
+                </fx:define>
+                <RadioButton text = "." toggleGroup="$markToggleGroup"/>
+                <RadioButton text = "x" toggleGroup="$markToggleGroup" selected = "true"/>
+                <RadioButton text = "o" toggleGroup="$markToggleGroup"/>
+                <RadioButton text = "char" toggleGroup="$markToggleGroup"/>
+                <TextField id="charMark" maxWidth="30"/>
+            </HBox>
+            <HBox>
+                <Label text = "Text" maxWidth ="100"/>
+                <TextField id = "textForDisplay" minWidth = "100"/>
+            </HBox>
+            <HBox>
+                <Label text = "FontName" minWidth ="100"/>
+                <Button text = "Font" minWidth = "100" onAction="#onFontButtonClicked"/>
+
+            </HBox>
+            <CheckBox text = "FNS"/>
+            <Button text = "Fill" minWidth = "100" onAction="#onFillButtonClicked"/>
+            <Button text = "Color" minWidth = "100" onAction="#onColorButtonClicked"/>
+        </VBox>
+    </left>
+    <center>
+        <Separator orientation="VERTICAL" minWidth="10"/>
+    </center>
+    <right    >
+        <VBox spacing = "5">
+            <padding>
+                <Insets left="10" top="10"  right="10"   bottom="10"/>
+            </padding>
+            <Label text = "Choose Object" />
+            <ComboBox value = "Object"></ComboBox>
+            <Button text = "Edit " minWidth = "100" onAction="#onEditButtonClicked"/>
+            <Button text = "Delete " minWidth = "100" onAction="#onDeleteButtonClicked"/>
+            <Button text = "Clear All" minWidth = "100" onAction="#onClearButtonClicked"/>
+        </VBox>
+
+
+    </right>
+    <bottom>
+        <VBox>
+            <padding>
+                <Insets left="10" top="10"  right="10"   bottom="10"/>
+            </padding>
+            <Separator orientation="HORIZONTAL"/>
+            <HBox spacing="20" alignment="CENTER_RIGHT">
+
+                <Button text = "Save" minWidth = "75" onAction="#onSaveButtonClicked"/>
+                <Button text = "Exit|Discard" minWidth = "75" onAction="#onDiscardButtonClicked"/>
+                <Button text = "Exit|Save" minWidth = "75" onAction="#onExitButtonClicked"/>
+            </HBox>
+        </VBox>
+
+    </bottom>
+
+</BorderPane>
