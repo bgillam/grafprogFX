@@ -4,20 +4,23 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class DialogController {
 
-
+    @FXML
+    public ComboBox fComboBox;
+    @FXML
+    public Label fChoiceLabel;
     @FXML
     public TextField x1Text;
-
     @FXML
     public Label x1Label;
-
     @FXML
     public Label separator1;
     @FXML
@@ -43,7 +46,6 @@ public class DialogController {
 
 
 
-
     @FXML
     public void onSaveButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
@@ -57,7 +59,7 @@ public class DialogController {
 
 
             GrafStage.dialogStage.hide();
-            GrafStage.dialogController.showPoints();  //this should hide all; add points for each box
+            GrafStage.dialogController.hideAll();  //this should hide all; add points for each box
 
 
 
@@ -97,10 +99,12 @@ public class DialogController {
 
     //public void hidePoints(){
 
-    public void hidePoints() //change to hide all
+    public void hideAll() //change to hide all
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                fChoiceLabel.setVisible(false);
+                fComboBox.setVisible(false);
                 x1Text.setVisible(false);
                 x1Label.setVisible(false);
                 separator1.setVisible(false);

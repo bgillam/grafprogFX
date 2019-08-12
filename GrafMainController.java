@@ -22,7 +22,7 @@ public class GrafMainController {
     public void fxInput(ActionEvent actionEvent) {
         //GrafStage.dialogStage.initModality(Modality.APPLICATION_MODAL);
         GrafStage.dialogStage.show();
-        GrafStage.dialogController.hidePoints();
+       // GrafStage.dialogController.showPoints();
 
     }
 

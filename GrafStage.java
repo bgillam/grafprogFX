@@ -43,6 +43,7 @@ public class GrafStage extends Application {
         dialogStage.setScene(dialogScene);
         dialogStage.hide();
         dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogController.hideAll();
 
 
         //new GrafProg();

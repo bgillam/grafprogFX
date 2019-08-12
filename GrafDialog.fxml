@@ -24,9 +24,8 @@
                 <Insets left="10" top="10"  right="10"   bottom="10"/>
             </padding>
             <HBox spacing = "5" >
-
-                <Label text = "choicetype"/>
-                <ComboBox value = "column or fstring"></ComboBox>
+                <Label fx:id="fChoiceLabel" text = "choicetype"/>
+                <ComboBox fx:id="fComboBox" value="column or fstring"/>
             </HBox>
             <HBox spacing = "5">
                 <Label text = "f(x)=" minWidth="30"/>
