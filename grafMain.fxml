@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:controller="GrafMainController"
+            xmlns:fx="http://javafx.com/fxml" >
+    <top>
+        <HBox>
+            <VBox>
+                <MenuBar fx:id="mainMenu" onKeyPressed="#onMenuChoice">
+                    <Menu fx:id="fileMenu" text="File">
+                        <MenuItem fx:id="newItem" text="New"/>
+                        <MenuItem fx:id="openItem" text="Open"/>
+                        <MenuItem fx:id="importItem" text="Import"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="saveItem" text="Save"/>
+                        <MenuItem fx:id="saveAsItem" text="Save As"/>
+                        <MenuItem fx:id="saveImageItem" text="Save Image"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="printItem" text="Print"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="exitItem" text="Exit"/>
+                    </Menu>
+                    <Menu fx:id="editMenu" text="Edit">
+                        <MenuItem fx:id="cutItem" text="Cut"/>
+                        <MenuItem fx:id="copyItem" text="Copy"/>
+                        <MenuItem fx:id="pasteItem" text="Paste"/>
+                    </Menu>
+                    <Menu fx:id="functionMenu" text="Function">
+                        <MenuItem fx:id="fxInputItem" text="Input" onAction="#fxInput"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="valueItem" text="Value"/>
+                        <MenuItem fx:id="tangentItem" text="Tangent"/>
+                        <MenuItem fx:id="chordItem" text="Chord"/>
+                        <MenuItem fx:id="zerosItem" text="Zeros"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="integrateIetm" text="Integrate"/>
+                    </Menu>
+                    <Menu fx:id="statMenu" text="Stats">
+                        <MenuItem fx:id="dataItem" text="Data"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="oneVarStatsItem" text="One Variable Stats"/>
+                        <MenuItem fx:id="freqTableItem" text="Freq. Distr. Table"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="columnPloteItem" text="Column Plot"/>
+                        <MenuItem fx:id="boxplotItem" text="Boxplot"/>
+
+                        <MenuItem fx:id="histoItem" text="Histogram"/>
+                        <MenuItem fx:id="freqPloyItem" text="Frequency Polygon"/>
+                        <MenuItem fx:id="ogiveItem" text="Ogive"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="scatterItem" text="Scatter Plot"/>
+                        <MenuItem fx:id="regressItem" text="Regression"/>
+                        <SeparatorMenuItem/>
+                        <CheckMenuItem fx:id="yAxisITem" text="Graph on Y-Axis"/>
+                    </Menu>
+                </MenuBar>
+            </VBox>
+        </HBox>
+    </top>
+
+</BorderPane>

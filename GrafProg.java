@@ -8,6 +8,13 @@
 /* Creates frame, graphing panel and menus. 
  * 
  */
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+//import javafx.application.Application;
+
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
@@ -52,10 +59,13 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
         grafObjectList.add(axes);
         setTitle("GrafProg");
         data.setTitle("Data:");
+
+
     }
            
     //Sets up Frame values
     private void SetupFrame(){
+
        setTitle("GrafProg");
        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
        //WindowListener ensures "Save" prompt on unsaved session
@@ -142,7 +152,9 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
             case "Single Variable Statistics"   : { GrafStatsDialog.createInputDialog(this);    break;}
             case "Regression"                   : { RegressionDialog.createInputDialog(this);   break; }
             
-            case "Input"                        : { new GrafFunction().createInputDialog(this);    break;}
+            case "Input"                        : { GrafStage.dialogStage.show();
+                                                    //new GrafFunction().createInputDialog(this);
+                                                    break;}
             case "Value"                        : { new GrafValue().createInputDialog(this);      break;}
             case "Point"                        : { new GrafPoint().createInputDialog(this);      break;}
             case "Tangent"                      : { new GrafTangent().createInputDialog(this);      break;}
@@ -235,10 +247,14 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
            if (o.getType().equals(gType)) count++;
        return count;
    }
+
+
    
-   public static void main(String[] args){
-        //GrafProg g = 
-        new GrafProg();           
+   public static void main(String[] args) throws Exception {
+
+        new GrafProg();
+
+
     }
   
    

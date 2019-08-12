@@ -14,7 +14,8 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.ComboBox?>
-<BorderPane fx:controller="sample.Controller"
+
+<BorderPane fx:controller="DialogController"
             xmlns:fx="http://javafx.com/fxml" >
 
         <top>
@@ -34,21 +35,21 @@
             <Separator orientation="HORIZONTAL"/>
             <HBox spacing="5">
 
-                <Label text ="x1" minWidth="15"/>
-                <TextField id = "X1" maxWidth="30"/>
-                <Label text = "|" minWidth = "10"/>
-                <Label text ="y1" minWidth="15"/>
-                <TextField id = "y1" maxWidth = "30"/>
-                <Label text = "|" minWidth = "10"/>
-                <Label text ="n" minWidth="15"/>
-                <TextField id = "N" maxWidth = "30"/>
+                <Label fx:id = "x1Label" text ="x1" minWidth="15"/>
+                <TextField fx:id = "x1Text" maxWidth="30"/>
+                <Label fx:id = "separator1" text = "|" minWidth = "10"/>
+                <Label fx:id="y1Label" text="y1" minWidth="15"/>
+                <TextField fx:id = "y1Text" maxWidth = "30"/>
+                <Label fx:id= "separator2" text = "|" minWidth = "10"/>
+                <Label fx:id="nLabel" text ="n" minWidth="15"/>
+                <TextField fx:id = "nText" maxWidth = "30"/>
             </HBox>
             <HBox spacing ="5">
-                <Label text ="x2" minWidth="15"/>
-                <TextField id = "X2" maxWidth = "30"/>
-                <Label text = "|" minWidth = "10"/>
-                <Label text ="y2" minWidth="15"/>
-                <TextField id = "y2" maxWidth = "30"/>
+                <Label fx:id="x2Label" text="x2" minWidth="15"/>
+                <TextField fx:id = "x2Text" maxWidth = "30"/>
+                <Label fx:id="separator3" text= "|" minWidth = "10"/>
+                <Label fx:id="y2Label" text ="y2" minWidth="15"/>
+                <TextField fx:id = "y2Text" maxWidth = "30"/>
             </HBox>
             <Separator orientation="HORIZONTAL"/>
         </VBox>
