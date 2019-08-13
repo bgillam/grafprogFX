@@ -1,6 +1,8 @@
+import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
@@ -49,4 +51,10 @@ public class GrafMainController {
     public void setMessage1(String message){ message1.setText(message); }
     public void setMessage2(String message){ message2.setText(message); }
     public void setMessage3(String message){ message3.setText(message); }
+
+    public void addGrafPanel(SwingNode swingNode){
+        grafPane.getChildren().add(swingNode);
+
+
+    }
 }

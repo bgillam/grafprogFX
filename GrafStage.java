@@ -65,12 +65,13 @@ public class GrafStage extends Application {
         primaryStage.setScene(grafScene);
 
         //setup swing graphing panel
-        final SwingNode swingNode = new SwingNode();
-        setUpSwingNode(swingNode);
-        System.out.println("node = "+ swingNode.toString());  //swingNode non-null here
-        //Pane grafPane = new Pane();
-        mainController.grafPane = new Pane();  //null poniter here
-        mainController.grafPane.getChildren().add(swingNode);
+          final SwingNode swingNode = new SwingNode();
+          setUpSwingNode(swingNode);
+          //addGrafPanel(swingNode);
+//        System.out.println("node = "+ swingNode.toString());  //swingNode non-null here
+        //System.out.println("grafPane:"+mainController.grafPane);
+//        mainController.grafPane = new Pane();  //null poniter here
+          //mainController.grafPane.getChildren().add(swingNode);
 
 
         primaryStage.setTitle("GrafProg: A Simple Graphing Program");
@@ -88,6 +89,8 @@ public class GrafStage extends Application {
         dialogStage.hide();
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
+
+
 
 
         //new GrafProg();
@@ -136,6 +139,8 @@ public class GrafStage extends Application {
     public GrafPanel getGrafPanel(){return grafPanel;}
     public GrafTable getData(){return data;}
     public GrafSettings getGrafSettings() {return grafSet;}
+
+
 
     public static void main(String[] args) {
         //new GrafProg();

@@ -91,7 +91,9 @@
         </HBox>
     </top>
     <center>
-        <Pane fx:id="grafPane"/>
+        <Pane fx:id="grafPane">
+                <Label text = "test"/>
+        </Pane>
     </center>
     <bottom>
         <HBox>
