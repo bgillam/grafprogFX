@@ -4,6 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -16,6 +18,9 @@ public class GrafMainController {
     public Label message2;
     @FXML
     public Label message3;
+    @FXML
+    public Pane grafPane;
+
 
     @FXML
     public void onButtonClicked(ActionEvent e){

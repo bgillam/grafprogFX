@@ -91,7 +91,7 @@
         </HBox>
     </top>
     <center>
-
+        <Pane fx:id="grafPane"/>
     </center>
     <bottom>
         <HBox>

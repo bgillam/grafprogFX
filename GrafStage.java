@@ -1,9 +1,11 @@
 //package sample;
 
 import javafx.application.Application;
+import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -47,15 +49,29 @@ public class GrafStage extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+
+
+
         //Set up Stage for Main Window
         Parent grafRoot = FXMLLoader.load(getClass().getResource("grafMain.fxml"));
         //FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
         //Parent grafRoot = (Parent)mainLoader.load();
 //        mainController = (GrafMainController)mainLoader.getController();
 
+
         //Scene for main window
         Scene grafScene = new Scene (grafRoot, 500, 500);
         primaryStage.setScene(grafScene);
+
+        //setup swing graphing panel
+        final SwingNode swingNode = new SwingNode();
+        setUpSwingNode(swingNode);
+        System.out.println("node = "+ swingNode.toString());  //swingNode non-null here
+        //Pane grafPane = new Pane();
+        mainController.grafPane = new Pane();  //null poniter here
+        mainController.grafPane.getChildren().add(swingNode);
+
 
         primaryStage.setTitle("GrafProg: A Simple Graphing Program");
         primaryStage.show();
@@ -76,6 +92,20 @@ public class GrafStage extends Application {
 
         //new GrafProg();
 
+
+    }
+
+
+    private void setUpSwingNode(final SwingNode swingNode) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JPanel panel = new JPanel();
+                //panel.add(new JButton("Click me!"));
+                panel.add(grafPanel);
+                swingNode.setContent(panel);
+            }
+        });
 
     }
 
