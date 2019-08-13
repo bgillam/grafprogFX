@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class GrafBoxplotTest
 {
-    private GrafProg  gSess;
+    private GrafStage  gSess;
     private GrafBoxPlot gBPlot;
     private ArrayList<GrafObject> aList;
     private ArrayList<Integer> indexList;
@@ -36,7 +36,7 @@ public class GrafBoxplotTest
     @Before
     public void setUp()
     {
-       gSess = new GrafProg();
+       gSess = new GrafStage();
        gBPlot = new GrafBoxPlot(gSess);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.BOXPLOT);
@@ -94,6 +94,6 @@ public class GrafBoxplotTest
     @After
     public void tearDown()
     {
-       gSess.dispose();
+      // gSess.dispose();
     }
 }

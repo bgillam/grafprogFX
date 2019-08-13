@@ -90,11 +90,19 @@
             </VBox>
         </HBox>
     </top>
+    <center>
+
+    </center>
     <bottom>
         <HBox>
-            <Label fx:id="message1" text = "message 1"/>
-            <Label fx:id="message2" text= "message 2"/>
-            <Label fx:id ="message3" text= "message 3"/>
+            <BorderPane>
+                <top> <Separator orientation="HORIZONTAL"/></top>
+                <left><Label fx:id="message1" text =  "message 1       "/></left>
+                <center><Label fx:id="message2" text= "message 2       " /></center>
+                <right><Label fx:id ="message3" text= "message 3       " /></right>
+
+            </BorderPane>
+
         </HBox>
 
     </bottom>

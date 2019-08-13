@@ -27,8 +27,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 //Class Header
-public class GrafProg extends JFrame implements ActionListener, Serializable {
-
+public class GrafProg extends JFrame //implements ActionListener, Serializable {
+{
     private static final long serialVersionUID = 1L;
     //instance variables
     private File grafFile = new File("");  //File associated with the current Graf object
@@ -92,7 +92,7 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
        messagePanel.add(panel, BorderLayout.CENTER);
        message2 = new JLabel("");
        panel.add(message2);
-       setJMenuBar(GrafMenu.createMenu(this));
+       //setJMenuBar(GrafMenu.createMenu(this));
        pack();
        setLocationRelativeTo(null);
        setVisible(true);
@@ -124,63 +124,63 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
     * This handles the action for the menu choices
     * @param ActionEvent event
     */
-    public void actionPerformed(ActionEvent event)
-    {
-         About about;
-         switch (event.getActionCommand()){
-            case "New"                          : { new GrafProg(); break;}
-            case "Open"                         : { GrafProg newg = (GrafProg)GrafFiles.openGrafFromFile(); break;}
-            case "Import Data"                  : { GrafFiles.importFile();}
-            case "Save"                         : { grafFile = GrafFiles.saveFile(this); break;}
-            case "Save As"                      : { grafFile = GrafFiles.saveFileAs(this); break; }
-            case "Print"                        : { GrafPrint.printBit(grafPanel); break;}
-            case "Printer Setup"                : { GrafPrint.printDiag(); break; }
-            case "Exit"                         : { closeGraf(); break; }
-            case "Data"                         : { data.setVisible(true); repaint(); }
-            case "Left"                         : { grafSet.toggleLeftFlag(); break; }
-            case "Hide y-axis"                  : { grafSet.toggleShowYAxis(); break; }
-            case "Hide x-axis"                  : { grafSet.toggleShowXAxis();  break;}
-            case "Hide X Scale"                 : { grafSet.toggleShowXScale(); break; }
-            case "Hide Y Scale"                 : { grafSet.toggleShowYScale();  break; }
-            case "Standard"                     : { grafSet.setStandardAxes();  break;}
-            case "Graphs On Y-Axis"             : { grafSet.toggleReverseXY(); break;}
-            case "Auto"                         : { break;}// not implemented at this time
-            case "Calculator"                   : { calc.setVisible(true); break; }
+//    public void actionPerformed(ActionEvent event)
+//    {
+//         About about;
+//         switch (event.getActionCommand()){
+//            case "New"                          : { new GrafProg(); break;}
+//            case "Open"                         : { GrafProg newg = (GrafProg)GrafFiles.openGrafFromFile(); break;}
+//            case "Import Data"                  : { GrafFiles.importFile();}
+//            case "Save"                         : { grafFile = GrafFiles.saveFile(this); break;}
+//            case "Save As"                      : { grafFile = GrafFiles.saveFileAs(this); break; }
+//            case "Print"                        : { GrafPrint.printBit(grafPanel); break;}
+//            case "Printer Setup"                : { GrafPrint.printDiag(); break; }
+//            case "Exit"                         : { closeGraf(); break; }
+//            case "Data"                         : { data.setVisible(true); repaint(); }
+//            case "Left"                         : { grafSet.toggleLeftFlag(); break; }
+//            case "Hide y-axis"                  : { grafSet.toggleShowYAxis(); break; }
+//            case "Hide x-axis"                  : { grafSet.toggleShowXAxis();  break;}
+//            case "Hide X Scale"                 : { grafSet.toggleShowXScale(); break; }
+//            case "Hide Y Scale"                 : { grafSet.toggleShowYScale();  break; }
+//            case "Standard"                     : { grafSet.setStandardAxes();  break;}
+//            case "Graphs On Y-Axis"             : { grafSet.toggleReverseXY(); break;}
+//            case "Auto"                         : { break;}// not implemented at this time
+//            case "Calculator"                   : { calc.setVisible(true); break; }
+//
+//            case "About"                        : { About.createInputDialog(this);      break;}
+//            case "Set"                          : { WindowSizeDialog.createInputDialog(this);   break; }
+//            case "Frequency Distribution Table" : { FrequencyChartDialog.createInputDialog(this); break;}
+//            case "Single Variable Statistics"   : { GrafStatsDialog.createInputDialog(this);    break;}
+//            case "Regression"                   : { RegressionDialog.createInputDialog(this);   break; }
+//
+//            case "Input"                        : { GrafStage.dialogStage.show();
+//                                                    //new GrafFunction().createInputDialog(this);
+//                                                    break;}
+//            case "Value"                        : { new GrafValue().createInputDialog(this);      break;}
+//            case "Point"                        : { new GrafPoint().createInputDialog(this);      break;}
+//            case "Tangent"                      : { new GrafTangent().createInputDialog(this);      break;}
+//            case "Chord"                        : { new GrafChord().createInputDialog(this);      break;}  // GrafObject.createGrafObject(GrafType.CHORD).createInputDialog(this); break;}
+//            case "Integrate"                    : { new GrafIntegral().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.INTEGRAL).createInputDialog(this);     break;}
+//            case "Roots"                        : { new GrafZeros().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.FZERO).createInputDialog(this);  break;}
+//            case "Line Segment"                 : { new GrafSegment().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.LINESEGMENT).createInputDialog(this);   break;}
+//            case "Rectangle"                    : { new GrafRectangle().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.RECTANGLE).createInputDialog(this);     break;}
+//            case "Ellipse"                      : { new GrafEllipse().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.ELLIPSE).createInputDialog(this); break;}
+//            case "Circle"                       : { new GrafCircle().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.CIRCLE).createInputDialog(this);break;}
+//            case "Text"                         : { new GrafText().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.TEXT).createInputDialog(this);  break;}
+//            case "Scatterplot"                  : { new GrafScatterPlot().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.SCATTER).createInputDialog(this);  break;}
+//            case "Column Plot"                  : { new GrafColumnPlot().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.COLUMN).createInputDialog(this);     break;}
+//            case "Boxplot"                      : { new GrafBoxPlot().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.BOXPLOT).createInputDialog(this);   break;}
+//            case "Histogram"                    : { new GrafHistogram().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.HISTOGRAM).createInputDialog(this);  break;}
+//            case "Distribution Polygon"         : { new GrafFreqPolygon().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.FREQPOLYGON).createInputDialog(this);   break;}
+//            case "Ogive"                        : { new GrafOgive().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.OGIVE).createInputDialog(this);  break;}
+//
+//
+//         }
 
-            case "About"                        : { About.createInputDialog(this);      break;}
-            case "Set"                          : { WindowSizeDialog.createInputDialog(this);   break; }
-            case "Frequency Distribution Table" : { FrequencyChartDialog.createInputDialog(this); break;}
-            case "Single Variable Statistics"   : { GrafStatsDialog.createInputDialog(this);    break;}
-            case "Regression"                   : { RegressionDialog.createInputDialog(this);   break; }
+      //grafPanel.repaint();
+      //repaint();
 
-            case "Input"                        : { GrafStage.dialogStage.show();
-                                                    //new GrafFunction().createInputDialog(this);
-                                                    break;}
-            case "Value"                        : { new GrafValue().createInputDialog(this);      break;}
-            case "Point"                        : { new GrafPoint().createInputDialog(this);      break;}
-            case "Tangent"                      : { new GrafTangent().createInputDialog(this);      break;}
-            case "Chord"                        : { new GrafChord().createInputDialog(this);      break;}  // GrafObject.createGrafObject(GrafType.CHORD).createInputDialog(this); break;}
-            case "Integrate"                    : { new GrafIntegral().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.INTEGRAL).createInputDialog(this);     break;}
-            case "Roots"                        : { new GrafZeros().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.FZERO).createInputDialog(this);  break;}
-            case "Line Segment"                 : { new GrafSegment().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.LINESEGMENT).createInputDialog(this);   break;}
-            case "Rectangle"                    : { new GrafRectangle().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.RECTANGLE).createInputDialog(this);     break;}
-            case "Ellipse"                      : { new GrafEllipse().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.ELLIPSE).createInputDialog(this); break;}
-            case "Circle"                       : { new GrafCircle().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.CIRCLE).createInputDialog(this);break;}
-            case "Text"                         : { new GrafText().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.TEXT).createInputDialog(this);  break;}
-            case "Scatterplot"                  : { new GrafScatterPlot().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.SCATTER).createInputDialog(this);  break;}
-            case "Column Plot"                  : { new GrafColumnPlot().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.COLUMN).createInputDialog(this);     break;}
-            case "Boxplot"                      : { new GrafBoxPlot().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.BOXPLOT).createInputDialog(this);   break;}
-            case "Histogram"                    : { new GrafHistogram().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.HISTOGRAM).createInputDialog(this);  break;}
-            case "Distribution Polygon"         : { new GrafFreqPolygon().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.FREQPOLYGON).createInputDialog(this);   break;}
-            case "Ogive"                        : { new GrafOgive().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.OGIVE).createInputDialog(this);  break;}
-
-
-         }
-
-      grafPanel.repaint();
-      repaint();
-      //printObjectTypes
-    }
+//    }
  
  
    

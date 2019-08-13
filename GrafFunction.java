@@ -20,7 +20,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
     //Instance Variables
     private String functionString;
     private int segLength = 200;
-    private GrafProg myOwner;
+    private GrafStage myOwner;
     private GrafSettings gStuff;
         
     //Constructor
@@ -33,7 +33,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
         
     }
     
-    public GrafFunction(GrafProg sess){
+    public GrafFunction(GrafStage sess){
         setGrafType(GrafType.FUNCTION);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -43,13 +43,13 @@ public class GrafFunction extends GrafObject implements IGrafable{
     }
     
     //constructor 
-    public GrafFunction(GrafProg sess, String fString){
+    public GrafFunction(GrafStage sess, String fString){
         this(sess);
         setFunction(fString);
        
     }
     
-    public GrafFunction(GrafProg sess, String fString, Color c){
+    public GrafFunction(GrafStage sess, String fString, Color c){
         this(sess, fString);
         setGrafColor(c);
        
@@ -81,8 +81,8 @@ public class GrafFunction extends GrafObject implements IGrafable{
     }
     
    @Override 
-   public GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(gs);
+   public GrafInputDialog createInputDialog(GrafStage gs){
+        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
         gfd.setTitle("FUNCTION");
         gfd.setPointPanel(gfd.addPointPanel());
         
@@ -135,14 +135,14 @@ public class GrafFunction extends GrafObject implements IGrafable{
     public String toString(){
         return "FUNCTION: "+ getFunction();//+", "+ getGrafColor();
     }
-       private static void saveFunction(GrafProg gSess, GrafInputDialog gfd){
+       private static void saveFunction(GrafStage gSess, GrafInputDialog gfd){
          if (gfd.getFinalSave() == true && gfd.getPtPanel().getF().equals("")) return;
          addFunction(gSess, gfd);
          gfd.getPtPanel().setF("");
    }
    
    
-   private static void addFunction(GrafProg gSess, GrafInputDialog gfd){
+   private static void addFunction(GrafStage gSess, GrafInputDialog gfd){
         
         if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPtPanel().getF(), (gSess.getGrafSettings().getXMax()+gSess.getGrafSettings().getXMin())/2)) { 
                    JOptionPane.showMessageDialog(null,

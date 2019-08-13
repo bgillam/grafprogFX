@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class GrafCircleTest
 {
-    private GrafProg  gSess;
+    private GrafStage  gSess;
     private GrafCircle gCircle;
     private ArrayList<GrafObject> aList;
     private ArrayList<Integer> indexList;
@@ -32,13 +32,13 @@ public class GrafCircleTest
      * Called before every test case method.
      */
     @Before
-    public void setUp()
-    {
-       gSess = new GrafProg();
-       gCircle = new GrafCircle(gSess, 2, 3, 4);
-       aList = MockMaker.createMockObjectList(gSess);
-       indexList = MockMaker.createMockIndexList(aList, GrafType.CIRCLE);
-    }
+//    public void setUp()
+//    {
+//       gSess = new GrafStage();
+//       gCircle = new GrafCircle(gSess, 2, 3, 4);
+//       aList = MockMaker.createMockObjectList(gSess);
+//       indexList = MockMaker.createMockIndexList(aList, GrafType.CIRCLE);
+//    }
     
     @Test
     public void drawGrafTest(){
@@ -49,11 +49,11 @@ public class GrafCircleTest
         gCircle.drawGraf((Graphics2D)g);
     }
     
-    @Test
-    public void createInputDialogTest(){
-       gCircle.createInputDialog(gSess);
-        
-    }
+//    @Test
+//    public void createInputDialogTest(){
+//       gCircle.createInputDialog(gSess);
+//
+//    }
     
     @Test
     public void getPlotListTest(){
@@ -61,13 +61,13 @@ public class GrafCircleTest
         
     }
     
-    @Test
-    public void setDeleteValuesTest(){
-        GrafInputDialog gid = gCircle.createInputDialog(gSess);
-        gid.getDeleter().setPlotIndex(indexList); 
-        gCircle.setDeleteValues(3, gid, aList );
-    
-    }  
+//    @Test
+//    public void setDeleteValuesTest(){
+//        GrafInputDialog gid = gCircle.createInputDialog(gSess);
+//        gid.getDeleter().setPlotIndex(indexList);
+//        gCircle.setDeleteValues(3, gid, aList );
+//
+//    }
     
       
     @Test
@@ -99,6 +99,6 @@ public class GrafCircleTest
     @After
     public void tearDown()
     {
-       gSess.dispose();
+//       gSess.close();
     }
 }

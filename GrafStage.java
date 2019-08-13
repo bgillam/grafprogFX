@@ -48,13 +48,13 @@ public class GrafStage extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Set up Stage for Main Window
-        //Parent grafRoot = FXMLLoader.load(getClass().getResource("grafMain.fxml"));
-        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
-        Parent grafRoot = (Parent)mainLoader.load();
-        mainController = (GrafMainController)mainLoader.getController();
+        Parent grafRoot = FXMLLoader.load(getClass().getResource("grafMain.fxml"));
+        //FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
+        //Parent grafRoot = (Parent)mainLoader.load();
+//        mainController = (GrafMainController)mainLoader.getController();
 
         //Scene for main window
-        Scene grafScene = new Scene (grafRoot, 400, 400);
+        Scene grafScene = new Scene (grafRoot, 500, 500);
         primaryStage.setScene(grafScene);
 
         primaryStage.setTitle("GrafProg: A Simple Graphing Program");
@@ -62,7 +62,7 @@ public class GrafStage extends Application {
 
         //Set up Stage for Dialogs (implement object)
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
-        Parent dialogRoot = (Parent)loader.load();
+        Parent dialogRoot = loader.load();
         dialogController = (GrafDialogController)loader.getController();
 
         //initial Scene for dialog
@@ -80,8 +80,24 @@ public class GrafStage extends Application {
     }
 
     public ArrayList<GrafObject> getGrafList(){return grafObjectList;}
+    public void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
 
+
+    public int getNumType(GrafType gType){
+        int count = 0;
+        for (GrafObject o: grafObjectList)
+            if (o.getType().equals(gType)) count++;
+        return count;
+    }
+
+    //keep up with boxplots
     public void zeroBoxPlotsPlotted(){boxPlotsPlotted = 0;}
+    public void incrementBoxPlotsPlotted(){
+        boxPlotsPlotted++;
+    }
+    public int getBoxPlotsPlotted(){
+        return boxPlotsPlotted;
+    }
 
     public void setMessage1(String message){ mainController.setMessage1(message); }
     public void setMessage2(String message){ mainController.setMessage2(message); }

@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 public class GrafIntegral extends GrafObject implements IGrafable
 {
         private String functionString="";
-        private GrafProg myOwner;
+        private GrafStage myOwner;
         private GrafSettings gStuff;
         private String mark =".";
         private double x1 = 0;
@@ -31,7 +31,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
        
        }     
         
-   public GrafIntegral(GrafProg sess){
+   public GrafIntegral(GrafStage sess){
         setGrafType(GrafType.INTEGRAL);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -39,7 +39,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
         gStuff = myOwner.getGrafSettings();
        }
    
-       public GrafIntegral(GrafProg sess, String yString, double firstX, double secondX, int nVal){
+       public GrafIntegral(GrafStage sess, String yString, double firstX, double secondX, int nVal){
         this(sess);
         setFunctionString(yString);
         x1 = firstX;
@@ -49,7 +49,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
     }
        
        
-   public GrafIntegral(GrafProg sess, String yString, double firstX, double secondX, int nVal, Color c){
+   public GrafIntegral(GrafStage sess, String yString, double firstX, double secondX, int nVal, Color c){
         this(sess, yString, firstX, secondX, nVal);
         super.setGrafColor(c);
     }
@@ -79,7 +79,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
     }
     
     @Override
-    public GrafInputDialog createInputDialog(GrafProg gs){
+    public GrafInputDialog createInputDialog(GrafStage gs){
         GrafInputDialog gfd = new GrafInputDialog(gs);
         gfd.setTitle("INTEGRAL");
         gfd.setPointPanel(gfd.addPointPanel());
@@ -125,7 +125,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
                     
        }
        
-          private static void saveIntegral(GrafProg gs, GrafInputDialog gfd){
+          private static void saveIntegral(GrafStage gs, GrafInputDialog gfd){
         if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
         addIntegral(gs, gfd);
         gfd.getPointPanel().blankF();
@@ -133,7 +133,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
         gfd.getPointPanel().blankX2();
     }
     
-    private static void addIntegral(GrafProg gs, GrafInputDialog gfd){
+    private static void addIntegral(GrafStage gs, GrafInputDialog gfd){
         if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPointPanel().getF(), (gs.getGrafSettings().getXMax()+gs.getGrafSettings().getXMin())/2)) { 
                    JOptionPane.showMessageDialog(null,
                    "The expression entered is not a valid function.",

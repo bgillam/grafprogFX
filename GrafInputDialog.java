@@ -38,6 +38,8 @@ public class GrafInputDialog extends JDialog
         GrafInputDialog gid = new GrafInputDialog(gSess);
        
     }
+
+    GrafInputDialog(GrafStage g){}
     
     //creates dialog with buttons used by all Graf dialogs    
     public GrafInputDialog(GrafProg gs){

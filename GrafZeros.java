@@ -18,7 +18,7 @@ public class GrafZeros extends GrafObject implements IGrafable
 {
         private String functionString="";
         private String zeroString = "";
-        private GrafProg myOwner;
+        private GrafStage myOwner;
         private GrafSettings gStuff;
         private String mark ="X";
         private double startX = 0;
@@ -34,7 +34,7 @@ public class GrafZeros extends GrafObject implements IGrafable
        
        }
         
-   public GrafZeros(GrafProg sess){
+   public GrafZeros(GrafStage sess){
         setGrafType(GrafType.FZERO);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -42,7 +42,7 @@ public class GrafZeros extends GrafObject implements IGrafable
         gStuff = myOwner.getGrafSettings();
        }
    
-       public GrafZeros(GrafProg sess, String yString, double firstX, double secondX, double dVal){
+       public GrafZeros(GrafStage sess, String yString, double firstX, double secondX, double dVal){
         this(sess);
         setFunctionString(yString);
         startX = firstX;
@@ -53,7 +53,7 @@ public class GrafZeros extends GrafObject implements IGrafable
     }
        
        
-   public GrafZeros(GrafProg sess, String yString, double firstX, double secondX, double dVal, Color c, String m){
+   public GrafZeros(GrafStage sess, String yString, double firstX, double secondX, double dVal, Color c, String m){
         this(sess, yString, firstX, secondX, dVal);  
         mark = m;
         super.setGrafColor(c);
@@ -76,7 +76,7 @@ public class GrafZeros extends GrafObject implements IGrafable
     }
    
     @Override
-   public GrafInputDialog createInputDialog(GrafProg gs){
+   public GrafInputDialog createInputDialog(GrafStage gs){
        GrafInputDialog gfd = new GrafInputDialog(gs);
        gfd.setTitle("ZEROS");
        gfd.setPointPanel(gfd.addPointPanel());
@@ -136,7 +136,7 @@ public class GrafZeros extends GrafObject implements IGrafable
    }
    
           
-   private static void saveZero(GrafProg gs, GrafInputDialog gfd){
+   private static void saveZero(GrafStage gs, GrafInputDialog gfd){
        if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
        addZeros(gs, gfd);
        gfd.getPointPanel().blankF();
@@ -145,7 +145,7 @@ public class GrafZeros extends GrafObject implements IGrafable
     
     }
     
-    private static void addZeros(GrafProg gs, GrafInputDialog gfd){
+    private static void addZeros(GrafStage gs, GrafInputDialog gfd){
         if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPointPanel().getF(), (gs.getGrafSettings().getXMax()+gs.getGrafSettings().getXMin())/2)) { 
                    JOptionPane.showMessageDialog(null,
                    "The expression entered is not a valid function.",

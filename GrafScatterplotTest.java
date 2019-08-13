@@ -52,24 +52,24 @@ public class GrafScatterplotTest
         gScat.drawGraf((Graphics2D)g);
     }
     
-    @Test
-    public void createInputDialogTest(){
-        gScat.createInputDialog(gSess);
-        
-    }
+//    @Test
+//    public void createInputDialogTest(){
+//        gScat.createInputDialog(gSess);
+//
+//    }
     
     public void getPlotListTest(){
         gScat.getPlotList(aList, indexList, GrafType.SCATTER);
         
     }
     
-    @Test
-    public void setDeleteValuesTest(){
-        GrafInputDialog gid = gScat.createInputDialog(gSess);
-        gid.getDeleter().setPlotIndex(indexList); 
-        gScat.setDeleteValues(3, gid, aList );
-    
-    }
+//    @Test
+//    public void setDeleteValuesTest(){
+//        GrafInputDialog gid = gScat.createInputDialog(gSess);
+//        gid.getDeleter().setPlotIndex(indexList);
+//        gScat.setDeleteValues(3, gid, aList );
+//
+//    }
     
     @Test
     public void setAndGetMarkTest(){
@@ -101,6 +101,7 @@ public class GrafScatterplotTest
     @After
     public void tearDown()
     {
-       gSess.dispose();
+
+        //gSess.close();
     }
 }

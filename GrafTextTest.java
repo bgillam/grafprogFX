@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class GrafTextTest
 {
-    private GrafProg  gSess;
+    private GrafStage  gSess;
     private GrafText gText;
     private ArrayList<GrafObject> aList;
     private ArrayList<Integer> indexList;
@@ -36,7 +36,7 @@ public class GrafTextTest
     @Before
     public void setUp()
     {
-       gSess = new GrafProg();
+       gSess = new GrafStage();
        gText = new GrafText(gSess, 2, 3, "x");
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.TEXT);
@@ -101,6 +101,7 @@ public class GrafTextTest
     @After
     public void tearDown()
     {
-       gSess.dispose();
+
+        //gSess.dispose();
     }
 }

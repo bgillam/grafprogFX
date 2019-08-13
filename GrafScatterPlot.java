@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class GrafScatterPlot extends GrafObject implements IGrafable{
     //Instance Variables
     private int inputColumnNumber, outputColumnNumber;
-    private GrafProg myOwner;
+    private GrafStage myOwner;
     private GrafSettings gStuff;
     private GrafTable table;
     private String mark =".";
@@ -33,7 +33,7 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
        setOutputColumnNumber(2);
     }
     
-    public GrafScatterPlot(GrafProg sess){
+    public GrafScatterPlot(GrafStage sess){
         setGrafType(GrafType.SCATTER);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -44,7 +44,7 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
     }
     
     //constructor 
-    public GrafScatterPlot(GrafProg sess, int inputCol, int outputCol){
+    public GrafScatterPlot(GrafStage sess, int inputCol, int outputCol){
         this(sess);
         setInputColumnNumber(inputCol);
         setOutputColumnNumber(outputCol);
@@ -83,8 +83,8 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
     
     
     @Override
-    public GrafInputDialog createInputDialog(GrafProg gs){//GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(gs); 
+    public GrafInputDialog createInputDialog(GrafStage gs){//GrafInputDialog createInputDialog(GrafProg gs){
+        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
         gfd.setTitle("ScatterPlot"); 
         gfd.addColumnChooserPanel(gfd.getColumnsString(),true, true);
         //gfd.setColumnChooser(gfd.getColumnChooser());
@@ -150,7 +150,7 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
         return "SCATTERPLOT: Col "+getInputColumnNumber()+", Col "+getOutputColumnNumber()+", "+getMark();//+", "+ getGrafColor();
     }
     
-    private static void saveScatter(GrafProg gs, GrafInputDialog gfd){
+    private static void saveScatter(GrafStage gs, GrafInputDialog gfd){
             int col = gfd.getColumnChooser().getInputColumn();
             if (gfd.getFinalSave() == true && col == 0) return; 
             addScatter(gs, gfd);
@@ -159,7 +159,7 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
     
     }
     
-    private static void addScatter(GrafProg gs, GrafInputDialog gfd){
+    private static void addScatter(GrafStage gs, GrafInputDialog gfd){
         int input = gfd.getInput();
         int output = gfd.getOutput();
         if (input == 0 || output == 0) return;

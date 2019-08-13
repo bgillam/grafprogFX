@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class GrafPointTest
 {
-    private GrafProg  gSess;
+    private GrafStage  gSess;
     private GrafPoint gPoint;
     private ArrayList<GrafObject> aList;
     private ArrayList<Integer> indexList;
@@ -36,7 +36,7 @@ public class GrafPointTest
     @Before
     public void setUp()
     {
-       gSess = new GrafProg();
+       gSess = new GrafStage();
        gPoint = new GrafPoint(gSess, 2, 3, "x", Color.BLACK);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.POINT);
@@ -91,6 +91,6 @@ public class GrafPointTest
     @After
     public void tearDown()
     {
-       gSess.dispose();
+       //gSess.dispose();
     }
 }

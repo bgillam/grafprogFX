@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class GrafSegmentTest
 {
-    private GrafProg  gSess;
+    private GrafStage  gSess;
     private GrafSegment gSeg;
     private ArrayList<GrafObject> aList;
     private ArrayList<Integer> indexList;
@@ -36,7 +36,7 @@ public class GrafSegmentTest
     @Before
     public void setUp()
     {
-       gSess = new GrafProg();
+       gSess = new GrafStage();
        gSeg = new GrafSegment(gSess, 2, 3, 4, 5);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.LINESEGMENT);
@@ -96,9 +96,9 @@ public class GrafSegmentTest
      *
      * Called after every test case method.
      */
-    @After
-    public void tearDown()
-    {
-       gSess.dispose();
-    }
+//    @After
+//    public void tearDown()
+//    {
+//       gSess.dispose();
+//    }
 }

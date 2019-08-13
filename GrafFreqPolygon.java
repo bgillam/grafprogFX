@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
     //Instance Variables
     private int columnNumber;
-    private GrafProg myOwner;
+    private GrafStage myOwner;
     private GrafSettings gStuff;
     private GrafTable table;
     //private FrequencyChartDialog fcd;
@@ -48,7 +48,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
      setGrafColor(Color.BLACK);
      setColumnNumber(1);
     }
-    public GrafFreqPolygon(GrafProg sess){
+    public GrafFreqPolygon(GrafStage sess){
         super();
         setGrafType(GrafType.FREQPOLYGON);
         myOwner = sess;
@@ -57,13 +57,13 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
     }
     
     //constructor 
-    public GrafFreqPolygon(GrafProg sess, int column){
+    public GrafFreqPolygon(GrafStage sess, int column){
         this(sess);
         setColumnNumber(column);
         sess.setMessage1("Histogram for Column "+columnNumber);
     }
     
-    public GrafFreqPolygon(GrafProg sess, int column, double b, double e, int numCl, Color c, boolean rel){
+    public GrafFreqPolygon(GrafStage sess, int column, double b, double e, int numCl, Color c, boolean rel){
         this(sess, column);
         relative = rel;
         begin = b;
@@ -74,7 +74,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
         classLimits = GrafStats.getClassesByNumber(numClasses, begin, end);    //problem here!
         classWidth = classLimits[1] - classLimits[0];
     }
-    public GrafFreqPolygon(GrafProg sess, int column, double b, double e, double classW, Color c, boolean rel){
+    public GrafFreqPolygon(GrafStage sess, int column, double b, double e, double classW, Color c, boolean rel){
         this(sess, column);
         relative = rel;
         begin = b;
@@ -161,7 +161,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
     }
     
     @Override
-    public  GrafInputDialog createInputDialog(GrafProg gs){
+    public  GrafInputDialog createInputDialog(GrafStage gs){
         GrafInputDialog gfd = new GrafInputDialog(gs); 
         gfd.setTitle("Histogram Polygon"); 
         gfd.setHistoPanel(addHistoPanel(gs, gfd));
@@ -209,7 +209,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
                     caller.getHisto().setClassSize(gfpEdit.getClassWidth());
        }
        
-        private static void saveFreqPolygon(GrafProg gs, GrafInputDialog gfd){
+        private static void saveFreqPolygon(GrafStage gs, GrafInputDialog gfd){
             int col = gfd.getColumnChooser().getInputColumn();
             if (gfd.getFinalSave() == true && col == 0) return; 
             addFreqPoly(gs, gfd);
@@ -217,7 +217,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
     
     }
     
-    private static void addFreqPoly(GrafProg gs, GrafInputDialog gfd){
+    private static void addFreqPoly(GrafStage gs, GrafInputDialog gfd){
               int input = gfd.getInput();
               if (input == 0) return;
               GrafFreqPolygon gfpPlot;

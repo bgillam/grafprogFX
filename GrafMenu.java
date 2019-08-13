@@ -20,7 +20,7 @@ public class GrafMenu
     /**
      Create the menu
      */
-    public static JMenuBar createMenu(GrafProg gp){
+    public static JMenuBar createMenu(GrafStage gp){
          JMenuBar grafMenuBar = new JMenuBar(); //create the Menu Bar
          JMenu fileMenu = new JMenu("File");
          JMenuItem newMenuItem = new JMenuItem("New");
@@ -93,49 +93,49 @@ public class GrafMenu
          JMenuItem toolsMenuItem = new JMenuItem("Show Toolbar"); //checkbox 
       
           //add listeners
-          openMenuItem.addActionListener(gp);
-          newMenuItem.addActionListener(gp);
-          importMenuItem.addActionListener(gp);
-          saveMenuItem.addActionListener(gp);
-          saveasMenuItem.addActionListener(gp);
-          saveimageMenuItem.addActionListener(gp);
-          //closeMenuItem.addActionListener(gp);
-          printMenuItem.addActionListener(gp);
-          //printsetMenuItem.addActionListener(gp);
-          exitMenuItem.addActionListener(gp);
-          dataMenuItem.addActionListener(gp);
-          leftMenuItem.addActionListener(gp);
-          xonlyMenuItem.addActionListener(gp);
-          yonlyMenuItem.addActionListener(gp);
-          hideXMenuItem.addActionListener(gp);
-          hideYMenuItem.addActionListener(gp);
-          standardMenuItem.addActionListener(gp);
-          setMenuItem.addActionListener(gp);
-          autoMenuItem.addActionListener(gp);
-          calcMenuItem.addActionListener(gp);
-          aboutMenuItem.addActionListener(gp);
-          inputMenuItem.addActionListener(gp);
-          valueMenuItem.addActionListener(gp);
-          tangentMenuItem.addActionListener(gp);
-          chordMenuItem.addActionListener(gp);
-          integrateMenuItem.addActionListener(gp);
-          solveMenuItem.addActionListener(gp);
-          point2MenuItem.addActionListener(gp);
-          lineMenuItem.addActionListener(gp);
-          rectMenuItem.addActionListener(gp);
-          ellipseMenuItem.addActionListener(gp);
-          circleMenuItem.addActionListener(gp);
-          textMenuItem.addActionListener(gp);
-          scatterMenuItem.addActionListener(gp);
-          cpMenuItem.addActionListener(gp);
-          flipMenuItem.addActionListener(gp);
-          statsMenuItem.addActionListener(gp);
-          boxMenuItem.addActionListener(gp);
-          histoMenuItem.addActionListener(gp);
-          freqMenuItem.addActionListener(gp);
-          regrMenuItem.addActionListener(gp);
-          polyMenuItem.addActionListener(gp);
-          ogiveMenuItem.addActionListener(gp);
+//          openMenuItem.addActionListener(gp);
+//          newMenuItem.addActionListener(gp);
+//          importMenuItem.addActionListener(gp);
+//          saveMenuItem.addActionListener(gp);
+//          saveasMenuItem.addActionListener(gp);
+//          saveimageMenuItem.addActionListener(gp);
+//          //closeMenuItem.addActionListener(gp);
+//          printMenuItem.addActionListener(gp);
+//          //printsetMenuItem.addActionListener(gp);
+//          exitMenuItem.addActionListener(gp);
+//          dataMenuItem.addActionListener(gp);
+//          leftMenuItem.addActionListener(gp);
+//          xonlyMenuItem.addActionListener(gp);
+//          yonlyMenuItem.addActionListener(gp);
+//          hideXMenuItem.addActionListener(gp);
+//          hideYMenuItem.addActionListener(gp);
+//          standardMenuItem.addActionListener(gp);
+//          setMenuItem.addActionListener(gp);
+//          autoMenuItem.addActionListener(gp);
+//          calcMenuItem.addActionListener(gp);
+//          aboutMenuItem.addActionListener(gp);
+//          inputMenuItem.addActionListener(gp);
+//          valueMenuItem.addActionListener(gp);
+//          tangentMenuItem.addActionListener(gp);
+//          chordMenuItem.addActionListener(gp);
+//          integrateMenuItem.addActionListener(gp);
+//          solveMenuItem.addActionListener(gp);
+//          point2MenuItem.addActionListener(gp);
+//          lineMenuItem.addActionListener(gp);
+//          rectMenuItem.addActionListener(gp);
+//          ellipseMenuItem.addActionListener(gp);
+//          circleMenuItem.addActionListener(gp);
+//          textMenuItem.addActionListener(gp);
+//          scatterMenuItem.addActionListener(gp);
+//          cpMenuItem.addActionListener(gp);
+//          flipMenuItem.addActionListener(gp);
+//          statsMenuItem.addActionListener(gp);
+//          boxMenuItem.addActionListener(gp);
+//          histoMenuItem.addActionListener(gp);
+//          freqMenuItem.addActionListener(gp);
+//          regrMenuItem.addActionListener(gp);
+//          polyMenuItem.addActionListener(gp);
+//          ogiveMenuItem.addActionListener(gp);
           
           //add menu items
           fileMenu.add(newMenuItem);

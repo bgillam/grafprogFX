@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class GrafSegment extends GrafObject implements IGrafable
 {
         private String functionString="";
-        private GrafProg myOwner;
+        private GrafStage myOwner;
         private GrafSettings gStuff;
         public enum EndType{RIGHTARROW, LEFTARROW, DOUBLEARROW, NOARROW}     
         private EndType ends = EndType.NOARROW;
@@ -32,7 +32,7 @@ public class GrafSegment extends GrafObject implements IGrafable
         
        }
         
-   public GrafSegment(GrafProg sess){
+   public GrafSegment(GrafStage sess){
         setGrafType(GrafType.LINESEGMENT);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -40,7 +40,7 @@ public class GrafSegment extends GrafObject implements IGrafable
         gStuff = myOwner.getGrafSettings();
        }
    
-   public GrafSegment(GrafProg sess, double x1, double y1, double x2, double y2){
+   public GrafSegment(GrafStage sess, double x1, double y1, double x2, double y2){
         this(sess);
         setX1(x1);
         setY1(y1);
@@ -48,7 +48,7 @@ public class GrafSegment extends GrafObject implements IGrafable
         setY2(y2);
     }
     
-    public GrafSegment(GrafProg sess, double x1, double y1, double x2, double y2, Color gColor){
+    public GrafSegment(GrafStage sess, double x1, double y1, double x2, double y2, Color gColor){
         this(sess, x1, y1, x2, y2);
         setGrafColor(gColor);
     }
@@ -63,8 +63,8 @@ public class GrafSegment extends GrafObject implements IGrafable
     }
  
    @Override
-   public   GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(gs);
+   public   GrafInputDialog createInputDialog(GrafStage gs){
+        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
         gfd.setTitle("LINESEGMENT"); 
         gfd.setPointPanel(gfd.addPointPanel());
         gfd.getPointPanel().addX1Y1();
@@ -124,7 +124,7 @@ public class GrafSegment extends GrafObject implements IGrafable
    }
    
    
-    private static void saveSegment(GrafProg gs, GrafInputDialog gfd){
+    private static void saveSegment(GrafStage gs, GrafInputDialog gfd){
             if (gfd.getFinalSave() == true && Double.isNaN(gfd.getPointPanel().getX1())) return; 
             addSegment(gs, gfd);
             gfd.getPointPanel().blankX1();
@@ -135,7 +135,7 @@ public class GrafSegment extends GrafObject implements IGrafable
     }
     
     
-    private static void addSegment(GrafProg gs, GrafInputDialog gfd){
+    private static void addSegment(GrafStage gs, GrafInputDialog gfd){
             if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
             if (Double.isNaN(gfd.getPointPanel().getY1())){gfd.NumErrorMessage("Y1", "valid number"); return;}    
             if (Double.isNaN(gfd.getPointPanel().getX2())){gfd.NumErrorMessage("x2", "valid number"); return;}

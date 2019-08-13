@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class GrafRectangleTest
 {
-    private GrafProg  gSess;
+    private GrafStage  gSess;
     private GrafRectangle gRect;
     private ArrayList<GrafObject> aList;
     private ArrayList<Integer> indexList;
@@ -37,7 +37,7 @@ public class GrafRectangleTest
     @Before
     public void setUp()
     {
-       gSess = new GrafProg();
+       gSess = new GrafStage();
        gRect = new GrafRectangle(gSess, 2, 3, 4, 5);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.RECTANGLE);
@@ -104,6 +104,7 @@ public class GrafRectangleTest
     @After
     public void tearDown()
     {
-       gSess.dispose();
+
+        //gSess.dispose();
     }
 }

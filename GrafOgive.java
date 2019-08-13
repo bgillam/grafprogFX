@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class GrafOgive extends GrafHistogram implements IGrafable{
     //Instance Variables
     private int columnNumber;
-    private GrafProg myOwner;
+    private GrafStage myOwner;
     private GrafSettings gStuff;
     private GrafTable table;
     //private FrequencyChartDialog fcd;
@@ -47,7 +47,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
      setColumnNumber(1);
     }
     
-    public GrafOgive(GrafProg sess){
+    public GrafOgive(GrafStage sess){
         super();
         setGrafType(GrafType.OGIVE);
         myOwner = sess;
@@ -56,13 +56,13 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     }
     
     //constructor 
-    public GrafOgive(GrafProg sess, int column){
+    public GrafOgive(GrafStage sess, int column){
         this(sess);
         setColumnNumber(column);
         sess.setMessage1("Histogram for Column "+columnNumber);
     }
     
-    public GrafOgive(GrafProg sess, int column, double b, double e, int numCl, Color c, boolean rel){
+    public GrafOgive(GrafStage sess, int column, double b, double e, int numCl, Color c, boolean rel){
         this(sess, column);
         relative = rel;
         begin = b;
@@ -73,7 +73,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
         classLimits = GrafStats.getClassesByNumber(numClasses, begin, end);    //problem here!
         classWidth = classLimits[1] - classLimits[0];
     }
-    public GrafOgive(GrafProg sess, int column, double b, double e, double classW, Color c, boolean rel){
+    public GrafOgive(GrafStage sess, int column, double b, double e, double classW, Color c, boolean rel){
         this(sess, column);
         relative = rel;
         begin = b;
@@ -174,7 +174,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     }
     
     @Override
-    public GrafInputDialog createInputDialog(GrafProg gs){
+    public GrafInputDialog createInputDialog(GrafStage gs){
         GrafInputDialog gfd = new GrafInputDialog(gs); 
         gfd.setTitle("Ogive"); 
         gfd.setHistoPanel(addHistoPanel(gs, gfd));
@@ -221,7 +221,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
                     caller.getHisto().setClassSize(oEdit.getClassWidth());   
        }
        
-        private static void saveOgive(GrafProg gs, GrafInputDialog gfd){
+        private static void saveOgive(GrafStage gs, GrafInputDialog gfd){
         int col = gfd.getColumnChooser().getInputColumn();
         if (gfd.getFinalSave() == true && col == 0) return; 
         addOgive(gs, gfd);
@@ -229,7 +229,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     
     }
     
-    private static void addOgive(GrafProg gs, GrafInputDialog gfd){
+    private static void addOgive(GrafStage gs, GrafInputDialog gfd){
           int input = gfd.getInput();
           if (input == 0) return;
           GrafOgive oPlot;

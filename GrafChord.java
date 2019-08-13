@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class GrafChord extends GrafObject implements IGrafable
 {
         private String functionString="";
-        private GrafProg myOwner;
+        private GrafStage myOwner;
         private GrafSettings gStuff;
         private String mark =".";
         private double x1 = 0;
@@ -32,7 +32,7 @@ public class GrafChord extends GrafObject implements IGrafable
        
        }     
         
-   public GrafChord(GrafProg sess){
+   public GrafChord(GrafStage sess){
         setGrafType(GrafType.CHORD);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -40,7 +40,7 @@ public class GrafChord extends GrafObject implements IGrafable
         gStuff = myOwner.getGrafSettings();
        }
    
-   public GrafChord(GrafProg sess, String yString, double firstX, double secondX){
+   public GrafChord(GrafStage sess, String yString, double firstX, double secondX){
         this(sess);
         setFunctionString(yString);
         x1 = firstX;
@@ -49,7 +49,7 @@ public class GrafChord extends GrafObject implements IGrafable
         calcY2();
     }
     
-    public GrafChord(GrafProg sess, String yString, double firstX, double secondX, Color c, String m){
+    public GrafChord(GrafStage sess, String yString, double firstX, double secondX, Color c, String m){
         this(sess, yString, firstX, secondX);
         setGrafColor(c);
         setMark(m);
@@ -71,10 +71,9 @@ public class GrafChord extends GrafObject implements IGrafable
        gc.setColor(Color.BLACK);
        //gStuff.getGrafPanel().repaint();
     }
-    
     @Override
-   public  GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(gs);
+   public  GrafInputDialog createInputDialog(GrafStage gs){
+        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
         gfd.setTitle("CHORD");
         gfd.setPointPanel(gfd.addPointPanel());
         //gfd.getPointPanel().
@@ -127,7 +126,7 @@ public class GrafChord extends GrafObject implements IGrafable
    public void sety2(double xval){ y2 = xval; }
    public double gety2() { return y2; } 
    
-   private static void saveChord(GrafProg gs, GrafInputDialog gfd){
+   private static void saveChord(GrafStage gs, GrafInputDialog gfd){
         if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
         addChord(gs, gfd);
         gfd.getPointPanel().blankF();
@@ -136,7 +135,7 @@ public class GrafChord extends GrafObject implements IGrafable
     
    }
 
-   private static void addChord(GrafProg gSess, GrafInputDialog gfd){
+   private static void addChord(GrafStage gSess, GrafInputDialog gfd){
         if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPointPanel().getF(), (gSess.getGrafSettings().getXMax()+gSess.getGrafSettings().getXMin())/2)) { 
                    JOptionPane.showMessageDialog(null,
                    "The expression entered is not a valid function.",

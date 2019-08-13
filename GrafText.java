@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 
 public class GrafText extends GrafObject implements IGrafable
 {       private String text;
-        private GrafProg myOwner;
+        private GrafStage myOwner;
         protected GrafSettings gStuff;
         private Font font;
         //protected Color color;
@@ -30,24 +30,24 @@ public class GrafText extends GrafObject implements IGrafable
      setText("");
     }
         
-   public GrafText(GrafProg sess){
+   public GrafText(GrafStage sess){
         setText("");
         setGrafType(GrafType.TEXT);
         setMoveable(false);
         setGrafColor(Color.BLACK);
         myOwner = sess;
         gStuff = myOwner.getGrafSettings();
-        setFont(sess.getGraphics().getFont());
+        //setFont(sess.getGraphics().getFont());
        }
    
-   public GrafText(GrafProg sess, double x, double y, String t){
+   public GrafText(GrafStage sess, double x, double y, String t){
         this(sess);
         setX(x);
         setY(y);
         setText(t);
    }
    
-   public GrafText(GrafProg sess, double x, double y, String t, Font f, Color c){
+   public GrafText(GrafStage sess, double x, double y, String t, Font f, Color c){
         this(sess, x, y, t); 
         setGrafColor(c);
         setFont(f);
@@ -66,8 +66,8 @@ public class GrafText extends GrafObject implements IGrafable
     }
  
   @Override   
-  public GrafInputDialog createInputDialog(GrafProg gs){
-         GrafInputDialog gfd = new GrafInputDialog(gs);
+  public GrafInputDialog createInputDialog(GrafStage gs){
+         GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
          gfd.setTitle("TEXT"); 
          gfd.setPointPanel(gfd.addPointPanel());
          gfd.getPointPanel().addX1Y1();
@@ -110,7 +110,7 @@ public class GrafText extends GrafObject implements IGrafable
      }
  }
  
- private static void saveText(GrafProg gSess, GrafInputDialog gfd){
+ private static void saveText(GrafStage gSess, GrafInputDialog gfd){
          if (gfd.getFinalSave() == true && Double.isNaN(gfd.getPointPanel().getX1())) return; 
              addText(gSess,gfd );
              gfd.getPointPanel().blankX1();
@@ -118,7 +118,7 @@ public class GrafText extends GrafObject implements IGrafable
            
    }
 
- private static void addText(GrafProg gSess, GrafInputDialog gfd){
+ private static void addText(GrafStage gSess, GrafInputDialog gfd){
        if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
        if (Double.isNaN(gfd.getPointPanel().getY1())){gfd.NumErrorMessage("Y1", "valid number"); return;}    
        GrafText gPlot = new GrafText(gSess, gfd.getPointPanel().getX1(), gfd.getPointPanel().getY1(), gfd.getMarkChooser().getTextMark() , gfd.getMarkChooser().getFont() , gfd.getMarkChooser().getColor());
