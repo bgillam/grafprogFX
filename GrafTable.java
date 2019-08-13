@@ -26,7 +26,7 @@ class GrafTable extends JDialog implements ActionListener, KeyListener
     private JTable      table;
     private JScrollPane scrollPane;
     private DefaultTableModel model;
-    private GrafProg gSess;   //owner
+    private GrafStage gSess;   //owner
     private ClipboardHandler clipper = new ClipboardHandler();
     
     //dialogs for data generation
@@ -37,12 +37,12 @@ class GrafTable extends JDialog implements ActionListener, KeyListener
      
     
     // Constructor of Table
-    public GrafTable(GrafProg sess, int row, int col)
+    public GrafTable(GrafStage sess, int row, int col)
     {   gSess = sess;
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setTitle( "Data" );
         setSize( 600, 400);
-        setLocationRelativeTo(sess);
+        //setLocationRelativeTo(sess);
         
         // Create a panel to hold all other components
         dataPanel = new JPanel();

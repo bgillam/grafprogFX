@@ -40,7 +40,7 @@ public class GrafSettings implements Serializable
    private boolean autoScale=false;
       
    //Frame, Panel and Canvas references
-   private GrafProg myFrame;
+   private GrafStage myStage;
    private GrafPanel myPanel;
  
    //enums
@@ -48,12 +48,12 @@ public class GrafSettings implements Serializable
    private ScaleFormat scaleFormat = ScaleFormat.DEC;
    public enum ScaleProcedure {TEN_POWER, FROM_RANGE, SET_SCALES };
    private ScaleProcedure scaleProcedure = ScaleProcedure.SET_SCALES;
-         
+
    //Constructor for objects of class GrafStuff
-    public GrafSettings(GrafProg frame)
+    public GrafSettings(GrafStage gs)
     {
-      myFrame = frame; 
-      myPanel = frame.getGrafPanel();
+      myStage = gs;
+      myPanel = myStage.getGrafPanel();
     }
       
     //prints out instance variable values    
@@ -81,8 +81,8 @@ public class GrafSettings implements Serializable
        setXMin(-10); setXMax(10); setYMin(-10); setYMax(10); setXAxisScale(1); setYAxisScale(1); 
    }
     
-    public GrafProg getOwner(){return myFrame;}
-    public void setOwner(GrafProg g){myFrame = g;}
+    public GrafStage getOwner(){return myStage;}
+    public void setOwner(GrafStage g){myStage = g;}
     public void setGrafPanel(GrafPanel gp){myPanel = gp;}
     public GrafPanel getGrafPanel(){return myPanel;}
     public boolean getShowYAxisScale(){return showYAxisScale;}

@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.ComboBox?>
 
-<BorderPane fx:controller="DialogController"
+<BorderPane fx:controller="GrafDialogController"
             xmlns:fx="http://javafx.com/fxml" >
 
         <top>
@@ -28,8 +28,8 @@
                 <ComboBox fx:id="fComboBox" value="column or fstring"/>
             </HBox>
             <HBox spacing = "5">
-                <Label text = "f(x)=" minWidth="30"/>
-                <TextField id = "Functionstring" minWidth = "250"/>
+                <Label fx:id = "fxLabel" text = "f(x)=" minWidth="30"/>
+                <TextField fx:id = "functionString" minWidth = "250"/>
             </HBox>
             <Separator orientation="HORIZONTAL"/>
             <HBox spacing="5">
@@ -60,19 +60,19 @@
                 <Insets left="10" top="10"  right="10"   bottom="10"/>
             </padding>
             <HBox spacing = "5">
-                <Label text = "mark:" maxWidth="100"/>
+                <Label fx:id = "markLabel" text = "mark:" maxWidth="100"/>
                 <fx:define>
                     <ToggleGroup fx:id="markToggleGroup"/>
                 </fx:define>
-                <RadioButton text = "." toggleGroup="$markToggleGroup"/>
-                <RadioButton text = "x" toggleGroup="$markToggleGroup" selected = "true"/>
-                <RadioButton text = "o" toggleGroup="$markToggleGroup"/>
-                <RadioButton text = "char" toggleGroup="$markToggleGroup"/>
-                <TextField id="charMark" maxWidth="30"/>
+                <RadioButton fx:id = "pointMarkRButton" text = "." toggleGroup="$markToggleGroup"/>
+                <RadioButton fx:id="xMarkRButton" text = "x" toggleGroup="$markToggleGroup" selected = "true"/>
+                <RadioButton fx:id="oMarkRButton" text = "o" toggleGroup="$markToggleGroup"/>
+                <RadioButton fx:id="charMarkRButton" text = "char" toggleGroup="$markToggleGroup"/>
+                <TextField fx:id="charMarkText" maxWidth="30"/>
             </HBox>
             <HBox>
-                <Label text = "Text" maxWidth ="100"/>
-                <TextField id = "textForDisplay" minWidth = "100"/>
+                <Label fx:id="textLabel" text = "Text" maxWidth ="100"/>
+                <TextField fx:id = "textForDisplay" minWidth = "100"/>
             </HBox>
             <HBox>
                 <Label text = "FontName" minWidth ="100"/>

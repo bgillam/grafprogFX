@@ -28,18 +28,19 @@ import java.util.ArrayList;
 
 //Class Header
 public class GrafProg extends JFrame implements ActionListener, Serializable {
+
     private static final long serialVersionUID = 1L;
     //instance variables
     private File grafFile = new File("");  //File associated with the current Graf object
     private boolean grafSaved = false;     //has the current graf been saved?
-    private GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel
+    private GrafPanel grafPanel = new GrafPanel(new GrafStage()); //Graphics Panel
     private int width = 600;
     private int height = 600;
-    private GrafSettings grafSet = new GrafSettings(this);  //Stores window settings
-    //private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
-    private GrafTable data = new GrafTable(this, 100,10);  //table for data 
+    private GrafSettings grafSet = new GrafSettings(new GrafStage());  //Stores window settings
+    private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
+    private GrafTable data = new GrafTable(new GrafStage(), 100,10);  //table for data
     private ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
-    private GrafAxes axes = new GrafAxes(this);   //axes object
+    private GrafAxes axes = new GrafAxes( new GrafStage());  //axes object
     private String copiedText = "";    
     private JPanel messagePanel;  
     private int boxPlotsPlotted = 0;              //for formatting multiple boxplots
@@ -53,9 +54,9 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
        
    //constructor
     public GrafProg(){
-        calc = new GrafCalc();
-        calc.setVisible(false);  
-        SetupFrame(); 
+        //calc = new GrafCalc();
+        //calc.setVisible(false);
+        SetupFrame();
         grafObjectList.add(axes);
         setTitle("GrafProg");
         data.setTitle("Data:");
@@ -124,14 +125,14 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
     * @param ActionEvent event
     */
     public void actionPerformed(ActionEvent event)
-    {  
+    {
          About about;
          switch (event.getActionCommand()){
             case "New"                          : { new GrafProg(); break;}
             case "Open"                         : { GrafProg newg = (GrafProg)GrafFiles.openGrafFromFile(); break;}
             case "Import Data"                  : { GrafFiles.importFile();}
             case "Save"                         : { grafFile = GrafFiles.saveFile(this); break;}
-            case "Save As"                      : { grafFile = GrafFiles.saveFileAs(this); break; } 
+            case "Save As"                      : { grafFile = GrafFiles.saveFileAs(this); break; }
             case "Print"                        : { GrafPrint.printBit(grafPanel); break;}
             case "Printer Setup"                : { GrafPrint.printDiag(); break; }
             case "Exit"                         : { closeGraf(); break; }
@@ -145,13 +146,13 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
             case "Graphs On Y-Axis"             : { grafSet.toggleReverseXY(); break;}
             case "Auto"                         : { break;}// not implemented at this time
             case "Calculator"                   : { calc.setVisible(true); break; }
-            
+
             case "About"                        : { About.createInputDialog(this);      break;}
-            case "Set"                          : { WindowSizeDialog.createInputDialog(this);   break; } 
+            case "Set"                          : { WindowSizeDialog.createInputDialog(this);   break; }
             case "Frequency Distribution Table" : { FrequencyChartDialog.createInputDialog(this); break;}
             case "Single Variable Statistics"   : { GrafStatsDialog.createInputDialog(this);    break;}
             case "Regression"                   : { RegressionDialog.createInputDialog(this);   break; }
-            
+
             case "Input"                        : { GrafStage.dialogStage.show();
                                                     //new GrafFunction().createInputDialog(this);
                                                     break;}
@@ -172,10 +173,10 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
             case "Histogram"                    : { new GrafHistogram().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.HISTOGRAM).createInputDialog(this);  break;}
             case "Distribution Polygon"         : { new GrafFreqPolygon().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.FREQPOLYGON).createInputDialog(this);   break;}
             case "Ogive"                        : { new GrafOgive().createInputDialog(this);      break;}  //GrafObject.createGrafObject(GrafType.OGIVE).createInputDialog(this);  break;}
-            
-            
+
+
          }
-     
+
       grafPanel.repaint();
       repaint();
       //printObjectTypes
@@ -210,11 +211,11 @@ public class GrafProg extends JFrame implements ActionListener, Serializable {
       
    public String getCopiedText(){return copiedText;}
    public void setCopiedText(String s){ copiedText = s;}
-  
+
    public void setData(GrafTable dt) { data = dt; }
    public GrafTable getData(){return data;}
-   
-   public void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;} 
+
+   public void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
    public ArrayList<GrafObject> getGrafList(){return grafObjectList;}
    
    public void setMessage1(String message){ message1.setText(message); }

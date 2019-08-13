@@ -17,7 +17,7 @@ public class GrafAxes extends GrafObject
     private Font currentFont = new Font("Ariel",Font.BOLD, 11);
       
     //Constructor 
-    public GrafAxes(GrafProg gFrame)
+    public GrafAxes(GrafStage gFrame)
     {
     	setGrafType(GrafType.AXES);
     	setGrafColor(Color.BLACK);

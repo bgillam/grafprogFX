@@ -6,12 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class DialogController {
+public class GrafDialogController {
 
     @FXML
     public ComboBox fComboBox;
@@ -43,7 +44,26 @@ public class DialogController {
     public Label y2Label;
     @FXML
     public TextField y2Text;
-
+    @FXML
+    public Label fxLabel;
+    @FXML
+    public TextField functionString;
+    @FXML
+    public Label markLabel;
+    @FXML
+    public RadioButton pointMarkRButton;
+    @FXML
+    public RadioButton xMarkRButton;
+    @FXML
+    public RadioButton oMarkRButton;
+    @FXML
+    public RadioButton charMarkRButton;
+    @FXML
+    public TextField charMarkText;
+    @FXML
+    public Label textLabel;
+    @FXML
+    public TextField textForDisplay;
 
 
     @FXML
@@ -105,6 +125,8 @@ public class DialogController {
             @Override public void run() {
                 fChoiceLabel.setVisible(false);
                 fComboBox.setVisible(false);
+                fxLabel.setVisible(false);
+                functionString.setVisible(false);
                 x1Text.setVisible(false);
                 x1Label.setVisible(false);
                 separator1.setVisible(false);
@@ -118,6 +140,26 @@ public class DialogController {
                 x2Text.setVisible(false);
                 y2Label.setVisible(false);
                 y2Text.setVisible(false);
+                markLabel.setVisible(false);
+                markLabel.setVisible(false);
+                pointMarkRButton.setVisible(false);
+                xMarkRButton.setVisible(false);
+                oMarkRButton.setVisible(false);
+                charMarkRButton.setVisible(false);
+                charMarkText.setVisible(false);
+
+            }
+        });
+    }
+
+    public void showFxEntry() //change to hide all
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                GrafStage.dialogStage.setTitle("Function");
+                fxLabel.setVisible(true);
+                functionString.setVisible(true);
+
             }
         });
     }

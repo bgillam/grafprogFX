@@ -50,18 +50,53 @@
                         <MenuItem fx:id="columnPloteItem" text="Column Plot"/>
                         <MenuItem fx:id="boxplotItem" text="Boxplot"/>
 
-                        <MenuItem fx:id="histoItem" text="Histogram"/>
+                        <MenuItem fx:id="histoItemItem" text="Histogram"/>
                         <MenuItem fx:id="freqPloyItem" text="Frequency Polygon"/>
                         <MenuItem fx:id="ogiveItem" text="Ogive"/>
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="scatterItem" text="Scatter Plot"/>
                         <MenuItem fx:id="regressItem" text="Regression"/>
                         <SeparatorMenuItem/>
-                        <CheckMenuItem fx:id="yAxisITem" text="Graph on Y-Axis"/>
+                        <CheckMenuItem fx:id="yAxisItem" text="Graph on Y-Axis"/>
                     </Menu>
+                    <Menu fx:id="shapeMenu" text="Shape">
+                        <MenuItem fx:id="pointItem" text="Point"/>
+                        <MenuItem fx:id="lineItem" text="Line Segment"/>
+                        <MenuItem fx:id="rectangleItem" text="Rectangle"/>
+                        <MenuItem fx:id="ellipseItem" text="Ellipse"/>
+                        <MenuItem fx:id="circleItem" text="Circle"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="textItem" text="Text"/>
+                    </Menu>
+                    <Menu fx:id="windowMenu" text="Window">
+                        <MenuItem fx:id="setItem" text="Set"/>
+                        <MenuItem fx:id="autoItem" text="Auto"/>
+                        <MenuItem fx:id="standardItem" text="Standard"/>
+                        <SeparatorMenuItem/>
+                        <CheckMenuItem fx:id="hideXScaleItem" text="Hide X Scale"/>
+                        <CheckMenuItem fx:id="hideYScaleItem" text="Hide y Scale"/>
+                        <CheckMenuItem fx:id="hideXAxisItem" text="Hide X Axis"/>
+                        <CheckMenuItem fx:id="hideYAxixItem" text="Hide Y Axis"/>
+                        <CheckMenuItem fx:id="leftITem" text="Left"/>
+                    </Menu>
+                    <Menu fx:id="helpMenu" text="Help">
+                        <MenuItem fx:id="aboutItem" text="About"/>
+                        <MenuItem fx:id="calcItem" text="Calculator" onAction = "#showCalc"/>
+                        <SeparatorMenuItem/>
+                        <CheckMenuItem fx:id="toolItem" text="Toolbar"/>
+                    </Menu>
+
                 </MenuBar>
             </VBox>
         </HBox>
     </top>
+    <bottom>
+        <HBox>
+            <Label fx:id="message1" text = "message 1"/>
+            <Label fx:id="message2" text= "message 2"/>
+            <Label fx:id ="message3" text= "message 3"/>
+        </HBox>
+
+    </bottom>
 
 </BorderPane>
