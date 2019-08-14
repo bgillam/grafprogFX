@@ -96,17 +96,15 @@
         </Pane>
     </center>
     <bottom>
-        <HBox>
-            <BorderPane>
-                <top> <Separator orientation="HORIZONTAL"/></top>
-                <left><Label fx:id="message1" text =  "message 1       "/></left>
-                <center><Label fx:id="message2" text= "message 2       " /></center>
-                <right><Label fx:id ="message3" text= "message 3       " /></right>
+           <BorderPane>
+                <top>
+                     <Separator orientation="HORIZONTAL"/>
+                </top>
+                <left><Label fx:id="message1" text =  "message 1 "/></left>
+                <center><Label fx:id="message2" text= "message 2 " /></center>
+                <right><Label fx:id ="message3" text= "message 3 " /></right>
 
             </BorderPane>
-
-        </HBox>
-
     </bottom>
 
 </BorderPane>

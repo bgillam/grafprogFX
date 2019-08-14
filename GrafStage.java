@@ -5,18 +5,22 @@ import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class GrafStage extends Application {
 
     //static UI variables
+    static Stage primaryStage;
     static Stage dialogStage = new Stage();
     static Stage spreadStage = new Stage();
     static GrafDialogController dialogController;
@@ -31,7 +35,7 @@ public class GrafStage extends Application {
     private int width = 600;
     private int height = 600;
     private GrafSettings grafSet = new GrafSettings(this);  //Stores window settings
-    //private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
+    private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
     private GrafTable data = new GrafTable(this, 100,10);  //table for data
     private ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
     private GrafAxes axes = new GrafAxes(this);   //axes object
@@ -50,53 +54,43 @@ public class GrafStage extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-
-
-
         //Set up Stage for Main Window
-        Parent grafRoot = FXMLLoader.load(getClass().getResource("grafMain.fxml"));
-        //FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
-        //Parent grafRoot = (Parent)mainLoader.load();
-//        mainController = (GrafMainController)mainLoader.getController();
-
-
+        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
+        Parent grafRoot = (Parent)mainLoader.load();
+        mainController = (GrafMainController)mainLoader.getController();
         //Scene for main window
         Scene grafScene = new Scene (grafRoot, 500, 500);
         primaryStage.setScene(grafScene);
-
-        //setup swing graphing panel
-          final SwingNode swingNode = new SwingNode();
-          setUpSwingNode(swingNode);
-          //addGrafPanel(swingNode);
-//        System.out.println("node = "+ swingNode.toString());  //swingNode non-null here
-        //System.out.println("grafPane:"+mainController.grafPane);
-//        mainController.grafPane = new Pane();  //null poniter here
-          //mainController.grafPane.getChildren().add(swingNode);
-
-
         primaryStage.setTitle("GrafProg: A Simple Graphing Program");
+        //setup swing graphing panel
+        final SwingNode swingNode = new SwingNode();
+        //setUpSwingNode(swingNode);
+        swingNode.setContent(grafPanel);
+        mainController.grafPane.getChildren().add(swingNode);
         primaryStage.show();
 
         //Set up Stage for Dialogs (implement object)
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
         dialogController = (GrafDialogController)loader.getController();
-
         //initial Scene for dialog
         Scene dialogScene = new Scene (dialogRoot, 400, 400);
         dialogStage.setScene(dialogScene);
-
         dialogStage.hide();
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
 
-
-
-
         //new GrafProg();
+        grafObjectList.add(axes);
+        data.setTitle("Data:");
+        grafPanel.setPreferredSize(new Dimension(width, height));
+
 
 
     }
+
+
+
 
 
     private void setUpSwingNode(final SwingNode swingNode) {

@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +33,11 @@ public class GrafMainController {
 
     @FXML
     public void onMenuChoice(KeyEvent keyEvent) {
+    }
+
+    @FXML
+    public void exitApplicaton(ActionEvent ae){
+        Platform.exit();
     }
 
     public void fxInput(ActionEvent actionEvent) {
