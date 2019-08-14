@@ -23,6 +23,8 @@ public class GrafMainController {
     public Label message3;
     @FXML
     public Pane grafPane;
+    @FXML
+    public SwingNode swingGrafNode;
 
 
     @FXML
@@ -54,13 +56,40 @@ public class GrafMainController {
         calc.setVisible(true);
     }
 
-    public void setMessage1(String message){ message1.setText(message); }
-    public void setMessage2(String message){ message2.setText(message); }
-    public void setMessage3(String message){ message3.setText(message); }
+
+    public void setMessage1(String message){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                message1.setText(message);
+            }
+        });
+    }
+
+    public void setMessage2(String message){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                message2.setText(message);
+            }
+        });
+    }
+
+    public void setMessage3(String message){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                message3.setText(message);
+            }
+        });
+    }
+
+
 
     public void addGrafPanel(SwingNode swingNode){
         grafPane.getChildren().add(swingNode);
 
 
+    }
+
+    public void fileNew(ActionEvent actionEvent) {
+        new GrafStage();
     }
 }

@@ -112,7 +112,7 @@ public class GrafProg extends JFrame //implements ActionListener, Serializable {
     public void closeGraf(){
         if (!grafSaved) 
             switch (JOptionPane.showConfirmDialog(null, "Save File?", "File"+grafFile.toString()+"not saved.", JOptionPane.YES_NO_CANCEL_OPTION)){
-            case JOptionPane.YES_OPTION : { GrafFiles.saveFile(this); setAsSaved(); }    
+            case JOptionPane.YES_OPTION : { GrafFiles.saveFile(new GrafStage()); setAsSaved(); }
             case JOptionPane.CANCEL_OPTION : { repaint(); return;}
         }    
         data.dispose(); dispose();
@@ -206,8 +206,8 @@ public class GrafProg extends JFrame //implements ActionListener, Serializable {
    public GrafSettings getGrafSettings() {return grafSet;}
    public void setGrafSettings(GrafSettings gs) { grafSet = gs; }
    
-   //public GrafPrimitives getGrafPrimitives(){  return grafPrim; }
-   //public void setGrafPrim(GrafPrimitives gp){}
+   public GrafPrimitives getGrafPrimitives(){  return grafPrim; }
+   public void setGrafPrim(GrafPrimitives gp){}
       
    public String getCopiedText(){return copiedText;}
    public void setCopiedText(String s){ copiedText = s;}

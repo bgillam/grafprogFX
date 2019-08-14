@@ -11,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -25,13 +26,15 @@ public class GrafStage extends Application {
     static Stage spreadStage = new Stage();
     static GrafDialogController dialogController;
     static GrafMainController mainController;
+    static SwingNode swingGrafNode = new SwingNode();
+    GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel
 
     private static final long serialVersionUID = 1L;
 
     //instance variables
     private File grafFile = new File("");  //File associated with the current Graf object
     private boolean grafSaved = false;     //has the current graf been saved?
-    private GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel
+
     private int width = 600;
     private int height = 600;
     private GrafSettings grafSet = new GrafSettings(this);  //Stores window settings
@@ -59,15 +62,21 @@ public class GrafStage extends Application {
         Parent grafRoot = (Parent)mainLoader.load();
         mainController = (GrafMainController)mainLoader.getController();
         //Scene for main window
-        Scene grafScene = new Scene (grafRoot, 500, 500);
+        Scene grafScene = new Scene (grafRoot,width, height);
         primaryStage.setScene(grafScene);
-        primaryStage.setTitle("GrafProg: A Simple Graphing Program");
         //setup swing graphing panel
-        final SwingNode swingNode = new SwingNode();
-        //setUpSwingNode(swingNode);
-        swingNode.setContent(grafPanel);
-        mainController.grafPane.getChildren().add(swingNode);
+        primaryStage.setTitle("GrafProg: A Simple Graphing Program");
+        grafPanel.setMinimumSize(new Dimension(width,height));
+        grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+
+
+        //System.out.println(grafPanel);
+        swingGrafNode.setContent(grafPanel);
+        mainController.grafPane.getChildren().add(swingGrafNode);
+
         primaryStage.show();
+
+
 
         //Set up Stage for Dialogs (implement object)
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
@@ -80,35 +89,88 @@ public class GrafStage extends Application {
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
 
+
         //new GrafProg();
         grafObjectList.add(axes);
         data.setTitle("Data:");
-        grafPanel.setPreferredSize(new Dimension(width, height));
+        grafPanel.setPreferredSize(new Dimension(width, height-100));
 
 
 
     }
 
+    //Set Titles and saved status after saving file
+    private void setAsSaved(){
+        primaryStage.setTitle(grafFile.toString());
+        data.setTitle("Data: "+grafFile.toString());
+        grafSaved=true;
 
+    }
 
-
-
-    private void setUpSwingNode(final SwingNode swingNode) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JPanel panel = new JPanel();
-                //panel.add(new JButton("Click me!"));
-                panel.add(grafPanel);
-                swingNode.setContent(panel);
+    //Close an open file
+    public void closeGraf(){
+        if (!grafSaved)
+            switch (JOptionPane.showConfirmDialog(null, "Save File?", "File"+grafFile.toString()+"not saved.", JOptionPane.YES_NO_CANCEL_OPTION)){
+                case JOptionPane.YES_OPTION : { GrafFiles.saveFile(this); setAsSaved(); }
+                case JOptionPane.CANCEL_OPTION : { return;}
             }
-        });
-
+        data.dispose(); primaryStage.close();
     }
 
-    public ArrayList<GrafObject> getGrafList(){return grafObjectList;}
-    public void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
 
+    public void setMessage1(String message){ mainController.setMessage1(message); }
+    public void setMessage2(String message){ mainController.setMessage2(message); }
+    public void setMessage3(String message){ mainController.setMessage3(message); }
+
+    //Setters and Getters
+    public int getTheWidth(){return width;}
+    public void setTheWidth(int w) {width = w;}
+
+    public int getTheHeight(){return height;}
+    public void setTheHeight(int h) {height = h;}
+
+    public File getGrafFile(){return grafFile;}
+    public void setGrafFile(File f) {grafFile = f;}
+
+    public boolean getgrafSaved(){return grafSaved;}
+    public void setgrafSaved(boolean tf){grafSaved = tf;}
+
+    public GrafPanel getGrafPanel(){return grafPanel;}
+    public void setPanel(GrafPanel gp) {grafPanel = gp;}
+
+    public GrafAxes getAxes(){return axes;}
+    public void setAxes(GrafAxes ga){axes = ga;}
+
+    public GrafSettings getGrafSettings() {return grafSet;}
+    public void setGrafSettings(GrafSettings gs) { grafSet = gs; }
+
+    public GrafPrimitives getGrafPrimitives(){  return grafPrim; }
+    public void setGrafPrim(GrafPrimitives gp){}
+
+    public String getCopiedText(){return copiedText;}
+    public void setCopiedText(String s){ copiedText = s;}
+
+    public void setData(GrafTable dt) { data = dt; }
+    public GrafTable getData(){return data;}
+
+    public void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
+    public ArrayList<GrafObject> getGrafList(){return grafObjectList;}
+
+    public int getBoxPlotsPlotted(){
+        return boxPlotsPlotted;
+    }
+
+    public void incrementBoxPlotsPlotted(){
+        boxPlotsPlotted++;
+    }
+
+    public void decrementBoxPlotsPlotted(){
+        boxPlotsPlotted--;
+    }
+
+    public void zeroBoxPlotsPlotted(){
+        boxPlotsPlotted = 0;
+    }
 
     public int getNumType(GrafType gType){
         int count = 0;
@@ -117,22 +179,6 @@ public class GrafStage extends Application {
         return count;
     }
 
-    //keep up with boxplots
-    public void zeroBoxPlotsPlotted(){boxPlotsPlotted = 0;}
-    public void incrementBoxPlotsPlotted(){
-        boxPlotsPlotted++;
-    }
-    public int getBoxPlotsPlotted(){
-        return boxPlotsPlotted;
-    }
-
-    public void setMessage1(String message){ mainController.setMessage1(message); }
-    public void setMessage2(String message){ mainController.setMessage2(message); }
-    public void setMessage3(String message){ mainController.setMessage3(message); }
-
-    public GrafPanel getGrafPanel(){return grafPanel;}
-    public GrafTable getData(){return data;}
-    public GrafSettings getGrafSettings() {return grafSet;}
 
 
 

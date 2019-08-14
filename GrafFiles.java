@@ -31,14 +31,14 @@ public class GrafFiles
   
     
   
-    public  static File saveFile(GrafProg g){
+    public  static File saveFile(GrafStage g){
         File f = g.getGrafFile();
         if (f.toString().equals("") || !f.exists()) f = getFile(f);
         saveObjectToFile(f, g);
         return f;
     }
     
-    public static File saveFileAs(GrafProg g){
+    public static File saveFileAs(GrafStage g){
         File f = g.getGrafFile();
         getFile(f);
         saveObjectToFile(f,g);
@@ -97,7 +97,7 @@ public class GrafFiles
              FileInputStream fileIn = new FileInputStream(file.toString());
              ObjectInputStream ois = new ObjectInputStream(fileIn);
              Object obj = ois.readObject();
-             //GrafProg gs = (GrafProg) ois.readObject();
+
              ois.close();  
              return obj;
                       
@@ -109,8 +109,8 @@ public class GrafFiles
   }
     
   
-  public static GrafProg openGrafFromFile(){
-         return (GrafProg)openFileObject("grf");
+  public static GrafStage openGrafFromFile(){
+         return (GrafStage)openFileObject("grf");
     
   }
 }
