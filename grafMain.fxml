@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <?import javafx.embed.swing.SwingNode?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.text.Text?>
 <BorderPane fx:controller="GrafMainController"
             xmlns:fx="http://javafx.com/fxml" >
     <top>
@@ -91,23 +93,28 @@
             </VBox>
         </HBox>
     </top>
-    <center>
-        <Pane fx:id="grafPane" >
+    <left>
+        <Pane fx:id="grafPane" />
 
-                <SwingNode fx:id = "swingGrafNode"/>
-
-        </Pane>
-    </center>
+<!--                <SwingNode fx:id = "swingGrafNode"/>-->
+<!--                   <Canvas height="400" width="400"/>-->
+<!--        </Pane>-->
+    </left>
     <bottom>
-           <BorderPane>
-                <top>
-                     <Separator orientation="HORIZONTAL"/>
-                </top>
-                <left><Label fx:id="message1" text =  "message 1 "/></left>
-                <center><Label fx:id="message2" text= "message 2 " /></center>
-                <right><Label fx:id ="message3" text= "message 3 " /></right>
 
-            </BorderPane>
+               <VBox>
+                   <Separator orientation="HORIZONTAL"/>
+                   <Text text="Messages:" />
+                   <Text text="     "/>
+
+                   <BorderPane>
+                       <left><Label fx:id="message1" text =  "message 1 " /></left>
+                       <center><Label fx:id="message2" text= "message 2 "  /></center>
+                       <right><Label fx:id ="message3" text= "message 3 "/></right>
+                   </BorderPane>
+               </VBox>
+
+
     </bottom>
 
 </BorderPane>

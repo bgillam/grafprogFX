@@ -8,6 +8,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,6 +66,9 @@ public class GrafDialogController {
     public Label textLabel;
     @FXML
     public TextField textForDisplay;
+
+    @FXML
+    public Pane grafPane;
 
 
     @FXML
@@ -147,8 +152,7 @@ public class GrafDialogController {
                 oMarkRButton.setVisible(false);
                 charMarkRButton.setVisible(false);
                 charMarkText.setVisible(false);
-
-            }
+                GrafStage.dialogStage.hide();           }
         });
     }
 

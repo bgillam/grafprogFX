@@ -57,35 +57,22 @@ public class GrafStage extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        //Set up Stage for Main Window
+        //Set up Main Window
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
         Parent grafRoot = (Parent)mainLoader.load();
         mainController = (GrafMainController)mainLoader.getController();
-        //Scene for main window
-        Scene grafScene = new Scene (grafRoot,width, height);
+        Scene grafScene = new Scene (grafRoot , width, height);
         primaryStage.setScene(grafScene);
-        //setup swing graphing panel
         primaryStage.setTitle("GrafProg: A Simple Graphing Program");
-        grafPanel.setMinimumSize(new Dimension(width,height));
-        grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-
-
-        //System.out.println(grafPanel);
-        swingGrafNode.setContent(grafPanel);
-        mainController.grafPane.getChildren().add(swingGrafNode);
-
+        mainController.putGrafPanelInGrafPane(swingGrafNode, grafPanel, width, height);  //puts swing panel in Pane
         primaryStage.show();
 
-
-
-        //Set up Stage for Dialogs (implement object)
+        //Set up Dialog Box
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
         dialogController = (GrafDialogController)loader.getController();
-        //initial Scene for dialog
         Scene dialogScene = new Scene (dialogRoot, 400, 400);
         dialogStage.setScene(dialogScene);
-        dialogStage.hide();
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
 
@@ -93,11 +80,11 @@ public class GrafStage extends Application {
         //new GrafProg();
         grafObjectList.add(axes);
         data.setTitle("Data:");
-        grafPanel.setPreferredSize(new Dimension(width, height-100));
+
+        //grafPanel.setPreferredSize(new Dimension(width, height-150));
 
 
-
-    }
+}
 
     //Set Titles and saved status after saving file
     private void setAsSaved(){

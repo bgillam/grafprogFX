@@ -40,7 +40,7 @@ public class GrafPanel extends JPanel implements Serializable
     
       
     public void paintComponent(Graphics g){
-        System.out.println("in paint");
+        //System.out.println("in paint");
         grafCanvas = (Graphics2D)g;
         String functionList = "";
         for (GrafObject graf: gStage.getGrafList()){

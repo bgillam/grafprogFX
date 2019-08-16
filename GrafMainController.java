@@ -12,6 +12,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import java.awt.*;
 import java.io.IOException;
 
 public class GrafMainController {
@@ -23,8 +26,8 @@ public class GrafMainController {
     public Label message3;
     @FXML
     public Pane grafPane;
-    @FXML
-    public SwingNode swingGrafNode;
+//    @FXML
+//    public SwingNode swingGrafNode;
 
 
     @FXML
@@ -32,7 +35,7 @@ public class GrafMainController {
         System.out.println(e.getSource()+ "was Clicked");
 
     }
-
+    
     @FXML
     public void onMenuChoice(KeyEvent keyEvent) {
     }
@@ -48,6 +51,18 @@ public class GrafMainController {
         GrafStage.dialogStage.show();
         GrafStage.dialogController.showFxEntry();
 
+    }
+
+    public void putGrafPanelInGrafPane(SwingNode swingGrafNode, GrafPanel grafPanel, int width, int height){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                grafPanel.setPreferredSize(new Dimension( width, height-55));
+                swingGrafNode.setContent(grafPanel);
+                grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+                //grafPanel.setMinimumSize(new Dimension(width,height));
+                grafPane.getChildren().add(swingGrafNode);
+            }
+        });
     }
 
 
