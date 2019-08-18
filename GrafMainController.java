@@ -30,6 +30,7 @@ public class GrafMainController {
 //    public SwingNode swingGrafNode;
 
 
+
     @FXML
     public void onButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
@@ -57,13 +58,17 @@ public class GrafMainController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 grafPanel.setPreferredSize(new Dimension( width, height-55));
+                grafPanel.setSize(new Dimension( width, height-55));
+
                 swingGrafNode.setContent(grafPanel);
                 grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-                //grafPanel.setMinimumSize(new Dimension(width,height));
                 grafPane.getChildren().add(swingGrafNode);
             }
         });
     }
+
+
+
 
 
     public void showCalc(ActionEvent actionEvent) {
@@ -97,7 +102,6 @@ public class GrafMainController {
     }
 
 
-
     public void addGrafPanel(SwingNode swingNode){
         grafPane.getChildren().add(swingNode);
 
@@ -107,4 +111,6 @@ public class GrafMainController {
     public void fileNew(ActionEvent actionEvent) {
         new GrafStage();
     }
+
+    public Pane getGrafPane(){return grafPane;}
 }

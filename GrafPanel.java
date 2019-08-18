@@ -42,6 +42,9 @@ public class GrafPanel extends JPanel implements Serializable
     public void paintComponent(Graphics g){
         //System.out.println("in paint");
         grafCanvas = (Graphics2D)g;
+
+        grafCanvas.clearRect(0,0,  getWidth(), getHeight());
+
         String functionList = "";
         for (GrafObject graf: gStage.getGrafList()){
             graf.drawGraf(grafCanvas);
@@ -53,6 +56,8 @@ public class GrafPanel extends JPanel implements Serializable
         }
         gStage.zeroBoxPlotsPlotted();
         gStage.setMessage1(functionList);
+
+
       }
     
     public void printPanel(){

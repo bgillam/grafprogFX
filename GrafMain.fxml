@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.BorderPane?>
-
-<?import javafx.embed.swing.SwingNode?>
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.text.Text?>
+<?import javafx.embed.swing.SwingNode?>
 <BorderPane fx:controller="GrafMainController"
             xmlns:fx="http://javafx.com/fxml" >
     <top>
@@ -94,10 +88,10 @@
         </HBox>
     </top>
     <left>
-        <Pane fx:id="grafPane" />
+        <Pane fx:id="grafPane"/>
 
 <!--                <SwingNode fx:id = "swingGrafNode"/>-->
-<!--                   <Canvas height="400" width="400"/>-->
+<!--&lt;!&ndash;                   <Canvas height="400" width="400"/>&ndash;&gt;-->
 <!--        </Pane>-->
     </left>
     <bottom>
