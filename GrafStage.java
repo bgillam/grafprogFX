@@ -101,12 +101,13 @@ public class GrafStage extends Application {
             grafPanel.setSize((new Dimension((int)stage.getWidth(), (int)stage.getHeight())));
             mainController.getGrafPane().resize((int)stage.getWidth(), (int)stage.getHeight());
             System.out.println("stage width =" + stage.getWidth()+"; grafPane width ="+mainController.grafPane.getWidth()+"; grafPanel width ="+grafPanel.getWidth());
+            //grafPane is problem
 
         });
 
         stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            grafPanel.setSize((new Dimension((int)stage.getWidth(), (int)stage.getHeight())));
-            mainController.getGrafPane().resize((int)stage.getWidth(), (int)stage.getHeight());
+            grafPanel.setSize((new Dimension((int)stage.getWidth(), (int)stage.getHeight()-100)));
+            mainController.getGrafPane().resize((int)stage.getWidth(), (int)stage.getHeight()-100);
             System.out.println("stage height =" + stage.getHeight()+"; grafPane height ="+mainController.grafPane.getHeight()+ "grafPanel Height ="+grafPanel.getHeight());
         });
 

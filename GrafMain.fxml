@@ -87,13 +87,11 @@
             </VBox>
         </HBox>
     </top>
-    <left>
-        <Pane fx:id="grafPane"/>
+    <center>
 
-<!--                <SwingNode fx:id = "swingGrafNode"/>-->
-<!--&lt;!&ndash;                   <Canvas height="400" width="400"/>&ndash;&gt;-->
-<!--        </Pane>-->
-    </left>
+            <Pane fx:id="grafPane" />
+
+    </center>
     <bottom>
 
                <VBox>
