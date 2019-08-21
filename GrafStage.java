@@ -1,6 +1,7 @@
 //package sample;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingNode;
@@ -8,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,6 +27,11 @@ public class GrafStage extends Application {
     //static UI variables
     static Stage primaryStage;
     static Stage dialogStage = new Stage();
+
+    static Stage testStage = new Stage();
+    static TestController testController;
+    static SwingNode testNode;
+
     static Stage spreadStage = new Stage();
     static GrafDialogController dialogController;
     static GrafMainController mainController;
@@ -61,23 +68,21 @@ public class GrafStage extends Application {
 
         //Set up Main Window
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
-
-
-        Parent grafRoot = (Parent)mainLoader.load();
-        mainController = (GrafMainController)mainLoader.getController();
+        Parent grafRoot = mainLoader.load();
+        mainController = mainLoader.getController();
         Scene grafScene = new Scene (grafRoot , initWidth, initHeight);
         primaryStage.setScene(grafScene);
         primaryStage.setTitle("GrafProg: A Simple Graphing Program");
         mainController.putGrafPanelInGrafPane(swingGrafNode, grafPanel, initWidth, initHeight);  //puts swing panel in Pane
+        
         primaryStage.show();
-
         //Set up Dialog Box
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
-        dialogController = (GrafDialogController)loader.getController();
-        //Scene dialogScene = new Scene (dialogRoot, 400, 400);
+        dialogController = loader.getController();
         Scene dialogScene = new Scene (dialogRoot, primaryStage.getWidth(), primaryStage.getHeight());
         dialogStage.setScene(dialogScene);
+
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
 
@@ -88,27 +93,60 @@ public class GrafStage extends Application {
         listenForSizeChange(primaryStage);
 
 
+         /*FXMLLoader testLoader = new FXMLLoader(getClass().getResource("Test.fxml"));
+         Parent testRoot = testLoader.load();
+         testController = (testLoader.getController());
+
+         Scene testScene = new Scene (testRoot, primaryStage.getWidth(), primaryStage.getHeight());
+         testStage.setScene(testScene);
+         testStage.setTitle("Test");
+
+         Platform.runLater(new Runnable() {
+            @Override public void run() {
+                grafPanel.setPreferredSize(new Dimension( (int)primaryStage.getWidth(), (int)primaryStage.getHeight()-55));
+                grafPanel.setSize(new Dimension( (int)primaryStage.getWidth(), (int)primaryStage.getHeight()-55));
+
+                swingGrafNode.setContent(grafPanel);
+                grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+                testController.testPane.getChildren().add(swingGrafNode);
+            }
+         });
+
+         grafObjectList.add(axes);
+         //setWindows(primaryStage);
+         testStage.show();
+*/
 
         //grafPanel.setPreferredSize(new Dimension(width, height-150));
 
 
-}
+    }
 
+
+
+    private void setWindows(Stage stage) {
+        grafPanel.setSize((new Dimension((int) stage.getWidth(), (int) stage.getHeight())));
+        mainController.getGrafPane().resize((int) stage.getWidth(), (int) stage.getHeight());
+    }
 
     public void listenForSizeChange(Stage stage) {
 
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            grafPanel.setSize((new Dimension((int)stage.getWidth(), (int)stage.getHeight())));
-            mainController.getGrafPane().resize((int)stage.getWidth(), (int)stage.getHeight());
+//            grafPanel.setSize((new Dimension((int)stage.getWidth(), (int)stage.getHeight())));
+//            mainController.getGrafPane().resize((int)stage.getWidth(), (int)stage.getHeight());
+              setWindows(stage);
             System.out.println("stage width =" + stage.getWidth()+"; grafPane width ="+mainController.grafPane.getWidth()+"; grafPanel width ="+grafPanel.getWidth());
             //grafPane is problem
 
         });
 
         stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            grafPanel.setSize((new Dimension((int)stage.getWidth(), (int)stage.getHeight()-100)));
-            mainController.getGrafPane().resize((int)stage.getWidth(), (int)stage.getHeight()-100);
+//            grafPanel.setSize((new Dimension((int)stage.getWidth(), (int)stage.getHeight()-100)));
+//            mainController.getGrafPane().resize((int)stage.getWidth(), (int)stage.getHeight()-100);
+            setWindows(stage);
             System.out.println("stage height =" + stage.getHeight()+"; grafPane height ="+mainController.grafPane.getHeight()+ "grafPanel Height ="+grafPanel.getHeight());
+
+
         });
 
 

@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
+
 <?import javafx.embed.swing.SwingNode?>
-<BorderPane fx:controller="GrafMainController"
-            xmlns:fx="http://javafx.com/fxml" >
+<BorderPane fx:controller="GrafMainController" xmlns:fx="http://javafx.com/fxml" >
     <top>
         <HBox>
             <VBox>

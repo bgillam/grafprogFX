@@ -26,7 +26,7 @@ public class GrafMainController {
     public Label message3;
     @FXML
     public Pane grafPane;
-//    @FXML
+
 //    public SwingNode swingGrafNode;
 
 
