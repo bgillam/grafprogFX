@@ -93,7 +93,7 @@ public class GrafStage extends Application {
         listenForSizeChange(primaryStage);
 
 
-         /*FXMLLoader testLoader = new FXMLLoader(getClass().getResource("Test.fxml"));
+         FXMLLoader testLoader = new FXMLLoader(getClass().getResource("Test.fxml"));
          Parent testRoot = testLoader.load();
          testController = (testLoader.getController());
 
@@ -115,7 +115,7 @@ public class GrafStage extends Application {
          grafObjectList.add(axes);
          //setWindows(primaryStage);
          testStage.show();
-*/
+        listenForSizeChange(testStage);
 
         //grafPanel.setPreferredSize(new Dimension(width, height-150));
 
