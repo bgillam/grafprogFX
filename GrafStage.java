@@ -28,7 +28,7 @@ public class GrafStage extends Application {
 
     static Stage spreadStage = new Stage();
     static GrafDialogController dialogController;
-    static GrafMainController mainController;
+    //static GrafMainController mainController;
     static SwingNode swingGrafNode = new SwingNode();
     GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel
 
@@ -126,9 +126,9 @@ public class GrafStage extends Application {
     }
 
 
-    public void setMessage1(String message){ mainController.setMessage1(message); }
-    public void setMessage2(String message){ mainController.setMessage2(message); }
-    public void setMessage3(String message){ mainController.setMessage3(message); }
+    public void setMessage1(String message){ grafController.setMessage1(message); }
+    public void setMessage2(String message){ grafController.setMessage2(message); }
+    public void setMessage3(String message){ grafController.setMessage3(message); }
 
 
     /*//Setters and Getters
