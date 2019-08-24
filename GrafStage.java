@@ -67,16 +67,18 @@ public class GrafStage extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         //Set up Main Window
-        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
-        Parent grafRoot = mainLoader.load();
-        mainController = mainLoader.getController();
-        Scene grafScene = new Scene (grafRoot , initWidth, initHeight);
-        primaryStage.setScene(grafScene);
-        primaryStage.setTitle("GrafProg: A Simple Graphing Program");
-        mainController.putGrafPanelInGrafPane(swingGrafNode, grafPanel, initWidth, initHeight);  //puts swing panel in Pane
-        
-        primaryStage.show();
-        //Set up Dialog Box
+//        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
+//        Parent grafRoot = mainLoader.load();
+//        mainController = mainLoader.getController();
+      //  Scene grafScene = new Scene (grafRoot , initWidth, initHeight);
+      // primaryStage.setScene(grafScene);
+    //   primaryStage.setTitle("GrafProg: A Simple Graphing Program");
+//        mainController.putGrafPanelInGrafPane(swingGrafNode, grafPanel, initWidth, initHeight);  //puts swing panel in Pane
+//
+//        primaryStage.show();
+//
+//
+        /*//Set up Dialog Box
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
         dialogController = loader.getController();
@@ -84,33 +86,39 @@ public class GrafStage extends Application {
         dialogStage.setScene(dialogScene);
 
         dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogController.hideAll();
+        dialogController.hideAll();*/
 
 
         //new GrafProg();
-        grafObjectList.add(axes);
-        data.setTitle("Data:");
-        listenForSizeChange(primaryStage);
 
+        //grafObjectList.add(axes);
+        //data.setTitle("Data:");
+        //listenForSizeChange(primaryStage);
+
+         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
+         Parent grafRoot = mainLoader.load();
+         mainController = mainLoader.getController();
 
          FXMLLoader testLoader = new FXMLLoader(getClass().getResource("Test.fxml"));
          Parent testRoot = testLoader.load();
          testController = (testLoader.getController());
 
-         Scene testScene = new Scene (testRoot, primaryStage.getWidth(), primaryStage.getHeight());
+         Scene testScene = new Scene (testRoot, initWidth, initHeight);
          testStage.setScene(testScene);
          testStage.setTitle("Test");
 
          Platform.runLater(new Runnable() {
             @Override public void run() {
-                grafPanel.setPreferredSize(new Dimension( (int)primaryStage.getWidth(), (int)primaryStage.getHeight()-55));
-                grafPanel.setSize(new Dimension( (int)primaryStage.getWidth(), (int)primaryStage.getHeight()-55));
+                grafPanel.setPreferredSize(new Dimension( (int)testStage.getWidth(), (int) testStage.getHeight()-55));
+                grafPanel.setSize(new Dimension( (int)testStage.getWidth(), (int)testStage.getHeight()-55));
 
                 swingGrafNode.setContent(grafPanel);
                 grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
                 testController.testPane.getChildren().add(swingGrafNode);
             }
          });
+
+         //testController.putGrafPanelInGrafPane(swingGrafNode, grafPanel, initWidth, initHeight);  //puts swing panel in Pane
 
          grafObjectList.add(axes);
          //setWindows(primaryStage);
