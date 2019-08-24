@@ -2,35 +2,29 @@
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class GrafStage extends Application {
 
     //static UI variables
-    static Stage primaryStage;
+    static Stage grafStage;
     static Stage dialogStage = new Stage();
 
-    static Stage testStage = new Stage();
-    static TestController testController;
-    static SwingNode testNode;
+    //static Stage testStage = new Stage();
+    static GrafController grafController;
+    //static SwingNode testNode;
 
     static Stage spreadStage = new Stage();
     static GrafDialogController dialogController;
@@ -56,55 +50,35 @@ public class GrafStage extends Application {
     private int boxPlotsPlotted = 0;              //for formatting multiple boxplots
     private static GrafCalc calc;                 //calculator for enteriung expressions
     //bottom status bar messages
-//    private JLabel message1;
-//    private JLabel message2;
-//    private JLabel message3;
+    private JLabel message1;
+    private JLabel message2;
+    private JLabel message3;
 
 
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage testStage) throws Exception{
 
-        //Set up Main Window
-//        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
-//        Parent grafRoot = mainLoader.load();
-//        mainController = mainLoader.getController();
-      //  Scene grafScene = new Scene (grafRoot , initWidth, initHeight);
-      // primaryStage.setScene(grafScene);
-    //   primaryStage.setTitle("GrafProg: A Simple Graphing Program");
-//        mainController.putGrafPanelInGrafPane(swingGrafNode, grafPanel, initWidth, initHeight);  //puts swing panel in Pane
-//
-//        primaryStage.show();
-//
-//
-        /*//Set up Dialog Box
+
+        //Set up Dialog Box
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
         dialogController = loader.getController();
-        Scene dialogScene = new Scene (dialogRoot, primaryStage.getWidth(), primaryStage.getHeight());
+        Scene dialogScene = new Scene (dialogRoot, testStage.getWidth(), testStage.getHeight());
         dialogStage.setScene(dialogScene);
 
         dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogController.hideAll();*/
+        dialogController.hideAll();
 
 
-        //new GrafProg();
+         //Set up main graf window
+         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
+         Parent grafRoot = grafLoader.load();
+         grafController = (grafLoader.getController());
 
-        //grafObjectList.add(axes);
-        //data.setTitle("Data:");
-        //listenForSizeChange(primaryStage);
-
-         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GrafMain.fxml"));
-         Parent grafRoot = mainLoader.load();
-         mainController = mainLoader.getController();
-
-         FXMLLoader testLoader = new FXMLLoader(getClass().getResource("Test.fxml"));
-         Parent testRoot = testLoader.load();
-         testController = (testLoader.getController());
-
-         Scene testScene = new Scene (testRoot, initWidth, initHeight);
-         testStage.setScene(testScene);
+         Scene grafScene = new Scene (grafRoot, initWidth, initHeight);
+         testStage.setScene(grafScene);
          testStage.setTitle("Test");
 
          Platform.runLater(new Runnable() {
@@ -113,56 +87,29 @@ public class GrafStage extends Application {
                 grafPanel.setSize(new Dimension( (int)testStage.getWidth(), (int)testStage.getHeight()-55));
 
                 swingGrafNode.setContent(grafPanel);
-                grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-                testController.testPane.getChildren().add(swingGrafNode);
+                //grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+                grafController.testPane.getChildren().add(swingGrafNode);
+                AnchorPane.setTopAnchor(swingGrafNode, 0.0);
+                AnchorPane.setLeftAnchor(swingGrafNode, 0.0);
+                AnchorPane.setRightAnchor(swingGrafNode, 0.0);
+                AnchorPane.setBottomAnchor(swingGrafNode, 0.0);
+
             }
          });
 
-         //testController.putGrafPanelInGrafPane(swingGrafNode, grafPanel, initWidth, initHeight);  //puts swing panel in Pane
-
-         grafObjectList.add(axes);
-         //setWindows(primaryStage);
-         testStage.show();
-        listenForSizeChange(testStage);
-
-        //grafPanel.setPreferredSize(new Dimension(width, height-150));
-
+        grafObjectList.add(axes);
+        data.setTitle("Data");
+        testStage.show();
 
     }
 
 
 
-    private void setWindows(Stage stage) {
-        grafPanel.setSize((new Dimension((int) stage.getWidth(), (int) stage.getHeight())));
-        mainController.getGrafPane().resize((int) stage.getWidth(), (int) stage.getHeight());
-    }
 
-    public void listenForSizeChange(Stage stage) {
-
-        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-//            grafPanel.setSize((new Dimension((int)stage.getWidth(), (int)stage.getHeight())));
-//            mainController.getGrafPane().resize((int)stage.getWidth(), (int)stage.getHeight());
-              setWindows(stage);
-            System.out.println("stage width =" + stage.getWidth()+"; grafPane width ="+mainController.grafPane.getWidth()+"; grafPanel width ="+grafPanel.getWidth());
-            //grafPane is problem
-
-        });
-
-        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-//            grafPanel.setSize((new Dimension((int)stage.getWidth(), (int)stage.getHeight()-100)));
-//            mainController.getGrafPane().resize((int)stage.getWidth(), (int)stage.getHeight()-100);
-            setWindows(stage);
-            System.out.println("stage height =" + stage.getHeight()+"; grafPane height ="+mainController.grafPane.getHeight()+ "grafPanel Height ="+grafPanel.getHeight());
-
-
-        });
-
-
-    }
 
     //Set Titles and saved status after saving file
     private void setAsSaved(){
-        primaryStage.setTitle(grafFile.toString());
+        grafStage.setTitle(grafFile.toString());
         data.setTitle("Data: "+grafFile.toString());
         grafSaved=true;
 
@@ -175,7 +122,7 @@ public class GrafStage extends Application {
                 case JOptionPane.YES_OPTION : { GrafFiles.saveFile(this); setAsSaved(); }
                 case JOptionPane.CANCEL_OPTION : { return;}
             }
-        data.dispose(); primaryStage.close();
+        data.dispose(); grafStage.close();
     }
 
 
@@ -184,12 +131,12 @@ public class GrafStage extends Application {
     public void setMessage3(String message){ mainController.setMessage3(message); }
 
 
-    //Setters and Getters
+    /*//Setters and Getters
     public static int getWidth(){return (int) primaryStage.getWidth();}
     //public static void setTheWidth(int w) {width = w;}
 
     public static int getHeight(){return (int) primaryStage.getHeight();}
-    //public static void setTheHeight(int h) {height = h;}
+    //public static void setTheHeight(int h) {height = h;}*/
 
     public File getGrafFile(){return grafFile;}
     public void setGrafFile(File f) {grafFile = f;}

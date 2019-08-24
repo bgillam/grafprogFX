@@ -55,7 +55,7 @@ public class GrafPanel extends JPanel implements Serializable
             //System.out.println();
         }
         gStage.zeroBoxPlotsPlotted();
-        gStage.setMessage1(functionList);
+        //gStage.setMessage1(functionList);
 
 
       }
