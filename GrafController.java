@@ -15,8 +15,8 @@ import java.awt.*;
 
 public class GrafController {
 
-    @FXML
-    public AnchorPane testPane;
+//    @FXML
+//    public AnchorPane testPane;
 
     @FXML
     public SwingNode testNode;
@@ -26,15 +26,10 @@ public class GrafController {
     @FXML
     public javafx.scene.control.Label message2;
     @FXML
-    public Label message3;
+    public javafx.scene.control.Label message3;
 
+    public AnchorPane grafPane;
 
-
-    @FXML
-    public void onButtonClicked(ActionEvent e){
-        System.out.println(e.getSource()+ "was Clicked");
-
-    }
 
     @FXML
     public void onMenuChoice(KeyEvent keyEvent) {
@@ -88,21 +83,5 @@ public class GrafController {
     }
 
 
-    public void putGrafPanelInGrafPane(SwingNode swingGrafNode, GrafPanel grafPanel, int width, int height){
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                grafPanel.setPreferredSize(new Dimension( width, height-55));
-                grafPanel.setSize(new Dimension( width, height-55));
-
-                swingGrafNode.setContent(grafPanel);
-                grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-                testPane.getChildren().add(swingGrafNode);
-            }
-        });
-    }
-
-    public AnchorPane getTestPane(){
-        return testPane;
-    }
 
 }

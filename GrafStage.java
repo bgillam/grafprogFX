@@ -17,27 +17,22 @@ import java.util.ArrayList;
 
 
 public class GrafStage extends Application {
+    private static final long serialVersionUID = 1L;
 
     //static UI variables
-    static Stage grafStage;
+    static Stage grafStage = new Stage();
     static Stage dialogStage = new Stage();
+    //static Stage spreadStage = new Stage();  for better spreadsheet later
 
-    //static Stage testStage = new Stage();
     static GrafController grafController;
-    //static SwingNode testNode;
-
-    static Stage spreadStage = new Stage();
     static GrafDialogController dialogController;
-    //static GrafMainController mainController;
-    static SwingNode swingGrafNode = new SwingNode();
-    GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel
 
-    private static final long serialVersionUID = 1L;
+    static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
+    GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel in swing
 
     //instance variables
     private File grafFile = new File("");  //File associated with the current Graf object
     private boolean grafSaved = false;     //has the current graf been saved?
-
     private static final int initWidth = 600;
     private static final int initHeight = 600;
     private GrafSettings grafSet = new GrafSettings(this);  //Stores window settings
@@ -49,25 +44,24 @@ public class GrafStage extends Application {
     private JPanel messagePanel;
     private int boxPlotsPlotted = 0;              //for formatting multiple boxplots
     private static GrafCalc calc;                 //calculator for enteriung expressions
+
     //bottom status bar messages
     private JLabel message1;
     private JLabel message2;
     private JLabel message3;
 
 
-
-
+    //UI elements start
     @Override
-    public void start(Stage testStage) throws Exception{
+    public void start(Stage grafStage) throws Exception{
 
 
         //Set up Dialog Box
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
         dialogController = loader.getController();
-        Scene dialogScene = new Scene (dialogRoot, testStage.getWidth(), testStage.getHeight());
+        Scene dialogScene = new Scene (dialogRoot, initWidth, initHeight); //.getWidth(), grafStage.getHeight());
         dialogStage.setScene(dialogScene);
-
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
 
@@ -78,28 +72,18 @@ public class GrafStage extends Application {
          grafController = (grafLoader.getController());
 
          Scene grafScene = new Scene (grafRoot, initWidth, initHeight);
-         testStage.setScene(grafScene);
-         testStage.setTitle("Test");
+         grafStage.setScene(grafScene);
+         grafStage.setTitle("GrafProg");
 
-         Platform.runLater(new Runnable() {
-            @Override public void run() {
-                grafPanel.setPreferredSize(new Dimension( (int)testStage.getWidth(), (int) testStage.getHeight()-55));
-                grafPanel.setSize(new Dimension( (int)testStage.getWidth(), (int)testStage.getHeight()-55));
-
-                swingGrafNode.setContent(grafPanel);
-                //grafPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-                grafController.testPane.getChildren().add(swingGrafNode);
-                AnchorPane.setTopAnchor(swingGrafNode, 0.0);
-                AnchorPane.setLeftAnchor(swingGrafNode, 0.0);
-                AnchorPane.setRightAnchor(swingGrafNode, 0.0);
-                AnchorPane.setBottomAnchor(swingGrafNode, 0.0);
-
-            }
-         });
-
-        grafObjectList.add(axes);
-        data.setTitle("Data");
-        testStage.show();
+         swingGrafNode.setContent(grafPanel);
+         grafController.grafPane.getChildren().add(swingGrafNode);
+         AnchorPane.setTopAnchor(swingGrafNode, 0.0);
+         AnchorPane.setLeftAnchor(swingGrafNode, 0.0);
+         AnchorPane.setRightAnchor(swingGrafNode, 0.0);
+         AnchorPane.setBottomAnchor(swingGrafNode, 0.0);
+         grafObjectList.add(axes);
+         data.setTitle("Data");
+         grafStage.show();
 
     }
 
