@@ -55,7 +55,6 @@ public class GrafStage extends Application {
     @Override
     public void start(Stage grafStage) throws Exception{
 
-
         //Set up Dialog Box
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
@@ -89,10 +88,14 @@ public class GrafStage extends Application {
 
 
     //Set Titles and saved status after saving file
-    private void setAsSaved(){
-        grafStage.setTitle(grafFile.toString());
-        data.setTitle("Data: "+grafFile.toString());
-        grafSaved=true;
+    private void setGrafSaved(boolean tf){
+        if (tf) {
+            grafStage.setTitle(grafFile.toString());
+            data.setTitle("Data: " + grafFile.toString());
+            grafSaved = true;
+        }else{
+            grafSaved = false;
+        }
 
     }
 
@@ -100,7 +103,7 @@ public class GrafStage extends Application {
     public void closeGraf(){
         if (!grafSaved)
             switch (JOptionPane.showConfirmDialog(null, "Save File?", "File"+grafFile.toString()+"not saved.", JOptionPane.YES_NO_CANCEL_OPTION)){
-                case JOptionPane.YES_OPTION : { GrafFiles.saveFile(this); setAsSaved(); }
+                case JOptionPane.YES_OPTION : { GrafFiles.saveFile(this); setGrafSaved(true); }
                 case JOptionPane.CANCEL_OPTION : { return;}
             }
         data.dispose(); grafStage.close();
