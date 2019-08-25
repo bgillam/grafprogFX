@@ -65,29 +65,26 @@ public class GrafStage extends Application {
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
 
-
-         //Set up main graf window
-         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
-         Parent grafRoot = grafLoader.load();
-         grafController = (grafLoader.getController());
-
-         Scene grafScene = new Scene (grafRoot, initWidth, initHeight);
-         grafStage.setScene(grafScene);
-         grafStage.setTitle("GrafProg");
-
-         swingGrafNode.setContent(grafPanel);
-         grafController.grafPane.getChildren().add(swingGrafNode);
-         AnchorPane.setTopAnchor(swingGrafNode, 0.0);
-         AnchorPane.setLeftAnchor(swingGrafNode, 0.0);
-         AnchorPane.setRightAnchor(swingGrafNode, 0.0);
-         AnchorPane.setBottomAnchor(swingGrafNode, 0.0);
-         grafObjectList.add(axes);
-         data.setTitle("Data");
-         grafStage.show();
+        //Set up main graf window
+        FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
+        Parent grafRoot = grafLoader.load();
+        grafController = (grafLoader.getController());
+        Scene grafScene = new Scene (grafRoot, initWidth, initHeight);
+        grafStage.setScene(grafScene);
+        grafStage.setTitle("GrafProg");
+        swingGrafNode.setContent(grafPanel);
+        //place graphing window node in pane
+        grafController.grafPane.getChildren().add(swingGrafNode);
+        //anchor graphing node to root BorderPane - need to figure out how to do this in Graf.fxml
+        AnchorPane.setTopAnchor(swingGrafNode, 0.0);
+        AnchorPane.setLeftAnchor(swingGrafNode, 0.0);
+        AnchorPane.setRightAnchor(swingGrafNode, 0.0);
+        AnchorPane.setBottomAnchor(swingGrafNode, 0.0);
+        grafObjectList.add(axes);
+        data.setTitle("Data");
+        grafStage.show();
 
     }
-
-
 
 
 
