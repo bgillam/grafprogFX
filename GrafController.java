@@ -40,13 +40,6 @@ public class GrafController {
         Platform.exit();
     }
 
-    public void fxInput(ActionEvent actionEvent) {
-        //GrafStage.dialogStage.initModality(Modality.APPLICATION_MODAL);
-
-        GrafStage.dialogStage.show();
-        GrafStage.dialogController.showFxEntry();
-
-    }
 
     public void fileNew(ActionEvent actionEvent) {
         new GrafStage();
@@ -82,6 +75,16 @@ public class GrafController {
         });
     }
 
+    public void fxInput(ActionEvent actionEvent) {
+        //GrafStage.dialogStage.initModality(Modality.APPLICATION_MODAL);
+        GrafStage.dialogController.showFxEntry();
+        GrafStage.dialogStage.show();
+
+    }
 
 
+    public void fxValue(ActionEvent actionEvent) {
+        GrafStage.dialogStage.show();
+        GrafStage.dialogController.showFxValue();
+    }
 }

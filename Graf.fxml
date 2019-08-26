@@ -35,7 +35,7 @@
                     <Menu fx:id="functionMenu" text="Function">
                         <MenuItem fx:id="fxInputItem" text="Input" onAction="#fxInput"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="valueItem" text="Value"/>
+                        <MenuItem fx:id="valueItem" text="Value" onAction="#fxValue"/>
                         <MenuItem fx:id="tangentItem" text="Tangent"/>
                         <MenuItem fx:id="chordItem" text="Chord"/>
                         <MenuItem fx:id="zerosItem" text="Zeros"/>
