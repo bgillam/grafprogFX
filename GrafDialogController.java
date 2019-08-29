@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 
@@ -101,6 +102,7 @@ public class GrafDialogController {
     public void onDiscardButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
     }
+
     @FXML
     public void onExitButtonClicked(ActionEvent e){
 
@@ -116,7 +118,7 @@ public class GrafDialogController {
     @FXML
     public void onEditButtonClicked(ActionEvent e){
 
-       //hidePoints();
+
 
 
 
@@ -145,12 +147,107 @@ public class GrafDialogController {
     }
 
 
+
+
+    public void showFxEntry()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                //hideAll();
+                GrafStage.dialogStage.setTitle("FUNCTION");
+                fxLabel.setVisible(true);
+                functionString.setVisible(true);
+                chooseObject.setText("Choose Function");
+
+
+
+            }
+        });
+    }
+
+
+    public void showFxValue()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                GrafStage.dialogStage.setTitle("FVALUE");
+                fChoiceLabel.setText("Choose f(x): ");
+                fChoiceLabel.setVisible(true);
+                fComboBox.setVisible(true);
+                //fstring choice
+                showX1();
+               
+                //show marks
+
+                chooseObject.setText("Choose Function");
+
+
+            }
+        });
+    }
+
+    public void showX1()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                x1Text.setVisible(true);
+                x1Label.setVisible(true);
+
+            }
+        });
+    }
+
+
+    public void showX1Y1()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                showX1();
+                separator1.setVisible(true);
+                y1Label.setVisible(true);
+                y1Text.setVisible(true);
+
+            }
+        });
+    }
+
+    public void showX1Y1X2Y2()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                showX1Y1();
+                separator2.setVisible(true);
+                x2Label.setVisible(true);
+                separator3.setVisible(true);
+                x2Text.setVisible(true);
+                y2Label.setVisible(true);
+                y2Text.setVisible(true);
+            }
+        });
+    }
+
+    public void showN()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                nLabel.setVisible(true);
+                nText.setVisible(true);
+            }
+        });
+    }
+
+
+
+
+
     public void hideAll() //change to hide all
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 fChoiceLabel.setVisible(false);
                 fComboBox.setVisible(false);
+                fChoiceLabel2.setVisible(false);
+                fComboBox2.setVisible(false);
                 fxLabel.setVisible(false);
                 functionString.setVisible(false);
                 x1Text.setVisible(false);
@@ -188,64 +285,6 @@ public class GrafDialogController {
             }
         });
     }
-
-    public void showFxEntry()
-    {
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                hideAll();
-                GrafStage.dialogStage.setTitle("FUNCTION");
-                fxLabel.setVisible(true);
-                functionString.setVisible(true);
-                chooseObject.setText("Choose Function");
-
-
-            }
-        });
-    }
-
-
-    public void showFxValue()
-    {
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                GrafStage.dialogStage.setTitle("FVALUE");
-                //show fxchooser
-                functionString.setVisible(true);
-                //show x1 and xllabel
-                //show marks
-
-                chooseObject.setText("Choose Function");
-
-
-            }
-        });
-    }
-
-    public void showPoints()
-    {
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                x1Text.setVisible(true);
-                x1Label.setVisible(true);
-                separator1.setVisible(true);
-                y1Label.setVisible(true);
-                y1Text.setVisible(true);
-                separator2.setVisible(true);
-                nLabel.setVisible(true);
-                nText.setVisible(true);
-                x2Label.setVisible(true);
-                separator3.setVisible(true);
-                x2Text.setVisible(true);
-                y2Label.setVisible(true);
-                y2Text.setVisible(true);
-            }
-        });
-    }
-
-
-
-
 
 
 }

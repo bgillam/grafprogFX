@@ -117,7 +117,7 @@
             <Separator orientation="HORIZONTAL"/>
             <HBox spacing="20" alignment="CENTER_RIGHT">
 
-                <Button text = "Save" minWidth = "75" onAction="#onSaveButtonClicked"/>
+                <Button text = "Create" minWidth = "75" onAction="#onSaveButtonClicked"/>
                 <Button text = "Exit|Discard" minWidth = "75" onAction="#onDiscardButtonClicked"/>
                 <Button text = "Exit|Save" minWidth = "75" onAction="#onExitButtonClicked"/>
             </HBox>

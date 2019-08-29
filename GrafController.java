@@ -77,6 +77,7 @@ public class GrafController {
 
     public void fxInput(ActionEvent actionEvent) {
         //GrafStage.dialogStage.initModality(Modality.APPLICATION_MODAL);
+        GrafStage.dialogController.hideAll();
         GrafStage.dialogController.showFxEntry();
         GrafStage.dialogStage.show();
 
@@ -84,7 +85,9 @@ public class GrafController {
 
 
     public void fxValue(ActionEvent actionEvent) {
-        GrafStage.dialogStage.show();
-        GrafStage.dialogController.showFxValue();
+      GrafStage.dialogController.hideAll();
+      GrafStage.dialogController.showFxValue();
+      GrafStage.dialogStage.show();
+
     }
 }
