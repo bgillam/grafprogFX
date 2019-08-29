@@ -176,7 +176,7 @@ public class GrafDialogController {
                 fComboBox.setVisible(true);
                 //fstring choice
                 showX1();
-               
+
                 //show marks
 
                 chooseObject.setText("Choose Function");
