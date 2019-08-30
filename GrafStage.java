@@ -84,6 +84,9 @@ public class GrafStage extends Application {
 
     }
 
+    public static void showData(){
+       // data.setVisible(true);
+    }
 
 
     //Set Titles and saved status after saving file
@@ -120,6 +123,10 @@ public class GrafStage extends Application {
 
     public static int getHeight(){return (int) primaryStage.getHeight();}
     //public static void setTheHeight(int h) {height = h;}*/
+
+    public Stage getGrafStage(){
+        return grafStage;
+    }
 
     public File getGrafFile(){return grafFile;}
     public void setGrafFile(File f) {grafFile = f;}

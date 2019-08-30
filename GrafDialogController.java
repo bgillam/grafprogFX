@@ -155,9 +155,7 @@ public class GrafDialogController {
                 GrafStage.dialogStage.setTitle("FUNCTION");
                 fxLabel.setVisible(true);
                 functionString.setVisible(true);
-                chooseObject.setText("Choose Function");
-
-
+                chooseObject.setText("Choose FUNCTION");
 
             }
         });
@@ -177,8 +175,88 @@ public class GrafDialogController {
                 functionString.setEditable(false);
                 showX1();
                 showMarks();
-                chooseObject.setText("Choose Function");
+                chooseObject.setText("Choose FVALUE");
 
+
+            }
+        });
+    }
+
+    public void showFxTangent()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                GrafStage.dialogStage.setTitle("FTANGENT");
+                fChoiceLabel.setText("Choose f(x): ");
+                fChoiceLabel.setVisible(true);
+                fComboBox.setVisible(true);
+                fxLabel.setVisible(true);
+                functionString.setVisible(true);
+                functionString.setEditable(false);
+                showX1();
+                showMarks();
+                chooseObject.setText("Choose FTANGENT");
+
+
+            }
+        });
+    }
+
+    public void showFxChord()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                GrafStage.dialogStage.setTitle("FCHORD");
+                fChoiceLabel.setText("Choose f(x): ");
+                fChoiceLabel.setVisible(true);
+                fComboBox.setVisible(true);
+                fxLabel.setVisible(true);
+                functionString.setVisible(true);
+                functionString.setEditable(false);
+                showX1Y1();
+                showMarks();
+                chooseObject.setText("Choose FCHORD");
+
+            }
+        });
+    }
+
+    public void showFxZeros()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                GrafStage.dialogStage.setTitle("FZEROS");
+                fChoiceLabel.setText("Choose f(x): ");
+                fChoiceLabel.setVisible(true);
+                fComboBox.setVisible(true);
+                fxLabel.setVisible(true);
+                functionString.setVisible(true);
+                functionString.setEditable(false);
+                showMarks();
+                showX1Y1();
+                showDx();
+                chooseObject.setText("Choose FZEROS");
+
+            }
+        });
+    }
+
+    public void showFxIntegral()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                GrafStage.dialogStage.setTitle("FINTEGRAL");
+                fChoiceLabel.setText("Choose f(x): ");
+                fChoiceLabel.setVisible(true);
+                fComboBox.setVisible(true);
+                fxLabel.setVisible(true);
+                functionString.setVisible(true);
+                functionString.setEditable(false);
+                fillButton.setVisible(true);
+                showX1Y1();
+                showN();
+
+                chooseObject.setText("Choose FINTEGRAL");
 
             }
         });
@@ -194,7 +272,7 @@ public class GrafDialogController {
                 oMarkRButton.setVisible(true);
                 charMarkRButton.setVisible(true);
                 charMarkText.setVisible(true);
-                textLabel.setVisible(true);
+                //textLabel.setVisible(true);
                 //textForDisplay.setVisible(true);
             }
         });
@@ -217,7 +295,6 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showX1();
-                separator1.setVisible(true);
                 y1Label.setVisible(true);
                 y1Text.setVisible(true);
 
@@ -230,9 +307,7 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showX1Y1();
-                separator2.setVisible(true);
                 x2Label.setVisible(true);
-                separator3.setVisible(true);
                 x2Text.setVisible(true);
                 y2Label.setVisible(true);
                 y2Text.setVisible(true);
@@ -245,13 +320,23 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 nLabel.setVisible(true);
+                nLabel.setText("n:");
                 nText.setVisible(true);
             }
         });
     }
 
 
-
+    public void showDx()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                nLabel.setVisible(true);
+                nLabel.setText("dx:");
+                nText.setVisible(true);
+            }
+        });
+    }
 
 
     public void hideAll() //change to hide all

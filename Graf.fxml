@@ -36,14 +36,14 @@
                         <MenuItem fx:id="fxInputItem" text="Input" onAction="#fxInput"/>
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="valueItem" text="Value" onAction="#fxValue"/>
-                        <MenuItem fx:id="tangentItem" text="Tangent"/>
-                        <MenuItem fx:id="chordItem" text="Chord"/>
-                        <MenuItem fx:id="zerosItem" text="Zeros"/>
+                        <MenuItem fx:id="tangentItem" text="Tangent" onAction= "#fxTangent"/>
+                        <MenuItem fx:id="chordItem" text="Chord" onAction= "#fxChord"/>
+                        <MenuItem fx:id="zerosItem" text="Zeros" onAction= "#fxZeros"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="integrateIetm" text="Integrate"/>
+                        <MenuItem fx:id="integrateIetm" text="Integrate" onAction= "#fxIntegral"/>
                     </Menu>
                     <Menu fx:id="statMenu" text="Stats">
-                        <MenuItem fx:id="dataItem" text="Data"/>
+                        <MenuItem fx:id="dataItem" text="Data" onAction= "#table"/>
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="oneVarStatsItem" text="One Variable Stats"/>
                         <MenuItem fx:id="freqTableItem" text="Freq. Distr. Table"/>
