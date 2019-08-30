@@ -63,7 +63,6 @@ public class GrafStage extends Application {
         dialogStage.setScene(dialogScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
-
         //Set up main graf window
         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
         Parent grafRoot = grafLoader.load();

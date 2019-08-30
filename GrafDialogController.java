@@ -82,8 +82,6 @@ public class GrafDialogController {
     @FXML
     public Label chooseObject;
 
-
-
     @FXML
     public Pane grafPane;
     @FXML
@@ -174,14 +172,30 @@ public class GrafDialogController {
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
-                //fstring choice
+                fxLabel.setVisible(true);
+                functionString.setVisible(true);
+                functionString.setEditable(false);
                 showX1();
-
-                //show marks
-
+                showMarks();
                 chooseObject.setText("Choose Function");
 
 
+            }
+        });
+    }
+
+    public void showMarks()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                markLabel.setVisible(true);
+                pointMarkRButton.setVisible(true);
+                xMarkRButton.setVisible(true);
+                oMarkRButton.setVisible(true);
+                charMarkRButton.setVisible(true);
+                charMarkText.setVisible(true);
+                textLabel.setVisible(true);
+                //textForDisplay.setVisible(true);
             }
         });
     }
