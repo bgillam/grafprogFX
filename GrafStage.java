@@ -22,13 +22,17 @@ public class GrafStage extends Application {
     //static UI variables
     static Stage grafStage = new Stage();
     static Stage dialogStage = new Stage();
+    static Stage tableStage = new Stage();
     //static Stage spreadStage = new Stage();  for better spreadsheet later
 
     static GrafController grafController;
     static GrafDialogController dialogController;
+    static TableController tableController;
 
     static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
     GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel in swing
+    static SwingNode swingTableNode = new SwingNode();
+    GrafTable data = new GrafTable(this, 100,10);  //table for data
 
     //instance variables
     private File grafFile = new File("");  //File associated with the current Graf object
@@ -37,7 +41,7 @@ public class GrafStage extends Application {
     private static final int initHeight = 600;
     private GrafSettings grafSet = new GrafSettings(this);  //Stores window settings
     private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
-    private GrafTable data = new GrafTable(this, 100,10);  //table for data
+
     private ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
     private GrafAxes axes = new GrafAxes(this);   //axes object
     private String copiedText = "";
@@ -49,6 +53,7 @@ public class GrafStage extends Application {
     private JLabel message1;
     private JLabel message2;
     private JLabel message3;
+
 
 
     //UI elements start
@@ -63,6 +68,25 @@ public class GrafStage extends Application {
         dialogStage.setScene(dialogScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
+
+        //Set up Table
+        FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("Table.fxml"));
+        Parent tableRoot = tableLoader.load();
+        tableController = (tableLoader.getController());
+        Scene tableScene = new Scene (tableRoot, initWidth, initHeight);
+        tableStage.setScene(tableScene);
+        tableStage.setTitle("Data");
+        
+       /* swingTableNode.setContent();
+        //place graphing window node in pane
+        tableController.tablePane.getChildren().add(swingTableNode);
+        //anchor graphing node to root BorderPane - need to figure out how to do this in Graf.fxml
+        AnchorPane.setTopAnchor(swingTableNode, 0.0);
+        AnchorPane.setLeftAnchor(swingTableNode, 0.0);
+        AnchorPane.setRightAnchor(swingTableNode, 0.0);
+        AnchorPane.setBottomAnchor(swingTableNode, 0.0);*/
+
+
         //Set up main graf window
         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
         Parent grafRoot = grafLoader.load();
@@ -79,7 +103,6 @@ public class GrafStage extends Application {
         AnchorPane.setRightAnchor(swingGrafNode, 0.0);
         AnchorPane.setBottomAnchor(swingGrafNode, 0.0);
         grafObjectList.add(axes);
-        data.setTitle("Data");
         grafStage.show();
 
     }
@@ -127,6 +150,8 @@ public class GrafStage extends Application {
     public Stage getGrafStage(){
         return grafStage;
     }
+
+    public Stage getDialogStage(){return dialogStage;}
 
     public File getGrafFile(){return grafFile;}
     public void setGrafFile(File f) {grafFile = f;}

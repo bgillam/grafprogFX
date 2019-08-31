@@ -42,7 +42,7 @@ public class GrafController {
 
 
     public void fileNew(ActionEvent actionEvent) {
-        new GrafStage();
+        //new GrafStage();
     }
 
     public void showCalc(ActionEvent actionEvent) {
