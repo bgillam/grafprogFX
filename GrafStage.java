@@ -77,11 +77,14 @@ public class GrafStage extends Application {
         tableStage.setScene(tableScene);
         tableStage.setTitle("Data");
 
-       /* swingTableNode.setContent();
-        //place graphing window node in pane
-        tableController.tablePane.getChildren().add(swingTableNode);
+        tableStage.show();
+
+        /*tableController.tablePane.getChildren().add(swingTableNode);
+        swingTableNode.setContent(tableController.spread);
+
+
         //anchor graphing node to root BorderPane - need to figure out how to do this in Graf.fxml
-        AnchorPane.setTopAnchor(swingTableNode, 0.0);
+        AnchorPane.setTopAnchor(tableController.spread, 0.0);
         AnchorPane.setLeftAnchor(swingTableNode, 0.0);
         AnchorPane.setRightAnchor(swingTableNode, 0.0);
         AnchorPane.setBottomAnchor(swingTableNode, 0.0);*/
