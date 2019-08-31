@@ -76,7 +76,7 @@ public class GrafStage extends Application {
         Scene tableScene = new Scene (tableRoot, initWidth, initHeight);
         tableStage.setScene(tableScene);
         tableStage.setTitle("Data");
-        
+
        /* swingTableNode.setContent();
         //place graphing window node in pane
         tableController.tablePane.getChildren().add(swingTableNode);
