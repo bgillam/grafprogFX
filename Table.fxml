@@ -10,6 +10,13 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="TableController"
             prefHeight="400.0" prefWidth="600.0">
-    <TableView fx:id = "spread"></TableView>
+   <!-- <TableView fx:id = "spread">
+        <columns>
+            <TableColumn text="row" />
+            <TableColumn text="Data1"/>
+            <TableColumn text="data2"/>
+            <TableColumn text="data3"/>
+        </columns>
+    </TableView>-->
 
 </AnchorPane>

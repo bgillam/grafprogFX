@@ -216,7 +216,7 @@ public class RecursiveDialog extends JDialog {
 				anMinus1=newVal;
 			} catch (DomainViolationException e) { }  //we know we should not get an exception because tested previously
 			  catch (FunctionFormatException e) {}   
-		myDaddy.repaint();
+		//myDaddy.repaint();
 	}
 	
     public void showDialog(){

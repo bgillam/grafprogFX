@@ -76,19 +76,14 @@ public class GrafStage extends Application {
         Scene tableScene = new Scene (tableRoot, initWidth, initHeight);
         tableStage.setScene(tableScene);
         tableStage.setTitle("Data");
-
-        tableStage.show();
-
-        /*tableController.tablePane.getChildren().add(swingTableNode);
-        swingTableNode.setContent(tableController.spread);
-
-
+        swingTableNode.setContent(data.getDataPanel());
+        tableController.tablePane.getChildren().add(swingTableNode);
         //anchor graphing node to root BorderPane - need to figure out how to do this in Graf.fxml
-        AnchorPane.setTopAnchor(tableController.spread, 0.0);
+        AnchorPane.setTopAnchor(swingTableNode, 0.0);
         AnchorPane.setLeftAnchor(swingTableNode, 0.0);
         AnchorPane.setRightAnchor(swingTableNode, 0.0);
-        AnchorPane.setBottomAnchor(swingTableNode, 0.0);*/
-
+        AnchorPane.setBottomAnchor(swingTableNode, 0.0);
+        tableStage.show();
 
         //Set up main graf window
         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
@@ -119,7 +114,7 @@ public class GrafStage extends Application {
     private void setGrafSaved(boolean tf){
         if (tf) {
             grafStage.setTitle(grafFile.toString());
-            data.setTitle("Data: " + grafFile.toString());
+            tableStage.setTitle("Data: " + grafFile.toString());
             grafSaved = true;
         }else{
             grafSaved = false;
@@ -134,7 +129,7 @@ public class GrafStage extends Application {
                 case JOptionPane.YES_OPTION : { GrafFiles.saveFile(this); setGrafSaved(true); }
                 case JOptionPane.CANCEL_OPTION : { return;}
             }
-        data.dispose(); grafStage.close();
+        tableStage.close(); grafStage.close();
     }
 
 

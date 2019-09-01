@@ -272,7 +272,7 @@ public class RandomDialog extends JDialog {
 		if (rdbtnIntegers.isSelected()) generateRandomIntegers();
 		else if (rdbtnDoubles.isSelected()) generateRandomDoubles();
 		resetChooser();
-		myDaddy.repaint();
+		//myDaddy.repaint();
 	}
 	
     public void showDialog(){

@@ -122,7 +122,7 @@ public class HeaderDialog extends JDialog {
 		headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(myDaddy.getHeaderArray()));
 		headerTextField.setEditable(false);
 		chooseLabel.setText("Choose Header to Edit:");
-		myDaddy.repaint();
+		//myDaddy.repaint();
 	}
 	
 

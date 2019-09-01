@@ -238,7 +238,7 @@ public class TableFunctionDialog extends JDialog {
             } catch (NullPointerException e)  { } //empty cells
               catch (DomainViolationException e) { }   //we know we will not get an exception because tested in previous if statement
               catch (FunctionFormatException e) {}   
-        myDaddy.repaint();
+        //myDaddy.repaint();
     }
     
     public void showDialog(){

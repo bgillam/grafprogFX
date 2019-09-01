@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 //class header
-class GrafTable extends JDialog implements ActionListener, KeyListener
+class GrafTable  implements ActionListener, KeyListener //extends JDialog implements ActionListener, KeyListener
  {
     private static final long serialVersionUID = 1L;
     //instance variables
@@ -39,15 +39,19 @@ class GrafTable extends JDialog implements ActionListener, KeyListener
     // Constructor of Table
     public GrafTable(GrafStage sess, int row, int col)
     {   gSess = sess;
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        /*setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setTitle( "Data" );
-        setSize( 600, 400);
+        setSize( 600, 400);*/
+
         //setLocationRelativeTo(sess);
         
         // Create a panel to hold all other components
         dataPanel = new JPanel();
         dataPanel.setLayout( new BorderLayout() );
-        getContentPane().add(dataPanel);
+
+
+        //getContentPane().add(dataPanel);   //
         
         // Make column 0 non-editable 
         model = new DefaultTableModel()
@@ -70,9 +74,10 @@ class GrafTable extends JDialog implements ActionListener, KeyListener
         scrollPane = new JScrollPane( table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         dataPanel.add( scrollPane, BorderLayout.CENTER );
         
-        setJMenuBar(GrafTableMenu.createMenu(this));//create menu including listeners
+        /*setJMenuBar(GrafTableMenu.createMenu(this));//create menu including listeners
         add(dataPanel);
-        setModal(false);
+        setModal(false);*/
+
         labelHeaders();
         numberTheRows();
         
@@ -118,9 +123,16 @@ class GrafTable extends JDialog implements ActionListener, KeyListener
         setCellValueInteger(i , 0, i );
         
     }
+
+    public JTable getTable(){
+            return table;
+    }
     
-        
-   //change the table dimensions
+    public JPanel getDataPanel(){
+        return dataPanel;
+
+    }
+     //change the table dimensions
    private void resizeData(){
       DataSizeDialog dataDialog = new DataSizeDialog(new JFrame(), getNumRows(), getNumCols());
       Point xy = dataDialog.showDataSizeDialog();
@@ -436,7 +448,7 @@ class GrafTable extends JDialog implements ActionListener, KeyListener
     //respond to menu commands
     public void actionPerformed(ActionEvent event)
    {  
-        if (event.getActionCommand().equals("Done")) setVisible(false); 
+        if (event.getActionCommand().equals("Done")) //setVisible(false);
         if (event.getActionCommand().equals("Resize")) resizeData();
         if (event.getActionCommand().equals("Delete Row")) deleteRows();
         if (event.getActionCommand().equals("Delete Column")) deleteColumns(); 

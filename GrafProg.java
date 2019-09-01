@@ -59,7 +59,7 @@ public class GrafProg extends JFrame //implements ActionListener, Serializable {
         SetupFrame();
         grafObjectList.add(axes);
         setTitle("GrafProg");
-        data.setTitle("Data:");
+        //data.setTitle("Data:");
 
 
     }
@@ -103,7 +103,7 @@ public class GrafProg extends JFrame //implements ActionListener, Serializable {
       //Set Titles and saved status after saving file
     private void setAsSaved(){
           setTitle(grafFile.toString());
-          data.setTitle("Data: "+grafFile.toString());
+          //data.setTitle("Data: "+grafFile.toString());
           grafSaved=true;
           repaint();
     }
@@ -115,7 +115,7 @@ public class GrafProg extends JFrame //implements ActionListener, Serializable {
             case JOptionPane.YES_OPTION : { GrafFiles.saveFile(new GrafStage()); setAsSaved(); }
             case JOptionPane.CANCEL_OPTION : { repaint(); return;}
         }    
-        data.dispose(); dispose();
+        //data.dispose(); dispose();
     }
   
   

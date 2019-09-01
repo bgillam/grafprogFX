@@ -9,6 +9,5 @@ public class TableController {
     @FXML
     public AnchorPane tablePane;
 
-    @FXML
-    public TableView spread;
+
 }
