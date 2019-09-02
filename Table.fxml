@@ -6,17 +6,64 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id = "tablePane" xmlns="http://javafx.com/javafx"
+
+<!--<AnchorPane fx:id = "tablePane" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="TableController"
             prefHeight="400.0" prefWidth="600.0">
-   <!-- <TableView fx:id = "spread">
-        <columns>
-            <TableColumn text="row" />
-            <TableColumn text="Data1"/>
-            <TableColumn text="data2"/>
-            <TableColumn text="data3"/>
-        </columns>
-    </TableView>-->
+</AnchorPane>-->
+<BorderPane fx:controller="TableController" xmlns:fx="http://javafx.com/fxml" >
+    <top>
+        <HBox>
+            <VBox>
+                <MenuBar fx:id="mainTableMenu" onKeyPressed="#onMenuChoice">
+                    <Menu fx:id="fileTableMenu" text="File">
+                        <MenuItem fx:id="newTableItem" text="New/Clear" />
+                        <MenuItem fx:id="importTableItem" text="Import"/>
+                        <MenuItem fx:id="ExprotTableItem" text="Export"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="doneTableItem" text="Done"/>
+                        <MenuItem fx:id="saveAsItem" text="Save As"/>
+                    </Menu>
+                    <Menu fx:id="editTableMenu" text="Edit">
+                        <MenuItem fx:id="cutTableItem" text="Cut"/>
+                        <MenuItem fx:id="copyTableItem" text="Copy"/>
+                        <MenuItem fx:id="pasteTableItem" text="Paste"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="deleteRowTableItem" text="Delete Row" />
+                        <MenuItem fx:id="deleteColumnTableItem" text="Delete Column" />
+                        <MenuItem fx:id="resizeTableItem" text="Resize Table" />
 
-</AnchorPane>
+                    </Menu>
+                    <Menu fx:id="columnActionTableMenu" text="Column Action">
+                        <MenuItem fx:id="headingTableItem" text="Heading" />
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="randomTableItem" text="Random"/>
+                        <MenuItem fx:id="functionTableItem" text = "Function"/>
+                        <MenuItem fx:id="recursionTableItem" text="Recursion"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="clearColumnTableItem" text="Clear Column"/>
+                        <MenuItem fx:id="zeroColumnTableItem" text="Zero Column"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="sortATableItem" text="Sort Ascending"/>
+                        <MenuItem fx:id="sortDTableItem" text="Sort Descending"/>
+
+                    </Menu>
+
+                </MenuBar>
+            </VBox>
+        </HBox>
+
+    </top>
+    <center>
+        <AnchorPane fx:id = "tablePane" xmlns="http://javafx.com/javafx"
+                    xmlns:fx="http://javafx.com/fxml">
+
+
+
+        </AnchorPane>
+
+    </center>
+
+
+</BorderPane>

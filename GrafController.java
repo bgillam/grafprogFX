@@ -28,7 +28,10 @@ public class GrafController {
     @FXML
     public javafx.scene.control.Label message3;
 
+    @FXML
     public AnchorPane grafPane;
+
+
 
 
     @FXML
