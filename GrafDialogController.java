@@ -105,7 +105,7 @@ public class GrafDialogController {
     public void onExitButtonClicked(ActionEvent e){
 
 
-            GrafStage.dialogStage.hide();
+            GrafStage.getDialogStage().hide();
             GrafStage.dialogController.hideAll();  //this should hide all; add points for each box
 
 
@@ -152,7 +152,7 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 //hideAll();
-                GrafStage.dialogStage.setTitle("FUNCTION");
+                GrafStage.getDialogStage().setTitle("FUNCTION");
                 fxLabel.setVisible(true);
                 functionString.setVisible(true);
                 chooseObject.setText("Choose FUNCTION");
@@ -166,7 +166,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.dialogStage.setTitle("FVALUE");
+                GrafStage.getDialogStage().setTitle("FVALUE");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
@@ -186,7 +186,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.dialogStage.setTitle("FTANGENT");
+                GrafStage.getDialogStage().setTitle("FTANGENT");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
@@ -206,7 +206,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.dialogStage.setTitle("FCHORD");
+                GrafStage.getDialogStage().setTitle("FCHORD");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
@@ -225,7 +225,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.dialogStage.setTitle("FZEROS");
+                GrafStage.getDialogStage().setTitle("FZEROS");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
@@ -245,7 +245,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.dialogStage.setTitle("FINTEGRAL");
+                GrafStage.getDialogStage().setTitle("FINTEGRAL");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);

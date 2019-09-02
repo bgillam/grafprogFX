@@ -38,7 +38,7 @@ public class GrafProg extends JFrame //implements ActionListener, Serializable {
     private int height = 600;
     private GrafSettings grafSet = new GrafSettings(new GrafStage());  //Stores window settings
     private GrafPrimitives grafPrim = new GrafPrimitives(new GrafStage());  //draw line, point or character
-    private GrafTable data = new GrafTable(new GrafStage(), 100,10);  //table for data
+    private GrafTable data = new GrafTable(100,10);  //table for data
     private ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
     private GrafAxes axes = new GrafAxes( new GrafStage());  //axes object
     private String copiedText = "";    

@@ -20,9 +20,9 @@ public class GrafStage extends Application {
     private static final long serialVersionUID = 1L;
 
     //static UI variables
-    static Stage grafStage = new Stage();
-    static Stage dialogStage = new Stage();
-    static Stage tableStage = new Stage();
+    private static Stage grafStage = new Stage();
+    private static Stage dialogStage = new Stage();
+    private static Stage tableStage = new Stage();
     //static Stage spreadStage = new Stage();  for better spreadsheet later
 
     static GrafController grafController;
@@ -32,7 +32,7 @@ public class GrafStage extends Application {
     static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
     GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel in swing
     static SwingNode swingTableNode = new SwingNode();
-    GrafTable data = new GrafTable(this, 100,10);  //table for data
+    static GrafTable data = new GrafTable(100,10);  //table for data
 
     //instance variables
     private File grafFile = new File("");  //File associated with the current Graf object
@@ -83,7 +83,7 @@ public class GrafStage extends Application {
         AnchorPane.setLeftAnchor(swingTableNode, 0.0);
         AnchorPane.setRightAnchor(swingTableNode, 0.0);
         AnchorPane.setBottomAnchor(swingTableNode, 0.0);
-        tableStage.show();
+        //tableStage.show();
 
         //Set up main graf window
         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
@@ -145,11 +145,14 @@ public class GrafStage extends Application {
     public static int getHeight(){return (int) primaryStage.getHeight();}
     //public static void setTheHeight(int h) {height = h;}*/
 
-    public Stage getGrafStage(){
-        return grafStage;
-    }
+    public Stage getGrafStage(){ return grafStage;  }
 
-    public Stage getDialogStage(){return dialogStage;}
+    public static Stage getDialogStage(){return dialogStage;}
+
+    public static Stage getTableStage() { return tableStage; }
+
+    public void setData(GrafTable dt) { data = dt; }
+    public static GrafTable getData(){return data;}
 
     public File getGrafFile(){return grafFile;}
     public void setGrafFile(File f) {grafFile = f;}
@@ -171,9 +174,6 @@ public class GrafStage extends Application {
 
     public String getCopiedText(){return copiedText;}
     public void setCopiedText(String s){ copiedText = s;}
-
-    public void setData(GrafTable dt) { data = dt; }
-    public GrafTable getData(){return data;}
 
     public void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
     public ArrayList<GrafObject> getGrafList(){return grafObjectList;}

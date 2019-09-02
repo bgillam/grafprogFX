@@ -45,7 +45,7 @@
                     <Menu fx:id="statMenu" text="Stats">
                         <MenuItem fx:id="dataItem" text="Data" onAction= "#table"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="oneVarStatsItem" text="One Variable Stats"/>
+                        <MenuItem fx:id="oneVarStatsItem" text="One Variable Stats" onAction="#oneVStats"/>
                         <MenuItem fx:id="freqTableItem" text="Freq. Distr. Table"/>
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="columnPloteItem" text="Column Plot"/>

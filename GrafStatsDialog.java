@@ -65,8 +65,8 @@ public class GrafStatsDialog extends JDialog {
     /**
      * Create the dialog.
      */
-    public GrafStatsDialog(GrafProg sess) {
-        gSess=sess;
+    public GrafStatsDialog(){  //GrafProg sess) {
+        //gSess=sess;
         setBounds(100, 100, 366, 286);
         getContentPane().setLayout(new BorderLayout());
         setModal(true);
@@ -94,7 +94,7 @@ public class GrafStatsDialog extends JDialog {
                     JButton okButton = new JButton("Close");
                     okButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent arg0) {
-                            gSess.repaint();     
+                            gSess.repaint();
                             gSess.getGrafPanel().repaint();
                             dispose();
                             }
@@ -300,7 +300,7 @@ public class GrafStatsDialog extends JDialog {
                         {
                             functionComboBox = new JComboBox();
                             panel_3_1.add(functionComboBox);
-                            functionComboBox.setModel(new javax.swing.DefaultComboBoxModel(gSess.getData().getHeaderArray()));
+                            functionComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafStage.getData().getHeaderArray()));
                         }
                     }
                     JButton calcBtn = new JButton("Calc");
@@ -500,13 +500,21 @@ public class GrafStatsDialog extends JDialog {
 	}
 	
 	
-	public static void createInputDialog(GrafProg gs){
+	/*public static void createInputDialog(GrafProg gs){
 	    GrafStatsDialog statDialog = new GrafStatsDialog(gs);
             statDialog.setVisible(true); 
             statDialog.setModal(true); 
 	   
 	 
-	}
+	}*/
+
+    public static void createInputDialog(){
+        GrafStatsDialog statDialog = new GrafStatsDialog();
+        statDialog.setVisible(true);
+        statDialog.setModal(true);
+
+
+    }
 	
 	 //private void resetListModels(){
 	    	//autoComboBox.setModel(new javax.swing.DefaultComboBoxModel(getFunctionListArray()));

@@ -37,8 +37,8 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
      
     
     // Constructor of Table
-    public GrafTable(GrafStage sess, int row, int col)
-    {   gSess = sess;
+    public GrafTable(int row, int col)              //GrafStage sess, int row, int col)
+    {   //gSess = sess;
 
         /*setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setTitle( "Data" );
@@ -160,7 +160,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
        return headerHolder;
    }
     
-    public String[] getHeaderStringArray(){
+    /*public String[] getHeaderStringArray(){
        String[] headerHolder = new String[getNumCols()+1];
        int cols = getNumCols();
        for (int i = 1; i<= cols; i++) {           // don't use index 0 just to keep indexes concurrent with Table calls
@@ -168,7 +168,29 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
             
        }
        return headerHolder;
-   }
+   }*/
+
+     public String[] getHeaderArray(){
+         String[] headerArray = new String[getNumCols()+1];
+         for (int i = 0; i <= getNumCols(); i++)
+             headerArray[i] = getHeaderString(i);
+         return headerArray;
+     }
+
+
+     public void setHeaderString(int c, String s){
+         table.getColumnModel().getColumn(c).setHeaderValue(s);
+     }
+
+     public String getHeaderString(int c){
+         return (String)table.getColumnModel().getColumn(c).getHeaderValue();
+     }
+
+
+     public void setHeaderArray(String[] headers){
+         for (int i=0; i <= getNumCols(); i++)
+             setHeaderString(i , headers[i]);
+     }
    
    private void restoreHeaders(String[] headerHolder){
        int len;
@@ -573,25 +595,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
         }
     }
     
-    public void setHeaderString(int c, String s){
-        table.getColumnModel().getColumn(c).setHeaderValue(s);
-    }
-    
-    public String getHeaderString(int c){
-        return (String)table.getColumnModel().getColumn(c).getHeaderValue();
-    }
-    
-    public String[] getHeaderArray(){
-        String[] headerArray = new String[getNumCols()+1];
-        for (int i = 0; i <= getNumCols(); i++)
-                headerArray[i] = getHeaderString(i);
-        return headerArray;
-    }
-    
-    public void setHeaderArray(String[] headers){
-        for (int i=0; i <= getNumCols(); i++)
-            setHeaderString(i , headers[i]);
-    }
+
 
 
     // Key Handling override for paste methods
