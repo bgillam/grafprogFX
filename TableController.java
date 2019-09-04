@@ -7,10 +7,13 @@ import javax.swing.text.TableView;
 public class TableController {
 
 
-    @FXML
-    public AnchorPane tablePane;
+    @FXML    private AnchorPane tablePane;
 
 
     public void onMenuChoice(KeyEvent keyEvent) {
+    }
+
+    public AnchorPane getTablePane(){
+        return tablePane;
     }
 }

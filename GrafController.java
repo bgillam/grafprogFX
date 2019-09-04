@@ -18,28 +18,16 @@ public class GrafController {
 //    @FXML
 //    public AnchorPane testPane;
 
-    @FXML
-    public SwingNode testNode;
+    @FXML    private SwingNode testNode;
+    @FXML    private javafx.scene.control.Label message1;
+    @FXML    private javafx.scene.control.Label message2;
+    @FXML    private javafx.scene.control.Label message3;
+    @FXML    private AnchorPane grafPane;
 
-    @FXML
-    public javafx.scene.control.Label message1;
-    @FXML
-    public javafx.scene.control.Label message2;
-    @FXML
-    public javafx.scene.control.Label message3;
-
-    @FXML
-    public AnchorPane grafPane;
-
-
-
-
-    @FXML
-    public void onMenuChoice(KeyEvent keyEvent) {
+    @FXML    private void onMenuChoice(KeyEvent keyEvent) {
     }
 
-    @FXML
-    public void exitApplicaton(ActionEvent ae){
+    @FXML    private void exitApplicaton(ActionEvent ae){
         Platform.exit();
     }
 
@@ -128,4 +116,8 @@ public class GrafController {
     public void oneVStats(ActionEvent actionEvent) {
         GrafStatsDialog.createInputDialog();
     }
-}
+
+    public AnchorPane getGrafPane(){return grafPane;}
+
+    }
+

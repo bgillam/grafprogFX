@@ -2,6 +2,9 @@
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.value.WeakChangeListener;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,11 +26,13 @@ public class GrafStage extends Application {
     private static Stage grafStage = new Stage();
     private static Stage dialogStage = new Stage();
     private static Stage tableStage = new Stage();
+    private static Stage statStage = new Stage();
     //static Stage spreadStage = new Stage();  for better spreadsheet later
 
     static GrafController grafController;
     static GrafDialogController dialogController;
     static TableController tableController;
+    static OneVarStatsController statController;
 
     static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
     GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel in swing
@@ -69,6 +74,16 @@ public class GrafStage extends Application {
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
 
+        //Set up One Variable Stats Dialog Box
+        FXMLLoader statLoader = new FXMLLoader(getClass().getResource("OneVarStats.fxml"));
+        Parent statRoot = statLoader.load();
+        statController = statLoader.getController();
+        Scene statScene = new Scene (statRoot, initWidth, initHeight); //.getWidth(), grafStage.getHeight());
+        statStage.setScene(statScene);
+        statStage.initModality(Modality.APPLICATION_MODAL);
+        statStage.setTitle("DATA");
+        statStage.show();
+
         //Set up Table
         FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("Table.fxml"));
         Parent tableRoot = tableLoader.load();
@@ -77,12 +92,13 @@ public class GrafStage extends Application {
         tableStage.setScene(tableScene);
         tableStage.setTitle("Data");
         swingTableNode.setContent(data.getDataPanel());
-        tableController.tablePane.getChildren().add(swingTableNode);
+        tableController.getTablePane().getChildren().add(swingTableNode);
         //anchor graphing node to root BorderPane - need to figure out how to do this in Graf.fxml
         AnchorPane.setTopAnchor(swingTableNode, 0.0);
         AnchorPane.setLeftAnchor(swingTableNode, 0.0);
         AnchorPane.setRightAnchor(swingTableNode, 0.0);
         AnchorPane.setBottomAnchor(swingTableNode, 0.0);
+        setSizeChangeListener(tableStage, data.getDataPanel());
         //tableStage.show();
 
         //Set up main graf window
@@ -92,21 +108,40 @@ public class GrafStage extends Application {
         Scene grafScene = new Scene (grafRoot, initWidth, initHeight);
         grafStage.setScene(grafScene);
         grafStage.setTitle("GrafProg");
-        swingGrafNode.setContent(grafPanel);
+        swingGrafNode.setContent(getGrafPanel());
         //place graphing window node in pane
-        grafController.grafPane.getChildren().add(swingGrafNode);
+        grafController.getGrafPane().getChildren().add(swingGrafNode);
         //anchor graphing node to root BorderPane - need to figure out how to do this in Graf.fxml
         AnchorPane.setTopAnchor(swingGrafNode, 0.0);
         AnchorPane.setLeftAnchor(swingGrafNode, 0.0);
         AnchorPane.setRightAnchor(swingGrafNode, 0.0);
         AnchorPane.setBottomAnchor(swingGrafNode, 0.0);
+        setSizeChangeListener(grafStage, getGrafPanel());
         grafObjectList.add(axes);
         grafStage.show();
 
     }
 
+    public void setSizeChangeListener(Stage stage, JPanel gPanel){
+        stage.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                gPanel.repaint();
+                stage.show();
+            }
+        });
+        stage.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                gPanel.repaint();
+                stage.show();
+            }
+        });
+
+    }
+
     public static void showData(){
-       // data.setVisible(true);
+       tableStage.show();
     }
 
 
@@ -136,6 +171,7 @@ public class GrafStage extends Application {
     public void setMessage1(String message){ grafController.setMessage1(message); }
     public void setMessage2(String message){ grafController.setMessage2(message); }
     public void setMessage3(String message){ grafController.setMessage3(message); }
+
 
 
     /*//Setters and Getters

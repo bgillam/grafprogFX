@@ -17,92 +17,53 @@ import java.awt.*;
 
 public class GrafDialogController {
 
-    @FXML
-    public ComboBox fComboBox;
-    @FXML
-    public Label fChoiceLabel;
-    @FXML
-    public TextField x1Text;
-    @FXML
-    public Label x1Label;
-    @FXML
-    public Label separator1;
-    @FXML
-    public Label y1Label;
-    @FXML
-    public TextField y1Text;
-    @FXML
-    public Label separator2;
-    @FXML
-    public Label nLabel;
-    @FXML
-    public TextField nText;
-    @FXML
-    public Label x2Label;
-    @FXML
-    public Label separator3;
-    @FXML
-    public TextField x2Text;
-    @FXML
-    public Label y2Label;
-    @FXML
-    public TextField y2Text;
-    @FXML
-    public Label fxLabel;
-    @FXML
-    public TextField functionString;
-    //@FXML
-    //public ToggleGroup markToggleGroup;
-    @FXML
-    public Label markLabel;
-    @FXML
-    public RadioButton pointMarkRButton;
-    @FXML
-    public RadioButton xMarkRButton;
-    @FXML
-    public RadioButton oMarkRButton;
-    @FXML
-    public RadioButton charMarkRButton;
-    @FXML
-    public TextField charMarkText;
-    @FXML
-    public Label textLabel;
-    @FXML
-    public TextField textForDisplay;
-    @FXML
-    public Label fontName;
-    @FXML
-    public Button fontButton;
-    //@FXML
-   // public Checkbox fns;
-    @FXML
-    public Button fillButton;
-    @FXML
-    public Button colorButton;
-    @FXML
-    public Label chooseObject;
-
-    @FXML
-    public Pane grafPane;
-    @FXML
-    public CheckBox fns;
-    @FXML
-    public Label fChoiceLabel2;
-    @FXML
-    public ComboBox fComboBox2;
+    @FXML    private ComboBox fComboBox;
+    @FXML    private Label fChoiceLabel;
+    @FXML    private TextField x1Text;
+    @FXML    private Label x1Label;
+    @FXML    private Label separator1;
+    @FXML    private Label y1Label;
+    @FXML    private TextField y1Text;
+    @FXML    private Label separator2;
+    @FXML    private Label nLabel;
+    @FXML    private TextField nText;
+    @FXML    private Label x2Label;
+    @FXML    private Label separator3;
+    @FXML    private TextField x2Text;
+    @FXML    private Label y2Label;
+    @FXML    private TextField y2Text;
+    @FXML    private Label fxLabel;
+    @FXML    private TextField functionString;
+    @FXML    private Label markLabel;
+    @FXML    private RadioButton pointMarkRButton;
+    @FXML    private RadioButton xMarkRButton;
+    @FXML    private RadioButton oMarkRButton;
+    @FXML    private RadioButton charMarkRButton;
+    @FXML    private TextField charMarkText;
+    @FXML    private Label textLabel;
+    @FXML    private TextField textForDisplay;
+    @FXML    private Label fontName;
+    @FXML    private Button fontButton;
+    @FXML    private Button fillButton;
+    @FXML    private Button colorButton;
+    @FXML    private Label chooseObject;
+    @FXML    private Pane grafPane;
+    @FXML    private CheckBox fns;
+    @FXML    private Label fChoiceLabel2;
+    @FXML    private ComboBox fComboBox2;
 
 
     @FXML
-    public void onSaveButtonClicked(ActionEvent e){
+    private void onSaveButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
     }
     @FXML
-    public void onDiscardButtonClicked(ActionEvent e){
+    private void onDiscardButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
     }
 
     @FXML
-    public void onExitButtonClicked(ActionEvent e){
+    private void onExitButtonClicked(ActionEvent e){
 
 
             GrafStage.getDialogStage().hide();
@@ -114,33 +75,27 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void onEditButtonClicked(ActionEvent e){
-
-
-
-
-
+    private void onEditButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
     }
     @FXML
-    public void onDeleteButtonClicked(ActionEvent e){
+    private void onDeleteButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
     }
     @FXML
-    public void onClearButtonClicked(ActionEvent e){
-        System.out.println(e.getSource()+ "was Clicked");
-    }
-
-    @FXML
-    public void onFontButtonClicked(ActionEvent e){
+    private void onClearButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
     }
     @FXML
-    public void onFillButtonClicked(ActionEvent e){
+    private void onFontButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
     }
     @FXML
-    public void onColorButtonClicked(ActionEvent e) {
+    private void onFillButtonClicked(ActionEvent e){
+        System.out.println(e.getSource()+ "was Clicked");
+    }
+    @FXML
+    private void onColorButtonClicked(ActionEvent e) {
         System.out.println(e.getSource() + "was Clicked");
     }
 
@@ -151,12 +106,10 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                //hideAll();
                 GrafStage.getDialogStage().setTitle("FUNCTION");
                 fxLabel.setVisible(true);
                 functionString.setVisible(true);
                 chooseObject.setText("Choose FUNCTION");
-
             }
         });
     }
@@ -176,8 +129,6 @@ public class GrafDialogController {
                 showX1();
                 showMarks();
                 chooseObject.setText("Choose FVALUE");
-
-
             }
         });
     }
@@ -196,8 +147,6 @@ public class GrafDialogController {
                 showX1();
                 showMarks();
                 chooseObject.setText("Choose FTANGENT");
-
-
             }
         });
     }
@@ -375,12 +324,6 @@ public class GrafDialogController {
                 fontButton.setVisible(false);
                 fns.setVisible(false);
                 fillButton.setVisible(false);
-
-
-
-
-                //GrafStage.dialogStage.hide();
-
             }
         });
     }
