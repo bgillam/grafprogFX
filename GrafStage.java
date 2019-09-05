@@ -78,11 +78,11 @@ public class GrafStage extends Application {
         FXMLLoader statLoader = new FXMLLoader(getClass().getResource("OneVarStats.fxml"));
         Parent statRoot = statLoader.load();
         statController = statLoader.getController();
-        Scene statScene = new Scene (statRoot, initWidth, initHeight); //.getWidth(), grafStage.getHeight());
+        Scene statScene = new Scene (statRoot, 580, 250); //.getWidth(), grafStage.getHeight());
         statStage.setScene(statScene);
         statStage.initModality(Modality.APPLICATION_MODAL);
         statStage.setTitle("DATA");
-        statStage.show();
+        //statStage.show();
 
         //Set up Table
         FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("Table.fxml"));
@@ -186,6 +186,10 @@ public class GrafStage extends Application {
     public static Stage getDialogStage(){return dialogStage;}
 
     public static Stage getTableStage() { return tableStage; }
+
+    public static Stage getStatStage(){
+        return statStage;
+    }
 
     public void setData(GrafTable dt) { data = dt; }
     public static GrafTable getData(){return data;}

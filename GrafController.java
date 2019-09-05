@@ -114,7 +114,7 @@ public class GrafController {
     }
 
     public void oneVStats(ActionEvent actionEvent) {
-        GrafStatsDialog.createInputDialog();
+        GrafStage.getStatStage().show();
     }
 
     public AnchorPane getGrafPane(){return grafPane;}

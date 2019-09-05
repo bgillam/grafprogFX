@@ -6,24 +6,61 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="OneVarStatsController"
-            prefHeight="400.0" prefWidth="600.0">
-    <VBox>
-        <HBox>
-            <Label text="Choose Column for Statistics" />
-            <ComboBox value = "column"/>
-            <Button text = "Calc"/>
-        </HBox>
-        <Separator orientation="HORIZONTAL"/>
-        <HBox>
-            <Label text="min:"/>
-            <TextField />
-            <Separator orientation="VERTICAL"/>
-            <Label text="n:"/>
-            <TextField />
-        </HBox>
-    </VBox>
-
-</AnchorPane>
+<?import javafx.scene.text.Text?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="OneVarStatsController">
+<!--          maxHeight="300.0"-->
+<!--          maxWidth="500.0"-->
+<!--          prefHeight="300.0" prefWidth="500.0">-->
+            <Separator orientation="VERTICAL" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"/>
+            <Label text="Choose Column for Statistics" GridPane.columnIndex = "1" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+            <ComboBox value = "column" GridPane.columnIndex = "3" GridPane.rowIndex="0"/>
+            <Button text = "Calc" GridPane.columnIndex = "5" GridPane.rowIndex="0" GridPane.halignment="RIGHT"/>
+             <Text text = "   "  GridPane.columnIndex = "6" GridPane.rowIndex="0"/>
+            <Separator orientation="HORIZONTAL" GridPane.rowIndex="1" GridPane.columnSpan="7"/>
+            <Label text="min:" GridPane.columnIndex = "1" GridPane.rowIndex="2"/>
+            <TextField   GridPane.columnIndex = "2" GridPane.rowIndex="2"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.halignment="CENTER"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="2" GridPane.halignment="RIGHT"/>
+            <Label text="n:" GridPane.columnIndex = "4" GridPane.rowIndex="2" GridPane.halignment="RIGHT"/>
+            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="2"/>
+            <Label text="Q1:" GridPane.columnIndex = "1" GridPane.rowIndex="3"/>
+            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="3"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.halignment="CENTER"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="3" GridPane.halignment="RIGHT"/>
+            <Label text="Mean:" GridPane.columnIndex = "4" GridPane.rowIndex="3" GridPane.halignment="RIGHT"/>
+            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="3"/>
+            <Label text="Median:" GridPane.columnIndex = "1" GridPane.rowIndex="4"/>
+            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="4"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.halignment="CENTER"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="4" GridPane.halignment="RIGHT"/>
+            <Label text="VarP:" GridPane.columnIndex = "4" GridPane.rowIndex="4" GridPane.halignment="RIGHT"/>
+            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="4"/>
+            <Label text="Q3:" GridPane.columnIndex = "1" GridPane.rowIndex="5"/>
+            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="5"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="5" GridPane.halignment="CENTER"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="5" GridPane.halignment="RIGHT"/>
+            <Label text="STDevP:" GridPane.columnIndex = "4" GridPane.rowIndex="5" GridPane.halignment="RIGHT"/>
+            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="5"/>
+            <Label text="Max:" GridPane.columnIndex = "1" GridPane.rowIndex="6"/>
+            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="6"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="6" GridPane.halignment="CENTER"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="6" GridPane.halignment="RIGHT"/>
+            <Label text="VarS:" GridPane.columnIndex = "4" GridPane.rowIndex="6" GridPane.halignment="RIGHT"/>
+            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="6"/>
+            <Label text="IQR:" GridPane.columnIndex = "1" GridPane.rowIndex="7"/>
+            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="7"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="7" GridPane.halignment="CENTER"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="7" GridPane.halignment="RIGHT"/>
+            <Label text="STDevS:" GridPane.columnIndex = "4" GridPane.rowIndex="7" GridPane.halignment="RIGHT"/>
+            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="7"/>
+            <Label text="Modes:" GridPane.columnIndex = "1" GridPane.rowIndex="8"/>
+            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="8"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="8" GridPane.halignment="CENTER"/>
+            <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="8" GridPane.halignment="RIGHT"/>
+            <Label text="Mean:" GridPane.columnIndex = "4" GridPane.rowIndex="8" GridPane.halignment="RIGHT"/>
+            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="8"/>
+            <Separator orientation="HORIZONTAL" GridPane.rowIndex="9" GridPane.columnSpan="7"/>
+            <Button text="Close" GridPane.columnIndex = "5" GridPane.rowIndex="10" GridPane.halignment="RIGHT"/>
+</GridPane>
