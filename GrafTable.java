@@ -38,21 +38,12 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
     
     // Constructor of Table
     public GrafTable(int row, int col)              //GrafStage sess, int row, int col)
-    {   //gSess = sess;
-
-        /*setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setTitle( "Data" );
-        setSize( 600, 400);*/
-
-        //setLocationRelativeTo(sess);
-        
+    {
         // Create a panel to hold all other components
         dataPanel = new JPanel();
         dataPanel.setLayout( new BorderLayout() );
 
 
-        //getContentPane().add(dataPanel);   //
-        
         // Make column 0 non-editable 
         model = new DefaultTableModel()
         {
@@ -74,9 +65,6 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
         scrollPane = new JScrollPane( table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         dataPanel.add( scrollPane, BorderLayout.CENTER );
         
-        /*setJMenuBar(GrafTableMenu.createMenu(this));//create menu including listeners
-        add(dataPanel);
-        setModal(false);*/
 
         labelHeaders();
         numberTheRows();

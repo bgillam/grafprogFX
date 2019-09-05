@@ -15,52 +15,52 @@
 <!--          prefHeight="300.0" prefWidth="500.0">-->
             <Separator orientation="VERTICAL" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"/>
             <Label text="Choose Column for Statistics" GridPane.columnIndex = "1" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
-            <ComboBox value = "column" GridPane.columnIndex = "3" GridPane.rowIndex="0"/>
+            <ComboBox fx:id = "functionComboBox" onMouseClicked="#moused" onAction="#selected" value = "column" GridPane.columnIndex = "3" GridPane.rowIndex="0"/>
             <Button text = "Calc" GridPane.columnIndex = "5" GridPane.rowIndex="0" GridPane.halignment="RIGHT"/>
              <Text text = "   "  GridPane.columnIndex = "6" GridPane.rowIndex="0"/>
             <Separator orientation="HORIZONTAL" GridPane.rowIndex="1" GridPane.columnSpan="7"/>
             <Label text="min:" GridPane.columnIndex = "1" GridPane.rowIndex="2"/>
-            <TextField   GridPane.columnIndex = "2" GridPane.rowIndex="2"/>
+            <TextField  fx:id="textFieldMin" GridPane.columnIndex = "2" GridPane.rowIndex="2"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.halignment="CENTER"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="2" GridPane.halignment="RIGHT"/>
             <Label text="n:" GridPane.columnIndex = "4" GridPane.rowIndex="2" GridPane.halignment="RIGHT"/>
-            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="2"/>
+            <TextField fx:id="textFieldN" GridPane.columnIndex = "5" GridPane.rowIndex="2"/>
             <Label text="Q1:" GridPane.columnIndex = "1" GridPane.rowIndex="3"/>
-            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="3"/>
+            <TextField fx:id="textFieldQ1" GridPane.columnIndex = "2" GridPane.rowIndex="3"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.halignment="CENTER"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="3" GridPane.halignment="RIGHT"/>
             <Label text="Mean:" GridPane.columnIndex = "4" GridPane.rowIndex="3" GridPane.halignment="RIGHT"/>
-            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="3"/>
+            <TextField fx:id="textFieldMean" GridPane.columnIndex = "5" GridPane.rowIndex="3"/>
             <Label text="Median:" GridPane.columnIndex = "1" GridPane.rowIndex="4"/>
-            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="4"/>
+            <TextField fx:id="textFieldMedian" GridPane.columnIndex = "2" GridPane.rowIndex="4"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.halignment="CENTER"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="4" GridPane.halignment="RIGHT"/>
             <Label text="VarP:" GridPane.columnIndex = "4" GridPane.rowIndex="4" GridPane.halignment="RIGHT"/>
-            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="4"/>
+            <TextField fx:id="textFieldVarP" GridPane.columnIndex = "5" GridPane.rowIndex="4"/>
             <Label text="Q3:" GridPane.columnIndex = "1" GridPane.rowIndex="5"/>
-            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="5"/>
+            <TextField fx:id = "textFieldQ3" GridPane.columnIndex = "2" GridPane.rowIndex="5"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="5" GridPane.halignment="CENTER"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="5" GridPane.halignment="RIGHT"/>
             <Label text="STDevP:" GridPane.columnIndex = "4" GridPane.rowIndex="5" GridPane.halignment="RIGHT"/>
-            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="5"/>
+            <TextField fx:id="textFieldStDevP" GridPane.columnIndex = "5" GridPane.rowIndex="5"/>
             <Label text="Max:" GridPane.columnIndex = "1" GridPane.rowIndex="6"/>
-            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="6"/>
+            <TextField fx:id = "textFieldMax" GridPane.columnIndex = "2" GridPane.rowIndex="6"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="6" GridPane.halignment="CENTER"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="6" GridPane.halignment="RIGHT"/>
             <Label text="VarS:" GridPane.columnIndex = "4" GridPane.rowIndex="6" GridPane.halignment="RIGHT"/>
-            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="6"/>
+            <TextField fx:id="textFieldVarS" GridPane.columnIndex = "5" GridPane.rowIndex="6"/>
             <Label text="IQR:" GridPane.columnIndex = "1" GridPane.rowIndex="7"/>
-            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="7"/>
+            <TextField fx:id="textFieldIQR" GridPane.columnIndex = "2" GridPane.rowIndex="7"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="7" GridPane.halignment="CENTER"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="7" GridPane.halignment="RIGHT"/>
             <Label text="STDevS:" GridPane.columnIndex = "4" GridPane.rowIndex="7" GridPane.halignment="RIGHT"/>
-            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="7"/>
+            <TextField fx:id = "textFieldStDevS" GridPane.columnIndex = "5" GridPane.rowIndex="7"/>
             <Label text="Modes:" GridPane.columnIndex = "1" GridPane.rowIndex="8"/>
-            <TextField GridPane.columnIndex = "2" GridPane.rowIndex="8"/>
+            <TextField fx:id ="textFieldModes" GridPane.columnIndex = "2" GridPane.rowIndex="8"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="3" GridPane.rowIndex="8" GridPane.halignment="CENTER"/>
             <Separator orientation="VERTICAL" GridPane.columnIndex="6" GridPane.rowIndex="8" GridPane.halignment="RIGHT"/>
-            <Label text="Mean:" GridPane.columnIndex = "4" GridPane.rowIndex="8" GridPane.halignment="RIGHT"/>
-            <TextField GridPane.columnIndex = "5" GridPane.rowIndex="8"/>
+            <Label text="Range:" GridPane.columnIndex = "4" GridPane.rowIndex="8" GridPane.halignment="RIGHT"/>
+            <TextField fx:id="textFieldRange" GridPane.columnIndex = "5" GridPane.rowIndex="8"/>
             <Separator orientation="HORIZONTAL" GridPane.rowIndex="9" GridPane.columnSpan="7"/>
             <Button text="Close" GridPane.columnIndex = "5" GridPane.rowIndex="10" GridPane.halignment="RIGHT"/>
 </GridPane>
