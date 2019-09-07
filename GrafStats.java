@@ -9,6 +9,8 @@
  */
 
 
+import javafx.scene.control.Alert;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -19,7 +21,10 @@ public class GrafStats {
 	
 	 public static boolean nullArray(Double[] dArray, String callerName){
 		  if ((dArray.length == 0) || (dArray == null)) {
-			 JOptionPane.showMessageDialog(null, callerName+" was passed an empty column. Returning zero", "Error!" , JOptionPane.ERROR_MESSAGE);
+		  	String message = callerName+" was passed an empty column. Returning zero";
+		  	Alert alert = new Alert(Alert.AlertType.ERROR, message);
+            alert.showAndWait();
+			// JOptionPane.showMessageDialog(null, callerName+" was passed an empty column. Returning zero", "Error!" , JOptionPane.ERROR_MESSAGE);
 			 return true;
 		 }
 		 return false;
@@ -84,47 +89,52 @@ public class GrafStats {
     	 else temp = Arrays.copyOfRange(temp, (int) temp.length/2 + 1, temp.length);
     	 return getMedian(temp);
      }
-     
+
      public static double[] getModes(Double[] dArray){
     	//copy array so original is not sorted
-    	 Double[] temp = getRidOfNulls(dArray);
+    	 Double[] sortedArray = getRidOfNulls(dArray);
+		 double[] returnNull = {};
     	 //return empty array, if null
-    	 if (nullArray(temp, "GetModes()")) {
-    		 double[] returnNull = {};
+    	 if (nullArray(sortedArray, "GetModes()")) {
+
     		 return returnNull;
     	 }
-    	 Arrays.sort(temp);
-    	 //row contains value column contains count
-    	 double[][] countArray = new double[temp.length][2];
-    	 countArray[0][0] = temp[0];
-    	 countArray[0][1] = 1;
-    	 int unique = 0;
-    	 //get count for each member
-    	 for (int i = 1; i<temp.length; i++)
-    		 if (temp[i] ==  countArray[unique][0]) countArray[unique][1] = countArray[unique][1] + 1;
-    		 else{
-    			 unique++;
-    			 countArray[unique][0] = temp[i];
-    			 countArray[unique][1] = 1;
-    		 }
-    	 //get count of modes
-    	 double maxCount = countArray[0][1];
-    	 for (int i = 1; i < countArray.length; i++)
-    		 if (countArray[i][1] > maxCount) maxCount = countArray[i][1];
-    	 //get number of modes
-    	 int maxCountCount = 0;
-    	 for (int i=0; i< countArray.length; i++)
-    		 if (countArray[i][1] == maxCount) maxCountCount++;
-    	 //create array of modes
-    	 double[] modes = new double[maxCountCount];
-    	 int modeIndex = 0;
-    	 for (int i = 0; i < modes.length; i++)
-    		 if (countArray[i][1] == maxCount) {
-    			 modes[modeIndex] = countArray[i][0];
-    			 modeIndex++;
-    		 }
+    	 Arrays.sort(sortedArray);
+
+		 //row contains value column contains count
+    	 double[][] countArray = new double[sortedArray.length][2];
+         double previousValue;
+		 countArray[0][0] = sortedArray[0];
+         if (sortedArray[0] == -1) previousValue = 0; else previousValue = -1;
+         int currentCount = 0;
+         int maxCount = 1;
+         for (int i = 0; i<sortedArray.length; i++){
+         	 if (sortedArray[i] != previousValue) {
+         	 	currentCount = 1;
+			 }
+         	 else {
+         	 	currentCount = currentCount+1;
+         	 	if (currentCount > maxCount) maxCount = currentCount;
+         	 }
+         	 countArray[i][0] = sortedArray[i];
+			 countArray[i][1] = currentCount;
+			 previousValue =  sortedArray[i];
+		 }
+
+         if (maxCount == 1) return returnNull;
+         ArrayList<Double> modeList = new ArrayList<>();
+         for (double[] row: countArray ){
+			 if (row[1] == maxCount) modeList.add(row[0]);
+		 }
+
+         double[] modes = new double[modeList.size()];
+         for (int i = 0; i<modeList.size(); i++){
+         	 modes[i] = modeList.get(i);
+		 }
+
+
     	 return modes;
-    	   			 
+
      }
      
      public static double getMean(Double[] dArray){

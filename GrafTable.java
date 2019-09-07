@@ -165,6 +165,13 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
          return headerArray;
      }
 
+     public String[] getHeaderArrayTrunc(){
+         String[] headerArray = new String[getNumCols()];
+         for (int i = 1; i <= getNumCols(); i++)
+             headerArray[i-1] = getHeaderString(i);
+         return headerArray;
+     }
+
 
      public void setHeaderString(int c, String s){
          table.getColumnModel().getColumn(c).setHeaderValue(s);

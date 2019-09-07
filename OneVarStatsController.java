@@ -34,48 +34,60 @@ public class OneVarStatsController {
       // functionComboBox.setSelectionModel(FXCollections.observableArrayList(GrafStage.getData().getHeaderArray());
         // setModel(new javax.swing.DefaultComboBoxModel(GrafStage.getData().getHeaderArray()));
         //System.out.println("Headers:"+GrafStage.getData().getHeaderArray()[3]);
-        functionComboBox.setItems(FXCollections.observableArrayList(GrafStage.getData().getHeaderArray()));
+        functionComboBox.setItems(FXCollections.observableArrayList(GrafStage.getData().getHeaderArrayTrunc()));
 
                 //= new ComboBox(FXCollections.observableArrayList(GrafStage.getData().getHeaderArray()));
     }
 
 
-    public void selected(ActionEvent actionEvent) {
-
-        doStats();
-       // System.out.println(functionComboBox.getValue()+" selected");
-    }
 
     public void doStats(){
-        int selectedColumn = functionComboBox.getSelectionModel().getSelectedIndex();
-        /*if ((selectedColumn == 0)) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION,"Choose an output column", ButtonType.OK);
-            alert.showAndWait();
-            functionComboBox.setItems(FXCollections.observableArrayList(GrafStage.getData().getHeaderArray()));
-        }*/
+        int selectedColumn = functionComboBox.getSelectionModel().getSelectedIndex()+1;
+
+        //check for empty column.
+        if (GrafStats.nullArray(GrafStats.getRidOfNulls(GrafStage.getData().getColumnValues(selectedColumn)), "Stats generator")) {
+            clearForm();
+            return;
+        }
+        Double[] columnValues = GrafStage.getData().getColumnValues(selectedColumn);
 
 
-        //int selectedColumn = functionComboBox.getSelectionModel().getSelectedIndex();
-        System.out.println("Column: "+selectedColumn+" Value: "+functionComboBox.getValue());
-        //textFieldN.setText(""+GrafStats.getN(GrafStage.getData().getColumnValues(selectedColumn)));
-//        textFieldMin.setText(""+GrafStats.getMin(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldQ1.setText(""+GrafStats.getQ1(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldMedian.setText(""+GrafStats.getMedian(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldQ3.setText(""+GrafStats.getQ3(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldMax.setText(""+GrafStats.getMax(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldRange.setText(""+GrafStats.getRange(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldMean.setText(""+GrafStats.getMean(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldVarP.setText(""+GrafStats.getVarianceOfPopulation(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldVarS.setText(""+GrafStats.getVarianceOfSample(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldStDevP.setText(""+GrafStats.getStandardDeviationOfPopulation(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldStDevS.setText(""+GrafStats.getStandardDeviationOfSample(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        textFieldIQR.setText(""+GrafStats.getIQR(GrafStage.getData().getColumnValues(getSelectedIndex())));
-//        double[] modes = GrafStats.getModes(GrafStage.getData().getColumnValues(getSelectedIndex()));
-//        String modeString = "";
-//        for (double m: modes)
-//            modeString = modeString+m+",";
-//        //modeString = modeString.substring(0,modeString.length() - 1);
-//        textFieldModes.setText(modeString);
+        textFieldN.setText(""+GrafStats.getN(columnValues));
+        textFieldMin.setText(""+GrafStats.getMin(columnValues));
+        textFieldQ1.setText(""+GrafStats.getQ1(columnValues));
+        textFieldMedian.setText(""+GrafStats.getMedian(columnValues));
+        textFieldQ3.setText(""+GrafStats.getQ3(columnValues));
+        textFieldMax.setText(""+GrafStats.getMax(columnValues));
+        textFieldRange.setText(""+GrafStats.getRange(columnValues));
+        textFieldMean.setText(""+GrafStats.getMean(columnValues));
+        textFieldVarP.setText(""+GrafStats.getVarianceOfPopulation(columnValues));
+        textFieldVarS.setText(""+GrafStats.getVarianceOfSample(columnValues));
+        textFieldStDevP.setText(""+GrafStats.getStandardDeviationOfPopulation(columnValues));
+        textFieldStDevS.setText(""+GrafStats.getStandardDeviationOfSample(columnValues));
+        textFieldIQR.setText(""+GrafStats.getIQR(columnValues));
+        double[] modes = GrafStats.getModes(columnValues);
+        String modeString = "";
+        for (double m : modes)
+                modeString = modeString + m + ",";
+            //modeString = modeString.substring(0,modeString.length() - 1);
+        textFieldModes.setText(modeString);
+    }
+
+    private void clearForm(){
+        textFieldN.setText("");
+        textFieldMin.setText("");
+        textFieldQ1.setText("");
+        textFieldMedian.setText("");
+        textFieldQ3.setText("");
+        textFieldMax.setText("");
+        textFieldRange.setText("");
+        textFieldMean.setText("");
+        textFieldVarP.setText("");
+        textFieldVarS.setText("");
+        textFieldStDevP.setText("");
+        textFieldStDevS.setText("");
+        textFieldIQR.setText("");
+        textFieldModes.setText("");
     }
 
 

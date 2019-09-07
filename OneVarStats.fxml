@@ -15,9 +15,9 @@
 <!--          prefHeight="300.0" prefWidth="500.0">-->
             <Separator orientation="VERTICAL" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"/>
             <Label text="Choose Column for Statistics" GridPane.columnIndex = "1" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
-            <ComboBox fx:id = "functionComboBox" onMouseClicked="#moused" onAction="#selected" value = "column" GridPane.columnIndex = "3" GridPane.rowIndex="0"/>
-            <Button text = "Calc" GridPane.columnIndex = "5" GridPane.rowIndex="0" GridPane.halignment="RIGHT"/>
-             <Text text = "   "  GridPane.columnIndex = "6" GridPane.rowIndex="0"/>
+            <ComboBox fx:id = "functionComboBox" onMouseClicked="#moused" value = "column" GridPane.columnIndex = "3" GridPane.rowIndex="0"/>
+            <Button text = "Calc" GridPane.columnIndex = "5" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#doStats"/>
+            <Text text = "   "  GridPane.columnIndex = "6" GridPane.rowIndex="0"/>
             <Separator orientation="HORIZONTAL" GridPane.rowIndex="1" GridPane.columnSpan="7"/>
             <Label text="min:" GridPane.columnIndex = "1" GridPane.rowIndex="2"/>
             <TextField  fx:id="textFieldMin" GridPane.columnIndex = "2" GridPane.rowIndex="2"/>
