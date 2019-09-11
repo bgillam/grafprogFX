@@ -47,7 +47,7 @@ public class GrafStage extends Application {
     private GrafSettings grafSet = new GrafSettings(this);  //Stores window settings
     private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
 
-    private ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
+    private static ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
     private GrafAxes axes = new GrafAxes(this);   //axes object
     private String copiedText = "";
     private JPanel messagePanel;
@@ -82,7 +82,7 @@ public class GrafStage extends Application {
         statStage.setScene(statScene);
         statStage.initModality(Modality.APPLICATION_MODAL);
         statStage.setTitle("DATA");
-        //statStage.show();
+
 
         //Set up Table
         FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("Table.fxml"));
@@ -168,9 +168,9 @@ public class GrafStage extends Application {
     }
 
 
-    public void setMessage1(String message){ grafController.setMessage1(message); }
-    public void setMessage2(String message){ grafController.setMessage2(message); }
-    public void setMessage3(String message){ grafController.setMessage3(message); }
+    public static void setMessage1(String message){ grafController.setMessage1(message); }
+    public static void setMessage2(String message){ grafController.setMessage2(message); }
+    public static void setMessage3(String message){ grafController.setMessage3(message); }
 
 
 
@@ -215,8 +215,8 @@ public class GrafStage extends Application {
     public String getCopiedText(){return copiedText;}
     public void setCopiedText(String s){ copiedText = s;}
 
-    public void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
-    public ArrayList<GrafObject> getGrafList(){return grafObjectList;}
+    public static void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
+    public static ArrayList<GrafObject> getGrafList(){return grafObjectList;}
 
     public int getBoxPlotsPlotted(){
         return boxPlotsPlotted;

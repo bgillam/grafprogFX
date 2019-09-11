@@ -101,7 +101,7 @@
                 <Insets left="10" top="10"  right="10"   bottom="10"/>
             </padding>
             <Label fx:id = "chooseObject" text = "Choose Object" />
-            <ComboBox value = "Object"></ComboBox>
+            <ComboBox fx:id="objectComboBox" value = "Object"></ComboBox>
             <Button text = "Edit " minWidth = "100" onAction="#onEditButtonClicked"/>
             <Button text = "Delete " minWidth = "100" onAction="#onDeleteButtonClicked"/>
             <Button text = "Clear All" minWidth = "100" onAction="#onClearButtonClicked"/>
@@ -117,7 +117,7 @@
             <Separator orientation="HORIZONTAL"/>
             <HBox spacing="20" alignment="CENTER_RIGHT">
 
-                <Button text = "Create" minWidth = "75" onAction="#onSaveButtonClicked"/>
+                <Button text = "Create" minWidth = "75" onAction="#onCreateButtonClicked"/>
                 <Button text = "Exit|Discard" minWidth = "75" onAction="#onDiscardButtonClicked"/>
                 <Button text = "Exit|Save" minWidth = "75" onAction="#onExitButtonClicked"/>
             </HBox>

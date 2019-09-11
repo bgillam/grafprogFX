@@ -15,7 +15,7 @@
 <!--          prefHeight="300.0" prefWidth="500.0">-->
             <Separator orientation="VERTICAL" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"/>
             <Label text="Choose Column for Statistics" GridPane.columnIndex = "1" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
-            <ComboBox fx:id = "functionComboBox" onMouseClicked="#moused" value = "column" GridPane.columnIndex = "3" GridPane.rowIndex="0"/>
+            <ComboBox fx:id = "functionComboBox" onMouseClicked="#pullDownMoused" value = "column" GridPane.columnIndex = "3" GridPane.rowIndex="0"/>
             <Button text = "Calc" GridPane.columnIndex = "5" GridPane.rowIndex="0" GridPane.halignment="RIGHT" onAction="#doStats"/>
             <Text text = "   "  GridPane.columnIndex = "6" GridPane.rowIndex="0"/>
             <Separator orientation="HORIZONTAL" GridPane.rowIndex="1" GridPane.columnSpan="7"/>
@@ -62,5 +62,5 @@
             <Label text="Range:" GridPane.columnIndex = "4" GridPane.rowIndex="8" GridPane.halignment="RIGHT"/>
             <TextField fx:id="textFieldRange" GridPane.columnIndex = "5" GridPane.rowIndex="8"/>
             <Separator orientation="HORIZONTAL" GridPane.rowIndex="9" GridPane.columnSpan="7"/>
-            <Button text="Close" GridPane.columnIndex = "5" GridPane.rowIndex="10" GridPane.halignment="RIGHT"/>
+            <Button text="Close" GridPane.columnIndex = "5" GridPane.rowIndex="10" GridPane.halignment="RIGHT" onAction="#close"/>
 </GridPane>

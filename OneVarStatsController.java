@@ -30,12 +30,12 @@ public class OneVarStatsController {
 
 
 
-    public void moused(MouseEvent mouseEvent) {
+    public void pullDownMoused(MouseEvent mouseEvent) {
       // functionComboBox.setSelectionModel(FXCollections.observableArrayList(GrafStage.getData().getHeaderArray());
         // setModel(new javax.swing.DefaultComboBoxModel(GrafStage.getData().getHeaderArray()));
         //System.out.println("Headers:"+GrafStage.getData().getHeaderArray()[3]);
-        functionComboBox.setItems(FXCollections.observableArrayList(GrafStage.getData().getHeaderArrayTrunc()));
 
+        functionComboBox.setItems(FXCollections.observableArrayList(GrafStage.getData().getHeaderArrayTrunc()));
                 //= new ComboBox(FXCollections.observableArrayList(GrafStage.getData().getHeaderArray()));
     }
 
@@ -91,4 +91,7 @@ public class OneVarStatsController {
     }
 
 
+    public void close(ActionEvent actionEvent) {
+        GrafStage.getStatStage().hide();
+    }
 }
