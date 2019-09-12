@@ -459,7 +459,7 @@ public class GrafStatsDialog extends JDialog {
 					}
 					calcBtn.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
-							saveColumnplot();
+							calcStats();
 						}
 					});
 				}
@@ -470,7 +470,7 @@ public class GrafStatsDialog extends JDialog {
 	
 	
 	
-	public void saveColumnplot(){
+	public void calcStats(){
 		    int output = functionComboBox.getSelectedIndex();
 			if (output == 0) { JOptionPane.showMessageDialog(null,
 				    "You must choose an output column for your column plot.",

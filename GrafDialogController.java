@@ -62,7 +62,9 @@ public class GrafDialogController {
 
     @FXML
     private void onCreateButtonClicked(ActionEvent e){
-         System.out.println("create item");
+
+
+        GrafStage.setMessage1("item created");
     }
     @FXML
     private void onDiscardButtonClicked(ActionEvent e){
