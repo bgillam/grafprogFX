@@ -21,7 +21,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GrafDialogController {
-
+    //instance variables shared with fxml file
     @FXML    private ComboBox fComboBox;
     @FXML    private Label fChoiceLabel;
     @FXML    private TextField x1Text;
@@ -59,10 +59,16 @@ public class GrafDialogController {
     @FXML    private ComboBox objectComboBox;
              private GrafType gType;
              private ArrayList<GrafObject> tempGrafList = GrafStage.getGrafList();
+             private boolean finalSave = false;
+
+    //Button actions
 
     @FXML
     private void onCreateButtonClicked(ActionEvent e){
-         System.out.println("create item");
+        GrafFunction.saveFunction();
+        objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+
+        System.out.println("create item");
     }
     @FXML
     private void onDiscardButtonClicked(ActionEvent e){
@@ -101,20 +107,24 @@ public class GrafDialogController {
         System.out.println(e.getSource() + "was Clicked");
     }
 
+    //run on exit. Hides dialog and varying elements
     private void resetDialog(){
         GrafStage.getDialogStage().hide();
-        GrafStage.dialogController.hideAll();  //this should hide all; add points for each box
+        GrafStage.dialogController.hideAll();  //this should hide all elements that are not always used
     }
 
+    //commits changes from temporary object Array to main one.
     private void saveChanges(){
         GrafStage.setGrafList(tempGrafList);
         GrafStage.setMessage1("changes saved");
     }
 
+    //creates an array of GrafFunctions from ones in the main object Array
     private GrafFunction[] createFunctionList(){
             return (GrafFunction[]) createObjectList(GrafType.FUNCTION);
     }
 
+    //creates an array of a particular object type from elements in the main object array
     private GrafObject[] createObjectList(GrafType gtype){
         ArrayList<GrafObject> grafObjects = new ArrayList<>();
         for (GrafObject g: tempGrafList){
@@ -123,6 +133,7 @@ public class GrafDialogController {
         return (GrafObject[]) grafObjects.toArray();
     }
 
+    //Sets up the dialog for GrafFunctions creation/editing
     public void showFxEntry()
     {
         gType = GrafType.FUNCTION;
@@ -136,6 +147,7 @@ public class GrafDialogController {
         });
     }
 
+    //Sets up the dialog for GrafValue creation/editing
     public void showFxValue()
     {
         gType = GrafType.FVALUE;
@@ -157,6 +169,7 @@ public class GrafDialogController {
         });
     }
 
+    //Sets up the dialog for GrafTangent creation/editing
     public void showFxTangent()
     {
         gType = GrafType.TANGENT;
@@ -176,6 +189,7 @@ public class GrafDialogController {
         });
     }
 
+    //Sets up the dialog for GrafChord creation/editing
     public void showFxChord()
     {
         gType = GrafType.CHORD;
@@ -196,6 +210,7 @@ public class GrafDialogController {
         });
     }
 
+    //Sets up the dialog for GrafZeros creation/editing
     public void showFxZeros()
     {
         gType = GrafType.FZERO;
@@ -216,6 +231,7 @@ public class GrafDialogController {
         });
     }
 
+    //Sets up the dialog for GrafIntegral creation/editing
     public void showFxIntegral()
     {gType = GrafType.INTEGRAL;
 
@@ -237,7 +253,8 @@ public class GrafDialogController {
         });
     }
 
-    public void showMarks()
+    //The following routines unhide neeeded elements and are called in from the setup routines above
+    private void showMarks()
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -253,7 +270,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showX1()
+    private void showX1()
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -265,7 +282,7 @@ public class GrafDialogController {
     }
 
 
-    public void showX1X2()
+    private void showX1X2()
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -277,7 +294,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showX1Y1()
+    private void showX1Y1()
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -289,7 +306,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showX1Y1X2Y2()
+    private void showX1Y1X2Y2()
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -302,7 +319,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showN()
+    private void showN()
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -314,7 +331,7 @@ public class GrafDialogController {
     }
 
 
-    public void showDx()
+    private void showDx()
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -325,6 +342,7 @@ public class GrafDialogController {
         });
     }
 
+    //hides the dialog elements that are not used in every dialog
 
     public void hideAll() //change to hide all
     {
@@ -364,4 +382,14 @@ public class GrafDialogController {
     }
 
 
+    public boolean isFinalSave() { return finalSave; }
+    public void setFinalSave(boolean finalSave) { this.finalSave = finalSave; }
+
+    public String getFunctionString(){return functionString.getText();}
+    public void setFunctionString(String text){functionString.setText(text);}
+
+    public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
+    public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList=t;}
+
+    public Color getColor(){return colorButton.getText().};
 }

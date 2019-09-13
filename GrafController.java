@@ -15,15 +15,14 @@ import java.awt.*;
 
 public class GrafController {
 
-//    @FXML
-//    public AnchorPane testPane;
-
+    //instance variables shared with fxml file
     @FXML    private SwingNode testNode;
     @FXML    private javafx.scene.control.Label message1;
     @FXML    private javafx.scene.control.Label message2;
     @FXML    private javafx.scene.control.Label message3;
     @FXML    private AnchorPane grafPane;
 
+    //
     @FXML    private void onMenuChoice(KeyEvent keyEvent) {
     }
 
@@ -33,10 +32,10 @@ public class GrafController {
 
 
     public void fileNew(ActionEvent actionEvent) {
-        //new GrafStage();
+        System.out.print("new");
     }
-
     public void showCalc(ActionEvent actionEvent) {
+
         GrafCalc calc= new GrafCalc();
         calc.setVisible(true);
     }

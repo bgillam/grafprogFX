@@ -4,6 +4,8 @@
 *  @author Bill Gillam           *
 *  2/25/15                       *
 **********************************/
+import javafx.stage.Stage;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.*;
@@ -25,32 +27,32 @@ public class GrafFunction extends GrafObject implements IGrafable{
         
     //Constructor
     
-    public GrafFunction(){
+    /*public GrafFunction(){
         setGrafType(GrafType.FUNCTION);
         setMoveable(false);
         setGrafColor(Color.BLACK);
        
         
-    }
+    }*/
     
-    public GrafFunction(GrafStage sess){
+    public GrafFunction(){
         setGrafType(GrafType.FUNCTION);
         setMoveable(false);
         setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
-        sess.setMessage1(functionString);
+        //myOwner = sess;
+        gStuff = GrafStage.getGrafSettings();
+        GrafStage.setMessage1(functionString);
     }
     
     //constructor 
-    public GrafFunction(GrafStage sess, String fString){
-        this(sess);
+    public GrafFunction(String fString){
+        this();
         setFunction(fString);
        
     }
     
-    public GrafFunction(GrafStage sess, String fString, Color c){
-        this(sess, fString);
+    public GrafFunction(String fString, Color c){
+        this(fString);
         setGrafColor(c);
        
    }
@@ -80,7 +82,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
         
     }
     
-   @Override 
+ /*  @Override
    public GrafInputDialog createInputDialog(GrafStage gs){
         GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
         gfd.setTitle("FUNCTION");
@@ -109,7 +111,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
         // gfd.pack();
         // gfd.setVisible(true);
         return gfd;
-   }
+   }*/
    
       
    
@@ -135,16 +137,18 @@ public class GrafFunction extends GrafObject implements IGrafable{
     public String toString(){
         return "FUNCTION: "+ getFunction();//+", "+ getGrafColor();
     }
-       private static void saveFunction(GrafStage gSess, GrafInputDialog gfd){
-         if (gfd.getFinalSave() == true && gfd.getPtPanel().getF().equals("")) return;
-         addFunction(gSess, gfd);
-         gfd.getPtPanel().setF("");
-   }
-   
-   
-   private static void addFunction(GrafStage gSess, GrafInputDialog gfd){
+
+    public static void saveFunction(){
+        GrafDialogController gdc = GrafStage.getDialogController();
+        if (gdc.isFinalSave() == true && gdc.getFunctionString().equals("")) return;
+        addFunction(gdc);
+        gdc.setFunctionString("");
+    }
+
+
+    private static void addFunction(GrafDialogController gdc){
         
-        if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPtPanel().getF(), (gSess.getGrafSettings().getXMax()+gSess.getGrafSettings().getXMin())/2)) { 
+        if (!FunctionString.isValidAtXIgnoreDomainError(gdc.getFunctionString(), (GrafStage.getGrafSettings().getXMax()+GrafStage.getGrafSettings().getXMin())/2)) {
                    JOptionPane.showMessageDialog(null,
                    "The expression entered is not a valid function.",
                    "Function Format Error",
@@ -152,8 +156,8 @@ public class GrafFunction extends GrafObject implements IGrafable{
                    return;
         }
        
-        GrafFunction gf = new GrafFunction(gSess, gfd.getPtPanel().getF(), gfd.getMarkChooser().getColor());
-        gfd.getTempList().add(gf);
+        GrafFunction gf = new GrafFunction(gdc.getFunctionString(), gdc.getColor());
+        gdc.getTempGrafList().add(gf);
     }
     
     /* Setters and Getters from Parent GrafObject

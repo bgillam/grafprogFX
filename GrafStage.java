@@ -44,7 +44,7 @@ public class GrafStage extends Application {
     private boolean grafSaved = false;     //has the current graf been saved?
     private static final int initWidth = 600;
     private static final int initHeight = 600;
-    private GrafSettings grafSet = new GrafSettings(this);  //Stores window settings
+    private static GrafSettings grafSet = new GrafSettings(this);  //Stores window settings
     private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
 
     private static ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
@@ -181,7 +181,7 @@ public class GrafStage extends Application {
     public static int getHeight(){return (int) primaryStage.getHeight();}
     //public static void setTheHeight(int h) {height = h;}*/
 
-    public Stage getGrafStage(){ return grafStage;  }
+    //public static Stage getGrafStage(){ return grafStage;  }
 
     public static Stage getDialogStage(){return dialogStage;}
 
@@ -190,6 +190,8 @@ public class GrafStage extends Application {
     public static Stage getStatStage(){
         return statStage;
     }
+
+    public static GrafDialogController getDialogController(){return dialogController;}
 
     public void setData(GrafTable dt) { data = dt; }
     public static GrafTable getData(){return data;}
@@ -206,8 +208,8 @@ public class GrafStage extends Application {
     public GrafAxes getAxes(){return axes;}
     public void setAxes(GrafAxes ga){axes = ga;}
 
-    public GrafSettings getGrafSettings() {return grafSet;}
-    public void setGrafSettings(GrafSettings gs) { grafSet = gs; }
+    public static GrafSettings getGrafSettings() {return grafSet;}
+    public static void setGrafSettings(GrafSettings gs) { grafSet = gs; }
 
     public GrafPrimitives getGrafPrimitives(){  return grafPrim; }
     public void setGrafPrim(GrafPrimitives gp){}
@@ -217,6 +219,8 @@ public class GrafStage extends Application {
 
     public static void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
     public static ArrayList<GrafObject> getGrafList(){return grafObjectList;}
+
+
 
     public int getBoxPlotsPlotted(){
         return boxPlotsPlotted;
@@ -246,6 +250,7 @@ public class GrafStage extends Application {
 
     public static void main(String[] args) {
         //new GrafProg();
+        //new GrafStage();
         launch(args);
     }
 
