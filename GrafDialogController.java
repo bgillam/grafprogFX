@@ -22,6 +22,8 @@ import java.util.ArrayList;
 
 public class GrafDialogController {
 
+
+
     @FXML    private ColorPicker fillColorPicker;
     @FXML    private Label fillLabel;
     @FXML    private ColorPicker grafColorPicker;
@@ -106,6 +108,8 @@ public class GrafDialogController {
 
     private void resetDialog(){
         GrafProg.getDialogStage().hide();
+        getGrafColorPicker().setValue(javafx.scene.paint.Color.BLACK);
+        getFillColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
     }
 
@@ -145,7 +149,6 @@ public class GrafDialogController {
         gType = GrafType.FVALUE;
         Platform.runLater(new Runnable() {
             @Override public void run() {
-               // fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("VALUE");
                 showFunctionChooser();
@@ -371,5 +374,13 @@ public class GrafDialogController {
     public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = GrafProg.getGrafList();}
 
     public Color getGrafColor(){return Color.BLACK;}
+
+    public ColorPicker getFillColorPicker() {return fillColorPicker; }
+
+    public void setFillColorPicker(ColorPicker fillColorPicker) {  this.fillColorPicker = fillColorPicker; }
+
+    public ColorPicker getGrafColorPicker() { return grafColorPicker; }
+
+    public void setGrafColorPicker(ColorPicker grafColorPicker) {this.grafColorPicker = grafColorPicker; }
 
 }
