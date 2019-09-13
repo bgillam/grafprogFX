@@ -50,10 +50,10 @@ public class GrafSettings implements Serializable
    private ScaleProcedure scaleProcedure = ScaleProcedure.SET_SCALES;
 
    //Constructor for objects of class GrafStuff
-    public GrafSettings(GrafStage gs)
+    public GrafSettings()
     {
-      myStage = gs;
-      myPanel = myStage.getGrafPanel();
+      //myStage = gs;
+      myPanel = GrafStage.getGrafPanel();
     }
       
     //prints out instance variable values    

@@ -29,29 +29,29 @@ public class GrafStage extends Application {
     private static Stage statStage = new Stage();
     //static Stage spreadStage = new Stage();  for better spreadsheet later
 
-    static GrafController grafController;
-    static GrafDialogController dialogController;
-    static TableController tableController;
-    static OneVarStatsController statController;
+    private static GrafController grafController;
+    private static GrafDialogController dialogController;
+    private static TableController tableController;
+    private static OneVarStatsController statController;
 
-    static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
-    GrafPanel grafPanel = new GrafPanel(this); //Graphics Panel in swing
-    static SwingNode swingTableNode = new SwingNode();
-    static GrafTable data = new GrafTable(100,10);  //table for data
+    private static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
+    private static GrafPanel grafPanel = new GrafPanel(); //Graphics Panel in swing
+    private static SwingNode swingTableNode = new SwingNode();
+    private static GrafTable data = new GrafTable(100,10);  //table for data
 
     //instance variables
     private File grafFile = new File("");  //File associated with the current Graf object
-    private boolean grafSaved = false;     //has the current graf been saved?
+    private static boolean grafSaved = false;     //has the current graf been saved?
     private static final int initWidth = 600;
     private static final int initHeight = 600;
-    private static GrafSettings grafSet = new GrafSettings(this);  //Stores window settings
+    private static GrafSettings grafSet = new GrafSettings();  //Stores window settings
     private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
 
     private static ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
     private GrafAxes axes = new GrafAxes(this);   //axes object
     private String copiedText = "";
     private JPanel messagePanel;
-    private int boxPlotsPlotted = 0;              //for formatting multiple boxplots
+    private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
     private static GrafCalc calc;                 //calculator for enteriung expressions
 
     //bottom status bar messages
@@ -202,8 +202,8 @@ public class GrafStage extends Application {
     public boolean getgrafSaved(){return grafSaved;}
     public void setgrafSaved(boolean tf){grafSaved = tf;}
 
-    public GrafPanel getGrafPanel(){return grafPanel;}
-    public void setPanel(GrafPanel gp) {grafPanel = gp;}
+    public static GrafPanel getGrafPanel(){return grafPanel;}
+    public static void setPanel(GrafPanel gp) {grafPanel = gp;}
 
     public GrafAxes getAxes(){return axes;}
     public void setAxes(GrafAxes ga){axes = ga;}
@@ -234,7 +234,7 @@ public class GrafStage extends Application {
         boxPlotsPlotted--;
     }
 
-    public void zeroBoxPlotsPlotted(){
+    public static void zeroBoxPlotsPlotted(){
         boxPlotsPlotted = 0;
     }
 

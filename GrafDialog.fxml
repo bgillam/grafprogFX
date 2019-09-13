@@ -15,6 +15,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.ComboBox?>
 
+<?import javafx.scene.control.ColorPicker?>
 <BorderPane fx:controller="GrafDialogController"
             xmlns:fx="http://javafx.com/fxml" >
 
@@ -88,8 +89,14 @@
 
             </HBox>
             <CheckBox fx:id = "fns" text = "FNS"/>
-            <Button fx:id = "fillButton" text = "Fill" minWidth = "100" onAction="#onFillButtonClicked"/>
-            <Button fx:id = "colorButton" text = "Color" minWidth = "100" onAction="#onColorButtonClicked"/>
+            <HBox>
+                <Label text="Color:"></Label>
+                <ColorPicker fx:id ="grafColorPicker" onAction="#onGrafColorPicker"/>
+            </HBox>
+            <HBox>
+                <Label fx:id ="fillLabel" text="Fill:    "></Label>
+                <ColorPicker fx:id ="fillColorPicker" onAction="#onFillColorPicker"/>
+            </HBox>
         </VBox>
     </left>
     <center>

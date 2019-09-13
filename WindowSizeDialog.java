@@ -90,7 +90,7 @@ public class WindowSizeDialog extends JDialog implements ActionListener  //, Ser
     public WindowSizeDialog(GrafProg sess)
     {   
         super(sess, "Window Parameters",true);
-        grafSet = sess.getGrafSettings();    //pointer to graph information
+        grafSet = GrafStage.getGrafSettings();    //pointer to graph information
         myScaleFormat = grafSet.getScaleFormat();
         myScaleProcedure = grafSet.getScaleProcedure();
         setLocationRelativeTo(sess);

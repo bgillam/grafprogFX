@@ -22,6 +22,9 @@ import java.util.ArrayList;
 
 public class GrafDialogController {
 
+    @FXML    private ColorPicker fillColorPicker;
+    @FXML    private Label fillLabel;
+    @FXML    private ColorPicker grafColorPicker;
     @FXML    private ComboBox fComboBox;
     @FXML    private Label fChoiceLabel;
     @FXML    private TextField x1Text;
@@ -49,8 +52,7 @@ public class GrafDialogController {
     @FXML    private TextField textForDisplay;
     @FXML    private Label fontName;
     @FXML    private Button fontButton;
-    @FXML    private Button fillButton;
-    @FXML    private Button colorButton;
+
     @FXML    private Label chooseObject;
     @FXML    private Pane grafPane;
     @FXML    private CheckBox fns;
@@ -59,6 +61,7 @@ public class GrafDialogController {
     @FXML    private ComboBox objectComboBox;
              private GrafType gType;
              private ArrayList<GrafObject> tempGrafList = GrafStage.getGrafList();
+             private boolean finalSave = false;
 
     @FXML
     private void onCreateButtonClicked(ActionEvent e){
@@ -92,18 +95,18 @@ public class GrafDialogController {
         System.out.println(e.getSource()+ "was Clicked");
     }
     @FXML
-    private void onFillButtonClicked(ActionEvent e){
+    private void onFillColorPicker(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
     }
     @FXML
-    private void onColorButtonClicked(ActionEvent e) {
+    private void onGrafColorPicker(ActionEvent e) {
 
         System.out.println(e.getSource() + "was Clicked");
     }
 
     private void resetDialog(){
         GrafStage.getDialogStage().hide();
-        GrafStage.dialogController.hideAll();  //this should hide all; add points for each box
+        GrafStage.getDialogController().hideAll();  //this should hide all; add points for each box
     }
 
     private void saveChanges(){
@@ -228,7 +231,8 @@ public class GrafDialogController {
                 fxLabel.setVisible(true);
                 functionString.setVisible(true);
                 functionString.setEditable(false);
-                fillButton.setVisible(true);
+                fillColorPicker.setVisible(true);
+                fillLabel.setVisible(true);
                 showX1X2();
                 showN();
                 chooseObject.setText("Choose INTEGRAL");
@@ -358,10 +362,22 @@ public class GrafDialogController {
                 fontName.setVisible(false);
                 fontButton.setVisible(false);
                 fns.setVisible(false);
-                fillButton.setVisible(false);
+                fillColorPicker.setVisible(false);
+                fillLabel.setVisible(false);
             }
         });
     }
 
+
+    public boolean isFinalSave() { return finalSave; }
+    public void setFinalSave(boolean finalSave) { this.finalSave = finalSave; }
+
+    public String getFunctionString(){return functionString.getText();}
+    public void setFunctionString(String s){ functionString.setText(s);}
+
+    public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
+    public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = GrafStage.getGrafList();}
+
+    public Color getGrafColor(){return Color.BLACK;}
 
 }

@@ -67,43 +67,43 @@ public class GrafController {
 
     public void fxInput(ActionEvent actionEvent) {
 
-        GrafStage.dialogController.hideAll();
-        GrafStage.dialogController.showFxEntry();
+        GrafStage.getDialogController().hideAll();
+        GrafStage.getDialogController().showFxEntry();
         GrafStage.getDialogStage().show();
 
     }
 
 
     public void fxValue(ActionEvent actionEvent) {
-      GrafStage.dialogController.hideAll();
-      GrafStage.dialogController.showFxValue();
+      GrafStage.getDialogController().hideAll();
+      GrafStage.getDialogController().showFxValue();
       GrafStage.getDialogStage().show();
 
     }
 
     public void fxTangent(ActionEvent actionEvent) {
-        GrafStage.dialogController.hideAll();
-        GrafStage.dialogController.showFxTangent();
+        GrafStage.getDialogController().hideAll();
+        GrafStage.getDialogController().showFxTangent();
         GrafStage.getDialogStage().show();
     }
 
 
     public void fxChord(ActionEvent actionEvent) {
-        GrafStage.dialogController.hideAll();
-        GrafStage.dialogController.showFxChord();
+        GrafStage.getDialogController().hideAll();
+        GrafStage.getDialogController().showFxChord();
         GrafStage.getDialogStage().show();
 
     }
 
     public void fxIntegral(ActionEvent actionEvent) {
-        GrafStage.dialogController.hideAll();
-        GrafStage.dialogController.showFxIntegral();
+        GrafStage.getDialogController().hideAll();
+        GrafStage.getDialogController().showFxIntegral();
         GrafStage.getDialogStage().show();
     }
 
     public void fxZeros(ActionEvent actionEvent) {
-        GrafStage.dialogController.hideAll();
-        GrafStage.dialogController.showFxZeros();
+        GrafStage.getDialogController().hideAll();
+        GrafStage.getDialogController().showFxZeros();
         GrafStage.getDialogStage().show();
     }
 

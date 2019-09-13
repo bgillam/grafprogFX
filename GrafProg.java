@@ -33,10 +33,10 @@ public class GrafProg extends JFrame //implements ActionListener, Serializable {
     //instance variables
     private File grafFile = new File("");  //File associated with the current Graf object
     private boolean grafSaved = false;     //has the current graf been saved?
-    private GrafPanel grafPanel = new GrafPanel(new GrafStage()); //Graphics Panel
+    private GrafPanel grafPanel = new GrafPanel(); //Graphics Panel
     private int width = 600;
     private int height = 600;
-    private GrafSettings grafSet = new GrafSettings(new GrafStage());  //Stores window settings
+    //private GrafSettings grafSet = new GrafSettings();  //Stores window settings
     private GrafPrimitives grafPrim = new GrafPrimitives(new GrafStage());  //draw line, point or character
     private GrafTable data = new GrafTable(100,10);  //table for data
     private ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
@@ -203,8 +203,8 @@ public class GrafProg extends JFrame //implements ActionListener, Serializable {
    public GrafAxes getAxes(){return axes;}
    public void setAxes(GrafAxes ga){axes = ga;}
    
-   public GrafSettings getGrafSettings() {return grafSet;}
-   public void setGrafSettings(GrafSettings gs) { grafSet = gs; }
+//   public GrafSettings getGrafSettings() {return grafSet;}
+//   public void setGrafSettings(GrafSettings gs) { grafSet = gs; }
    
    public GrafPrimitives getGrafPrimitives(){  return grafPrim; }
    public void setGrafPrim(GrafPrimitives gp){}

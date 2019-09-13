@@ -156,7 +156,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
                    return;
         }
        
-        GrafFunction gf = new GrafFunction(gdc.getFunctionString(), gdc.getColor());
+        GrafFunction gf = new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
         gdc.getTempGrafList().add(gf);
     }
     

@@ -22,19 +22,11 @@ import java.awt.print.PrinterJob;
 public class GrafPanel extends JPanel implements Serializable 
 {   //Instance Variable
     private transient Graphics2D grafCanvas;
-    //private GrafProg gFrame;
-    private GrafStage gStage;
 
-    /**
-     * Constructor for objects of class GrafPanel
-     *
-     */
 
-    public GrafPanel(GrafStage g)
-    {
-        gStage = g;
+    public GrafPanel(){}
 
-    }
+
 
 
     
@@ -46,7 +38,7 @@ public class GrafPanel extends JPanel implements Serializable
         grafCanvas.clearRect(0,0,  getWidth(), getHeight());
 
         String functionList = "";
-        for (GrafObject graf: gStage.getGrafList()){
+        for (GrafObject graf: GrafStage.getGrafList()){
             graf.drawGraf(grafCanvas);
             if (graf.getType() == GrafType.FUNCTION) {
                 GrafFunction gf = (GrafFunction)graf;
@@ -54,7 +46,7 @@ public class GrafPanel extends JPanel implements Serializable
             }
             //System.out.println();
         }
-        gStage.zeroBoxPlotsPlotted();
+        GrafStage.zeroBoxPlotsPlotted();
         //gStage.setMessage1(functionList);
 
 
@@ -81,7 +73,7 @@ public class GrafPanel extends JPanel implements Serializable
     }
     
     //Getters and Setters
-    public void setOwner(GrafStage gs) {gStage = gs;}
+    //public void setOwner(GrafStage gs) {gStage = gs;}
     
     //public Graphics2D getGrafCanvas(){
         //System.out.println(grafCanvas);
