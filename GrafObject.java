@@ -72,7 +72,7 @@ abstract public class GrafObject implements Serializable
    }
    
    public String[] getColumnsString(){
-       return myOwner.getData().getHeaderArray();
+       return GrafProg.getData().getHeaderArray();
    }
    
    
