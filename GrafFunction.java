@@ -41,14 +41,14 @@ public class GrafFunction extends GrafObject implements IGrafable{
         setGrafColor(Color.BLACK);
         //myOwner = sess;
         gStuff = GrafProg.getGrafSettings();
-        GrafProg.setMessage1(functionString);
+        //GrafProg.setMessage1(functionString);
     }
     
     //constructor 
     public GrafFunction(String fString){
         this();
         setFunction(fString);
-       
+        GrafProg.setMessage1(functionString);
     }
     
     public GrafFunction(String fString, Color c){
@@ -118,14 +118,14 @@ public class GrafFunction extends GrafObject implements IGrafable{
 
     
 
-     @Override
+    /* @Override
      public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                    GrafFunction gEdit = (GrafFunction)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                    caller.getPointChooser().setF(gEdit.getFunction());
                    caller.getMarkChooser().setColor(gEdit.getGrafColor());
                   
                     
-       }
+       }*/
     
     //Setters and Getters
     public void setFunction(String s){ functionString = s;}
