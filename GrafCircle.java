@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class GrafCircle extends GrafObject implements IGrafable{
         
         //private String functionString="";
-        private GrafStage myOwner; //changed changed
+        private GrafProg myOwner; //changed changed
         private GrafSettings gStuff;
         private double cX = 0;
         private double cY = 0;
@@ -33,7 +33,7 @@ public class GrafCircle extends GrafObject implements IGrafable{
         
        }
 
-    public GrafCircle(GrafStage sess){
+    public GrafCircle(GrafProg sess){
         setGrafType(GrafType.CIRCLE);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -41,7 +41,7 @@ public class GrafCircle extends GrafObject implements IGrafable{
         gStuff = myOwner.getGrafSettings();
        }
     
-     public GrafCircle(GrafStage sess, double x1, double y1, double r1){
+     public GrafCircle(GrafProg sess, double x1, double y1, double r1){
         this(sess);
         setCx(x1);
         setCy(y1);
@@ -49,7 +49,7 @@ public class GrafCircle extends GrafObject implements IGrafable{
         
     }
         
-    public GrafCircle(GrafStage sess, double x1, double y1, double r1, Color gColor){
+    public GrafCircle(GrafProg sess, double x1, double y1, double r1, Color gColor){
         this(sess, x1, y1, r1);
         setGrafColor(gColor);
                   
@@ -69,8 +69,8 @@ public class GrafCircle extends GrafObject implements IGrafable{
            
         }
      
-     @Override   
-    public GrafInputDialog createInputDialog(GrafStage gs){
+    /* @Override
+    public GrafInputDialog createInputDialog(GrafProg gs){
         GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
         gfd.setTitle("CIRCLE"); 
         gfd.setPointPanel(gfd.addPointPanel());
@@ -98,7 +98,7 @@ public class GrafCircle extends GrafObject implements IGrafable{
         // gfd.pack();
         // gfd.setVisible(true); 
         return gfd;
-    }
+    }*/
          
     
      @Override
@@ -136,7 +136,7 @@ public class GrafCircle extends GrafObject implements IGrafable{
            return "CIRCLE: ("+getCx()+", "+getCy()+"); "+getR();//+", "+ " "+getGrafColor()+")";
        }
        
-        private static void saveCircle(GrafStage gs, GrafInputDialog gfd){
+        private static void saveCircle(GrafProg gs, GrafInputDialog gfd){
         if (gfd.getFinalSave() == true && Double.isNaN(gfd.getPointPanel().getX1())) return; 
         addCircle(gs, gfd);
         gfd.getPointPanel().blankX1();
@@ -146,7 +146,7 @@ public class GrafCircle extends GrafObject implements IGrafable{
     
     }
         
-    private static void addCircle(GrafStage gs, GrafInputDialog gfd){
+    private static void addCircle(GrafProg gs, GrafInputDialog gfd){
        if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
        if (Double.isNaN(gfd.getPointPanel().getY1())){gfd.NumErrorMessage("Y1", "valid number"); return;}    
        if (Double.isNaN(gfd.getPointPanel().getR())){gfd.NumErrorMessage("R", "valid number"); return;}

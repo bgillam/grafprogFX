@@ -300,7 +300,7 @@ public class GrafStatsDialog extends JDialog {
                         {
                             functionComboBox = new JComboBox();
                             panel_3_1.add(functionComboBox);
-                            functionComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafStage.getData().getHeaderArray()));
+                            functionComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
                         }
                     }
                     JButton calcBtn = new JButton("Calc");
@@ -478,20 +478,20 @@ public class GrafStatsDialog extends JDialog {
 				    JOptionPane.ERROR_MESSAGE);
 					return;
 			}
-			textFieldN.setText(""+GrafStats.getN(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldMin.setText(""+GrafStats.getMin(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldQ1.setText(""+GrafStats.getQ1(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldMedian.setText(""+GrafStats.getMedian(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldQ3.setText(""+GrafStats.getQ3(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldMax.setText(""+GrafStats.getMax(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldRange.setText(""+GrafStats.getRange(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldMean.setText(""+GrafStats.getMean(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldVarP.setText(""+GrafStats.getVarianceOfPopulation(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldVarS.setText(""+GrafStats.getVarianceOfSample(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldStDevP.setText(""+GrafStats.getStandardDeviationOfPopulation(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldStDevS.setText(""+GrafStats.getStandardDeviationOfSample(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldIQR.setText(""+GrafStats.getIQR(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			double[] modes = GrafStats.getModes(GrafStage.getData().getColumnValues(functionComboBox.getSelectedIndex()));
+			textFieldN.setText(""+GrafStats.getN(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldMin.setText(""+GrafStats.getMin(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldQ1.setText(""+GrafStats.getQ1(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldMedian.setText(""+GrafStats.getMedian(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldQ3.setText(""+GrafStats.getQ3(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldMax.setText(""+GrafStats.getMax(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldRange.setText(""+GrafStats.getRange(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldMean.setText(""+GrafStats.getMean(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldVarP.setText(""+GrafStats.getVarianceOfPopulation(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldVarS.setText(""+GrafStats.getVarianceOfSample(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldStDevP.setText(""+GrafStats.getStandardDeviationOfPopulation(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldStDevS.setText(""+GrafStats.getStandardDeviationOfSample(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			textFieldIQR.setText(""+GrafStats.getIQR(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
+			double[] modes = GrafStats.getModes(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex()));
 			String modeString = "";
 			for (double m: modes) 
 				modeString = modeString+m+",";

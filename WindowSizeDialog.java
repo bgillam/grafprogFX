@@ -87,13 +87,16 @@ public class WindowSizeDialog extends JDialog implements ActionListener  //, Ser
     private final JPanel panel = new JPanel();
      
     //constructor 
-    public WindowSizeDialog(GrafProg sess)
+    public WindowSizeDialog()
     {   
-        super(sess, "Window Parameters",true);
-        grafSet = GrafStage.getGrafSettings();    //pointer to graph information
+        //super(sess, "Window Parameters",true);
+        setTitle("Window Parameters");
+        setModal(true);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        grafSet = GrafProg.getGrafSettings();    //pointer to graph information
         myScaleFormat = grafSet.getScaleFormat();
         myScaleProcedure = grafSet.getScaleProcedure();
-        setLocationRelativeTo(sess);
+        setLocationRelativeTo(GrafProg.getGrafPanel());
         
         //Set up Yes/No button panel at bottem of Dialog
         buttonPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));        
@@ -199,11 +202,11 @@ public class WindowSizeDialog extends JDialog implements ActionListener  //, Ser
         cancelButton.addActionListener(this);
     }
     
-    public static void createInputDialog(GrafProg gs){
-       WindowSizeDialog tempDialog = new WindowSizeDialog(gs); 
+    public static void createInputDialog(){
+       WindowSizeDialog tempDialog = new WindowSizeDialog();
        tempDialog.showWindowSizeDialog(); 
        
-       gs.repaint(); 
+       //gs.repaint();
     
     }
     

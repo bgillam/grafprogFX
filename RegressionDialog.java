@@ -52,7 +52,7 @@ public class RegressionDialog extends JDialog {
     private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
     private JComboBox<String> curveComboBox;
-    private GrafProg gSess;
+    //private GrafProg gSess;
     private JComboBox outputComboBox;
     private JComboBox inputComboBox;
     private JTextField textFieldEquation;
@@ -68,8 +68,8 @@ public class RegressionDialog extends JDialog {
     /**
      * Create the dialog.
      */
-    public RegressionDialog(GrafProg sess) {
-        gSess=sess;
+    public RegressionDialog() {
+        //gSess=sess;
         setBounds(100, 100, 525, 417);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
@@ -129,7 +129,7 @@ public class RegressionDialog extends JDialog {
                             {
                                 outputComboBox = new JComboBox();
                                 panel_3.add(outputComboBox);
-                                outputComboBox.setModel(new javax.swing.DefaultComboBoxModel(gSess.getData().getHeaderArray()));
+                                outputComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
                                
                             }
                         }
@@ -143,7 +143,7 @@ public class RegressionDialog extends JDialog {
                             {
                                 inputComboBox = new JComboBox();
                                 panel_3.add(inputComboBox);
-                                inputComboBox.setModel(new javax.swing.DefaultComboBoxModel(gSess.getData().getHeaderArray()));
+                                inputComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
                                 
                               
                             }
@@ -334,8 +334,8 @@ public class RegressionDialog extends JDialog {
                     JButton okButton = new JButton("Done");
                     okButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent arg0) {
-                            gSess.repaint();     
-                            gSess.getGrafPanel().repaint();
+                            //GrafProg.repaint();
+                            GrafProg.getGrafPanel().repaint();
                             dispose();
                             }
                     });
@@ -366,8 +366,8 @@ public class RegressionDialog extends JDialog {
                     JOptionPane.ERROR_MESSAGE);
                     return;
             }
-            int inputLength = GrafStats.getRidOfNulls(gSess.getData().getColumnValues(input)).length;
-            int outputLength = GrafStats.getRidOfNulls(gSess.getData().getColumnValues(output)).length;
+            int inputLength = GrafStats.getRidOfNulls(GrafProg.getData().getColumnValues(input)).length;
+            int outputLength = GrafStats.getRidOfNulls(GrafProg.getData().getColumnValues(output)).length;
             if (inputLength != outputLength) { 
                     JOptionPane.showMessageDialog(null, "X and Y columns must have an equal number of items", "Need Paired Data!", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -389,8 +389,8 @@ public class RegressionDialog extends JDialog {
             }
             
                  
-            Vector xVector = new Vector(gSess.getData().getColumnValues(inputComboBox.getSelectedIndex())); //takes a Double[]
-            Vector yVector = new Vector(gSess.getData().getColumnValues(outputComboBox.getSelectedIndex()));
+            Vector xVector = new Vector(GrafProg.getData().getColumnValues(inputComboBox.getSelectedIndex())); //takes a Double[]
+            Vector yVector = new Vector(GrafProg.getData().getColumnValues(outputComboBox.getSelectedIndex()));
             if (!curveType.equals("exponential")) {
                         
                 RegressionMath rm = new RegressionMath(xVector, yVector, order);
@@ -436,7 +436,7 @@ public class RegressionDialog extends JDialog {
     private String[] createFunctionListArray(){
         ArrayList<String> functionList = new ArrayList<String>();
         functionList.add("choose");
-        for (GrafObject gObject: gSess.getGrafList()){
+        for (GrafObject gObject: GrafProg.getGrafList()){
             if (gObject.getType() == GrafType.FUNCTION){
                 GrafFunction funct = (GrafFunction)gObject; 
                 functionList.add(funct.getFunction());
@@ -447,8 +447,8 @@ public class RegressionDialog extends JDialog {
         return fLArray;
     }
     
-    public static void createInputDialog(GrafProg gs){
-       RegressionDialog rd = new RegressionDialog(gs); 
+    public static void createInputDialog(){
+       RegressionDialog rd = new RegressionDialog();
        rd.setVisible(true); 
        rd.setModal(true); 
     

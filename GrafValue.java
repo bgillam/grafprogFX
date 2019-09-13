@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class GrafValue extends GrafObject implements IGrafable{
         private String functionString="";
         //private int segLength = 1000;
-        private GrafStage myOwner;
+        private GrafProg myOwner;
         private GrafSettings gStuff;
         private String mark ="x";
         private double x = 0;
@@ -33,7 +33,7 @@ public class GrafValue extends GrafObject implements IGrafable{
        }    
         
         
-   public GrafValue(GrafStage sess){
+   public GrafValue(GrafProg sess){
         setGrafType(GrafType.FVALUE);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -42,7 +42,7 @@ public class GrafValue extends GrafObject implements IGrafable{
        
        }
    
-   public GrafValue(GrafStage sess, String yString, double x){
+   public GrafValue(GrafProg sess, String yString, double x){
         this(sess);
         setX(x);
         setFunctionString(yString);
@@ -50,7 +50,7 @@ public class GrafValue extends GrafObject implements IGrafable{
    }
    
     
-   public GrafValue(GrafStage sess, String yString, double x, Color c, String mark){
+   public GrafValue(GrafProg sess, String yString, double x, Color c, String mark){
         this(sess, yString, x);
         setGrafColor(c);
         setMark(mark);
@@ -66,8 +66,8 @@ public class GrafValue extends GrafObject implements IGrafable{
        //gStuff.getGrafPanel().repaint();
    }
    
-   @Override
-   public GrafInputDialog createInputDialog(GrafStage gs){
+  /* @Override
+   public GrafInputDialog createInputDialog(GrafProg gs){
        GrafInputDialog gfd = new GrafInputDialog(gs);
        gfd.setTitle("FVALUE");
        gfd.setPointPanel(gfd.addPointPanel());
@@ -97,7 +97,7 @@ public class GrafValue extends GrafObject implements IGrafable{
         return gfd;
    }
    
-  
+  */
    
 
      @Override
@@ -110,14 +110,14 @@ public class GrafValue extends GrafObject implements IGrafable{
                     
        }
        
-   private static void saveValue(GrafStage gs, GrafInputDialog gfd){
+   private static void saveValue(GrafProg gs, GrafInputDialog gfd){
     if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
            addValue(gs,gfd);
            gfd.getPointPanel().blankF();
            gfd.getPointPanel().blankX1();
             
    }   
-  private static void addValue(GrafStage gSess, GrafInputDialog gfd ){
+  private static void addValue(GrafProg gSess, GrafInputDialog gfd ){
         if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPointPanel().getF(), (gSess.getGrafSettings().getXMax()+gSess.getGrafSettings().getXMin())/2)) { 
                    JOptionPane.showMessageDialog(null,
                    "The expression entered is not a valid function.",

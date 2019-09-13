@@ -31,12 +31,12 @@ public class OneVarStatsController {
 
 
     public void pullDownMoused(MouseEvent mouseEvent) {
-      // functionComboBox.setSelectionModel(FXCollections.observableArrayList(GrafStage.getData().getHeaderArray());
-        // setModel(new javax.swing.DefaultComboBoxModel(GrafStage.getData().getHeaderArray()));
-        //System.out.println("Headers:"+GrafStage.getData().getHeaderArray()[3]);
+      // functionComboBox.setSelectionModel(FXCollections.observableArrayList(GrafProg.getData().getHeaderArray());
+        // setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
+        //System.out.println("Headers:"+GrafProg.getData().getHeaderArray()[3]);
 
-        functionComboBox.setItems(FXCollections.observableArrayList(GrafStage.getData().getHeaderArrayTrunc()));
-                //= new ComboBox(FXCollections.observableArrayList(GrafStage.getData().getHeaderArray()));
+        functionComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
+                //= new ComboBox(FXCollections.observableArrayList(GrafProg.getData().getHeaderArray()));
     }
 
 
@@ -45,11 +45,11 @@ public class OneVarStatsController {
         int selectedColumn = functionComboBox.getSelectionModel().getSelectedIndex()+1;
 
         //check for empty column.
-        if (GrafStats.nullArray(GrafStats.getRidOfNulls(GrafStage.getData().getColumnValues(selectedColumn)), "Stats generator")) {
+        if (GrafStats.nullArray(GrafStats.getRidOfNulls(GrafProg.getData().getColumnValues(selectedColumn)), "Stats generator")) {
             clearForm();
             return;
         }
-        Double[] columnValues = GrafStage.getData().getColumnValues(selectedColumn);
+        Double[] columnValues = GrafProg.getData().getColumnValues(selectedColumn);
 
 
         textFieldN.setText(""+GrafStats.getN(columnValues));
@@ -92,6 +92,6 @@ public class OneVarStatsController {
 
 
     public void close(ActionEvent actionEvent) {
-        GrafStage.getStatStage().hide();
+        GrafProg.getStatStage().hide();
     }
 }

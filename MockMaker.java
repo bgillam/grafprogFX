@@ -21,7 +21,7 @@ public class MockMaker
     // }
       
     
-    public static ArrayList<GrafObject> createMockObjectList(GrafStage gSess){
+    public static ArrayList<GrafObject> createMockObjectList(GrafProg gSess){
            ArrayList<GrafObject> aList = new ArrayList<GrafObject>();
            aList.add(new GrafAxes(gSess));
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GrafRectangle extends GrafObject implements IGrafable
 {
         private String functionString="";
-        private GrafStage myOwner;
+        private GrafProg myOwner;
         private GrafSettings gStuff;
         private double x = 0;
         private double y = 0;
@@ -30,7 +30,7 @@ public class GrafRectangle extends GrafObject implements IGrafable
         
        }
       
-   public GrafRectangle(GrafStage sess){
+   public GrafRectangle(GrafProg sess){
         setGrafType(GrafType.RECTANGLE);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -38,7 +38,7 @@ public class GrafRectangle extends GrafObject implements IGrafable
         gStuff = myOwner.getGrafSettings();
        }
    
-   public GrafRectangle(GrafStage sess, double x1, double y1, double width, double height){
+   public GrafRectangle(GrafProg sess, double x1, double y1, double width, double height){
         this(sess);
         setX(x1);
         setY(y1);
@@ -46,7 +46,7 @@ public class GrafRectangle extends GrafObject implements IGrafable
         setHeight(height);
     }
    
-     public GrafRectangle(GrafStage sess, double x1, double y1, double width, double height, Color gColor){
+     public GrafRectangle(GrafProg sess, double x1, double y1, double width, double height, Color gColor){
         this(sess, x1, y1, width, height);
         setGrafColor(gColor);
     }
@@ -65,8 +65,8 @@ public class GrafRectangle extends GrafObject implements IGrafable
        
     }
    
-    @Override 
-   public  GrafInputDialog createInputDialog(GrafStage gs){
+  /*  @Override
+   public  GrafInputDialog createInputDialog(GrafProg gs){
            GrafInputDialog gfd = new GrafInputDialog(gs);          
            gfd.setTitle("RECTANGLE"); 
            gfd.setPointPanel(gfd.addPointPanel());
@@ -94,7 +94,7 @@ public class GrafRectangle extends GrafObject implements IGrafable
             // gfd.pack();
             // gfd.setVisible(true);  
             return gfd;    
-   }
+   }*/
    
    
    
@@ -132,7 +132,7 @@ public class GrafRectangle extends GrafObject implements IGrafable
        return "RECTANGLE: ("+getX()+", "+getY()+"); ("+getWidth()+", "+getHeight();//+ " "+getGrafColor()+" "+getFill()+")";
    }
    
-   private static void saveRectangle(GrafStage gs, GrafInputDialog gfd){
+   private static void saveRectangle(GrafProg gs, GrafInputDialog gfd){
         if (gfd.getFinalSave() == true && Double.isNaN(gfd.getPointPanel().getX1())) return; 
         addRect(gs, gfd);
         gfd.getPointPanel().blankX1();
@@ -142,7 +142,7 @@ public class GrafRectangle extends GrafObject implements IGrafable
     
     }
     
-    private static void addRect(GrafStage gs, GrafInputDialog gfd){
+    private static void addRect(GrafProg gs, GrafInputDialog gfd){
            if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
            if (Double.isNaN(gfd.getPointPanel().getY1())){gfd.NumErrorMessage("Y1", "valid number"); return;}    
            if (Double.isNaN(gfd.getPointPanel().getW())){gfd.NumErrorMessage("Width", "valid number"); return;}

@@ -16,7 +16,7 @@ import java.awt.Graphics2D;
 
 public class GrafAxesTest
 {
-    private GrafStage  gSess;
+    private GrafProg  gSess;
     private GrafAxes gAxes;
     /**
      * Default constructor for test class GrafPointTest
@@ -33,7 +33,7 @@ public class GrafAxesTest
     @Before
     public void setUp()
     {
-       gSess = new GrafStage();
+       gSess = new GrafProg();
        gAxes = new GrafAxes(gSess);
     }
     

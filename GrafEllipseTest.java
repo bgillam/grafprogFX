@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class GrafEllipseTest
 {
-    private GrafStage  gSess;
+    private GrafProg  gSess;
     private GrafEllipse gRect;
     private ArrayList<GrafObject> aList;
     private ArrayList<Integer> indexList;
@@ -37,7 +37,7 @@ public class GrafEllipseTest
     @Before
     public void setUp()
     {
-       gSess = new GrafStage();
+       gSess = new GrafProg();
        gRect = new GrafEllipse(gSess, 2, 3, 4, 5);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.ELLIPSE);

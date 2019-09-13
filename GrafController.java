@@ -67,53 +67,53 @@ public class GrafController {
 
     public void fxInput(ActionEvent actionEvent) {
 
-        GrafStage.getDialogController().hideAll();
-        GrafStage.getDialogController().showFxEntry();
-        GrafStage.getDialogStage().show();
+       GrafProg.getDialogController().hideAll();
+       GrafProg.getDialogController().showFxEntry();
+       GrafProg.getDialogStage().show();
 
     }
 
 
     public void fxValue(ActionEvent actionEvent) {
-      GrafStage.getDialogController().hideAll();
-      GrafStage.getDialogController().showFxValue();
-      GrafStage.getDialogStage().show();
+     GrafProg.getDialogController().hideAll();
+     GrafProg.getDialogController().showFxValue();
+     GrafProg.getDialogStage().show();
 
     }
 
     public void fxTangent(ActionEvent actionEvent) {
-        GrafStage.getDialogController().hideAll();
-        GrafStage.getDialogController().showFxTangent();
-        GrafStage.getDialogStage().show();
+       GrafProg.getDialogController().hideAll();
+       GrafProg.getDialogController().showFxTangent();
+       GrafProg.getDialogStage().show();
     }
 
 
     public void fxChord(ActionEvent actionEvent) {
-        GrafStage.getDialogController().hideAll();
-        GrafStage.getDialogController().showFxChord();
-        GrafStage.getDialogStage().show();
+       GrafProg.getDialogController().hideAll();
+       GrafProg.getDialogController().showFxChord();
+       GrafProg.getDialogStage().show();
 
     }
 
     public void fxIntegral(ActionEvent actionEvent) {
-        GrafStage.getDialogController().hideAll();
-        GrafStage.getDialogController().showFxIntegral();
-        GrafStage.getDialogStage().show();
+       GrafProg.getDialogController().hideAll();
+       GrafProg.getDialogController().showFxIntegral();
+       GrafProg.getDialogStage().show();
     }
 
     public void fxZeros(ActionEvent actionEvent) {
-        GrafStage.getDialogController().hideAll();
-        GrafStage.getDialogController().showFxZeros();
-        GrafStage.getDialogStage().show();
+       GrafProg.getDialogController().hideAll();
+       GrafProg.getDialogController().showFxZeros();
+       GrafProg.getDialogStage().show();
     }
 
     public void table(ActionEvent actionEvent) {
         //GrafStage.showData();
-        GrafStage.getTableStage().show();
+       GrafProg.getTableStage().show();
     }
 
     public void oneVStats(ActionEvent actionEvent) {
-        GrafStage.getStatStage().show();
+       GrafProg.getStatStage().show();
     }
 
     public AnchorPane getGrafPane(){return grafPane;}

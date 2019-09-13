@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class GrafCircleTest
 {
-    private GrafStage  gSess;
+    private GrafProg  gSess;
     private GrafCircle gCircle;
     private ArrayList<GrafObject> aList;
     private ArrayList<Integer> indexList;

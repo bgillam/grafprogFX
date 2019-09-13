@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class GrafColumnPlot extends GrafObject implements IGrafable{
     //Instance Variables
     private int columnNumber;
-    private GrafStage myOwner;
+    private GrafProg myOwner;
     private GrafSettings gStuff;
     private GrafTable table;
     private String mark =".";
@@ -29,7 +29,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
      setColumnNumber(1);
     }
     
-    public GrafColumnPlot(GrafStage sess){
+    public GrafColumnPlot(GrafProg sess){
         int column = 1;
         setGrafType(GrafType.COLUMN);
         setMoveable(false);
@@ -42,7 +42,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     }
     
         
-    public GrafColumnPlot(GrafStage sess, int column){
+    public GrafColumnPlot(GrafProg sess, int column){
         setGrafType(GrafType.COLUMN);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -74,8 +74,8 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         gc.setColor(Color.BLACK);
     }
     
-    @Override
-      public GrafInputDialog createInputDialog(GrafStage gs){
+  /*  @Override
+      public GrafInputDialog createInputDialog(GrafProg gs){
         GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
         gfd.setTitle("Column Plot");  
         //gfd.setColumnChooser(gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false));
@@ -107,7 +107,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         // gfd.setVisible(true); 
         return gfd;
     }
-    
+    */
     
     
 
@@ -135,7 +135,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         return "COLUMNPLOT: Col "+getColumnNumber()+","+", "+getMark();//+", "+ getGrafColor();
     }
     
-    private static void saveColumn(GrafStage gs, GrafInputDialog gfd){
+    private static void saveColumn(GrafProg gs, GrafInputDialog gfd){
         int col = gfd.getColumnChooser().getInputColumn();
         if (gfd.getFinalSave() == true && col == 0) return; 
         addColumn(gs, gfd); 
@@ -143,7 +143,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     
     }
     
-    private static void addColumn(GrafStage gs, GrafInputDialog gfd){
+    private static void addColumn(GrafProg gs, GrafInputDialog gfd){
         int input = gfd.getInput();
         if (input == 0)  return;
         GrafColumnPlot gPlot = new GrafColumnPlot(gs, input);

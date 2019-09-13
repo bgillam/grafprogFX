@@ -17,7 +17,7 @@ abstract public class GrafObject implements Serializable
    private GrafType grType;
    private Color grafColor = Color.BLACK; 
    private boolean moveable;
-   private GrafStage myOwner;
+   private GrafProg myOwner;
    
    
    protected ColumnChooserPanel columnChooser;
@@ -27,7 +27,7 @@ abstract public class GrafObject implements Serializable
    
    public void drawGraf(Graphics2D g2D){};
    
-   public GrafInputDialog createInputDialog(GrafStage gs){return null;};
+   public GrafInputDialog createInputDialog(GrafProg gs){return null;};
    
    public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){};
    
@@ -83,8 +83,8 @@ abstract public class GrafObject implements Serializable
    public void setMoveable(boolean tf){ moveable = tf;  }
    public boolean getMoveable(){return moveable;}
    
-   public void setOwner(GrafStage owner){myOwner = owner;}
-   public GrafStage getOwner(){return myOwner;}
+   public void setOwner(GrafProg owner){myOwner = owner;}
+   public GrafProg getOwner(){return myOwner;}
    
    public void setGrafColor(Color c){grafColor = c;   }
    public Color getGrafColor() { return grafColor;}

@@ -60,7 +60,7 @@ public class GrafDialogController {
     @FXML    private ComboBox fComboBox2;
     @FXML    private ComboBox objectComboBox;
              private GrafType gType;
-             private ArrayList<GrafObject> tempGrafList = GrafStage.getGrafList();
+             private ArrayList<GrafObject> tempGrafList = GrafProg.getGrafList();
              private boolean finalSave = false;
 
     @FXML
@@ -105,13 +105,13 @@ public class GrafDialogController {
     }
 
     private void resetDialog(){
-        GrafStage.getDialogStage().hide();
-        GrafStage.getDialogController().hideAll();  //this should hide all; add points for each box
+        GrafProg.getDialogStage().hide();
+        GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
     }
 
     private void saveChanges(){
-        GrafStage.setGrafList(tempGrafList);
-        GrafStage.setMessage1("changes saved");
+        GrafProg.setGrafList(tempGrafList);
+        GrafProg.setMessage1("changes saved");
     }
 
     private GrafFunction[] createFunctionList(){
@@ -131,7 +131,7 @@ public class GrafDialogController {
         gType = GrafType.FUNCTION;
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.getDialogStage().setTitle("FUNCTION");
+                GrafProg.getDialogStage().setTitle("FUNCTION");
                 fxLabel.setVisible(true);
                 functionString.setVisible(true);
                 chooseObject.setText("Choose FUNCTION");
@@ -146,7 +146,7 @@ public class GrafDialogController {
             @Override public void run() {
                 fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
-                GrafStage.getDialogStage().setTitle("VALUE");
+                GrafProg.getDialogStage().setTitle("VALUE");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
@@ -165,7 +165,7 @@ public class GrafDialogController {
         gType = GrafType.TANGENT;
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.getDialogStage().setTitle("TANGENT");
+                GrafProg.getDialogStage().setTitle("TANGENT");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
@@ -184,7 +184,7 @@ public class GrafDialogController {
         gType = GrafType.CHORD;
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.getDialogStage().setTitle("FCHORD");
+                GrafProg.getDialogStage().setTitle("FCHORD");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
@@ -204,7 +204,7 @@ public class GrafDialogController {
         gType = GrafType.FZERO;
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.getDialogStage().setTitle("FZEROS");
+                GrafProg.getDialogStage().setTitle("FZEROS");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
@@ -224,7 +224,7 @@ public class GrafDialogController {
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                GrafStage.getDialogStage().setTitle("INTEGRAL");
+                GrafProg.getDialogStage().setTitle("INTEGRAL");
                 fChoiceLabel.setText("Choose f(x): ");
                 fChoiceLabel.setVisible(true);
                 fComboBox.setVisible(true);
@@ -376,7 +376,7 @@ public class GrafDialogController {
     public void setFunctionString(String s){ functionString.setText(s);}
 
     public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
-    public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = GrafStage.getGrafList();}
+    public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = GrafProg.getGrafList();}
 
     public Color getGrafColor(){return Color.BLACK;}
 

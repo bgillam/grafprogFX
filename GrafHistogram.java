@@ -24,7 +24,7 @@ import javax.swing.border.BevelBorder;
 public class GrafHistogram extends GrafObject implements IGrafable{
     //Instance Variables
     private int columnNumber;
-    private GrafStage myOwner;
+    private GrafProg myOwner;
     private GrafSettings gStuff;
     private GrafTable table;
     //private FrequencyChartDialog fcd;
@@ -52,7 +52,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
        setColumnNumber(1);
     }
     
-    public GrafHistogram(GrafStage sess){
+    public GrafHistogram(GrafProg sess){
         setGrafType(GrafType.HISTOGRAM);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -64,13 +64,13 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     }
     
     //constructor 
-    public GrafHistogram(GrafStage sess, int column){
+    public GrafHistogram(GrafProg sess, int column){
         this(sess);
         setColumnNumber(column);
         sess.setMessage1("Histogram for Column "+columnNumber);
     }
     
-    public GrafHistogram(GrafStage sess, int column, double b, double e, int numCl, Color c, boolean rel){
+    public GrafHistogram(GrafProg sess, int column, double b, double e, int numCl, Color c, boolean rel){
         this(sess, column);
         relative = rel;
         begin = b;
@@ -81,7 +81,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         classLimits = GrafStats.getClassesByNumber(numClasses, begin, end);    //problem here!
         classWidth = classLimits[1] - classLimits[0];
     }
-    public GrafHistogram(GrafStage sess, int column, double b, double e, double classW, Color c, boolean rel){
+    public GrafHistogram(GrafProg sess, int column, double b, double e, double classW, Color c, boolean rel){
         this(sess, column);
         relative = rel;
         begin = b;
@@ -156,9 +156,9 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         
     }
     
-     @Override
-    public GrafInputDialog createInputDialog(GrafStage gs){
-        GrafInputDialog gfd = new GrafInputDialog(new GrafStage());
+   /*  @Override
+    public GrafInputDialog createInputDialog(GrafProg gs){
+        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
         gfd.setTitle("Histogram"); 
         gfd.setHistoPanel(addHistoPanel(gs, gfd));
         //gfd.setColumnChooser(gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false));
@@ -189,7 +189,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         // gfd.setVisible(true);     
         return gfd;
     }
-
+*/
     
     
    
@@ -207,7 +207,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
                     caller.getHisto().setClassSize(histEdit.getClassWidth());
        }
     
-       protected static HistoPanel addHistoPanel(GrafStage gs, GrafInputDialog gfd){
+       protected static HistoPanel addHistoPanel(GrafProg gs, GrafInputDialog gfd){
         HistoPanel histoPanel = new HistoPanel();
         histoPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
         histoPanel.setBackground(UIManager.getColor("Button.background"));
@@ -220,7 +220,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     }
     
     
-    private static void saveHistogram(GrafStage gs, GrafInputDialog gfd){
+    private static void saveHistogram(GrafProg gs, GrafInputDialog gfd){
         int col = gfd.getColumnChooser().getInputColumn();
         if (gfd.getFinalSave() == true && col == 0) return; 
         addHisto(gs,gfd);
@@ -228,7 +228,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     
     }
     
-    private static void addHisto(GrafStage gs, GrafInputDialog gfd){
+    private static void addHisto(GrafProg gs, GrafInputDialog gfd){
           int input = gfd.getInput();
           if (input == 0) return;
           GrafHistogram hPlot;

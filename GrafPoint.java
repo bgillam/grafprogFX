@@ -22,31 +22,31 @@ public class GrafPoint extends GrafText implements IGrafable
        super.setText(".");
    }
    
-   public GrafPoint(GrafStage sess){
+   public GrafPoint(GrafProg sess){
        super(sess);
        setGrafType(GrafType.POINT);
        super.setText(".");
        
    }
    
-   public GrafPoint(GrafStage sess, double x, double y){
+   public GrafPoint(GrafProg sess, double x, double y){
        super(sess, x, y, ".");
        setGrafType(GrafType.POINT);
    }
    
 
-   public GrafPoint(GrafStage sess, double x, double y, String t){
+   public GrafPoint(GrafProg sess, double x, double y, String t){
         super(sess, x, y, t);
         setGrafType(GrafType.POINT);
     }
     
-   public GrafPoint(GrafStage sess, double x, double y, String t, Color c){
+   public GrafPoint(GrafProg sess, double x, double y, String t, Color c){
         super(sess, x, y, t);
         setGrafType(GrafType.POINT);
         setGrafColor(c);
    }
    
-   public GrafPoint(GrafStage sess, double x, double y, String t, Font f, Color c){
+   public GrafPoint(GrafProg sess, double x, double y, String t, Font f, Color c){
         super(sess, x, y, t, f, c);
         setGrafType(GrafType.POINT);
    }
@@ -59,8 +59,8 @@ public class GrafPoint extends GrafText implements IGrafable
     }
     
     
-     @Override
-     public GrafInputDialog createInputDialog(GrafStage gs){
+     /*@Override
+     public GrafInputDialog createInputDialog(GrafProg gs){
          GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
          gfd.setTitle("Point"); 
          gfd.setPointPanel(gfd.addPointPanel());
@@ -89,7 +89,7 @@ public class GrafPoint extends GrafText implements IGrafable
          // gfd.pack();
          // gfd.setVisible(true);  
          return gfd;
-     }
+     }*/
     
      
     @Override
@@ -109,14 +109,14 @@ public class GrafPoint extends GrafText implements IGrafable
     return "POINT: ("+getX()+", "+getY()+") "+getMark();//+ ", "+getGrafColor();
     }
    
-    private static void savePoint(GrafStage gSess, GrafInputDialog gfd){
+    private static void savePoint(GrafProg gSess, GrafInputDialog gfd){
          if (gfd.getFinalSave() == true && Double.isNaN(gfd.getPointPanel().getX1())) return; 
              addPoint(gSess,gfd );
              gfd.getPointPanel().blankX1();
              gfd.getPointPanel().blankY1();
     }
 
-    private static void addPoint(GrafStage gSess, GrafInputDialog gfd){
+    private static void addPoint(GrafProg gSess, GrafInputDialog gfd){
        if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
        if (Double.isNaN(gfd.getPointPanel().getY1())){gfd.NumErrorMessage("Y1", "valid number"); return;}    
        GrafPoint gPlot = new GrafPoint(gSess, gfd.getPointPanel().getX1(), gfd.getPointPanel().getY1(), gfd.getMark(), gfd.getMarkChooser().getColor());

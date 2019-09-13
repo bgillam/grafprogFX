@@ -38,7 +38,7 @@ public class GrafPanel extends JPanel implements Serializable
         grafCanvas.clearRect(0,0,  getWidth(), getHeight());
 
         String functionList = "";
-        for (GrafObject graf: GrafStage.getGrafList()){
+        for (GrafObject graf: GrafProg.getGrafList()){
             graf.drawGraf(grafCanvas);
             if (graf.getType() == GrafType.FUNCTION) {
                 GrafFunction gf = (GrafFunction)graf;
@@ -46,7 +46,7 @@ public class GrafPanel extends JPanel implements Serializable
             }
             //System.out.println();
         }
-        GrafStage.zeroBoxPlotsPlotted();
+        GrafProg.zeroBoxPlotsPlotted();
         //gStage.setMessage1(functionList);
 
 
@@ -73,7 +73,7 @@ public class GrafPanel extends JPanel implements Serializable
     }
     
     //Getters and Setters
-    //public void setOwner(GrafStage gs) {gStage = gs;}
+    //public void setOwner(GrafProg gs) {gStage = gs;}
     
     //public Graphics2D getGrafCanvas(){
         //System.out.println(grafCanvas);

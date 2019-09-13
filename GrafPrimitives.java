@@ -20,11 +20,11 @@ public class GrafPrimitives implements Serializable
 {  
       
    //Frame, Panel and Canvas references
-   private GrafStage myFrame;
+   private GrafProg myFrame;
    private GrafPanel myPanel;
       
    //Constructor for objects of class GrafStuff
-    public GrafPrimitives(GrafStage frame)
+    public GrafPrimitives(GrafProg frame)
     {
       myFrame = frame;  
       myPanel = frame.getGrafPanel();

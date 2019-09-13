@@ -17,12 +17,12 @@ public class GrafAxes extends GrafObject
     private Font currentFont = new Font("Ariel",Font.BOLD, 11);
       
     //Constructor 
-    public GrafAxes(GrafStage gFrame)
+    public GrafAxes(GrafProg gFrame)
     {
     	setGrafType(GrafType.AXES);
     	setGrafColor(Color.BLACK);
     	setMoveable(false); 
-        setOwner(gFrame);
+        //setOwner(gFrame);
         gStuff = gFrame.getGrafSettings();
         
      }

@@ -26,7 +26,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
     private JTable      table;
     private JScrollPane scrollPane;
     private DefaultTableModel model;
-    private GrafStage gSess;   //owner
+    private GrafProg gSess;   //owner
     private ClipboardHandler clipper = new ClipboardHandler();
     
     //dialogs for data generation

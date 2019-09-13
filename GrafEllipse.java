@@ -21,7 +21,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
      * 
      */
     private static final long serialVersionUID = 1L;
-    private GrafStage myOwner;
+    private GrafProg myOwner;
     private GrafSettings gStuff;
    
     
@@ -31,7 +31,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
         
     }
 
-    public GrafEllipse(GrafStage sess) {
+    public GrafEllipse(GrafProg sess) {
         super(sess);
         myOwner = sess;
         gStuff = super.getGrafSettings();
@@ -39,7 +39,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
         // TODO Auto-generated constructor stub
     }
     
-     public GrafEllipse(GrafStage sess, double x1, double y1, double width, double height){
+     public GrafEllipse(GrafProg sess, double x1, double y1, double width, double height){
             super(sess, x1, y1, width, height);
             setGrafType(GrafType.ELLIPSE);
             setMoveable(false);
@@ -52,7 +52,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
             setHeight(height);
         }
         
-        public GrafEllipse(GrafStage sess, double x1, double y1, double width, double height, Color gColor){
+        public GrafEllipse(GrafProg sess, double x1, double y1, double width, double height, Color gColor){
             super(sess, x1, y1, width, height);
             setGrafType(GrafType.ELLIPSE);
             setMoveable(false);
@@ -80,8 +80,8 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
            
         }
      
-     @Override
-     public GrafInputDialog createInputDialog(GrafStage gs){
+    /* @Override
+     public GrafInputDialog createInputDialog(GrafProg gs){
         GrafInputDialog gfd = new GrafInputDialog(gs);          
         gfd.setTitle("ELLIPSE");  
         gfd.setPointPanel(gfd.addPointPanel());
@@ -109,7 +109,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
         // gfd.pack();
         // gfd.setVisible(true);  
         return gfd;
-     }  
+     }  */
      
      
          
@@ -133,7 +133,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
            return "ELLIPSE: ("+getX()+", "+getY()+"); ("+getWidth()+", "+getHeight();//+ " "+getGrafColor()+")";
        }
        
-        private static void saveEllipse(GrafStage gs, GrafInputDialog gfd){
+        private static void saveEllipse(GrafProg gs, GrafInputDialog gfd){
         if (gfd.getFinalSave() == true && Double.isNaN(gfd.getPointPanel().getX1())) return; 
         addEllipse(gs, gfd);
         gfd.getPointPanel().blankX1();
@@ -143,7 +143,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
        
        }
        
-       private static void addEllipse(GrafStage gs, GrafInputDialog gfd){
+       private static void addEllipse(GrafProg gs, GrafInputDialog gfd){
            if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
            if (Double.isNaN(gfd.getPointPanel().getY1())){gfd.NumErrorMessage("Y1", "valid number"); return;}    
            if (Double.isNaN(gfd.getPointPanel().getW())){gfd.NumErrorMessage("width", "valid number"); return;}

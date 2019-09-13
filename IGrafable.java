@@ -11,7 +11,7 @@ public interface IGrafable
 {
     
     public void drawGraf(Graphics2D gc);
-    public GrafInputDialog createInputDialog(GrafStage gs);
+    public GrafInputDialog createInputDialog(GrafProg gs);
     
     
     

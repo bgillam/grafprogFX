@@ -22,7 +22,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
     //Instance Variables
     private String functionString;
     private int segLength = 200;
-    private GrafStage myOwner;
+    private GrafProg myOwner;
     private GrafSettings gStuff;
         
     //Constructor
@@ -40,8 +40,8 @@ public class GrafFunction extends GrafObject implements IGrafable{
         setMoveable(false);
         setGrafColor(Color.BLACK);
         //myOwner = sess;
-        gStuff = GrafStage.getGrafSettings();
-        GrafStage.setMessage1(functionString);
+        gStuff = GrafProg.getGrafSettings();
+        GrafProg.setMessage1(functionString);
     }
     
     //constructor 
@@ -139,7 +139,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
     }
 
     public static void saveFunction(){
-        GrafDialogController gdc = GrafStage.getDialogController();
+        GrafDialogController gdc = GrafProg.getDialogController();
         if (gdc.isFinalSave() == true && gdc.getFunctionString().equals("")) return;
         addFunction(gdc);
         gdc.setFunctionString("");
@@ -148,7 +148,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
 
     private static void addFunction(GrafDialogController gdc){
         
-        if (!FunctionString.isValidAtXIgnoreDomainError(gdc.getFunctionString(), (GrafStage.getGrafSettings().getXMax()+GrafStage.getGrafSettings().getXMin())/2)) {
+        if (!FunctionString.isValidAtXIgnoreDomainError(gdc.getFunctionString(), (GrafProg.getGrafSettings().getXMax()+GrafProg.getGrafSettings().getXMin())/2)) {
                    JOptionPane.showMessageDialog(null,
                    "The expression entered is not a valid function.",
                    "Function Format Error",

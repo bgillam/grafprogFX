@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class GrafScatterplotTest
 {
-    private GrafStage  gSess;
+    private GrafProg  gSess;
     private GrafScatterPlot gScat;
     private ArrayList<GrafObject> aList;
     private ArrayList<Integer> indexList;
@@ -36,7 +36,7 @@ public class GrafScatterplotTest
     @Before
     public void setUp()
     {
-       gSess = new GrafStage();
+       gSess = new GrafProg();
        gScat = new GrafScatterPlot(gSess);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.SCATTER);

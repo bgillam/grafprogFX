@@ -29,20 +29,20 @@ public class GrafInputDialog extends JDialog
     private JButton cancelChanges = new JButton("Exit/No Changes"); 
     private JButton saveChanges =  new JButton("Exit/Save All");
     private ArrayList<GrafObject> tempList = new ArrayList<GrafObject>();
-    private GrafProg gSess;
+    //private GrafProg gSess;
     private boolean finalSave = false;
        
     //tester
     public static void main(String[] args){
-        GrafProg gSess = new GrafProg();
-        GrafInputDialog gid = new GrafInputDialog(gSess);
+       // GrafProg gSess = new GrafProg();
+        //GrafInputDialog gid = new GrafInputDialog(gSess);
        
     }
 
-    GrafInputDialog(GrafStage g){}
+    //GrafInputDialog(GrafStage g){}
     
     //creates dialog with buttons used by all Graf dialogs    
-    public GrafInputDialog(GrafProg gs){
+    /*public GrafInputDialog(GrafProg gs){
         gSess = gs;
         tempList = (ArrayList<GrafObject>)(gSess.getGrafList().clone()); //make a temporary copy of list to modify. This provides opportunity to cancel or save changes when ending dialog
         getContentPane().setLayout(new BorderLayout());
@@ -59,7 +59,7 @@ public class GrafInputDialog extends JDialog
         exitPanel.add(saveChanges,BorderLayout.CENTER);
         optionPanel.add(exitPanel, BorderLayout.EAST);
         getContentPane().add(optionPanel, BorderLayout.SOUTH);
-    }
+    }*/
     
     //adds a column chooser to the input dialog
     public void addColumnChooserPanel(String[] str, boolean inputOn, boolean outputOn) {
@@ -225,9 +225,9 @@ public class GrafInputDialog extends JDialog
         return finalSave;
     }
     
-    public GrafProg getSess(){
+    /*public GrafProg getSess(){
         return gSess;
-    }
+    }*/
     
     public ArrayList<GrafObject> getTempList(){
             return tempList;

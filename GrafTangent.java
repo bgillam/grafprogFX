@@ -14,7 +14,7 @@ public class GrafTangent extends GrafObject implements IGrafable
 {
         private String functionString="";
         private int segLength = 1000;
-        private GrafStage myOwner;
+        private GrafProg myOwner;
         private GrafSettings gStuff;
         private String mark ="x";
         private double x = 0;
@@ -27,7 +27,7 @@ public class GrafTangent extends GrafObject implements IGrafable
        }     
         
         
-   public GrafTangent(GrafStage sess){
+   public GrafTangent(GrafProg sess){
         setGrafType(GrafType.TANGENT);
         setMoveable(false);
         setGrafColor(Color.BLACK);
@@ -36,7 +36,7 @@ public class GrafTangent extends GrafObject implements IGrafable
        
        }
    
-   public GrafTangent(GrafStage sess, String yString, double x){
+   public GrafTangent(GrafProg sess, String yString, double x){
         this(sess);
         setX(x);
         setFunctionString(yString);
@@ -44,7 +44,7 @@ public class GrafTangent extends GrafObject implements IGrafable
    }
    
     
-   public GrafTangent(GrafStage sess, String yString, double x, Color c, String mark){
+   public GrafTangent(GrafProg sess, String yString, double x, Color c, String mark){
         this(sess, yString, x);
         setGrafColor(c);
         setMark(mark);
@@ -86,8 +86,8 @@ public class GrafTangent extends GrafObject implements IGrafable
        //gStuff.getGrafPanel().repaint();
     }
  
-    @Override
-   public  GrafInputDialog createInputDialog(GrafStage gs){
+  /*  @Override
+   public  GrafInputDialog createInputDialog(GrafProg gs){
        GrafInputDialog gfd = new GrafInputDialog(gs);
        gfd.setTitle("TANGENT");
        gfd.setPointPanel(gfd.addPointPanel());
@@ -114,7 +114,7 @@ public class GrafTangent extends GrafObject implements IGrafable
       
         return gfd;
    } 
-    
+    */
    
     
     @Override
@@ -127,14 +127,14 @@ public class GrafTangent extends GrafObject implements IGrafable
                     
        }
        
-       private static void saveTangent(GrafStage gs, GrafInputDialog gfd){
+       private static void saveTangent(GrafProg gs, GrafInputDialog gfd){
         if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
         addTangent(gs, gfd);
         gfd.getPointPanel().blankF();
         gfd.getPointPanel().blankX1();
    }
    
-   private static void addTangent(GrafStage gSess, GrafInputDialog gfd){
+   private static void addTangent(GrafProg gSess, GrafInputDialog gfd){
        if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPointPanel().getF(), (gSess.getGrafSettings().getXMax()+gSess.getGrafSettings().getXMin())/2)) { 
                    JOptionPane.showMessageDialog(null,
                    "The expression entered is not a valid function.",

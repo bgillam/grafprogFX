@@ -49,7 +49,7 @@ public class FrequencyChartDialog extends JDialog {
     private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
     private ArrayList<Integer> boxplotIndex = new ArrayList<Integer>();  // indexes which grafList objects are boxplots
-    private GrafProg gSess;
+    // GrafProg gSess;
     private JComboBox columnComboBox;
     private JTable table;
     private JTextField textFieldEnd;
@@ -65,8 +65,8 @@ public class FrequencyChartDialog extends JDialog {
     /**
      * Create the dialog.
      */
-    public FrequencyChartDialog(GrafProg sess) {
-        gSess=sess;
+    public FrequencyChartDialog() {
+        //gSess=sess;
         setBounds(100, 100, 543, 359);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
@@ -127,7 +127,7 @@ public class FrequencyChartDialog extends JDialog {
                             {
                                 columnComboBox = new JComboBox();
                                 panel_3.add(columnComboBox);
-                                columnComboBox.setModel(new javax.swing.DefaultComboBoxModel(gSess.getData().getHeaderArray()));
+                                columnComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
                                 columnComboBox.addItemListener(new ItemListener() {
                                     public void itemStateChanged(ItemEvent event) {
                                         if (event.getStateChange() == ItemEvent.SELECTED){
@@ -418,7 +418,7 @@ public class FrequencyChartDialog extends JDialog {
         int chosen = columnComboBox.getSelectedIndex();
         if (chosen != 0) 
         {   
-            Double[] columnValues = gSess.getData().getColumnValues(chosen);
+            Double[] columnValues = GrafProg.getData().getColumnValues(chosen);
             columnValues = GrafStats.getRidOfNulls(columnValues);
             if (columnValues.length == 0){  
                 JOptionPane.showMessageDialog(null, "You chose an empty column.", "I Feel So Empty!" , JOptionPane.ERROR_MESSAGE);
@@ -455,7 +455,7 @@ public class FrequencyChartDialog extends JDialog {
         int numClasses = classArray.length-1;               //don't count max
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(numClasses+2);                    //+2 for header and total rows
-        Double[] temp = GrafStats.getRidOfNulls(gSess.getData().getColumnValues(column));
+        Double[] temp = GrafStats.getRidOfNulls(GrafProg.getData().getColumnValues(column));
         Arrays.sort(temp);
                     
         int binCount = 0;
@@ -530,9 +530,9 @@ public class FrequencyChartDialog extends JDialog {
             
     }
     
-    public static void createInputDialog(GrafProg gs){
+    public static void createInputDialog(){
         System.out.println("in call");
-        FrequencyChartDialog fcDialog = new FrequencyChartDialog(gs); 
+        FrequencyChartDialog fcDialog = new FrequencyChartDialog();
         fcDialog.setVisible(true); 
         fcDialog.setModal(true); 
         

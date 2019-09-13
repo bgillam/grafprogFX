@@ -20,7 +20,7 @@ public class GrafMenu
     /**
      Create the menu
      */
-    public static JMenuBar createMenu(GrafStage gp){
+    public static JMenuBar createMenu(GrafProg gp){
          JMenuBar grafMenuBar = new JMenuBar(); //create the Menu Bar
          JMenu fileMenu = new JMenu("File");
          JMenuItem newMenuItem = new JMenuItem("New");
