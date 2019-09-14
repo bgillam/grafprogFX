@@ -99,7 +99,7 @@ public class PointPanel extends JPanel
     }
    
      //sets up the function combobox
-    public void setupFunctionChooser(){
+   /* public void setupFunctionChooser(){
             leftPanel.add(functionText, BorderLayout.WEST);
             fComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafFunction.getPlotList(tempList, GrafDeletePanel.indexPlots(tempList, GrafType.FUNCTION), GrafType.FUNCTION)));
             leftPanel.add(fComboBox, BorderLayout.CENTER);
@@ -118,7 +118,7 @@ public class PointPanel extends JPanel
             leftPanel2.add(x1Label, BorderLayout.WEST);
             leftPanel2.add(x1, BorderLayout.CENTER);
             bottomPanel.add(leftPanel2, BorderLayout.WEST);
-    }
+    }*/
 
     //Input for a point
     public void addX1Y1(){

@@ -58,11 +58,11 @@ public class GrafColumnplotTest
         
     }
     
-     @Test
+   /*  @Test
     public void getPlotListTest(){
         gCPlot.getPlotList(aList, indexList, GrafType.COLUMN);
         
-    }
+    }*/
     
     @Test
     public void setDeleteValuesTest(){

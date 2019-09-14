@@ -160,7 +160,7 @@ public class GrafZeros extends GrafObject implements IGrafable
         gfd.getTempList().add(gint);
     }
     
-     private static void setupZeros(GrafInputDialog gfd){
+    /* private static void setupZeros(GrafInputDialog gfd){
         PointPanel pointPanel = gfd.getPointPanel();
         pointPanel.setupFunctionChooser();
         pointPanel.getX1Label().setText("Start x:");
@@ -178,7 +178,7 @@ public class GrafZeros extends GrafObject implements IGrafable
         JPanel bottomPanel = pointPanel.getBottomPanel();
         bottomPanel.add(rightPanel, BorderLayout.CENTER);
         bottomPanel.add(rightPanel2, BorderLayout.EAST);
-    }
+    }*/
     
    private void findZeroPoints(){
         //if (!checkInputValues()) return;

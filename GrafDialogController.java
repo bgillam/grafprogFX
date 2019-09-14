@@ -63,12 +63,21 @@ public class GrafDialogController {
     @FXML    private ComboBox objectComboBox;
     private GrafType gType;
     private ArrayList<GrafObject> tempGrafList = GrafProg.getGrafList();
-    private boolean finalSave = false;
+    //private boolean finalSave = false;
+    //private boolean currentObjectSaved;
 
     @FXML
     private void onCreateButtonClicked(ActionEvent e){
-        System.out.println("create item");
+        System.out.println("create item in");
+        if (functionString.equals("")) return;
+        getTempGrafList().add(GrafObject.createGrafObjectFromController(this, gType));
+        createObjectList(gType);
+        createFunctionList();
+        objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+        if (fComboBox.isVisible()) {fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));}
+        System.out.println("create item out");
     }
+
     @FXML
     private void onDiscardButtonClicked(ActionEvent e){
         resetDialog();
@@ -76,6 +85,7 @@ public class GrafDialogController {
 
     @FXML
     private void onExitButtonClicked(ActionEvent e){
+        getTempGrafList().add(GrafObject.createGrafObjectFromController(this, gType));
         saveChanges();
         resetDialog();
     }
@@ -104,6 +114,7 @@ public class GrafDialogController {
     private void onGrafColorPicker(ActionEvent e) {
 
         System.out.println(e.getSource() + "was Clicked");
+        System.out.println(grafColorPicker.getValue());
     }
 
     private void resetDialog(){
@@ -364,8 +375,10 @@ public class GrafDialogController {
     }
 
 
-    public boolean isFinalSave() { return finalSave; }
-    public void setFinalSave(boolean finalSave) { this.finalSave = finalSave; }
+
+
+    /*public boolean isFinalSave() { return finalSave; }
+    public void setFinalSave(boolean finalSave) { this.finalSave = finalSave; }*/
 
     public String getFunctionString(){return functionString.getText();}
     public void setFunctionString(String s){ functionString.setText(s);}
@@ -373,7 +386,11 @@ public class GrafDialogController {
     public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
     public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = GrafProg.getGrafList();}
 
-    public Color getGrafColor(){return Color.BLACK;}
+    public Color getGrafColor(){
+        //System.out.println(grafColorPicker.getValue());
+        javafx.scene.paint.Color fxColor = grafColorPicker.getValue();
+        Color color = new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
+        return color;}
 
     public ColorPicker getFillColorPicker() {return fillColorPicker; }
 

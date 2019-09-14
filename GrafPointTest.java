@@ -58,10 +58,10 @@ public class GrafPointTest
         
     }
     
-    public void getPlotListTest(){
+    /*public void getPlotListTest(){
         gPoint.getPlotList(aList, indexList, GrafType.POINT); 
         
-    }
+    }*/
     
     @Test
      public void setDeleteValuesTest(){

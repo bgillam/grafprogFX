@@ -58,11 +58,11 @@ public class GrafBoxplotTest
         
     }
     
-    @Test
+    /*@Test
     public void getPlotListTest(){
         gBPlot.getPlotList(aList, indexList, GrafType.BOXPLOT);
         
-    }
+    }*/
     
     @Test
     public void setDeleteValuesTest(){

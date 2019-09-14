@@ -55,11 +55,11 @@ public class GrafCircleTest
 //
 //    }
     
-    @Test
+    /*@Test
     public void getPlotListTest(){
         gCircle.getPlotList(aList, indexList, GrafType.CIRCLE);
         
-    }
+    }*/
     
 //    @Test
 //    public void setDeleteValuesTest(){

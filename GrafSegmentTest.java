@@ -57,10 +57,10 @@ public class GrafSegmentTest
         
     }
     
-     public void getPlotListTest(){
+    /* public void getPlotListTest(){
         gSeg.getPlotList(aList, indexList, GrafType.LINESEGMENT);
         
-    }
+    }*/
     
     @Test
     public void setDeleteValuesTest(){

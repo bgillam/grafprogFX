@@ -58,11 +58,11 @@ public class GrafEllipseTest
         
     }
     
-    @Test
+   /* @Test
     public void getPlotListTest(){
         gRect.getPlotList(aList, indexList, GrafType.RECTANGLE);
         
-    }
+    }*/
     
     @Test
     public void setDeleteValuesTest(){

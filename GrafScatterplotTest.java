@@ -58,10 +58,10 @@ public class GrafScatterplotTest
 //
 //    }
     
-    public void getPlotListTest(){
+   /* public void getPlotListTest(){
         gScat.getPlotList(aList, indexList, GrafType.SCATTER);
         
-    }
+    }*/
     
 //    @Test
 //    public void setDeleteValuesTest(){

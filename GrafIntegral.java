@@ -148,7 +148,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
         gfd.getTempList().add(gint); 
     }
     
-    public static void setupIntegral(GrafInputDialog gfd){
+    /*public static void setupIntegral(GrafInputDialog gfd){
         PointPanel pointPanel = gfd.getPointPanel();
         pointPanel.setupFunctionChooser();
         pointPanel.getX2JText().setColumns(8);
@@ -162,7 +162,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
         JPanel bottomPanel = pointPanel.getBottomPanel();
         bottomPanel.add(rightPanel, BorderLayout.CENTER);
         bottomPanel.add(rightPanel2, BorderLayout.EAST);
-    }
+    }*/
     
    public void setX1(double xval){ x1 = xval; }
    public double getX1() { return x1; } 

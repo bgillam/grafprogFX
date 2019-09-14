@@ -58,11 +58,11 @@ public class GrafRectangleTest
         
     }
     
-    @Test
+   /* @Test
     public void getPlotListTest(){
         gRect.getPlotList(aList, indexList, GrafType.RECTANGLE);
         
-    }
+    }*/
     
     @Test
     public void setDeleteValuesTest(){

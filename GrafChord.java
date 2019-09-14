@@ -149,7 +149,7 @@ public class GrafChord extends GrafObject implements IGrafable
         gfd.getTempList().add(gch);      
    }
    
-   private static void setupChord(GrafInputDialog gfd){
+   /*private static void setupChord(GrafInputDialog gfd){
         PointPanel pointPanel = gfd.getPointPanel();
         JPanel rightPanel = pointPanel.getRightPanel();
         pointPanel.setupFunctionChooser();
@@ -157,7 +157,7 @@ public class GrafChord extends GrafObject implements IGrafable
         rightPanel.add(pointPanel.getX2Label(), BorderLayout.WEST);
         rightPanel.add(pointPanel.getX2JText(), BorderLayout.CENTER);
         gfd.getPointPanel().getBottomPanel().add(rightPanel, BorderLayout.CENTER);
-    }
+    }*/
    
    public void calcY1(){
        try {

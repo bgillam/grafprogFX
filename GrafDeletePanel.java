@@ -24,7 +24,7 @@ public class GrafDeletePanel extends JPanel
     
     public GrafDeletePanel(GrafInputDialog c, GrafType gType, ArrayList<GrafObject> tempList)//, GrafObject g)
     {
-       caller = c;  
+       /*caller = c;
        setBackground(new Color(220, 220, 220));
        setLayout(new BorderLayout());
        deleteMessage= new JLabel("Choose "+gType+" to delete/edit:");
@@ -69,7 +69,7 @@ public class GrafDeletePanel extends JPanel
        });
       deleteComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafObject.getPlotList(tempList, plotIndex, gType)));
       deleteButtonPanel.add(btnClearAll, BorderLayout.SOUTH);  
-      add(deleteButtonPanel, BorderLayout.SOUTH);
+      add(deleteButtonPanel, BorderLayout.SOUTH);*/
     }
           
     

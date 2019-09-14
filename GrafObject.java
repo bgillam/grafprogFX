@@ -31,7 +31,7 @@ abstract public class GrafObject implements Serializable
    
    public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){};
    
-   public static GrafObject createGrafObject(GrafType gType){
+   public static GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
        switch (gType){
 
                 case TEXT: return new GrafText();
@@ -45,8 +45,8 @@ abstract public class GrafObject implements Serializable
                 case LINESEGMENT: return new GrafSegment();
                 case RECTANGLE: return new GrafRectangle();
                 case ELLIPSE: return new GrafEllipse();
-                case   CIRCLE: return new GrafCircle();
-                case FUNCTION: return new GrafFunction();
+                case CIRCLE: return new GrafCircle();
+                case FUNCTION: return new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
                 case FVALUE: return new GrafValue();
                 case TANGENT: return new GrafTangent();
                 case CHORD: return new GrafChord();
@@ -89,7 +89,7 @@ abstract public class GrafObject implements Serializable
    public void setGrafColor(Color c){grafColor = c;   }
    public Color getGrafColor() { return grafColor;}
     
-   protected void addColumnChooserPanel(String[] str, boolean inputOn, boolean outputOn) {//ColumnChooserPanel addColumnChooserPanel(String[] str, boolean inputOn, boolean outputOn) {
+  /* protected void addColumnChooserPanel(String[] str, boolean inputOn, boolean outputOn) {//ColumnChooserPanel addColumnChooserPanel(String[] str, boolean inputOn, boolean outputOn) {
          ColumnChooserPanel columnChooser;
          columnChooser = new ColumnChooserPanel(str, inputOn, outputOn);
          columnChooser.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -103,11 +103,11 @@ abstract public class GrafObject implements Serializable
         mp.setBackground(UIManager.getColor("Button.background"));
         jd.add(mp, BorderLayout.WEST);
         //return mp;
-   }
+   }*/
    
    
    
-   public static String[] getPlotList(ArrayList<GrafObject> tempList, ArrayList<Integer> plotIndex, GrafType gType){ 
+  /* public static String[] getPlotList(ArrayList<GrafObject> tempList, ArrayList<Integer> plotIndex, GrafType gType){
         String con;
         GrafObject currentObj;
         GrafDeletePanel.indexPlots(tempList, gType);   
@@ -118,12 +118,12 @@ abstract public class GrafObject implements Serializable
             plotListArray[i] = currentObj.toString(); 
         }
        return plotListArray;
- }
+ }*/
    
-   protected static void closeGFD(GrafInputDialog gfd){
+   /*protected static void closeGFD(GrafInputDialog gfd){
         gfd.setModal(true);
         gfd.pack();
         gfd.setVisible(true); 
-   }
+   }*/
       
 }

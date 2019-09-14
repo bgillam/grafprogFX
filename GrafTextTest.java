@@ -57,10 +57,10 @@ public class GrafTextTest
         
     }
     
-    public void getPlotListTest(){
+    /*public void getPlotListTest(){
         gText.getPlotList(aList, indexList, GrafType.TEXT);
         
-    }
+    }*/
     
     @Test
     public void setDeleteValuesTest(){

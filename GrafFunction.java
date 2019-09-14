@@ -138,12 +138,12 @@ public class GrafFunction extends GrafObject implements IGrafable{
         return "FUNCTION: "+ getFunction();//+", "+ getGrafColor();
     }
 
-    public static void saveFunction(){
+    /*public static void saveFunction(){
         GrafDialogController gdc = GrafProg.getDialogController();
         if (gdc.isFinalSave() == true && gdc.getFunctionString().equals("")) return;
         addFunction(gdc);
         gdc.setFunctionString("");
-    }
+    }*/
 
 
     private static void addFunction(GrafDialogController gdc){
@@ -158,6 +158,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
        
         GrafFunction gf = new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
         gdc.getTempGrafList().add(gf);
+        System.out.println("Function added");
     }
     
     /* Setters and Getters from Parent GrafObject
