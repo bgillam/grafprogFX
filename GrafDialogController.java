@@ -68,14 +68,13 @@ public class GrafDialogController {
 
     @FXML
     private void onCreateButtonClicked(ActionEvent e){
-        System.out.println("create item in");
-        if (functionString.equals("")) return;
+        if (functionString.getText().equals("")) return;
         getTempGrafList().add(GrafObject.createGrafObjectFromController(this, gType));
         createObjectList(gType);
         createFunctionList();
         objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
         if (fComboBox.isVisible()) {fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));}
-        System.out.println("create item out");
+
     }
 
     @FXML
@@ -85,9 +84,11 @@ public class GrafDialogController {
 
     @FXML
     private void onExitButtonClicked(ActionEvent e){
-        getTempGrafList().add(GrafObject.createGrafObjectFromController(this, gType));
+        System.out.println("exit");
+        if (!functionString.equals("")) getTempGrafList().add(GrafObject.createGrafObjectFromController(this, gType));
         saveChanges();
         resetDialog();
+        GrafProg.getGrafPanel().repaint();
     }
 
     @FXML
@@ -117,40 +118,20 @@ public class GrafDialogController {
         System.out.println(grafColorPicker.getValue());
     }
 
-    private void resetDialog(){
-        GrafProg.getDialogStage().hide();
-        getGrafColorPicker().setValue(javafx.scene.paint.Color.BLACK);
-        getFillColorPicker().setValue(javafx.scene.paint.Color.BLACK);
-        GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
-    }
 
-    private void saveChanges(){
-        GrafProg.setGrafList(tempGrafList);
-        GrafProg.setMessage1("changes saved");
-    }
-
-    private ArrayList<GrafObject> createFunctionList(){
-        return createObjectList(GrafType.FUNCTION);
-    }
-
-    private ArrayList<GrafObject> createObjectList(GrafType gtype){
-        ArrayList<GrafObject> grafObjects = new ArrayList<>();
-        for (GrafObject g: tempGrafList){
-            if (g.getType() == gtype) grafObjects.add(g);
-        }
-        //return (GrafObject[]) grafObjects.toArray();
-        return grafObjects;
-    }
 
     public void showFxEntry()
     {
-        gType = GrafType.FUNCTION;
+        //gType = GrafType.FUNCTION;
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                gType = GrafType.FUNCTION;
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("FUNCTION");
                 fxLabel.setVisible(true);
                 functionString.setVisible(true);
                 chooseObject.setText("Choose FUNCTION");
+                //pack();
             }
         });
     }
@@ -340,6 +321,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                //functionString.setText("");
                 fChoiceLabel.setVisible(false);
                 fComboBox.setVisible(false);
                 fChoiceLabel2.setVisible(false);
@@ -375,10 +357,44 @@ public class GrafDialogController {
     }
 
 
+    private void resetDialog(){
+        GrafProg.getDialogStage().hide();
+        functionString.setText("");
+        x1Text.setText("");
+        x2Text.setText("");
+        y1Text.setText("");
+        y2Text.setText("");
+        nText.setText("");
+        textForDisplay.setText("");
+        getGrafColorPicker().setValue(javafx.scene.paint.Color.BLACK);
+        getFillColorPicker().setValue(javafx.scene.paint.Color.BLACK);
+        GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
+    }
 
+    private void saveChanges(){
+        GrafProg.setGrafList(tempGrafList);
+        GrafProg.setMessage1("changes saved");
+    }
+
+    private ArrayList<GrafObject> createFunctionList(){
+        return createObjectList(GrafType.FUNCTION);
+    }
+
+    private ArrayList<GrafObject> createObjectList(GrafType gtype){
+        ArrayList<GrafObject> grafObjects = new ArrayList<>();
+        for (GrafObject g: tempGrafList){
+            if (g.getType() == gtype) grafObjects.add(g);
+        }
+        //return (GrafObject[]) grafObjects.toArray();
+        return grafObjects;
+    }
 
     /*public boolean isFinalSave() { return finalSave; }
     public void setFinalSave(boolean finalSave) { this.finalSave = finalSave; }*/
+
+    /*public void pack(){
+        GrafProg.getStatStage().getScene().getWindow().sizeToScene();
+    }*/
 
     public String getFunctionString(){return functionString.getText();}
     public void setFunctionString(String s){ functionString.setText(s);}

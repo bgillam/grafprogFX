@@ -118,5 +118,9 @@ public class GrafController {
 
     public AnchorPane getGrafPane(){return grafPane;}
 
+    public void closeGraf(ActionEvent actionEvent) {
+        GrafProg.closeGraf();
+
     }
+}
 

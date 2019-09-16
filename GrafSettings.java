@@ -89,11 +89,18 @@ public class GrafSettings implements Serializable
     public boolean getShowXAxisScale(){return showXAxisScale;}
     public void toggleShowYScale(){if (showYAxisScale) showYAxisScale=false; else showYAxisScale=true;}
     public void toggleShowXScale(){if (showXAxisScale) showXAxisScale=false; else showXAxisScale=true;}
+
+    public void setShowXAxisScale(boolean tf) {this.showXAxisScale = tf;}
+    public void setShowYAxisScale(boolean tf) {this.showYAxisScale = tf;}
+
     public boolean showYAxis(){return showYAxis;}
+    public void setShowYAxis(boolean tf){showYAxis=tf;}
     public boolean showXAxis(){return showXAxis;}
+    public void setShowXAxis(boolean tf){showXAxis=tf;}
     public void toggleShowXAxis(){if (showXAxis) showXAxis=false; else showXAxis=true;} 
     public void toggleShowYAxis(){if (showYAxis) showYAxis=false; else showYAxis=true;} 
     public boolean getLeftScale(){return leftScale;}
+    public void setLeftScale(boolean tf){leftScale=tf;}
     public void toggleLeftFlag(){if (leftScale)leftScale=false; else leftScale=true;}
     public void toggleReverseXY(){ if (reverseXY) reverseXY = false; else reverseXY = true;}
     public double getXMin(){return xMin;}
@@ -118,4 +125,6 @@ public class GrafSettings implements Serializable
     public void setClassesForScale(boolean tf){classesForScale = tf;}
     public boolean getReverseXY(){return reverseXY;}
     public void setReversXY(boolean tf) {reverseXY = tf;}
+    public boolean isAutoScale(){return autoScale;}
+    public void setAutoScale(boolean tf){autoScale = tf;}
 }

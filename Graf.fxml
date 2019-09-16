@@ -25,7 +25,7 @@
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="printItem" text="Print"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="exitItem" text="Exit"/>
+                        <MenuItem fx:id="exitItem" text="Exit" onAction="#closeGraf"/>
                     </Menu>
                     <Menu fx:id="editMenu" text="Edit">
                         <MenuItem fx:id="cutItem" text="Cut"/>

@@ -40,7 +40,7 @@ public class GrafProgOld extends JFrame //implements ActionListener, Serializabl
     private GrafPrimitives grafPrim = new GrafPrimitives(new GrafProg());  //draw line, point or character
     private GrafTable data = new GrafTable(100,10);  //table for data
     private ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
-    private GrafAxes axes = new GrafAxes( new GrafProg());  //axes object
+    private GrafAxes axes = new GrafAxes();  //axes object
     private String copiedText = "";    
     private JPanel messagePanel;  
     private int boxPlotsPlotted = 0;              //for formatting multiple boxplots
@@ -67,7 +67,7 @@ public class GrafProgOld extends JFrame //implements ActionListener, Serializabl
     //Sets up Frame values
     private void SetupFrame(){
 
-       setTitle("GrafProg");
+      /* setTitle("GrafProg");
        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
        //WindowListener ensures "Save" prompt on unsaved session
        addWindowListener(new WindowAdapter() {
@@ -95,7 +95,7 @@ public class GrafProgOld extends JFrame //implements ActionListener, Serializabl
        //setJMenuBar(GrafMenu.createMenu(this));
        pack();
        setLocationRelativeTo(null);
-       setVisible(true);
+       setVisible(true);*/
     }
         
   
@@ -109,14 +109,14 @@ public class GrafProgOld extends JFrame //implements ActionListener, Serializabl
     }
   
     //Close an open file
-    public void closeGraf(){
+    /*public void closeGraf(){
         if (!grafSaved) 
             switch (JOptionPane.showConfirmDialog(null, "Save File?", "File"+grafFile.toString()+"not saved.", JOptionPane.YES_NO_CANCEL_OPTION)){
             case JOptionPane.YES_OPTION : { GrafFiles.saveFile(new GrafProg()); setAsSaved(); }
             case JOptionPane.CANCEL_OPTION : { repaint(); return;}
         }    
         //data.dispose(); dispose();
-    }
+    }*/
   
   
  

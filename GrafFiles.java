@@ -10,10 +10,34 @@ import javax.swing.*;
 import javax.swing.filechooser.*;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class GrafFiles
 {
-   
+
+    private double xMin=GrafProg.getGrafSettings().getXMin();
+    private double xMax=GrafProg.getGrafSettings().getXMax();
+    private double yMin=GrafProg.getGrafSettings().getYMin();
+    private double yMax=GrafProg.getGrafSettings().getYMax();
+    private double xAxisScale=GrafProg.getGrafSettings().getXAxisScale();
+    private double yAxisScale=GrafProg.getGrafSettings().getYAxisScale();
+    private int decPlaces = GrafProg.getGrafSettings().getDecPlaces();
+    private boolean showYAxis=GrafProg.getGrafSettings().showYAxis();
+    private boolean showXAxis=GrafProg.getGrafSettings().showXAxis();
+    private boolean showYAxisScale=GrafProg.getGrafSettings().getShowYAxisScale();
+    private boolean showXAxisScale=GrafProg.getGrafSettings().getShowXAxisScale();
+    private boolean reverseXY=GrafProg.getGrafSettings().getReverseXY();
+    private boolean leftScale=GrafProg.getGrafSettings().getLeftScale();
+    private boolean autoScale=GrafProg.getGrafSettings().isAutoScale();
+    private GrafSettings.ScaleFormat scaleFormat = GrafProg.getGrafSettings().getScaleFormat();
+    private GrafSettings.ScaleProcedure scaleProcedure = GrafProg.getGrafSettings().getScaleProcedure();
+    private static File grafFile = GrafProg.getGrafFile();
+    private static boolean grafSaved = GrafProg.getGrafSaved();
+    private static ArrayList<GrafObject> grafObjectList = GrafProg.getGrafList();
+    private Font currentFont = GrafProg.getAxes().getCurrentFont();
+    private static int boxPlotsPlotted = GrafProg.getBoxPlotsPlotted();
+    private static GrafTable data = GrafProg.getData();
+
     /**
      * Constructor for objects of class GrafFiles
      */
@@ -31,17 +55,19 @@ public class GrafFiles
   
     
   
-    public  static File saveFile(GrafProg g){
-        File f = g.getGrafFile();
+    public static File saveFile(){
+        File f = GrafProg.getGrafFile();
         if (f.toString().equals("") || !f.exists()) f = getFile(f);
-        saveObjectToFile(f, g);
+        GrafFiles gf = new GrafFiles();
+        saveObjectToFile(f,gf);
         return f;
     }
     
-    public static File saveFileAs(GrafProg g){
-        File f = g.getGrafFile();
+    public static File saveFileAs(){
+        File f = GrafProg.getGrafFile();
         getFile(f);
-        saveObjectToFile(f,g);
+        GrafFiles gf = new GrafFiles();
+        saveObjectToFile(f,gf);
         return f;
     }
 
@@ -110,7 +136,30 @@ public class GrafFiles
     
   
   public static GrafProg openGrafFromFile(){
-         return (GrafProg)openFileObject("grf");
-    
+     GrafFiles gf = (GrafFiles)openFileObject("grf");
+     GrafProg grafProg = new GrafProg();
+     grafProg.getGrafSettings().setXMin(gf.xMin);
+     grafProg.getGrafSettings().setXMax(gf.xMax);
+     grafProg.getGrafSettings().setYMin(gf.yMin);
+     grafProg.getGrafSettings().setYMax(gf.yMax);
+     grafProg.getGrafSettings().setXAxisScale(gf.xAxisScale);
+     grafProg.getGrafSettings().setYAxisScale(gf.yAxisScale);
+     grafProg.getGrafSettings().setDecPlaces(gf.decPlaces);
+     grafProg.getGrafSettings().setShowYAxis(gf.showYAxis);
+     grafProg.getGrafSettings().setShowXAxis(gf.showXAxis);
+     grafProg.getGrafSettings().setShowXAxisScale(gf.showXAxisScale);
+     grafProg.getGrafSettings().setShowYAxisScale(gf.showYAxisScale);
+      grafProg.getGrafSettings().setReversXY(gf.reverseXY);
+      grafProg.getGrafSettings().setLeftScale(gf.leftScale);
+      grafProg.getGrafSettings().setAutoScale(gf.autoScale);
+      grafProg.getGrafSettings().setScaleFormat(gf.scaleFormat);
+      grafProg.getGrafSettings().setScaleProcedure(gf.scaleProcedure);
+      grafProg.setGrafFile(gf.grafFile);
+      grafProg.setGrafSaved(gf.grafSaved);
+      grafProg.setGrafList(gf.grafObjectList);
+      grafProg.getAxes().setCurrentFont(gf.currentFont);
+      grafProg.setBoxPlotsPlotted(gf.boxPlotsPlotted);
+      grafProg.setData(gf.data);
+      return grafProg;
   }
 }

@@ -17,13 +17,13 @@ public class GrafAxes extends GrafObject
     private Font currentFont = new Font("Ariel",Font.BOLD, 11);
       
     //Constructor 
-    public GrafAxes(GrafProg gFrame)
+    public GrafAxes()
     {
     	setGrafType(GrafType.AXES);
     	setGrafColor(Color.BLACK);
     	setMoveable(false); 
         //setOwner(gFrame);
-        gStuff = gFrame.getGrafSettings();
+        gStuff = GrafProg.getGrafSettings();
         
      }
     
@@ -62,8 +62,16 @@ public class GrafAxes extends GrafObject
         }
         gc.setColor(Color.BLACK);
     }
-    
-    // Getters and setters 
+
+    public Font getCurrentFont() {
+        return currentFont;
+    }
+
+    public void setCurrentFont(Font currentFont) {
+        this.currentFont = currentFont;
+    }
+
+    // Getters and setters
     /* Defined in the parent class GrafObject
     public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
     public GrafProg.GrafType getType(){return grafType; }

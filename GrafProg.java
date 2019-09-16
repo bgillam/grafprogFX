@@ -40,15 +40,15 @@ public class GrafProg extends Application {
     private static GrafTable data = new GrafTable(100,10);  //table for data
 
     //instance variables
-    private File grafFile = new File("");  //File associated with the current Graf object
+    private static File grafFile = new File("");  //File associated with the current Graf object
     private static boolean grafSaved = false;     //has the current graf been saved?
     private static final int initWidth = 600;
     private static final int initHeight = 600;
-    private static GrafSettings grafSet = new GrafSettings();  //Stores window settings
+    private static GrafSettings    grafSet = new GrafSettings();  //Stores window settings
     private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
 
     private static ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
-    private GrafAxes axes = new GrafAxes(this);   //axes object
+    private static GrafAxes axes = new GrafAxes();   //axes object
     private String copiedText = "";
     private JPanel messagePanel;
     private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
@@ -69,7 +69,7 @@ public class GrafProg extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
         dialogController = loader.getController();
-        Scene dialogScene = new Scene (dialogRoot, initWidth, initHeight); //.getWidth(), grafStage.getHeight());
+        Scene dialogScene = new Scene (dialogRoot, 450, 400); //.getWidth(), grafStage.getHeight());
         dialogStage.setScene(dialogScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();
@@ -140,13 +140,16 @@ public class GrafProg extends Application {
 
     }
 
+
+
+
     public static void showData(){
        tableStage.show();
     }
 
 
     //Set Titles and saved status after saving file
-    private void setGrafSaved(boolean tf){
+    private static void setGrafSavedAndTitle(boolean tf){
         if (tf) {
             grafStage.setTitle(grafFile.toString());
             tableStage.setTitle("Data: " + grafFile.toString());
@@ -157,11 +160,13 @@ public class GrafProg extends Application {
 
     }
 
+
     //Close an open file
-    public void closeGraf(){
+    public static void closeGraf(){
+
         if (!grafSaved)
             switch (JOptionPane.showConfirmDialog(null, "Save File?", "File"+grafFile.toString()+"not saved.", JOptionPane.YES_NO_CANCEL_OPTION)){
-                case JOptionPane.YES_OPTION : { GrafFiles.saveFile(this); setGrafSaved(true); }
+                case JOptionPane.YES_OPTION : { GrafFiles.saveFile(); setGrafSavedAndTitle(true); }
                 case JOptionPane.CANCEL_OPTION : { return;}
             }
         tableStage.close(); grafStage.close();
@@ -196,17 +201,18 @@ public class GrafProg extends Application {
     public void setData(GrafTable dt) { data = dt; }
     public static GrafTable getData(){return data;}
 
-    public File getGrafFile(){return grafFile;}
-    public void setGrafFile(File f) {grafFile = f;}
+    public static File getGrafFile(){return grafFile;}
+    public static void setGrafFile(File f) {grafFile = f;}
 
-    public boolean getgrafSaved(){return grafSaved;}
-    public void setgrafSaved(boolean tf){grafSaved = tf;}
+
+    public static void setGrafSaved(boolean tf){grafSaved = tf;}
+    public static boolean getGrafSaved(){return grafSaved;}
 
     public static GrafPanel getGrafPanel(){return grafPanel;}
     public static void setPanel(GrafPanel gp) {grafPanel = gp;}
 
-    public GrafAxes getAxes(){return axes;}
-    public void setAxes(GrafAxes ga){axes = ga;}
+    public static GrafAxes getAxes(){return axes;}
+    public static void setAxes(GrafAxes ga){axes = ga;}
 
     public static GrafSettings getGrafSettings() {return grafSet;}
     public static void setGrafSettings(GrafSettings gs) { grafSet = gs; }
@@ -222,9 +228,10 @@ public class GrafProg extends Application {
 
 
 
-    public int getBoxPlotsPlotted(){
+    public static int getBoxPlotsPlotted(){
         return boxPlotsPlotted;
     }
+    public void setBoxPlotsPlotted(int numBoxPlots){boxPlotsPlotted=numBoxPlots;}
 
     public void incrementBoxPlotsPlotted(){
         boxPlotsPlotted++;
@@ -247,10 +254,8 @@ public class GrafProg extends Application {
 
 
 
-
     public static void main(String[] args) {
-        //new GrafProg();
-        //new GrafStage();
+        //new GrafProg().launch(args);
         launch(args);
     }
 

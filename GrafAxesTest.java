@@ -34,7 +34,7 @@ public class GrafAxesTest
     public void setUp()
     {
        gSess = new GrafProg();
-       gAxes = new GrafAxes(gSess);
+       gAxes = new GrafAxes();
     }
     
     @Test
