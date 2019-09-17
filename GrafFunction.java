@@ -22,7 +22,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
     //Instance Variables
     private String functionString;
     private int segLength = 200;
-    private GrafProg myOwner;
+    //private GrafProg myOwner;
     private GrafSettings gStuff;
         
     //Constructor
@@ -80,6 +80,22 @@ public class GrafFunction extends GrafObject implements IGrafable{
         catch (FunctionFormatException e) {}   
         gc.setColor(Color.BLACK);
         
+    }
+
+    @Override
+    public boolean deepEquals(GrafObject o){
+        GrafFunction gf = (GrafFunction) o;
+        System.out.println(getType()+" "+gf.getType());
+        System.out.println(getGrafColor()+" "+gf.getGrafColor());
+        System.out.println(functionString+" "+gf.getFunction());
+        if (getType() != o.getType()) return false;
+        System.out.println("Type same");
+        if (!getGrafColor().equals(gf.getGrafColor())) return false;
+        System.out.println("Color same");
+        if (!functionString.equals(gf.getFunction())) return false;
+        System.out.println("function same");
+        System.out.println("returning true");
+        return true;
     }
     
  /*  @Override
@@ -146,7 +162,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
     }*/
 
 
-    private static void addFunction(GrafDialogController gdc){
+    /*private static void addFunction(GrafDialogController gdc){
         
         if (!FunctionString.isValidAtXIgnoreDomainError(gdc.getFunctionString(), (GrafProg.getGrafSettings().getXMax()+GrafProg.getGrafSettings().getXMin())/2)) {
                    JOptionPane.showMessageDialog(null,
@@ -159,7 +175,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
         GrafFunction gf = new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
         gdc.getTempGrafList().add(gf);
         System.out.println("Function added");
-    }
+    }*/
     
     /* Setters and Getters from Parent GrafObject
      *  public void drawGraf(Graphics2D g2D){};

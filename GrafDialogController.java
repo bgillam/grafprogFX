@@ -68,10 +68,9 @@ public class GrafDialogController {
 
     @FXML
     private void onCreateButtonClicked(ActionEvent e){
-        if (functionString.getText().equals("")) return;
-        getTempGrafList().add(GrafObject.createGrafObjectFromController(this, gType));
-        createObjectList(gType);
-        createFunctionList();
+        addGrafObject();
+        //createObjectList(gType);
+        //createFunctionList();
         objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
         if (fComboBox.isVisible()) {fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));}
 
@@ -84,9 +83,9 @@ public class GrafDialogController {
 
     @FXML
     private void onExitButtonClicked(ActionEvent e){
-        System.out.println("exit");
-        if (!functionString.equals("")) getTempGrafList().add(GrafObject.createGrafObjectFromController(this, gType));
-        saveChanges();
+        addGrafObject();
+        GrafProg.setGrafList(tempGrafList);
+        GrafProg.setMessage1("changes saved");
         resetDialog();
         GrafProg.getGrafPanel().repaint();
     }
@@ -101,7 +100,13 @@ public class GrafDialogController {
     }
     @FXML
     private void onClearButtonClicked(ActionEvent e){
-        System.out.println(e.getSource()+ "was Clicked");
+        for (int i = 1; i<tempGrafList.size(); i++){
+                if (tempGrafList.get(i).getType().equals(gType)) {
+                tempGrafList.remove(i);
+                i--;
+            }
+        }
+        objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
     }
     @FXML
     private void onFontButtonClicked(ActionEvent e){
@@ -371,9 +376,26 @@ public class GrafDialogController {
         GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
     }
 
-    private void saveChanges(){
+    /*private void saveChanges(){
+
         GrafProg.setGrafList(tempGrafList);
         GrafProg.setMessage1("changes saved");
+    }*/
+
+    private void addGrafObject(){
+        if (!GrafObject.isValidInput(this)) {
+            GrafProg.setMessage1("not a valid "+gType);
+            return;
+        }
+        GrafObject newObject = GrafObject.createGrafObjectFromController(this, gType);
+        if (!duplicate(newObject)) getTempGrafList().add(newObject);
+    }
+
+    private boolean duplicate(GrafObject newObject){
+        for (GrafObject grafObject: tempGrafList) {
+            if (grafObject.deepEquals(newObject)) return true;
+        }
+        return false;
     }
 
     private ArrayList<GrafObject> createFunctionList(){
@@ -389,15 +411,13 @@ public class GrafDialogController {
         return grafObjects;
     }
 
-    /*public boolean isFinalSave() { return finalSave; }
-    public void setFinalSave(boolean finalSave) { this.finalSave = finalSave; }*/
 
-    /*public void pack(){
-        GrafProg.getStatStage().getScene().getWindow().sizeToScene();
-    }*/
 
     public String getFunctionString(){return functionString.getText();}
     public void setFunctionString(String s){ functionString.setText(s);}
+    public boolean functionStringIsVisible(){
+        return functionString.isVisible();
+    }
 
     public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
     public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = GrafProg.getGrafList();}
@@ -416,4 +436,12 @@ public class GrafDialogController {
 
     public void setGrafColorPicker(ColorPicker grafColorPicker) {this.grafColorPicker = grafColorPicker; }
 
+
+    /*public boolean isFinalSave() {
+        return finalSave;
+    }
+
+    public void setFinalSave(boolean finalSave) {
+        this.finalSave = finalSave;
+    }*/
 }
