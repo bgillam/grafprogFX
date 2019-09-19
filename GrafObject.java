@@ -57,6 +57,10 @@ abstract public class GrafObject implements Serializable
         }
     }
 
+    public void loadObjectFields(GrafDialogController gdc){
+
+    }
+
     public static boolean isValidInput(GrafDialogController gdf){
        if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
            return true;
@@ -64,7 +68,7 @@ abstract public class GrafObject implements Serializable
 
     public boolean deepEquals(GrafObject g) {
        if (getType() != g.getType()) return false;
-       if (getGrafColor() != getGrafColor()) return false;
+       if (getGrafColor() != g.getGrafColor()) return false;
        return true;
     }
    

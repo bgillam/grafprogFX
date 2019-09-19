@@ -6,13 +6,11 @@
 **********************************/
 import javafx.stage.Stage;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.io.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-import java.awt.BorderLayout;
 import javax.swing.border.*;
 import javax.swing.UIManager;
 import java.util.ArrayList;
@@ -78,6 +76,14 @@ public class GrafFunction extends GrafObject implements IGrafable{
         if (!getGrafColor().equals(gf.getGrafColor())) return false;
         if (!functionString.equals(gf.getFunction())) return false;
         return true;
+    }
+
+    @Override
+    public void loadObjectFields(GrafDialogController gdc){
+        gdc.setFunctionString(getFunction());
+        Color awtColor = getGrafColor();
+        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
+        gdc.getGrafColorPicker().setValue(fxColor);
     }
     
  /*  @Override

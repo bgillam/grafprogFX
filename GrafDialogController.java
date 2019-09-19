@@ -31,14 +31,14 @@ public class GrafDialogController {
     @FXML    private Label fChoiceLabel;
     @FXML    private TextField x1Text;
     @FXML    private Label x1Label;
-    @FXML    private Label separator1;
+    //@FXML    private Label separator1;
     @FXML    private Label y1Label;
     @FXML    private TextField y1Text;
-    @FXML    private Label separator2;
+    //@FXML    private Label separator2;
     @FXML    private Label nLabel;
     @FXML    private TextField nText;
     @FXML    private Label x2Label;
-    @FXML    private Label separator3;
+    //@FXML    private Label separator3;
     @FXML    private TextField x2Text;
     @FXML    private Label y2Label;
     @FXML    private TextField y2Text;
@@ -93,10 +93,15 @@ public class GrafDialogController {
 
     @FXML
     private void onEditButtonClicked(ActionEvent e){
-        System.out.println(e.getSource()+ "was Clicked");
+        GrafObject currentObject = (GrafObject)objectComboBox.getValue();
+        currentObject.loadObjectFields(this);
+
+
+
     }
     @FXML
     private void onDeleteButtonClicked(ActionEvent e){
+         if (objectComboBox.getValue().equals("Object")) return;
          GrafObject currentObject = (GrafObject)objectComboBox.getValue();
          int index = findGrafObject(currentObject, tempGrafList);
          if (index != -1) tempGrafList.remove(index);
