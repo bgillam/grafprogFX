@@ -47,7 +47,7 @@ public class GrafProg extends Application {
     private static GrafSettings    grafSet = new GrafSettings();  //Stores window settings
     private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
 
-    private static ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //list of objects to be graphed
+    private static ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //should make this class and use here and in DialogController
     private static GrafAxes axes = new GrafAxes();   //axes object
     private String copiedText = "";
     private JPanel messagePanel;

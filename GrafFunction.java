@@ -26,22 +26,12 @@ public class GrafFunction extends GrafObject implements IGrafable{
     private GrafSettings gStuff;
         
     //Constructor
-    
-    /*public GrafFunction(){
-        setGrafType(GrafType.FUNCTION);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-       
-        
-    }*/
-    
     public GrafFunction(){
         setGrafType(GrafType.FUNCTION);
         setMoveable(false);
         setGrafColor(Color.BLACK);
         //myOwner = sess;
         gStuff = GrafProg.getGrafSettings();
-        //GrafProg.setMessage1(functionString);
     }
     
     //constructor 
@@ -54,8 +44,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
     public GrafFunction(String fString, Color c){
         this(fString);
         setGrafColor(c);
-       
-   }
+    }
    
 
     //drawGraf overri[]ding method in parent GrafObject
@@ -85,16 +74,9 @@ public class GrafFunction extends GrafObject implements IGrafable{
     @Override
     public boolean deepEquals(GrafObject o){
         GrafFunction gf = (GrafFunction) o;
-        System.out.println(getType()+" "+gf.getType());
-        System.out.println(getGrafColor()+" "+gf.getGrafColor());
-        System.out.println(functionString+" "+gf.getFunction());
         if (getType() != o.getType()) return false;
-        System.out.println("Type same");
         if (!getGrafColor().equals(gf.getGrafColor())) return false;
-        System.out.println("Color same");
         if (!functionString.equals(gf.getFunction())) return false;
-        System.out.println("function same");
-        System.out.println("returning true");
         return true;
     }
     
@@ -142,6 +124,10 @@ public class GrafFunction extends GrafObject implements IGrafable{
                   
                     
        }*/
+
+    private String shortColorString(Color c){
+        return "R"+c.getRed()+":G"+c.getGreen()+":B"+c.getBlue();
+    }
     
     //Setters and Getters
     public void setFunction(String s){ functionString = s;}
@@ -151,7 +137,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
     public int getSegLength(){return segLength;}
     
     public String toString(){
-        return "FUNCTION: "+ getFunction();//+", "+ getGrafColor();
+        return getFunction()+"; "+shortColorString(getGrafColor());
     }
 
     /*public static void saveFunction(){

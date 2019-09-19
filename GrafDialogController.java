@@ -72,7 +72,8 @@ public class GrafDialogController {
         //createObjectList(gType);
         //createFunctionList();
         objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
-        if (fComboBox.isVisible()) {fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));}
+
+        //if (fComboBox.isVisible()) {fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));}
 
     }
 
@@ -96,7 +97,10 @@ public class GrafDialogController {
     }
     @FXML
     private void onDeleteButtonClicked(ActionEvent e){
-        System.out.println(e.getSource()+ "was Clicked");
+         GrafObject currentObject = (GrafObject)objectComboBox.getValue();
+         int index = findGrafObject(currentObject, tempGrafList);
+         if (index != -1) tempGrafList.remove(index);
+         objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
     }
     @FXML
     private void onClearButtonClicked(ActionEvent e){
@@ -124,7 +128,7 @@ public class GrafDialogController {
     }
 
 
-
+    @FXML
     public void showFxEntry()
     {
         //gType = GrafType.FUNCTION;
@@ -140,7 +144,7 @@ public class GrafDialogController {
             }
         });
     }
-
+    @FXML
     public void showFxValue()
     {
         gType = GrafType.FVALUE;
@@ -156,7 +160,7 @@ public class GrafDialogController {
             }
         });
     }
-
+    @FXML
     public void showFxTangent()
     {
         gType = GrafType.TANGENT;
@@ -171,7 +175,7 @@ public class GrafDialogController {
             }
         });
     }
-
+    @FXML
     public void showFxChord()
     {
         gType = GrafType.CHORD;
@@ -187,7 +191,7 @@ public class GrafDialogController {
             }
         });
     }
-
+    @FXML
     public void showFxZeros()
     {
         gType = GrafType.FZERO;
@@ -203,7 +207,7 @@ public class GrafDialogController {
             }
         });
     }
-
+    @FXML
     public void showFxIntegral()
     {gType = GrafType.INTEGRAL;
 
@@ -396,6 +400,11 @@ public class GrafDialogController {
             if (grafObject.deepEquals(newObject)) return true;
         }
         return false;
+    }
+
+    private int findGrafObject(GrafObject grafObject, ArrayList<GrafObject> list){
+            for (int i = 0; i<list.size(); i++) if (grafObject == list.get(i)) return i;
+            return -1;
     }
 
     private ArrayList<GrafObject> createFunctionList(){
