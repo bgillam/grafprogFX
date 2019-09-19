@@ -69,7 +69,7 @@ public class GrafProg extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
         dialogController = loader.getController();
-        Scene dialogScene = new Scene (dialogRoot, 450, 400); //.getWidth(), grafStage.getHeight());
+        Scene dialogScene = new Scene (dialogRoot, 500, 400); //.getWidth(), grafStage.getHeight());
         dialogStage.setScene(dialogScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogController.hideAll();

@@ -23,7 +23,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
     //private GrafProg myOwner;
     private GrafSettings gStuff;
         
-    //Constructor
+    //Constructors
     public GrafFunction(){
         setGrafType(GrafType.FUNCTION);
         setMoveable(false);
@@ -32,7 +32,6 @@ public class GrafFunction extends GrafObject implements IGrafable{
         gStuff = GrafProg.getGrafSettings();
     }
     
-    //constructor 
     public GrafFunction(String fString){
         this();
         setFunction(fString);
@@ -45,7 +44,7 @@ public class GrafFunction extends GrafObject implements IGrafable{
     }
    
 
-    //drawGraf overri[]ding method in parent GrafObject
+    //drawGraf overriding method in parent GrafObject
     @Override
     public void drawGraf(Graphics2D gc){
         double xMin = gStuff.getXMin();
@@ -86,50 +85,6 @@ public class GrafFunction extends GrafObject implements IGrafable{
         gdc.getGrafColorPicker().setValue(fxColor);
     }
     
- /*  @Override
-   public GrafInputDialog createInputDialog(GrafStage gs){
-        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
-        gfd.setTitle("FUNCTION");
-        gfd.setPointPanel(gfd.addPointPanel());
-        
-        gfd.getPointPanel().addFx();
-        gfd.setMarkChooser(gfd.addMarkPanel(new FillColorMarkPanel(false, false))); 
-        gfd.setDeleter(gfd.addDeleterPanel(GrafType.FUNCTION));   
-        gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.FUNCTION)));      
-        gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveFunction(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.FUNCTION)));    
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveFunction(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-        // gfd.setModal(true);
-        // gfd.pack();
-        // gfd.setVisible(true);
-        return gfd;
-   }*/
-   
-      
-   
-
-    
-
-    /* @Override
-     public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-                   GrafFunction gEdit = (GrafFunction)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-                   caller.getPointChooser().setF(gEdit.getFunction());
-                   caller.getMarkChooser().setColor(gEdit.getGrafColor());
-                  
-                    
-       }*/
 
     private String shortColorString(Color c){
         return "R"+c.getRed()+":G"+c.getGreen()+":B"+c.getBlue();
@@ -146,44 +101,5 @@ public class GrafFunction extends GrafObject implements IGrafable{
         return getFunction()+"; "+shortColorString(getGrafColor());
     }
 
-    /*public static void saveFunction(){
-        GrafDialogController gdc = GrafProg.getDialogController();
-        if (gdc.isFinalSave() == true && gdc.getFunctionString().equals("")) return;
-        addFunction(gdc);
-        gdc.setFunctionString("");
-    }*/
 
-
-    /*private static void addFunction(GrafDialogController gdc){
-        
-        if (!FunctionString.isValidAtXIgnoreDomainError(gdc.getFunctionString(), (GrafProg.getGrafSettings().getXMax()+GrafProg.getGrafSettings().getXMin())/2)) {
-                   JOptionPane.showMessageDialog(null,
-                   "The expression entered is not a valid function.",
-                   "Function Format Error",
-                   JOptionPane.ERROR_MESSAGE);  
-                   return;
-        }
-       
-        GrafFunction gf = new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
-        gdc.getTempGrafList().add(gf);
-        System.out.println("Function added");
-    }*/
-    
-    /* Setters and Getters from Parent GrafObject
-     *  public void drawGraf(Graphics2D g2D){};
-   
-        public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-        public GrafProg.GrafType getType(){return grafType; }
-   
-        public boolean isMoveable(){ return moveable; } 
-        public void setMoveable(boolean tf){ moveable = tf;  }
-        public boolean getMoveable(){return moveable;}
-   
-        public void setOwner(GrafProg owner){myOwner = owner;}
-        public GrafProg getOwner(){return myOwner;}
-   
-        public void setGrafColor(Color c){grafColor = Color.BLACK;   }
-        public Color getGrafColor() { return grafColor;}
-     */
-    
 }
