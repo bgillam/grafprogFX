@@ -207,7 +207,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     
      
   
-    @Override
+    /*@Override
     public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                     GrafOgive oEdit = (GrafOgive)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                     caller.getColumnChooser().setInputIndex(oEdit.getColumnNumber());
@@ -219,7 +219,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
                     caller.getHisto().setnumClassesChecked(oEdit.getByNumClassChecked());
                     caller.getHisto().setNumClasses(oEdit.getNumClasses());
                     caller.getHisto().setClassSize(oEdit.getClassWidth());   
-       }
+       }*/
        
         private static void saveOgive(GrafProg gs, GrafInputDialog gfd){
         int col = gfd.getColumnChooser().getInputColumn();

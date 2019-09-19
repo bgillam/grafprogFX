@@ -195,7 +195,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
    
     
   
-    @Override
+   /* @Override
     public  void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                     GrafFreqPolygon gfpEdit = (GrafFreqPolygon)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                     caller.getColumnChooser().setInputIndex(gfpEdit.getColumnNumber());
@@ -207,7 +207,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
                     caller.getHisto().setnumClassesChecked(gfpEdit.getByNumClassChecked());
                     caller.getHisto().setNumClasses(gfpEdit.getNumClasses());
                     caller.getHisto().setClassSize(gfpEdit.getClassWidth());
-       }
+       }*/
        
         private static void saveFreqPolygon(GrafProg gs, GrafInputDialog gfd){
             int col = gfd.getColumnChooser().getInputColumn();

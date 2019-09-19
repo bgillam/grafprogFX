@@ -120,6 +120,10 @@ public class GrafProg extends Application {
         grafObjectList.add(axes);
         grafStage.show();
 
+        grafStage.setOnCloseRequest(event -> {
+            closeGraf();
+        });
+
     }
 
     public void setSizeChangeListener(Stage stage, JPanel gPanel){
@@ -164,12 +168,20 @@ public class GrafProg extends Application {
     //Close an open file
     public static void closeGraf(){
 
-        if (!grafSaved)
-            switch (JOptionPane.showConfirmDialog(null, "Save File?", "File"+grafFile.toString()+"not saved.", JOptionPane.YES_NO_CANCEL_OPTION)){
-                case JOptionPane.YES_OPTION : { GrafFiles.saveFile(); setGrafSavedAndTitle(true); }
-                case JOptionPane.CANCEL_OPTION : { return;}
+        if (!grafSaved) {
+            switch (JOptionPane.showConfirmDialog(null, "Save File?", "File" + grafFile.toString() + "not saved.", JOptionPane.YES_NO_CANCEL_OPTION)) {
+                case JOptionPane.YES_OPTION: {
+                    GrafFiles.saveFile();
+                    setGrafSavedAndTitle(true);
+                }
+                case JOptionPane.CANCEL_OPTION: {
+                    return;
+                }
             }
-        tableStage.close(); grafStage.close();
+        }
+        /*tableStage.close();
+        grafStage.close();*/
+        System.exit(0);
     }
 
 

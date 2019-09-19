@@ -150,12 +150,12 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
     
     
 
-    @Override
+   /* @Override
     public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
          GrafBoxPlot bpEdit = (GrafBoxPlot)tempList.get(caller.getDeleter().getPlotIndex().get(index));
          caller.getColumnChooser().setInputIndex(bpEdit.getColumnNumber());
          caller.getMarkChooser().setColor(bpEdit.getGrafColor()); 
-       }
+       }*/
     
     //Setters and Getters
     public void setColumnNumber(int c){ columnNumber = c;}

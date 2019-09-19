@@ -65,6 +65,16 @@ public class GrafValue extends GrafObject implements IGrafable{
        myOwner.setMessage2(toString());
        //gStuff.getGrafPanel().repaint();
    }
+
+    @Override
+    public void loadObjectFields(GrafDialogController gdc){
+        gdc.setFunctionString(getFunctionString());
+        gdc.setX1(""+getX());
+        gdc.settDialogMark(getMark());
+        Color awtColor = getGrafColor();
+        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
+        gdc.getGrafColorPicker().setValue(fxColor);
+    }
    
   /* @Override
    public GrafInputDialog createInputDialog(GrafProg gs){
@@ -100,7 +110,7 @@ public class GrafValue extends GrafObject implements IGrafable{
   */
    
 
-     @Override
+    /* @Override
      public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                    GrafTangent fvEdit = (GrafTangent)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                      caller.getPointChooser().setF(fvEdit.getFunctionString());
@@ -108,7 +118,7 @@ public class GrafValue extends GrafObject implements IGrafable{
                      caller.getMarkChooser().setColor(fvEdit.getGrafColor());
                   
                     
-       }
+       }*/
        
    private static void saveValue(GrafProg gs, GrafInputDialog gfd){
     if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 

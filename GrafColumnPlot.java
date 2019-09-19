@@ -111,14 +111,14 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     
     
 
-    @Override
+    /*@Override
     public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
              GrafColumnPlot cEdit = (GrafColumnPlot)tempList.get(caller.getDeleter().getPlotIndex().get(index));
              caller.getColumnChooser().setInputIndex(cEdit.getColumnNumber());
              caller.getMarkChooser().setMark(cEdit.getMark());
              caller.getMarkChooser().setConnectedChecked(cEdit.getConnected());
              caller.getMarkChooser().setColor(cEdit.getGrafColor()); 
-}
+}*/
     //Setters and Getters
     public void setColumnNumber(int c){ columnNumber = c;}
     public int getColumnNumber(){ return columnNumber;}

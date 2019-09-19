@@ -113,7 +113,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
  
  
 
-     @Override
+    /* @Override
      public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                    GrafIntegral intEdit = (GrafIntegral)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                      caller.getPointChooser().setF(intEdit.getFunctionString());
@@ -123,7 +123,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
                      caller.getMarkChooser().setColor(intEdit.getGrafColor());
                   
                     
-       }
+       }*/
        
           private static void saveIntegral(GrafProg gs, GrafInputDialog gfd){
         if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 

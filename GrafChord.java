@@ -107,7 +107,7 @@ public class GrafChord extends GrafObject implements IGrafable
    
   
      
-      @Override
+      /*@Override
       public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                      GrafChord chEdit = (GrafChord)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                      caller.getPointChooser().setF(chEdit.getFunctionString());
@@ -115,7 +115,7 @@ public class GrafChord extends GrafObject implements IGrafable
                      caller.getPointChooser().setX2(chEdit.getX2());
                      caller.getMarkChooser().setColor(chEdit.getGrafColor());
                     
-       }
+       }*/
      
    public void setX1(double xval){ x1 = xval; }
    public double getX1() { return x1; } 

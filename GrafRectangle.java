@@ -99,7 +99,7 @@ public class GrafRectangle extends GrafObject implements IGrafable
    
    
     
-     @Override 
+   /*  @Override
      public  void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                      GrafRectangle rEdit = (GrafRectangle)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                      caller.getPointChooser().setX1(rEdit.getX());
@@ -110,7 +110,7 @@ public class GrafRectangle extends GrafObject implements IGrafable
                      caller.getMarkChooser().setColor(rEdit.getGrafColor());  
                      caller.getMarkChooser().setFillColor(rEdit.getFill());  
                     
-       }
+       }*/
      
      
    public void setX(double xval){ x = xval; }

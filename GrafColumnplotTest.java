@@ -52,17 +52,17 @@ public class GrafColumnplotTest
         gCPlot.drawGraf((Graphics2D)g);
     }
     
-    @Test
+   /* @Test
     public void createInputDialogTest(){
         gCPlot.createInputDialog(gSess);
         
     }
     
-   /*  @Test
+   *//*  @Test
     public void getPlotListTest(){
         gCPlot.getPlotList(aList, indexList, GrafType.COLUMN);
         
-    }*/
+    }*//*
     
     @Test
     public void setDeleteValuesTest(){
@@ -70,7 +70,7 @@ public class GrafColumnplotTest
         gid.getDeleter().setPlotIndex(indexList); 
         gCPlot.setDeleteValues(3, gid, aList );
     
-    }
+    }*/
     
     @Test
     public void setAndGetMarkTest(){

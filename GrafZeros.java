@@ -109,7 +109,7 @@ public class GrafZeros extends GrafObject implements IGrafable
    
     
 
-     @Override
+    /* @Override
      public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                    GrafZeros zEdit = (GrafZeros)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                      caller.getPointChooser().setF(zEdit.getFunctionString());
@@ -119,7 +119,7 @@ public class GrafZeros extends GrafObject implements IGrafable
                      caller.getMarkChooser().setColor(zEdit.getGrafColor());
                   
                     
-       }
+       }*/
     
    public void setStartX(double xval){ startX = xval; }
    public double getStartX() { return startX; } 

@@ -52,16 +52,16 @@ public class GrafPointTest
         gPoint.drawGraf((Graphics2D)g);
     }
     
-    @Test
+   /* @Test
     public void createInputDialogTest(){
         gPoint.createInputDialog(gSess);
         
     }
     
-    /*public void getPlotListTest(){
+    *//*public void getPlotListTest(){
         gPoint.getPlotList(aList, indexList, GrafType.POINT); 
         
-    }*/
+    }*//*
     
     @Test
      public void setDeleteValuesTest(){
@@ -69,7 +69,7 @@ public class GrafPointTest
          gid.getDeleter().setPlotIndex(indexList); 
          gPoint.setDeleteValues(3, gid, aList );
     
-     }
+     }*/
     
     @Test
     public void setAndGetMarkTest(){

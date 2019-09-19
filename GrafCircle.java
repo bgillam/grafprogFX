@@ -101,7 +101,7 @@ public class GrafCircle extends GrafObject implements IGrafable{
     }*/
          
     
-     @Override
+    /* @Override
      public  void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                      GrafCircle circEdit = (GrafCircle)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                      caller.getPointChooser().setX1(circEdit.getCx());
@@ -109,11 +109,11 @@ public class GrafCircle extends GrafObject implements IGrafable{
                      caller.getPointChooser().setR(circEdit.getR());
                      //caller.getPointChooser().setH(circEdit.getHeight());
                      caller.getMarkChooser().setFillChecked(circEdit.getFillFlag());
-                     caller.getMarkChooser().setColor(circEdit.getGrafColor());  
-                     caller.getMarkChooser().setFillColor(circEdit.getFill());  
-                  
-                    
-       }
+                     caller.getMarkChooser().setColor(circEdit.getGrafColor());
+                     caller.getMarkChooser().setFillColor(circEdit.getFill());
+
+
+       }*/
         
    public void setCx(double xval){ cX = xval; }
    public double getCx() { return cX; }

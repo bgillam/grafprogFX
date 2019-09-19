@@ -95,7 +95,7 @@ public class GrafSegment extends GrafObject implements IGrafable
     
    
     
-    @Override    
+ /*   @Override
     public  void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                      GrafSegment lEdit = (GrafSegment)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                      caller.getPointChooser().setX1(lEdit.getX1());
@@ -105,7 +105,7 @@ public class GrafSegment extends GrafObject implements IGrafable
                      //caller.getMarkChooser().setTextString(ptEdit.getText());
                      //caller.getMarkChooser().setCurrentFont(ptEdit.getFont());
                      caller.getMarkChooser().setColor(lEdit.getGrafColor());   
-       }
+       }*/
     
    public void setX1(double xval){ x1 = xval; }
    public double getX1() { return x1; }

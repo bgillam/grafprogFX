@@ -52,17 +52,17 @@ public class GrafEllipseTest
         gRect.drawGraf((Graphics2D)g);
     }
     
-    @Test
+   /* @Test
     public void createInputDialogTest(){
        gRect.createInputDialog(gSess);
         
     }
     
-   /* @Test
+   *//* @Test
     public void getPlotListTest(){
         gRect.getPlotList(aList, indexList, GrafType.RECTANGLE);
         
-    }*/
+    }*//*
     
     @Test
     public void setDeleteValuesTest(){
@@ -70,7 +70,7 @@ public class GrafEllipseTest
         gid.getDeleter().setPlotIndex(indexList); 
         gRect.setDeleteValues(3, gid, aList );
     
-    }  
+    }  */
     
       
     @Test

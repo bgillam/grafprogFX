@@ -45,6 +45,7 @@ public class GrafDialogController {
     @FXML    private Label fxLabel;
     @FXML    private TextField functionString;
     @FXML    private Label markLabel;
+    @FXML    private ToggleGroup markToggleGroup;
     @FXML    private RadioButton pointMarkRButton;
     @FXML    private RadioButton xMarkRButton;
     @FXML    private RadioButton oMarkRButton;
@@ -450,6 +451,24 @@ public class GrafDialogController {
 
     public void setGrafColorPicker(ColorPicker grafColorPicker) {this.grafColorPicker = grafColorPicker; }
 
+    public String getX1() { return x1Text.getText(); }
+
+    public void setX1(String x1String) { this.x1Text.setText(x1String); }
+
+    public String getDilogMark(){
+        System.out.println(markToggleGroup.getSelectedToggle().toString());
+        return markToggleGroup.getSelectedToggle().toString();
+    }
+
+    public void settDialogMark(String mark){
+           if (mark.equals(".")) pointMarkRButton.setSelected(true);
+           else if (mark.equals("x")) xMarkRButton.setSelected(true);
+           else if (mark.equals("0")) oMarkRButton.setSelected(true);
+           else {
+               charMarkRButton.setSelected(true);
+               charMarkText.setText(mark);
+           }
+    }
 
     /*public boolean isFinalSave() {
         return finalSave;

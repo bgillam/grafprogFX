@@ -11,8 +11,7 @@ public interface IGrafable
 {
     
     public void drawGraf(Graphics2D gc);
-    public GrafInputDialog createInputDialog(GrafProg gs);
-    
+    public void loadObjectFields(GrafDialogController gdc);
     
     
 }

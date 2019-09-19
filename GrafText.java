@@ -97,7 +97,7 @@ public class GrafText extends GrafObject implements IGrafable
   
     
 
- @Override
+ /*@Override
  public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
      try{
          GrafText tEdit = (GrafText)tempList.get(caller.getDeleter().getPlotIndex().get(index));
@@ -108,7 +108,7 @@ public class GrafText extends GrafObject implements IGrafable
          caller.getMarkChooser().setColor(tEdit.getGrafColor());
        }catch (NullPointerException e){
      }
- }
+ }*/
  
  private static void saveText(GrafProg gSess, GrafInputDialog gfd){
          if (gfd.getFinalSave() == true && Double.isNaN(gfd.getPointPanel().getX1())) return; 

@@ -52,17 +52,17 @@ public class GrafBoxplotTest
         gBPlot.drawGraf((Graphics2D)g);
     }
     
-    @Test
+   /* @Test
     public void createInputDialogTest(){
         gBPlot.createInputDialog(gSess);
         
     }
     
-    /*@Test
+    *//*@Test
     public void getPlotListTest(){
         gBPlot.getPlotList(aList, indexList, GrafType.BOXPLOT);
         
-    }*/
+    }*//*
     
     @Test
     public void setDeleteValuesTest(){
@@ -70,7 +70,7 @@ public class GrafBoxplotTest
         gid.getDeleter().setPlotIndex(indexList); 
         gBPlot.setDeleteValues(3, gid, aList );
     
-    }
+    }*/
     
     @Test
     public void setAndGetMarkTest(){

@@ -51,25 +51,25 @@ public class GrafTextTest
         gText.drawGraf((Graphics2D)g);
     }
     
-    @Test
+   /* @Test
     public void createInputDialogTest(){
         gText.createInputDialog(gSess);
         
-    }
+    }*/
     
     /*public void getPlotListTest(){
         gText.getPlotList(aList, indexList, GrafType.TEXT);
         
     }*/
     
-    @Test
+   /* @Test
     public void setDeleteValuesTest(){
         GrafInputDialog gid = gText.createInputDialog(gSess);
         //gid.getMarkChooser().setTextString("");
         gid.getDeleter().setPlotIndex(indexList); 
         gText.setDeleteValues(3, gid, aList);
     
-    }
+    }*/
   
     @Test
     public void setAndGetMarkTest(){

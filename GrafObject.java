@@ -12,7 +12,7 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-abstract public class GrafObject implements Serializable 
+abstract public class GrafObject implements Serializable, IGrafable
 {
    private GrafType grType;
    private Color grafColor = Color.BLACK; 
@@ -26,10 +26,12 @@ abstract public class GrafObject implements Serializable
    protected PointPanel ptPanel;
    
    public void drawGraf(Graphics2D g2D){};
+
+   public void loadObjectFields(GrafDialogController gdc){}
    
-   public GrafInputDialog createInputDialog(GrafProg gs){return null;};
+   //public GrafInputDialog createInputDialog(GrafProg gs){return null;};
    
-   public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){};
+   //public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){};
    
    public static GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
        switch (gType){
@@ -57,9 +59,6 @@ abstract public class GrafObject implements Serializable
         }
     }
 
-    public void loadObjectFields(GrafDialogController gdc){
-
-    }
 
     public static boolean isValidInput(GrafDialogController gdf){
        if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;

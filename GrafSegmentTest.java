@@ -51,16 +51,16 @@ public class GrafSegmentTest
         gSeg.drawGraf((Graphics2D)g);
     }
     
-    @Test
+    /*@Test
     public void createInputDialogTest(){
         gSeg.createInputDialog(gSess);
         
     }
     
-    /* public void getPlotListTest(){
+    *//* public void getPlotListTest(){
         gSeg.getPlotList(aList, indexList, GrafType.LINESEGMENT);
         
-    }*/
+    }*//*
     
     @Test
     public void setDeleteValuesTest(){
@@ -68,14 +68,14 @@ public class GrafSegmentTest
         gid.getDeleter().setPlotIndex(indexList); 
         gSeg.setDeleteValues(3, gid, aList );
     
-    }  
+    }  */
     
     
-    @Test
+    /*@Test
     public void setAndGetColorRedTest(){
         gSeg.setGrafColor(Color.RED);
         assertEquals(gSeg.getGrafColor(),Color.RED);
-    }
+    }*/
     
     @Test 
     public void setAndGetCoords(){

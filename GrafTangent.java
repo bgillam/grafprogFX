@@ -117,7 +117,7 @@ public class GrafTangent extends GrafObject implements IGrafable
     */
    
     
-    @Override
+   /* @Override
      public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                      GrafTangent vEdit = (GrafTangent)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                      caller.getPointChooser().setF(vEdit.getFunctionString());
@@ -125,7 +125,7 @@ public class GrafTangent extends GrafObject implements IGrafable
                      caller.getMarkChooser().setColor(vEdit.getGrafColor());
                   
                     
-       }
+       }*/
        
        private static void saveTangent(GrafProg gs, GrafInputDialog gfd){
         if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 

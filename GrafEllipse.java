@@ -115,7 +115,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
          
     
      
-     @Override
+     /*@Override
      public  void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                      GrafEllipse ellEdit = (GrafEllipse)tempList.get(caller.getDeleter().getPlotIndex().get(index));
                      caller.getPointChooser().setX1(ellEdit.getX());
@@ -127,7 +127,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
                      caller.getMarkChooser().setFillColor(ellEdit.getFill());  
                   
                     
-       }
+       }*/
         
      public String toString(){
            return "ELLIPSE: ("+getX()+", "+getY()+"); ("+getWidth()+", "+getHeight();//+ " "+getGrafColor()+")";

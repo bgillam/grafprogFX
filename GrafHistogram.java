@@ -192,7 +192,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
 */
     
     
-   
+   /*
      @Override
     public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
                     GrafHistogram histEdit = (GrafHistogram)tempList.get(caller.getDeleter().getPlotIndex().get(index));
@@ -205,7 +205,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
                     caller.getHisto().setnumClassesChecked(histEdit.getByNumClassChecked());
                     caller.getHisto().setNumClasses(histEdit.getNumClasses());
                     caller.getHisto().setClassSize(histEdit.getClassWidth());
-       }
+       }*/
     
        protected static HistoPanel addHistoPanel(GrafProg gs, GrafInputDialog gfd){
         HistoPanel histoPanel = new HistoPanel();

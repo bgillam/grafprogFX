@@ -117,7 +117,7 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
     
     
   
-    @Override
+   /* @Override
     public  void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
          GrafScatterPlot scEdit = (GrafScatterPlot)tempList.get(caller.getDeleter().getPlotIndex().get(index));
          caller.getColumnChooser().setInputIndex(scEdit.getInputColumnNumber());
@@ -125,7 +125,7 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
          caller.getMarkChooser().setMark(scEdit.getMark());
          caller.getMarkChooser().setConnectedChecked(scEdit.getConnected());
          caller.getMarkChooser().setColor(scEdit.getGrafColor()); 
-       }
+       }*/
  
     
    
