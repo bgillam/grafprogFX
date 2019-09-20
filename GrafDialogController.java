@@ -403,7 +403,8 @@ public class GrafDialogController {
 
     private boolean duplicate(GrafObject newObject){
         for (GrafObject grafObject: tempGrafList) {
-            if (grafObject.deepEquals(newObject)) return true;
+            if (grafObject.getType().equals(gType))
+                if (grafObject.deepEquals(newObject)) return true;
         }
         return false;
     }
@@ -455,7 +456,7 @@ public class GrafDialogController {
 
     public void setX1(String x1String) { this.x1Text.setText(x1String); }
 
-    public String getDilogMark(){
+    public String getDialogMark(){
         System.out.println(markToggleGroup.getSelectedToggle().toString());
         return markToggleGroup.getSelectedToggle().toString();
     }
@@ -468,6 +469,10 @@ public class GrafDialogController {
                charMarkRButton.setSelected(true);
                charMarkText.setText(mark);
            }
+    }
+
+    public void functionChosen(ActionEvent actionEvent) {
+        functionString.setText(fComboBox.getValue().toString());
     }
 
     /*public boolean isFinalSave() {

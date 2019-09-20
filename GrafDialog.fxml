@@ -26,8 +26,8 @@
                 <Insets left="10" top="10"  right="10"   bottom="10"/>
             </padding>
             <HBox spacing = "5" >
-                <Label fx:id="fChoiceLabel" text = "choicetype"/>
-                <ComboBox fx:id="fComboBox" value="column or fstring"/>
+                <Label fx:id="fChoiceLabel" text = "choicetype" />
+                <ComboBox fx:id="fComboBox" value="column or fstring" onAction="#functionChosen"/>
                 <Separator orientation="VERTICAL"/>
                 <Label fx:id="fChoiceLabel2" text = "choicetype"/>
                 <ComboBox fx:id="fComboBox2" value="column or fstring"/>

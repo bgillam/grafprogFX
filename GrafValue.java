@@ -24,34 +24,27 @@ public class GrafValue extends GrafObject implements IGrafable{
         private double x = 0;
         private double y = 0;
        
-    public GrafValue(){
+
+        
+   public GrafValue(){
         setGrafType(GrafType.FVALUE);
         setMoveable(false);
         setGrafColor(Color.BLACK);
-      
-       
-       }    
-        
-        
-   public GrafValue(GrafProg sess){
-        setGrafType(GrafType.FVALUE);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
+        //myOwner = sess;
+        gStuff = GrafProg.getGrafSettings();
        
        }
    
-   public GrafValue(GrafProg sess, String yString, double x){
-        this(sess);
+   public GrafValue(String yString, double x){
+        this();
         setX(x);
         setFunctionString(yString);
         y = calcY();
    }
    
     
-   public GrafValue(GrafProg sess, String yString, double x, Color c, String mark){
-        this(sess, yString, x);
+   public GrafValue(String yString, double x, Color c, String mark){
+        this(yString, x);
         setGrafColor(c);
         setMark(mark);
        
@@ -67,6 +60,16 @@ public class GrafValue extends GrafObject implements IGrafable{
    }
 
     @Override
+    public boolean deepEquals(GrafObject o){
+        GrafValue gv = (GrafValue) o;
+        if (getType() != o.getType()) return false;
+        if (!getGrafColor().equals(gv.getGrafColor())) return false;
+        if (!functionString.equals(gv.getFunctionString())) return false;
+        if (!(getX() == gv.getX())) return false;
+        return true;
+    }
+
+    @Override
     public void loadObjectFields(GrafDialogController gdc){
         gdc.setFunctionString(getFunctionString());
         gdc.setX1(""+getX());
@@ -76,69 +79,7 @@ public class GrafValue extends GrafObject implements IGrafable{
         gdc.getGrafColorPicker().setValue(fxColor);
     }
    
-  /* @Override
-   public GrafInputDialog createInputDialog(GrafProg gs){
-       GrafInputDialog gfd = new GrafInputDialog(gs);
-       gfd.setTitle("FVALUE");
-       gfd.setPointPanel(gfd.addPointPanel());
-       gfd.getPointPanel().setupFunctionChooser();
-       gfd.getPointPanel().initFx();
-       gfd.setMarkChooser(gfd.addMarkPanel(new ColorRadioMarkPanel(false)));
-       gfd.setDeleter(gfd.addDeleterPanel(GrafType.FVALUE));
-       gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.FVALUE)));      
-       gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveValue(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.FVALUE))); 
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveValue(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            } 
-        });
-        GrafObject.closeGFD(gfd);
-        // gfd.setModal(true);
-        // gfd.pack();
-        // gfd.setVisible(true);
-        return gfd;
-   }
-   
-  */
-   
 
-    /* @Override
-     public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-                   GrafTangent fvEdit = (GrafTangent)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-                     caller.getPointChooser().setF(fvEdit.getFunctionString());
-                     caller.getPointChooser().setX1(fvEdit.getX());
-                     caller.getMarkChooser().setColor(fvEdit.getGrafColor());
-                  
-                    
-       }*/
-       
-   private static void saveValue(GrafProg gs, GrafInputDialog gfd){
-    if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
-           addValue(gs,gfd);
-           gfd.getPointPanel().blankF();
-           gfd.getPointPanel().blankX1();
-            
-   }   
-  private static void addValue(GrafProg gSess, GrafInputDialog gfd ){
-        if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPointPanel().getF(), (gSess.getGrafSettings().getXMax()+gSess.getGrafSettings().getXMin())/2)) { 
-                   JOptionPane.showMessageDialog(null,
-                   "The expression entered is not a valid function.",
-                   "Function Format Error",
-                   JOptionPane.ERROR_MESSAGE);  
-                   return;
-        }
-        if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
-        GrafValue gv = new GrafValue(gSess, gfd.getPointPanel().getF(), gfd.getPointPanel().getX1(), gfd.getMarkChooser().getColor(), gfd.getMarkChooser().getMark());
-        gfd.getTempList().add(gv); 
-    }
    
    public void setX(double xval){ x = xval; }
    public double getX() { return x; }   
@@ -163,29 +104,3 @@ public class GrafValue extends GrafObject implements IGrafable{
     }
 }
     
-   
-
-
-/* Inherited from GrafObject
-   private GrafProg.GrafType grafType;
-   private Color grafColor = Color.BLACK; 
-   private boolean moveable;
-   private GrafProg myOwner;
-     
-   
-   public void drawGraf(Graphics2D g2D){};
-   
-   public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-   public GrafProg.GrafType getType(){return grafType; }
-   
-   public boolean isMoveable(){ return moveable; } 
-   public void setMoveable(boolean tf){ moveable = tf;  }
-   public boolean getMoveable(){return moveable;}
-   
-   public void setOwner(GrafProg owner){myOwner = owner;}
-   public GrafProg getOwner(){return myOwner;}
-   
-   public void setGrafColor(Color c){grafColor = c;   }
-   public Color getGrafColor() { return grafColor;}
-  */
-   

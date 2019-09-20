@@ -49,7 +49,7 @@ abstract public class GrafObject implements Serializable, IGrafable
                 case ELLIPSE: return new GrafEllipse();
                 case CIRCLE: return new GrafCircle();
                 case FUNCTION: return new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
-                case FVALUE: return new GrafValue();
+                case FVALUE: return new GrafValue( gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
                 case TANGENT: return new GrafTangent();
                 case CHORD: return new GrafChord();
                 case INTEGRAL: return new GrafIntegral();

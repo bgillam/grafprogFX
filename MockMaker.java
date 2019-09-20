@@ -39,7 +39,7 @@ public class MockMaker
                aList.add(new GrafOgive(gSess));
                aList.add(new GrafFreqPolygon(gSess));
                //aList.add(new GrafFunction(gSess));
-               aList.add(new GrafValue(gSess));
+               aList.add(new GrafValue());
                aList.add(new GrafTangent(gSess));
                aList.add(new GrafChord(gSess));
                aList.add(new GrafIntegral(gSess));
