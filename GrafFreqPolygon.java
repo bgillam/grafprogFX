@@ -159,55 +159,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
         myOwner.incrementBoxPlotsPlotted();     
         gc.setColor(Color.BLACK);
     }
-   /*
-    @Override
-    public  GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(gs); 
-        gfd.setTitle("Histogram Polygon"); 
-        gfd.setHistoPanel(addHistoPanel(gs, gfd));
-        //gfd.setColumnChooser(gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false));
-        gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false);
-        //gfd.setColumnChooser(gfd.getColumnChooser());
-        gfd.setMarkChooser(gfd.addMarkPanel(new FillColorMarkPanel(true, false)));  //addMarkPanel(gSess.getGraphics().getFont(), true, true, true, false, false, false, false);
-        gfd.setDeleter(gfd.addDeleterPanel(GrafType.FREQPOLYGON)); 
-        
-        gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.FREQPOLYGON)));  
-        
-        gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveFreqPolygon(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.FREQPOLYGON)));  
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveFreqPolygon(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-           
-        return gfd;
-    }
-    */
-   
-    
-  
-   /* @Override
-    public  void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-                    GrafFreqPolygon gfpEdit = (GrafFreqPolygon)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-                    caller.getColumnChooser().setInputIndex(gfpEdit.getColumnNumber());
-                    caller.getMarkChooser().setFillChecked(gfpEdit.getFillFlag());
-                    caller.getMarkChooser().setColor(gfpEdit.getGrafColor());  
-                    caller.getMarkChooser().setFillColor(gfpEdit.getFill());  
-                    caller.getHisto().setBegin(gfpEdit.getBegin());
-                    caller.getHisto().setEnd(gfpEdit.getEnd());
-                    caller.getHisto().setnumClassesChecked(gfpEdit.getByNumClassChecked());
-                    caller.getHisto().setNumClasses(gfpEdit.getNumClasses());
-                    caller.getHisto().setClassSize(gfpEdit.getClassWidth());
-       }*/
+
        
         private static void saveFreqPolygon(GrafProg gs, GrafInputDialog gfd){
             int col = gfd.getColumnChooser().getInputColumn();

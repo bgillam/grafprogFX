@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.value.WeakChangeListener;
 import javafx.embed.swing.SwingNode;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.awt.event.WindowEvent;
 
 
 public class GrafProg extends Application {
@@ -122,7 +124,10 @@ public class GrafProg extends Application {
 
         grafStage.setOnCloseRequest(event -> {
             closeGraf();
+            event.consume();
         });
+
+
 
     }
 
@@ -173,15 +178,19 @@ public class GrafProg extends Application {
                 case JOptionPane.YES_OPTION: {
                     GrafFiles.saveFile();
                     setGrafSavedAndTitle(true);
+                    System.exit(0);
+                    break;
                 }
                 case JOptionPane.CANCEL_OPTION: {
-                    return;
+                    break;
                 }
+                case JOptionPane.NO_OPTION:{
+                    System.exit(0);
+                    break;
+                }
+                default:{System.exit(0);}
             }
         }
-        /*tableStage.close();
-        grafStage.close();*/
-        System.exit(0);
     }
 
 

@@ -472,7 +472,12 @@ public class GrafDialogController {
     }
 
     public void functionChosen(ActionEvent actionEvent) {
-        functionString.setText(fComboBox.getValue().toString());
+        try {
+            GrafFunction gf = (GrafFunction) (fComboBox.getValue());
+            functionString.setText(gf.getFunction());
+        }catch (ClassCastException cce){
+             System.out.println("Choose a Function.");
+        }
     }
 
     /*public boolean isFinalSave() {
