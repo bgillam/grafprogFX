@@ -27,8 +27,8 @@ abstract public class GrafObject implements Serializable, IGrafable
    
    public void drawGraf(Graphics2D g2D){};
 
-   public void loadObjectFields(GrafDialogController gdc){}
-   
+   //'lic void loadObjectFields(GrafDialogController gdc){}
+
    //public GrafInputDialog createInputDialog(GrafProg gs){return null;};
    
    //public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){};
@@ -58,11 +58,42 @@ abstract public class GrafObject implements Serializable, IGrafable
 
         }
     }
+    public static GrafObject createGrafObjectFromController(GrafType gType){
+        switch (gType){
+
+            case TEXT: return new GrafText();
+            case COLUMN: return new GrafColumnPlot();
+            case BOXPLOT: return new GrafBoxPlot();
+            case SCATTER:return new GrafScatterPlot();
+            case HISTOGRAM: return new GrafHistogram();
+            case FREQPOLYGON: return new GrafFreqPolygon();
+            case OGIVE: return new GrafOgive();
+            case POINT: return new GrafPoint();
+            case LINESEGMENT: return new GrafSegment();
+            case RECTANGLE: return new GrafRectangle();
+            case ELLIPSE: return new GrafEllipse();
+            case CIRCLE: return new GrafCircle();
+            case FUNCTION: return new GrafFunction();
+            case FVALUE: return new GrafValue();
+            case TANGENT: return new GrafTangent();
+            case CHORD: return new GrafChord();
+            case INTEGRAL: return new GrafIntegral();
+            case FZERO: return new GrafZeros();
+            default: return null;
+
+        }
+    }
+
+    public void loadObjectFields(GrafDialogController gdc){
+        Color awtColor = getGrafColor();
+        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
+        gdc.getGrafColorPicker().setValue(fxColor);
+    }
 
 
-    public static boolean isValidInput(GrafDialogController gdf){
-       if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
-           return true;
+    public boolean isValidInput(GrafDialogController gdf){
+       //if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+       return true;
     }
 
     public boolean deepEquals(GrafObject g) {
@@ -103,41 +134,6 @@ abstract public class GrafObject implements Serializable, IGrafable
    public void setGrafColor(Color c){grafColor = c;   }
    public Color getGrafColor() { return grafColor;}
     
-  /* protected void addColumnChooserPanel(String[] str, boolean inputOn, boolean outputOn) {//ColumnChooserPanel addColumnChooserPanel(String[] str, boolean inputOn, boolean outputOn) {
-         ColumnChooserPanel columnChooser;
-         columnChooser = new ColumnChooserPanel(str, inputOn, outputOn);
-         columnChooser.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-         columnChooser.setBackground(UIManager.getColor("Button.background"));
-         jd.add(columnChooser, BorderLayout.NORTH);
-         //return columnChooser;
-    }  
-    
-   protected void addMarkPanel(MarkPanel mp){ //MarkPanel addMarkPanel(MarkPanel mp){
-        mp.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-        mp.setBackground(UIManager.getColor("Button.background"));
-        jd.add(mp, BorderLayout.WEST);
-        //return mp;
-   }*/
-   
-   
-   
-  /* public static String[] getPlotList(ArrayList<GrafObject> tempList, ArrayList<Integer> plotIndex, GrafType gType){
-        String con;
-        GrafObject currentObj;
-        GrafDeletePanel.indexPlots(tempList, gType);   
-        String[] plotListArray = new String[plotIndex.size()];
-        for (int i = 0; i < plotIndex.size(); i++){
-            //GrafObject 
-            currentObj = tempList.get(plotIndex.get(i)); 
-            plotListArray[i] = currentObj.toString(); 
-        }
-       return plotListArray;
- }*/
-   
-   /*protected static void closeGFD(GrafInputDialog gfd){
-        gfd.setModal(true);
-        gfd.pack();
-        gfd.setVisible(true); 
-   }*/
+
       
 }

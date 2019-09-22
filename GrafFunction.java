@@ -53,7 +53,6 @@ public class GrafFunction extends GrafObject implements IGrafable{
         double x = xMin;
         gc.setColor(super.getGrafColor());
         while (x < xMax){
-        
             try {
                 GrafPrimitives.grafLine(gStuff,x, FunctionString.fValue(functionString, x), x + dx , FunctionString.fValue(functionString, x+dx), gc);
             } catch (DomainViolationException e) {  }
@@ -69,6 +68,12 @@ public class GrafFunction extends GrafObject implements IGrafable{
     }
 
     @Override
+    public boolean isValidInput(GrafDialogController gdf){
+        if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+        return true;
+    }
+
+    @Override
     public boolean deepEquals(GrafObject o){
         GrafFunction gf = (GrafFunction) o;
         if (getType() != o.getType()) return false;
@@ -79,10 +84,9 @@ public class GrafFunction extends GrafObject implements IGrafable{
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
+        super.loadObjectFields(gdc);
         gdc.setFunctionString(getFunction());
-        Color awtColor = getGrafColor();
-        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
-        gdc.getGrafColorPicker().setValue(fxColor);
+
     }
     
 

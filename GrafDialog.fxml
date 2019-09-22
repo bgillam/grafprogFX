@@ -92,7 +92,7 @@
             <CheckBox fx:id = "fns" text = "FNS"/>
             <HBox>
                 <Label text="Color:"></Label>
-                <ColorPicker fx:id ="grafColorPicker"  onAction="#onGrafColorPicker">
+                <ColorPicker fx:id ="grafColorPicker">
                     <value>
                         <Color blue="0.0" green="0.0"   red="0.0"/>
                     </value>
@@ -100,7 +100,7 @@
             </HBox>
             <HBox>
                 <Label fx:id ="fillLabel" text="Fill:    "></Label>
-                <ColorPicker fx:id ="fillColorPicker" onAction="#onFillColorPicker">
+                <ColorPicker fx:id ="fillColorPicker">
                     <value>
                         <Color blue="0.0" green="0.0"   red="0.0"/>
                     </value>

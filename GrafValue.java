@@ -60,6 +60,14 @@ public class GrafValue extends GrafObject implements IGrafable{
    }
 
     @Override
+    public boolean isValidInput(GrafDialogController gdf){
+       System.out.println("made it here");
+        if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+        if (gdf.getX1().equals("")) return false;
+        return true;
+    }
+
+    @Override
     public boolean deepEquals(GrafObject o){
         GrafValue gv = (GrafValue) o;
         if (getType() != o.getType()) return false;
@@ -71,12 +79,11 @@ public class GrafValue extends GrafObject implements IGrafable{
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
+        super.loadObjectFields(gdc);
         gdc.setFunctionString(getFunctionString());
         gdc.setX1(""+getX());
         gdc.settDialogMark(getMark());
-        Color awtColor = getGrafColor();
-        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
-        gdc.getGrafColorPicker().setValue(fxColor);
+
     }
    
 
