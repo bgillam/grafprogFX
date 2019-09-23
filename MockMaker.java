@@ -38,12 +38,12 @@ public class MockMaker
                aList.add(new GrafHistogram(gSess));
                aList.add(new GrafOgive(gSess));
                aList.add(new GrafFreqPolygon(gSess));
-               //aList.add(new GrafFunction(gSess));
+               aList.add(new GrafFunction());
                aList.add(new GrafValue());
-               aList.add(new GrafTangent(gSess));
-               aList.add(new GrafChord(gSess));
+               aList.add(new GrafTangent());
+               aList.add(new GrafChord());
                aList.add(new GrafIntegral(gSess));
-               aList.add(new GrafZeros(gSess));
+               aList.add(new GrafZeros());
                
            }
            return aList;

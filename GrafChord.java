@@ -26,22 +26,12 @@ public class GrafChord extends GrafObject implements IGrafable
         //private String yString = "";
         
    public GrafChord(){
-        setGrafType(GrafType.CHORD);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-       
-       }     
+        gStuff = super.initGrafObject(GrafType.CHORD);
+   }
         
-   public GrafChord(GrafProg sess){
-        setGrafType(GrafType.CHORD);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
-       }
-   
-   public GrafChord(GrafProg sess, String yString, double firstX, double secondX){
-        this(sess);
+
+   public GrafChord(String yString, double firstX, double secondX){
+        this();
         setFunctionString(yString);
         x1 = firstX;
         x2 = secondX;
@@ -49,8 +39,8 @@ public class GrafChord extends GrafObject implements IGrafable
         calcY2();
     }
     
-    public GrafChord(GrafProg sess, String yString, double firstX, double secondX, Color c, String m){
-        this(sess, yString, firstX, secondX);
+    public GrafChord(String yString, double firstX, double secondX, Color c, String m){
+        this(yString, firstX, secondX);
         setGrafColor(c);
         setMark(m);
         
@@ -71,93 +61,50 @@ public class GrafChord extends GrafObject implements IGrafable
        gc.setColor(Color.BLACK);
        //gStuff.getGrafPanel().repaint();
     }
- /*   @Override
-   public  GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
-        gfd.setTitle("CHORD");
-        gfd.setPointPanel(gfd.addPointPanel());
-        //gfd.getPointPanel().
-        setupChord(gfd);
-        gfd.getPointPanel().initFx();
-        gfd.setMarkChooser(gfd.addMarkPanel(new ColorRadioMarkPanel(false)));
-        gfd.setDeleter(gfd.addDeleterPanel(GrafType.CHORD)); 
-        gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.CHORD)));  
-        gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveChord(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.CHORD)));   
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveChord(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-        // gfd.setModal(true);
-        // gfd.pack();
-        // gfd.setVisible(true);  
-        return gfd;
-   }
-   */
-   
-   
-  
-     
-      /*@Override
-      public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-                     GrafChord chEdit = (GrafChord)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-                     caller.getPointChooser().setF(chEdit.getFunctionString());
-                     caller.getPointChooser().setX1(chEdit.getX1());
-                     caller.getPointChooser().setX2(chEdit.getX2());
-                     caller.getMarkChooser().setColor(chEdit.getGrafColor());
-                    
-       }*/
-     
+
+
+    @Override
+    public boolean isValidInput(GrafDialogController gdf){
+        if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+        if (gdf.getX1().equals("")) return false;
+        if (gdf.getX2().equals("")) return false;
+        return true;
+    }
+
+    @Override
+    public boolean deepEquals(GrafObject o){
+        GrafChord gc = (GrafChord) o;
+        if (getType() != o.getType()) return false;
+        if (!getGrafColor().equals(gc.getGrafColor())) return false;
+        if (!functionString.equals(gc.getFunctionString())) return false;
+        if (!(getX1() == gc.getX1())) return false;
+        if (!(getX2() == gc.getX2())) return false;
+        return true;
+    }
+
+    @Override
+    public void loadObjectFields(GrafDialogController gdc){
+        super.loadObjectFields(gdc);
+        gdc.setFunctionString(getFunctionString());
+        gdc.setX1(""+getX1());
+        gdc.setX2(""+getX2());
+        gdc.settDialogMark(getMark());
+    }
+
+
+
    public void setX1(double xval){ x1 = xval; }
    public double getX1() { return x1; } 
    public void setX2(double xval){ x2 = xval; }
    public double getX2() { return x2; } 
-   public void sety1(double xval){ y1 = xval; }
+   /*public void sety1(double xval){ y1 = xval; }
    public double gety1() { return y1; } 
    public void sety2(double xval){ y2 = xval; }
-   public double gety2() { return y2; } 
+   public double gety2() { return y2; } */
    
-   private static void saveChord(GrafProg gs, GrafInputDialog gfd){
-        if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
-        addChord(gs, gfd);
-        gfd.getPointPanel().blankF();
-        gfd.getPointPanel().blankX1();
-        gfd.getPointPanel().blankX2();
-    
-   }
 
-   private static void addChord(GrafProg gSess, GrafInputDialog gfd){
-        if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPointPanel().getF(), (gSess.getGrafSettings().getXMax()+gSess.getGrafSettings().getXMin())/2)) { 
-                   JOptionPane.showMessageDialog(null,
-                   "The expression entered is not a valid function.",
-                   "Function Format Error",
-                   JOptionPane.ERROR_MESSAGE);  
-                   return;
-        }
-        if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
-        if (Double.isNaN(gfd.getPointPanel().getX2())){gfd.NumErrorMessage("x2", "valid number"); return;}
-        GrafChord gch = new GrafChord(gSess, gfd.getPointPanel().getF(), gfd.getPointPanel().getX1(), gfd.getPointPanel().getX2(), gfd.getMarkChooser().getColor(), gfd.getMarkChooser().getMark());
-        gfd.getTempList().add(gch);      
-   }
    
-   /*private static void setupChord(GrafInputDialog gfd){
-        PointPanel pointPanel = gfd.getPointPanel();
-        JPanel rightPanel = pointPanel.getRightPanel();
-        pointPanel.setupFunctionChooser();
-        pointPanel.getX2JText().setColumns(8);
-        rightPanel.add(pointPanel.getX2Label(), BorderLayout.WEST);
-        rightPanel.add(pointPanel.getX2JText(), BorderLayout.CENTER);
-        gfd.getPointPanel().getBottomPanel().add(rightPanel, BorderLayout.CENTER);
-    }*/
+
    
    public void calcY1(){
        try {
@@ -190,28 +137,3 @@ public class GrafChord extends GrafObject implements IGrafable
  }
    
  
-
-
-/* Inherited from GrafObject
-   private GrafProg.GrafType grafType;
-   private Color grafColor = Color.BLACK; 
-   private boolean moveable;
-   private GrafProg myOwner;
-     
-   
-   public void drawGraf(Graphics2D g2D){};
-   
-   public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-   public GrafProg.GrafType getType(){return grafType; }
-   
-   public boolean isMoveable(){ return moveable; } 
-   public void setMoveable(boolean tf){ moveable = tf;  }
-   public boolean getMoveable(){return moveable;}
-   
-   public void setOwner(GrafProg owner){myOwner = owner;}
-   public GrafProg getOwner(){return myOwner;}
-   
-   public void setGrafColor(Color c){grafColor = c;   }
-   public Color getGrafColor() { return grafColor;}
-  */
-   

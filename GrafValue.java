@@ -27,11 +27,7 @@ public class GrafValue extends GrafObject implements IGrafable{
 
         
    public GrafValue(){
-        setGrafType(GrafType.FVALUE);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        //myOwner = sess;
-        gStuff = GrafProg.getGrafSettings();
+       gStuff = super.initGrafObject(GrafType.FVALUE);
        
        }
    
@@ -61,7 +57,6 @@ public class GrafValue extends GrafObject implements IGrafable{
 
     @Override
     public boolean isValidInput(GrafDialogController gdf){
-       System.out.println("made it here");
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
         if (gdf.getX1().equals("")) return false;
         return true;
@@ -83,7 +78,6 @@ public class GrafValue extends GrafObject implements IGrafable{
         gdc.setFunctionString(getFunctionString());
         gdc.setX1(""+getX());
         gdc.settDialogMark(getMark());
-
     }
    
 

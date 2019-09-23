@@ -27,12 +27,13 @@ abstract public class GrafObject implements Serializable, IGrafable
    
    public void drawGraf(Graphics2D g2D){};
 
-   //'lic void loadObjectFields(GrafDialogController gdc){}
+   public GrafSettings initGrafObject(GrafType gType){
+       setGrafType(gType);
+       setMoveable(false);
+       setGrafColor(Color.BLACK);
+       return GrafProg.getGrafSettings();
+   }
 
-   //public GrafInputDialog createInputDialog(GrafProg gs){return null;};
-   
-   //public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){};
-   
    public static GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
        switch (gType){
 
@@ -50,10 +51,10 @@ abstract public class GrafObject implements Serializable, IGrafable
                 case CIRCLE: return new GrafCircle();
                 case FUNCTION: return new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
                 case FVALUE: return new GrafValue( gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
-                case TANGENT: return new GrafTangent();
-                case CHORD: return new GrafChord();
+                case TANGENT: return new GrafTangent(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
+                case CHORD: return new GrafChord(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),   gdc.getGrafColor(), gdc.getDialogMark());
                 case INTEGRAL: return new GrafIntegral();
-                case FZERO: return new GrafZeros();
+                case FZERO: return new GrafZeros(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),  Double.parseDouble(gdc.getDx()), gdc.getGrafColor(),gdc.getDialogMark() );
                 default: return null;
 
         }

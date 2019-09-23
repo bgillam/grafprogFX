@@ -20,32 +20,21 @@ public class GrafTangent extends GrafObject implements IGrafable
         private double x = 0;
        
    public GrafTangent(){
-        setGrafType(GrafType.TANGENT);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        
+       gStuff = super.initGrafObject(GrafType.TANGENT);
        }     
         
         
-   public GrafTangent(GrafProg sess){
-        setGrafType(GrafType.TANGENT);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
-       
-       }
-   
-   public GrafTangent(GrafProg sess, String yString, double x){
-        this(sess);
+
+   public GrafTangent(String yString, double x){
+        this();
         setX(x);
         setFunctionString(yString);
        
    }
    
     
-   public GrafTangent(GrafProg sess, String yString, double x, Color c, String mark){
-        this(sess, yString, x);
+   public GrafTangent(String yString, double x, Color c, String mark){
+        this(yString, x);
         setGrafColor(c);
         setMark(mark);
    }
@@ -86,48 +75,36 @@ public class GrafTangent extends GrafObject implements IGrafable
        //gStuff.getGrafPanel().repaint();
     }
  
-  /*  @Override
-   public  GrafInputDialog createInputDialog(GrafProg gs){
-       GrafInputDialog gfd = new GrafInputDialog(gs);
-       gfd.setTitle("TANGENT");
-       gfd.setPointPanel(gfd.addPointPanel());
-       gfd.getPointPanel().setupFunctionChooser();
-       gfd.getPointPanel().initFx();
-       gfd.setMarkChooser(gfd.addMarkPanel(new ColorRadioMarkPanel(false)));
-       gfd.setDeleter(gfd.addDeleterPanel(GrafType.TANGENT)); 
-       gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.TANGENT)));  
-       gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveTangent(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.TANGENT)));     
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveTangent(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-      
-        return gfd;
-   } 
-    */
-   
-    
-   /* @Override
-     public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-                     GrafTangent vEdit = (GrafTangent)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-                     caller.getPointChooser().setF(vEdit.getFunctionString());
-                     caller.getPointChooser().setX1(vEdit.getX());
-                     caller.getMarkChooser().setColor(vEdit.getGrafColor());
-                  
-                    
-       }*/
+
+
+    @Override
+    public boolean isValidInput(GrafDialogController gdf){
+        if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+        if (gdf.getX1().equals("")) return false;
+        return true;
+    }
+
+    @Override
+    public boolean deepEquals(GrafObject o){
+        GrafTangent gv = (GrafTangent) o;
+        if (getType() != o.getType()) return false;
+        if (!getGrafColor().equals(gv.getGrafColor())) return false;
+        if (!functionString.equals(gv.getFunctionString())) return false;
+        if (!(getX() == gv.getX())) return false;
+        return true;
+    }
+
+    @Override
+    public void loadObjectFields(GrafDialogController gdc){
+        super.loadObjectFields(gdc);
+        gdc.setFunctionString(getFunctionString());
+        gdc.setX1(""+getX());
+        gdc.settDialogMark(getMark());
+
+    }
+
        
-       private static void saveTangent(GrafProg gs, GrafInputDialog gfd){
+  /*     private static void saveTangent(GrafProg gs, GrafInputDialog gfd){
         if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
         addTangent(gs, gfd);
         gfd.getPointPanel().blankF();
@@ -146,7 +123,7 @@ public class GrafTangent extends GrafObject implements IGrafable
         //System.out.println(gfd.getPointPanel().getF());
         GrafTangent gt = new GrafTangent(gSess, gfd.getPointPanel().getF(), gfd.getPointPanel().getX1(), gfd.getMarkChooser().getColor(), gfd.getMarkChooser().getMark());
         gfd.getTempList().add(gt); 
-    }
+    }*/
     
      
    public void setX(double xval){ x = xval; }
@@ -164,26 +141,3 @@ public class GrafTangent extends GrafObject implements IGrafable
    
 
 
-/* Inherited from GrafObject
-   private GrafProg.GrafType grafType;
-   private Color grafColor = Color.BLACK; 
-   private boolean moveable;
-   private GrafProg myOwner;
-     
-   
-   public void drawGraf(Graphics2D g2D){};
-   
-   public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-   public GrafProg.GrafType getType(){return grafType; }
-   
-   public boolean isMoveable(){ return moveable; } 
-   public void setMoveable(boolean tf){ moveable = tf;  }
-   public boolean getMoveable(){return moveable;}
-   
-   public void setOwner(GrafProg owner){myOwner = owner;}
-   public GrafProg getOwner(){return myOwner;}
-   
-   public void setGrafColor(Color c){grafColor = c;   }
-   public Color getGrafColor() { return grafColor;}
-  */
-   

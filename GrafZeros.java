@@ -28,22 +28,13 @@ public class GrafZeros extends GrafObject implements IGrafable
         //private String yString = "";
         
         public GrafZeros(){
-        setGrafType(GrafType.FZERO);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-       
+        gStuff = gStuff = super.initGrafObject(GrafType.FZERO);
+
        }
         
-   public GrafZeros(GrafProg sess){
-        setGrafType(GrafType.FZERO);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
-       }
-   
-       public GrafZeros(GrafProg sess, String yString, double firstX, double secondX, double dVal){
-        this(sess);
+
+       public GrafZeros(String yString, double firstX, double secondX, double dVal){
+        this();
         setFunctionString(yString);
         startX = firstX;
         endX = secondX;
@@ -53,8 +44,8 @@ public class GrafZeros extends GrafObject implements IGrafable
     }
        
        
-   public GrafZeros(GrafProg sess, String yString, double firstX, double secondX, double dVal, Color c, String m){
-        this(sess, yString, firstX, secondX, dVal);  
+   public GrafZeros(String yString, double firstX, double secondX, double dVal, Color c, String m){
+        this(yString, firstX, secondX, dVal);
         mark = m;
         super.setGrafColor(c);
     }
@@ -75,51 +66,9 @@ public class GrafZeros extends GrafObject implements IGrafable
        //gStuff.getGrafPanel().repaint();
     }
    
-   /* @Override
-   public GrafInputDialog createInputDialog(GrafProg gs){
-       GrafInputDialog gfd = new GrafInputDialog(gs);
-       gfd.setTitle("ZEROS");
-       gfd.setPointPanel(gfd.addPointPanel());
-       setupZeros(gfd);
-       gfd.getPointPanel().setX1(gs.getGrafSettings().getXMin());
-       gfd.getPointPanel().setX2(gs.getGrafSettings().getXMax());
-       gfd.getPointPanel().initFx();
-       gfd.setDeleter(gfd.addDeleterPanel(GrafType.FZERO)); 
-       gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.FZERO)));
-       gfd.setMarkChooser(gfd.addMarkPanel(new ColorRadioMarkPanel(false)));
-       gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveZero(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.FZERO)));       
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveZero(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-         
-        return gfd;
-   }
-   */
-   
-    
 
-    /* @Override
-     public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-                   GrafZeros zEdit = (GrafZeros)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-                     caller.getPointChooser().setF(zEdit.getFunctionString());
-                     caller.getPointChooser().setX1(zEdit.getStartX());
-                     caller.getPointChooser().setX2(zEdit.getEndX());
-                     caller.getPointChooser().setDx(zEdit.getDx());
-                     caller.getMarkChooser().setColor(zEdit.getGrafColor());
-                  
-                    
-       }*/
+
+
     
    public void setStartX(double xval){ startX = xval; }
    public double getStartX() { return startX; } 
@@ -136,7 +85,7 @@ public class GrafZeros extends GrafObject implements IGrafable
    }
    
           
-   private static void saveZero(GrafProg gs, GrafInputDialog gfd){
+   /*private static void saveZero(GrafProg gs, GrafInputDialog gfd){
        if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
        addZeros(gs, gfd);
        gfd.getPointPanel().blankF();
@@ -158,27 +107,38 @@ public class GrafZeros extends GrafObject implements IGrafable
         if (gfd.getPointPanel().getDx()== Double.NaN){ gfd.NumErrorMessage("n", "integer"); return;}
         GrafZeros gint = new GrafZeros(gs, gfd.getPointPanel().getF(), gfd.getPointPanel().getX1(), gfd.getPointPanel().getX2(), gfd.getPointPanel().getDx(),gfd.getMarkChooser().getColor(), gfd.getMarkChooser().getMark());
         gfd.getTempList().add(gint);
-    }
-    
-    /* private static void setupZeros(GrafInputDialog gfd){
-        PointPanel pointPanel = gfd.getPointPanel();
-        pointPanel.setupFunctionChooser();
-        pointPanel.getX1Label().setText("Start x:");
-        pointPanel.getX2Label().setText("End x:");
-        pointPanel.getNLabel().setText("dx:");
-        pointPanel.setDx(.01);
-        pointPanel.getX2JText().setColumns(8);
-        pointPanel.getNJText().setColumns(8);
-        JPanel rightPanel = pointPanel.getRightPanel();
-        rightPanel.add(pointPanel.getX2Label(), BorderLayout.WEST);
-        rightPanel.add(pointPanel.getX2JText(), BorderLayout.CENTER);
-        JPanel rightPanel2 = pointPanel.getRightPanel2();
-        rightPanel2.add(pointPanel.getNLabel(), BorderLayout.WEST);
-        rightPanel2.add(pointPanel.getNJText(), BorderLayout.CENTER);
-        JPanel bottomPanel = pointPanel.getBottomPanel();
-        bottomPanel.add(rightPanel, BorderLayout.CENTER);
-        bottomPanel.add(rightPanel2, BorderLayout.EAST);
     }*/
+
+    @Override
+    public boolean isValidInput(GrafDialogController gdf){
+        if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+        if (gdf.getX1().equals("")) return false;
+        if (gdf.getX2().equals("")) return false;
+        if (gdf.getDx().equals("")) return false;
+        return true;
+    }
+
+    @Override
+    public boolean deepEquals(GrafObject o){
+        GrafZeros gz = (GrafZeros) o;
+        if (getType() != o.getType()) return false;
+        if (!getGrafColor().equals(gz.getGrafColor())) return false;
+        if (!functionString.equals(gz.getFunctionString())) return false;
+        if (!(getX1() == gz.getX1())) return false;
+        if (!(getX2() == gz.getX2())) return false;
+        if (!(getDx() == gz.getDx())) return false;
+        return true;
+    }
+
+    @Override
+    public void loadObjectFields(GrafDialogController gdc){
+        super.loadObjectFields(gdc);
+        gdc.setFunctionString(getFunctionString());
+        gdc.setX1(""+getX1());
+        gdc.setX2(""+getX2());
+        gdc.setDx(""+getDx());
+        gdc.settDialogMark(getMark());
+    }
     
    private void findZeroPoints(){
         //if (!checkInputValues()) return;
@@ -236,34 +196,15 @@ public class GrafZeros extends GrafObject implements IGrafable
                 if (difference < 1E10) return rootX1;
         }while(true);
     }
-    
+
+    public void setX1(double xval){ startX = xval; }
+    public double getX1() { return startX; }
+    public void setX2(double xval){ endX = xval; }
+    public double getX2() { return endX; }
+
     public String toString(){
        return "FZEROS: "+getFunctionString()+" "+zeroString;//+" "+getGrafColor();
    }
  }
    
 
-
-/* Inherited from GrafObject
-   private GrafProg.GrafType grafType;
-   private Color grafColor = Color.BLACK; 
-   private boolean moveable;
-   private GrafProg myOwner;
-     
-   
-   public void drawGraf(Graphics2D g2D){};
-   
-   public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-   public GrafProg.GrafType getType(){return grafType; }
-   
-   public boolean isMoveable(){ return moveable; } 
-   public void setMoveable(boolean tf){ moveable = tf;  }
-   public boolean getMoveable(){return moveable;}
-   
-   public void setOwner(GrafProg owner){myOwner = owner;}
-   public GrafProg getOwner(){return myOwner;}
-   
-   public void setGrafColor(Color c){grafColor = c;   }
-   public Color getGrafColor() { return grafColor;}
-  */
-    

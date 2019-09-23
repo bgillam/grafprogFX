@@ -238,7 +238,10 @@ public class GrafDialogController {
         fChoiceLabel.setText("Choose f(x): ");
         fChoiceLabel.setVisible(true);
         fComboBox.setVisible(true);
-        fComboBox.setValue("function");
+        //fComboBox.setValue("function");
+        try {
+            fComboBox.setValue(getTempGrafList().get(1));
+        }catch (IndexOutOfBoundsException iob){ fComboBox.setValue("function");}
         fxLabel.setVisible(true);
         functionString.setVisible(true);
         functionString.setEditable(false);
@@ -455,8 +458,17 @@ public class GrafDialogController {
     public void setGrafColorPicker(ColorPicker grafColorPicker) {this.grafColorPicker = grafColorPicker; }
 
     public String getX1() { return x1Text.getText(); }
-
     public void setX1(String x1String) { this.x1Text.setText(x1String); }
+
+    public String getX2(){return x2Text.getText();}
+    public void setX2(String x2String){this.x2Text.setText(x2String);}
+
+    public String getDx(){return nText.getText();}
+    public void setDx(String dx){ nText.setText(dx);}
+
+    public String getNText(){return nText.getText();}
+    public void setnText(int n){ nText.setText(""+n);}
+
 
     public String getDialogMark(){
         if (markToggleGroup.getSelectedToggle().toString().contains(".")) return ".";
