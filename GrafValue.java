@@ -78,6 +78,7 @@ public class GrafValue extends GrafObject implements IGrafable{
         gdc.setFunctionString(getFunctionString());
         gdc.setX1(""+getX());
         gdc.settDialogMark(getMark());
+
     }
    
 

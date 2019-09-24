@@ -53,7 +53,7 @@ abstract public class GrafObject implements Serializable, IGrafable
                 case FVALUE: return new GrafValue( gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
                 case TANGENT: return new GrafTangent(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
                 case CHORD: return new GrafChord(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),   gdc.getGrafColor(), gdc.getDialogMark());
-                case INTEGRAL: return new GrafIntegral();
+                case INTEGRAL: return new GrafIntegral(gdc.getFunctionString(),Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()), Integer.parseInt(gdc.getNText()), gdc.getGrafColor(), gdc.getFillColor());
                 case FZERO: return new GrafZeros(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),  Double.parseDouble(gdc.getDx()), gdc.getGrafColor(),gdc.getDialogMark() );
                 default: return null;
 

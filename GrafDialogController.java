@@ -88,8 +88,16 @@ public class GrafDialogController {
 
     @FXML
     private void onEditButtonClicked(ActionEvent e){
-        GrafObject currentObject = (GrafObject)objectComboBox.getValue();
-        currentObject.loadObjectFields(this);
+        try {
+            if (objectComboBox.getValue().equals("Object") || objectComboBox.getValue().equals("")) {
+                if (getTempGrafList().size() > 1) objectComboBox.setValue(getTempGrafList().get(1));
+                else return;
+            }
+        }catch(NullPointerException nullPointer){return;}
+            GrafObject currentObject = (GrafObject) objectComboBox.getValue();
+            currentObject.loadObjectFields(this);
+
+
     }
 
     @FXML
@@ -446,6 +454,12 @@ public class GrafDialogController {
     public Color getGrafColor(){
         //System.out.println(grafColorPicker.getValue());
         javafx.scene.paint.Color fxColor = grafColorPicker.getValue();
+        Color color = new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
+        return color;}
+
+    public Color getFillColor(){
+        //System.out.println(grafColorPicker.getValue());
+        javafx.scene.paint.Color fxColor = fillColorPicker.getValue();
         Color color = new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
         return color;}
 

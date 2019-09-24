@@ -102,7 +102,7 @@
                 <Label fx:id ="fillLabel" text="Fill:    "></Label>
                 <ColorPicker fx:id ="fillColorPicker">
                     <value>
-                        <Color blue="0.0" green="0.0"   red="0.0"/>
+                        <Color blue="1.0" green="1.0"   red="1.0"/>
                     </value>
                 </ColorPicker>
             </HBox>

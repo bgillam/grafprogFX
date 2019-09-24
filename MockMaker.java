@@ -42,7 +42,7 @@ public class MockMaker
                aList.add(new GrafValue());
                aList.add(new GrafTangent());
                aList.add(new GrafChord());
-               aList.add(new GrafIntegral(gSess));
+               aList.add(new GrafIntegral());
                aList.add(new GrafZeros());
                
            }

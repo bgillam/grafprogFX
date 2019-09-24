@@ -85,29 +85,6 @@ public class GrafZeros extends GrafObject implements IGrafable
    }
    
           
-   /*private static void saveZero(GrafProg gs, GrafInputDialog gfd){
-       if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
-       addZeros(gs, gfd);
-       gfd.getPointPanel().blankF();
-       gfd.getPointPanel().blankX1();
-       gfd.getPointPanel().blankX2();
-    
-    }
-    
-    private static void addZeros(GrafProg gs, GrafInputDialog gfd){
-        if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPointPanel().getF(), (gs.getGrafSettings().getXMax()+gs.getGrafSettings().getXMin())/2)) { 
-                   JOptionPane.showMessageDialog(null,
-                   "The expression entered is not a valid function.",
-                   "Function Format Error",
-                   JOptionPane.ERROR_MESSAGE);  
-                   return;
-        }
-        if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
-        if (Double.isNaN(gfd.getPointPanel().getX2())){gfd.NumErrorMessage("x2", "valid number"); return;}
-        if (gfd.getPointPanel().getDx()== Double.NaN){ gfd.NumErrorMessage("n", "integer"); return;}
-        GrafZeros gint = new GrafZeros(gs, gfd.getPointPanel().getF(), gfd.getPointPanel().getX1(), gfd.getPointPanel().getX2(), gfd.getPointPanel().getDx(),gfd.getMarkChooser().getColor(), gfd.getMarkChooser().getMark());
-        gfd.getTempList().add(gint);
-    }*/
 
     @Override
     public boolean isValidInput(GrafDialogController gdf){
