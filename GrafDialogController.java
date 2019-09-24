@@ -103,6 +103,7 @@ public class GrafDialogController {
     @FXML
     private void onDeleteButtonClicked(ActionEvent e){
          if (objectComboBox.getValue().equals("Object")) return;
+         if (tempGrafList.size() == 0) return;
          GrafObject currentObject = (GrafObject)objectComboBox.getValue();
          int index = findGrafObject(currentObject, tempGrafList);
          if (index != -1) tempGrafList.remove(index);
