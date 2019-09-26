@@ -66,6 +66,11 @@ public class GrafFunction extends GrafObject implements IGrafable{
     @Override
     public boolean isValidInput(GrafDialogController gdf){
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+        int errorCode = FunctionString.checkFunctionString(gdf.getFunctionString());
+        if (errorCode != 0) {
+            FunctionString.errorMsg(errorCode);
+            return false;
+        }
         return true;
     }
 

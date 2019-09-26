@@ -21,7 +21,7 @@ public class FunctionString {
         String test = "123e56i8";
         try{
            //for (int i=0; i<8; i++) System.out.println(i+" "+GrafInputHelpers.isAnAlphaChar(test,i));
-           //System.out.println(fValue("-X",-1.0));
+           //System.out.println(fValue("X",-1.0));
            //System.out.println(fValue("x-(-2)",-1.0));
            //System.out.println(fValue("exp(-x^2)", -1.0));
            //System.out.println(fValue("exp(-x^2)", 1.0));
@@ -31,6 +31,7 @@ public class FunctionString {
            //System.out.println(fValue("3-2x", -1.0));
            //System.out.println("again:");
            //System.out.println(fValue("3-2x", 1.0));
+            System.out.println(checkFunctionString("=x"));
         }catch (Exception e){}
     }
 
@@ -138,7 +139,6 @@ public class FunctionString {
         String leftSubstr="";;
         try{
             leftSubstr = fString.substring(getBeginLeftNumPos(counter,fString),counter);
-            //System.out.println("fString: "+fString);
             return Double.parseDouble(leftSubstr);
         } catch (NumberFormatException e){
             
@@ -326,13 +326,6 @@ public class FunctionString {
             fString =  fString.substring(0,pos)+"-"+fString.substring(pos+2, fString.length());
             //System.out.println(token);
         }while (pos != -1);
-        //token = "-(";
-        //do{ 
-        //    pos = fString.indexOf(token,pos+1);
-        //    if (pos == -1) break;            
-        //    fString =  fString.substring(0,pos)+"-1*("+fString.substring(pos+2, fString.length());
-        //}while (pos != -1);
-        
         return fString;
     }
     
@@ -353,7 +346,6 @@ public class FunctionString {
             String first = fString.substring(0,minusXPos);
             String last = fString.substring(minusXPos+2);
             fString = first+"-1*X"+last;
-            //System.out.println("first:"+first+"   last"+last+"   final:"+fString);
             minusXPos = fString.indexOf("-X");
          }
         
@@ -388,7 +380,6 @@ public class FunctionString {
     
     //parses string from left to right performing multiplications and divisions
     private static String multAndDiv(String middle){
-        //System.out.println("in multAndDiv: " +middle);
         int counter = 0;
         do {
             try{ 
@@ -398,10 +389,6 @@ public class FunctionString {
             catch (NumberFormatException e){ }
             
             if (middle.charAt(counter) == '*') {
-                //String pre = getPreString(counter, middle);
-                //System.out.println("Mid1 = "+getLeftNum(counter,middle));
-                //System.out.println("Mid2 = "+getRightNum(counter,middle));
-                //System.out.println("Post = "+ getPostString(counter, middle));
                 middle = getPreString(counter, middle)+(getLeftNum(counter,middle)*getRightNum(counter,middle))+getPostString(counter, middle);
                 counter = 0;
             }   
@@ -533,18 +520,12 @@ public class FunctionString {
     //Recursive part called after all spaces removed, unaries changed to *1, multiplication signs added in front of parentheses where needed, 
     //and x replaced with value
     private static double eval(String fString) throws DomainViolationException{
-        //System.out.println("in eval: " +fString);
         int rp = 0;
         double r = 0;
-        //printFStringAndWait(fString);
         String first,fs,middle,last;
-        //System.out.println(fString+", "+x);         
         fString = replaceDoubleOperator(fString);
-        //fString = replaceMinusParen(fString);
         fString.toLowerCase();
-        //printFStringAndWait(fString);
         fString = FunctionString.rightFunctions(fString);
-        //printFStringAndWait(fString);
         if (fString.equals("domainError")) throw new DomainViolationException();
         int lp = fString.lastIndexOf('(');     //     getInnerLeftParensPos(fString); //find the number of left parentheses
         if (lp != -1){ 
@@ -567,29 +548,23 @@ public class FunctionString {
             middle = fString;
             last = "";
         }
-        //System.out.println("middle "+middle);
-        middle = doExponents(middle); 
-        //System.out.println("middle after exponents "+middle);
+        middle = doExponents(middle);
         middle = multAndDiv(middle);
-        //System.out.println("middle after multdiv "+middle);
         middle = addAndSub(middle);
-        //System.out.println("middle after add sub "+middle);
-        //System.out.println("first = "+first);  
-        //System.out.println("middle = "+middle);  
-        //System.out.println("last = "+last);  
-        fs = first+middle+last;   
-        
-        //System.out.println("fs = "+fs);  
-        //printFStringAndWait(fString);  
+        fs = first+middle+last;
         try {r = Double.parseDouble(fs);}
-        catch (NumberFormatException e){ 
-            //printFStringAndWait(fString);
-            r = eval(fs);}
+        catch (NumberFormatException e) {
+            try {
+                r = eval(fs);
+            } catch (StackOverflowError stackOverflowError) {
+                return -1;
+            }
+        }
         return r;
     }
 
     //returns error message for error code
-    private static int errorMsg(int eCode)
+    public static int errorMsg(int eCode)
     {     
         if (eCode == 0) return 0; 
         String message = "";
@@ -613,6 +588,35 @@ public class FunctionString {
          System.out.println("Enter to contiue");
          String text = scan.nextLine();
     }
+
+    public static int checkFunctionString(String fString) {
+        double r;
+        int errorCode = 0;
+        if (fString.equals("")) return -1;
+        fString = fString.toUpperCase(); //all caps
+        fString = removeString(" ",fString); //remove blanks
+        fString = addMultSigns(fString); //add * signs where needed. ex: 2(3+5 -> 2*(3+5)
+        fString = replaceMinusX(fString);
+        fString = replaceMinusParen(fString);
+        fString = replaceX(fString,0);  //replace x with its value
+        fString = replacePI(fString); //replace pi with its approximation
+        try {
+            errorCode = checkErrors(fString);
+            //errorMsg(errorCode); //check for non-matching parentheses and other typo errors
+        }catch (Exception e){}
+
+        //errorMsg(errorCode);
+        if (errorCode != 0) {
+            return errorCode; } //possibly do something, but more likely implement a try-catch later
+
+        try{ r=Double.parseDouble(fString); } //if we can't parse what we have to a number,
+        catch (NumberFormatException e){
+            try{
+                r = eval(fString);
+            } catch (DomainViolationException dve){return 9;}
+        } //call eval to simplify
+        return 0 ;
+    }
        
     //given a string representing a function  and an input value, returns an output value
     public static double fValue(String fString, double x) throws DomainViolationException, FunctionFormatException {
@@ -629,9 +633,9 @@ public class FunctionString {
          fString = replacePI(fString); //replace pi with its approximation 
          errorMsg(checkErrors(fString)); //check for non-matching parentheses and other typo errors
          
-         //errorMsg(errorCode);
+        /* //errorMsg(errorCode);
          if (errorCode != 0) {
-             return Double.NaN; } //possibly do something, but more likely implement a try-catch later
+             return Double.NaN; } //possibly do something, but more likely implement a try-catch later*/
          
          try{ r=Double.parseDouble(fString); } //if we can't parse what we have to a number, 
          catch (NumberFormatException e){r = eval(fString); } //call eval to simplify 

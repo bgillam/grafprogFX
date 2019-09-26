@@ -87,7 +87,7 @@ abstract public class GrafObject implements Serializable, IGrafable
 
     public void loadObjectFields(GrafDialogController gdc){
         Color awtColor = getGrafColor();
-        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
+        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed()/255, (double)awtColor.getRed()/255, (double)awtColor.getBlue()/255, 1);
         gdc.getGrafColorPicker().setValue(fxColor);
     }
 

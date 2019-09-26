@@ -12,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -61,15 +63,11 @@ public class GrafDialogController {
     @FXML    private ComboBox objectComboBox;
     private GrafType gType;
     private ArrayList<GrafObject> tempGrafList = GrafProg.getGrafList();
-    //private boolean finalSave = false;
-    //private boolean currentObjectSaved;
 
     @FXML
     private void onCreateButtonClicked(ActionEvent e){
-        addGrafObject();
-        //createObjectList(gType);
-        //createFunctionList();
-        objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+            addGrafObject();
+            objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
     }
 
     @FXML
@@ -94,21 +92,27 @@ public class GrafDialogController {
                 else return;
             }
         }catch(NullPointerException nullPointer){return;}
-            GrafObject currentObject = (GrafObject) objectComboBox.getValue();
-            currentObject.loadObjectFields(this);
+        GrafObject currentObject = (GrafObject) objectComboBox.getValue();
+        currentObject.loadObjectFields(this);
 
 
     }
 
     @FXML
     private void onDeleteButtonClicked(ActionEvent e){
-         if (objectComboBox.getValue().equals("Object")) return;
-         if (tempGrafList.size() == 0) return;
+        try {
+            if (objectComboBox.getValue().equals("Object") || objectComboBox.getValue().equals("")) {
+                if (getTempGrafList().size() > 1) objectComboBox.setValue(getTempGrafList().get(1));
+                else return;
+            }
+        }catch(NullPointerException nullPointer){return;}
          GrafObject currentObject = (GrafObject)objectComboBox.getValue();
          int index = findGrafObject(currentObject, tempGrafList);
          if (index != -1) tempGrafList.remove(index);
          objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
     }
+
+
 
     @FXML
     private void onClearButtonClicked(ActionEvent e){
@@ -125,19 +129,6 @@ public class GrafDialogController {
     private void onFontButtonClicked(ActionEvent e){
         System.out.println(e.getSource()+ "was Clicked");
     }
-
-   /* @FXML
-    private void onFillColorPicker(ActionEvent e){
-        System.out.println(e.getSource()+ "was Clicked");
-    }
-
-    @FXML
-    private void onGrafColorPicker(ActionEvent e) {
-
-        System.out.println(e.getSource() + "was Clicked");
-        System.out.println(grafColorPicker.getValue());
-    }*/
-
 
     @FXML
     public void showFxEntry()
@@ -406,6 +397,7 @@ public class GrafDialogController {
     }*/
 
     private void addGrafObject(){
+
         GrafObject newObject = GrafObject.createGrafObjectFromController(gType);
         if (!newObject.isValidInput(this)) {
             GrafProg.setMessage1("not a valid "+gType);
@@ -516,4 +508,11 @@ public class GrafDialogController {
     }
 
 
+    public void checkForEnter(KeyEvent keyEvent) {
+        if ((keyEvent.getCode() == KeyCode.ENTER) && (functionString.isEditable())){
+            onCreateButtonClicked(new ActionEvent());
+
+        }
+
+    }
 }
