@@ -73,6 +73,7 @@ public class GrafDialogController {
     @FXML
     private void onDiscardButtonClicked(ActionEvent e){
         resetDialog();
+        //GrafProg.getGrafPanel().repaint();
     }
 
     @FXML
@@ -81,7 +82,7 @@ public class GrafDialogController {
         GrafProg.setGrafList(tempGrafList);
         GrafProg.setMessage1("changes saved");
         resetDialog();
-        GrafProg.getGrafPanel().repaint();
+        //GrafProg.getGrafPanel().repaint();
     }
 
     @FXML
@@ -233,6 +234,21 @@ public class GrafDialogController {
         });
     }
 
+    public void showFxPoint() {
+        gType = GrafType.POINT;
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("POINT");
+                showMarks();
+                showX1Y1();
+                chooseObject.setText("Choose POINT");
+
+            }
+        });
+    }
+
     private void showFunctionChooser(){
         fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));
         fChoiceLabel.setText("Choose f(x): ");
@@ -336,6 +352,8 @@ public class GrafDialogController {
     }
 
 
+
+
     public void hideAll() //change to hide all
     {
         Platform.runLater(new Runnable() {
@@ -388,6 +406,7 @@ public class GrafDialogController {
         getGrafColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         getFillColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
+        GrafProg.getGrafPanel().repaint();
     }
 
     /*private void saveChanges(){
@@ -444,17 +463,17 @@ public class GrafDialogController {
     public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
     public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = GrafProg.getGrafList();}
 
-    public Color getGrafColor(){
+    public java.awt.Color getGrafColor(){
         //System.out.println(grafColorPicker.getValue());
         javafx.scene.paint.Color fxColor = grafColorPicker.getValue();
-        Color color = new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
-        return color;}
+        java.awt.Color awtColor = new java.awt.Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
+        return awtColor;}
 
     public Color getFillColor(){
         //System.out.println(grafColorPicker.getValue());
         javafx.scene.paint.Color fxColor = fillColorPicker.getValue();
-        Color color = new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
-        return color;}
+        java.awt.Color awtColor = new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
+        return awtColor;}
 
     public ColorPicker getFillColorPicker() {return fillColorPicker; }
 
@@ -469,6 +488,12 @@ public class GrafDialogController {
 
     public String getX2(){return x2Text.getText();}
     public void setX2(String x2String){this.x2Text.setText(x2String);}
+
+    public String getY1() { return y1Text.getText(); }
+    public void setY1(String x1String) { this.y1Text.setText(x1String); }
+
+    public String getY2(){return y2Text.getText();}
+    public void setY2(String x2String){this.y2Text.setText(x2String);}
 
     public String getDx(){return nText.getText();}
     public void setDx(String dx){ nText.setText(dx);}
@@ -515,4 +540,7 @@ public class GrafDialogController {
         }
 
     }
+
+
+
 }

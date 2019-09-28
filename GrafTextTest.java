@@ -37,7 +37,7 @@ public class GrafTextTest
     public void setUp()
     {
        gSess = new GrafProg();
-       gText = new GrafText(gSess, 2, 3, "x");
+       gText = new GrafText(2, 3, "x");
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.TEXT);
     }

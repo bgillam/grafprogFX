@@ -66,7 +66,7 @@ public class GrafProg extends Application {
     //UI elements start
     @Override
     public void start(Stage grafStage) throws Exception{
-
+        this.grafStage = grafStage;
         //Set up Dialog Box
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
@@ -207,7 +207,7 @@ public class GrafProg extends Application {
     public static int getHeight(){return (int) primaryStage.getHeight();}
     //public static void setTheHeight(int h) {height = h;}*/
 
-    //public static Stage getGrafStage(){ return grafStage;  }
+    public static Stage getGrafStage(){ return grafStage;  }
 
     public static Stage getDialogStage(){return dialogStage;}
 

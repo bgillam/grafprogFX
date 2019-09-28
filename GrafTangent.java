@@ -104,28 +104,7 @@ public class GrafTangent extends GrafObject implements IGrafable
     }
 
        
-  /*     private static void saveTangent(GrafProg gs, GrafInputDialog gfd){
-        if (gfd.getFinalSave() == true && gfd.getPointPanel().getF().equals("")) return; 
-        addTangent(gs, gfd);
-        gfd.getPointPanel().blankF();
-        gfd.getPointPanel().blankX1();
-   }
-   
-   private static void addTangent(GrafProg gSess, GrafInputDialog gfd){
-       if (!FunctionString.isValidAtXIgnoreDomainError(gfd.getPointPanel().getF(), (gSess.getGrafSettings().getXMax()+gSess.getGrafSettings().getXMin())/2)) { 
-                   JOptionPane.showMessageDialog(null,
-                   "The expression entered is not a valid function.",
-                   "Function Format Error",
-                   JOptionPane.ERROR_MESSAGE);  
-                   return;
-        }
-        if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
-        //System.out.println(gfd.getPointPanel().getF());
-        GrafTangent gt = new GrafTangent(gSess, gfd.getPointPanel().getF(), gfd.getPointPanel().getX1(), gfd.getMarkChooser().getColor(), gfd.getMarkChooser().getMark());
-        gfd.getTempList().add(gt); 
-    }*/
-    
-     
+
    public void setX(double xval){ x = xval; }
    public double getX() { return x; }   
    public void setFunctionString(String fString){ functionString = fString; }

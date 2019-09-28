@@ -26,29 +26,20 @@ public class GrafText extends GrafObject implements IGrafable
         
    public GrafText(){
      super();
-     setGrafType(GrafType.TEXT);
-     setText("");
+       gStuff = super.initGrafObject(GrafType.TEXT);
+       setText("");
     }
         
-   public GrafText(GrafProg sess){
-        setText("");
-        setGrafType(GrafType.TEXT);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
-        //setFont(sess.getGraphics().getFont());
-       }
-   
-   public GrafText(GrafProg sess, double x, double y, String t){
-        this(sess);
+
+   public GrafText(double x, double y, String t){
+        this();
         setX(x);
         setY(y);
         setText(t);
    }
    
-   public GrafText(GrafProg sess, double x, double y, String t, Font f, Color c){
-        this(sess, x, y, t); 
+   public GrafText(double x, double y, String t, Font f, Color c){
+        this(x, y, t);
         setGrafColor(c);
         setFont(f);
   }
@@ -65,50 +56,11 @@ public class GrafText extends GrafObject implements IGrafable
        gc.setColor(Color.BLACK);
     }
  
- /* @Override
-  public GrafInputDialog createInputDialog(GrafProg gs){
-         GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
-         gfd.setTitle("TEXT"); 
-         gfd.setPointPanel(gfd.addPointPanel());
-         gfd.getPointPanel().addX1Y1();
-         gfd.setMarkChooser(gfd.addMarkPanel(new TextMarkPanel()));
-         gfd.setDeleter(gfd.addDeleterPanel(GrafType.TEXT));
-         gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.TEXT)));  
-         gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveText(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.TEXT)));  
-                
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveText(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-        
-        return gfd;
-     }
-    */
+
   
     
 
- /*@Override
- public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-     try{
-         GrafText tEdit = (GrafText)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-         caller.getPointChooser().setX1(tEdit.getX());
-         caller.getPointChooser().setY1(tEdit.getY());
-         caller.getMarkChooser().setTextString(tEdit.getText());
-         caller.getMarkChooser().setGrafFont(tEdit.getFont());
-         caller.getMarkChooser().setColor(tEdit.getGrafColor());
-       }catch (NullPointerException e){
-     }
- }*/
+
  
  private static void saveText(GrafProg gSess, GrafInputDialog gfd){
          if (gfd.getFinalSave() == true && Double.isNaN(gfd.getPointPanel().getX1())) return; 
@@ -121,7 +73,7 @@ public class GrafText extends GrafObject implements IGrafable
  private static void addText(GrafProg gSess, GrafInputDialog gfd){
        if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
        if (Double.isNaN(gfd.getPointPanel().getY1())){gfd.NumErrorMessage("Y1", "valid number"); return;}    
-       GrafText gPlot = new GrafText(gSess, gfd.getPointPanel().getX1(), gfd.getPointPanel().getY1(), gfd.getMarkChooser().getTextMark() , gfd.getMarkChooser().getFont() , gfd.getMarkChooser().getColor());
+       GrafText gPlot = new GrafText(gfd.getPointPanel().getX1(), gfd.getPointPanel().getY1(), gfd.getMarkChooser().getTextMark() , gfd.getMarkChooser().getFont() , gfd.getMarkChooser().getColor());
        gfd.getTempList().add(gPlot);
   }  
    
@@ -136,7 +88,7 @@ public class GrafText extends GrafObject implements IGrafable
   
  
  public String toString(){
-    return "TEXT: ("+getX()+", "+getY()+") "+getText();
+    return "TEXT: ("+getX()+", "+getY()+") "+getText()+" "+getGrafColor();
     }
 }
 

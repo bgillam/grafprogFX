@@ -107,6 +107,12 @@ public class GrafController {
        GrafProg.getDialogStage().show();
     }
 
+    public void onPoint(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showFxPoint();
+        GrafProg.getDialogStage().show();
+    }
+
     public void table(ActionEvent actionEvent) {
         //GrafStage.showData();
        GrafProg.getTableStage().show();
@@ -122,5 +128,7 @@ public class GrafController {
         GrafProg.closeGraf();
 
     }
+
+
 }
 

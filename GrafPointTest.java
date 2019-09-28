@@ -37,7 +37,7 @@ public class GrafPointTest
     public void setUp()
     {
        gSess = new GrafProg();
-       gPoint = new GrafPoint(gSess, 2, 3, "x", Color.BLACK);
+       gPoint = new GrafPoint(2, 3, "x", Color.BLACK);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.POINT);
                  

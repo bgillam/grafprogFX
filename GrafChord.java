@@ -97,15 +97,8 @@ public class GrafChord extends GrafObject implements IGrafable
    public double getX1() { return x1; } 
    public void setX2(double xval){ x2 = xval; }
    public double getX2() { return x2; } 
-   /*public void sety1(double xval){ y1 = xval; }
-   public double gety1() { return y1; } 
-   public void sety2(double xval){ y2 = xval; }
-   public double gety2() { return y2; } */
-   
 
-   
 
-   
    public void calcY1(){
        try {
         y1 = FunctionString.fValue(functionString, x1);

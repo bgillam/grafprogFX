@@ -44,7 +44,7 @@ abstract public class GrafObject implements Serializable, IGrafable
                 case HISTOGRAM: return new GrafHistogram();
                 case FREQPOLYGON: return new GrafFreqPolygon();
                 case OGIVE: return new GrafOgive();
-                case POINT: return new GrafPoint();
+                case POINT: return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(),   gdc.getGrafColor());
                 case LINESEGMENT: return new GrafSegment();
                 case RECTANGLE: return new GrafRectangle();
                 case ELLIPSE: return new GrafEllipse();
@@ -85,9 +85,11 @@ abstract public class GrafObject implements Serializable, IGrafable
         }
     }
 
+    //load object fields into graf dialog
     public void loadObjectFields(GrafDialogController gdc){
         Color awtColor = getGrafColor();
-        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed()/255, (double)awtColor.getRed()/255, (double)awtColor.getBlue()/255, 1);
+        javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(getGrafColor().getRed(), getGrafColor().getGreen(), getGrafColor().getBlue(), 1);
+        //new javafx.scene.paint.Color(awtColor.getRed()/255, (double)awtColor.getGreen()/255, (double)awtColor.getBlue()/255, 1);
         gdc.getGrafColorPicker().setValue(fxColor);
     }
 

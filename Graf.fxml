@@ -61,7 +61,7 @@
                         <CheckMenuItem fx:id="yAxisItem" text="Graph on Y-Axis"/>
                     </Menu>
                     <Menu fx:id="shapeMenu" text="Shape">
-                        <MenuItem fx:id="pointItem" text="Point"/>
+                        <MenuItem fx:id="pointItem" text="Point" onAction="#onPoint"/>
                         <MenuItem fx:id="lineItem" text="Line Segment"/>
                         <MenuItem fx:id="rectangleItem" text="Rectangle"/>
                         <MenuItem fx:id="ellipseItem" text="Ellipse"/>
