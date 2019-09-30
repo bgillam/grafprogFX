@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.FontPosture;
 import javafx.stage.Modality;
 
 import javax.swing.*;
@@ -53,6 +54,8 @@ public class GrafDialogController {
     @FXML    private Label textLabel;
     @FXML    private TextField textForDisplay;
     @FXML    private Label fontName;
+    @FXML    private Label fontSize;
+    @FXML    private Label fontStyle;
     @FXML    private Button fontButton;
     @FXML    private Label chooseObject;
     @FXML    private Pane grafPane;
@@ -67,6 +70,8 @@ public class GrafDialogController {
 
     public void initialize(){
         fontName.setText(javafx.scene.text.Font.getDefault().getName());
+        fontSize.setText(javafx.scene.text.Font.getDefault().getSize()+"  ");
+        fontStyle.setText(javafx.scene.text.Font.getDefault().getStyle());
         hideAll();
     }
 
@@ -131,8 +136,26 @@ public class GrafDialogController {
 
     @FXML
     private void onFontButtonClicked(ActionEvent e){
-        System.out.println(e.getSource()+ "was Clicked");
-    }
+
+        FontDialog fontDialog = new FontDialog(
+                new java.awt.Font(javafx.scene.text.Font.getDefault().getName(),
+                        Font.PLAIN,
+                        (int) javafx.scene.text.Font.getDefault().getSize()));
+        Font f = fontDialog.showFontDialog();
+
+        fontName.setText(f.getFontName());
+        fontSize.setText(f.getSize()+" ");
+        String style = "";
+        switch (f.getStyle()){
+            case 0: style = "plain"; break;
+            case 1: style = "bold"; break;
+            case 2: style = "italic"; break;
+            case 3: style = "bold & italic"; break;
+            //otherwise: style = "plain"; break;
+        }
+
+        fontStyle.setText(style);
+}
 
     //display appropriate dialog setup for object editing
     @FXML
@@ -590,8 +613,9 @@ public class GrafDialogController {
 
     public void setFontName(String fontNameString) {
         this.fontName.setText(fontNameString);
-        Font. 
     }
+
+
 
 
 
