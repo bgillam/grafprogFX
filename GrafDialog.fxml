@@ -85,8 +85,8 @@
                 <TextField fx:id = "textForDisplay" minWidth = "100"/>
             </HBox>
             <HBox>
-                <Label fx:id = "fontName" text = "FontName" minWidth ="100"/>
                 <Button fx:id = "fontButton" text = "Font" minWidth = "100" onAction="#onFontButtonClicked"/>
+                <Label fx:id = "fontName" text = "FontName" minWidth ="100"/>
 
             </HBox>
             <CheckBox fx:id = "fns" text = "FNS"/>

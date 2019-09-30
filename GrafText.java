@@ -28,6 +28,7 @@ public class GrafText extends GrafObject implements IGrafable
      super();
        gStuff = super.initGrafObject(GrafType.TEXT);
        setText("");
+       setFont(new TextField().getFont());
     }
         
 
@@ -37,12 +38,17 @@ public class GrafText extends GrafObject implements IGrafable
         setY(y);
         setText(t);
    }
+
+    public GrafText(double x, double y, String t, Color c){
+        this(x, y, t);
+        setGrafColor(c);
+   }
    
    public GrafText(double x, double y, String t, Font f, Color c){
         this(x, y, t);
         setGrafColor(c);
         setFont(f);
-  }
+   }
    
    
    @Override
@@ -55,27 +61,42 @@ public class GrafText extends GrafObject implements IGrafable
        gc.setFont(oldFont);
        gc.setColor(Color.BLACK);
     }
- 
 
+    @Override
+    public boolean isValidInput(GrafDialogController gdf){
+        if (gdf.getX1().equals("")) return false;
+        if (gdf.getY1().equals("")) return false;
+        if (gdf.getCharMarkRButton().isSelected() &&  gdf.getTextForDisplay().equals("") ) return false;
+        //eventually need to check font here
+        return true;
+    }
+
+    @Override
+    public boolean deepEquals(GrafObject o){
+        GrafPoint gp = (GrafPoint) o;
+        if (getType() != o.getType()) return false;
+        if (!getText().equals(gp.getMark())) return false;
+        if (!getGrafColor().equals(gp.getGrafColor())) return false;
+        if (!(getX() == gp.getX())) return false;
+        if (!(getY() == gp.getY())) return false;
+        //eventually need to check font here
+        return true;
+    }
+
+    @Override
+    public void loadObjectFields(GrafDialogController gdc){
+        super.loadObjectFields(gdc);
+        gdc.setX1(""+getX());
+        gdc.setY1(""+getY());
+        gdc.settDialogMark(getText());
+        gdc.setFontName(getFont().toString());
+    }
   
     
 
 
  
- private static void saveText(GrafProg gSess, GrafInputDialog gfd){
-         if (gfd.getFinalSave() == true && Double.isNaN(gfd.getPointPanel().getX1())) return; 
-             addText(gSess,gfd );
-             gfd.getPointPanel().blankX1();
-             gfd.getPointPanel().blankY1();
-           
-   }
 
- private static void addText(GrafProg gSess, GrafInputDialog gfd){
-       if (Double.isNaN(gfd.getPointPanel().getX1())){gfd.NumErrorMessage("x1", "valid number"); return;}
-       if (Double.isNaN(gfd.getPointPanel().getY1())){gfd.NumErrorMessage("Y1", "valid number"); return;}    
-       GrafText gPlot = new GrafText(gfd.getPointPanel().getX1(), gfd.getPointPanel().getY1(), gfd.getMarkChooser().getTextMark() , gfd.getMarkChooser().getFont() , gfd.getMarkChooser().getColor());
-       gfd.getTempList().add(gPlot);
-  }  
    
    public void setX(double xval){ x = xval; }
    public double getX() { return x; }   
@@ -92,26 +113,3 @@ public class GrafText extends GrafObject implements IGrafable
     }
 }
 
-/* Inherited from GrafObject
-   private GrafProg.GrafType grafType;
-   private Color grafColor = Color.BLACK; 
-   private boolean moveable;
-   private GrafProg myOwner;
-     
-   
-   public void drawGraf(Graphics2D g2D){};
-   
-   public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-   public GrafProg.GrafType getType(){return grafType; }
-   
-   public boolean isMoveable(){ return moveable; } 
-   public void setMoveable(boolean tf){ moveable = tf;  }
-   public boolean getMoveable(){return moveable;}
-   
-   public void setOwner(GrafProg owner){myOwner = owner;}
-   public GrafProg getOwner(){return myOwner;}
-   
-   public void setGrafColor(Color c){grafColor = c;   }
-   public Color getGrafColor() { return grafColor;}
-  */
- 

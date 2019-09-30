@@ -67,7 +67,7 @@
                         <MenuItem fx:id="ellipseItem" text="Ellipse"/>
                         <MenuItem fx:id="circleItem" text="Circle"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="textItem" text="Text"/>
+                        <MenuItem fx:id="textItem" text="Text" onAction="#onText"/>
                     </Menu>
                     <Menu fx:id="windowMenu" text="Window">
                         <MenuItem fx:id="setItem" text="Set"/>

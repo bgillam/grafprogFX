@@ -74,7 +74,7 @@ public class GrafProg extends Application {
         Scene dialogScene = new Scene (dialogRoot, 500, 400); //.getWidth(), grafStage.getHeight());
         dialogStage.setScene(dialogScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogController.hideAll();
+        //dialogController.hideAll();
 
         //Set up One Variable Stats Dialog Box
         FXMLLoader statLoader = new FXMLLoader(getClass().getResource("OneVarStats.fxml"));

@@ -68,7 +68,7 @@ public class GrafController {
     public void fxInput(ActionEvent actionEvent) {
 
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxEntry();
+       GrafProg.getDialogController().showFxEntryDialog();
        GrafProg.getDialogStage().show();
 
     }
@@ -76,40 +76,46 @@ public class GrafController {
 
     public void fxValue(ActionEvent actionEvent) {
      GrafProg.getDialogController().hideAll();
-     GrafProg.getDialogController().showFxValue();
+     GrafProg.getDialogController().showFxValueDialog();
      GrafProg.getDialogStage().show();
 
     }
 
     public void fxTangent(ActionEvent actionEvent) {
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxTangent();
+       GrafProg.getDialogController().showFxTangentDialog();
        GrafProg.getDialogStage().show();
     }
 
 
     public void fxChord(ActionEvent actionEvent) {
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxChord();
+       GrafProg.getDialogController().showFxChordDialog();
        GrafProg.getDialogStage().show();
 
     }
 
     public void fxIntegral(ActionEvent actionEvent) {
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxIntegral();
+       GrafProg.getDialogController().showFxIntegralDialog();
        GrafProg.getDialogStage().show();
     }
 
     public void fxZeros(ActionEvent actionEvent) {
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxZeros();
+       GrafProg.getDialogController().showFxZerosDialog();
        GrafProg.getDialogStage().show();
     }
 
     public void onPoint(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showFxPoint();
+        GrafProg.getDialogController().showFxPointDialog();
+        GrafProg.getDialogStage().show();
+    }
+
+    public void onText(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showFxTextDialog();
         GrafProg.getDialogStage().show();
     }
 

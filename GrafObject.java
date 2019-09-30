@@ -37,7 +37,8 @@ abstract public class GrafObject implements Serializable, IGrafable
    public static GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
        switch (gType){
 
-                case TEXT: return new GrafText();
+                case TEXT: return new GrafText(Double.parseDouble(
+                        gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getCharMarkRButton().getText(),   gdc.getGrafColor());
                 case COLUMN: return new GrafColumnPlot();
                 case BOXPLOT: return new GrafBoxPlot();
                 case SCATTER:return new GrafScatterPlot();

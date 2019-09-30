@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class GrafDialogController {
 
 
-
+//instance variables tied to GUI
     @FXML    private ColorPicker fillColorPicker;
     @FXML    private Label fillLabel;
     @FXML    private ColorPicker grafColorPicker;
@@ -54,16 +54,23 @@ public class GrafDialogController {
     @FXML    private TextField textForDisplay;
     @FXML    private Label fontName;
     @FXML    private Button fontButton;
-
     @FXML    private Label chooseObject;
     @FXML    private Pane grafPane;
     @FXML    private CheckBox fns;
     @FXML    private Label fChoiceLabel2;
     @FXML    private ComboBox fComboBox2;
     @FXML    private ComboBox objectComboBox;
+
+    //other instance variables
     private GrafType gType;
     private ArrayList<GrafObject> tempGrafList = GrafProg.getGrafList();
 
+    public void initialize(){
+        fontName.setText(javafx.scene.text.Font.getDefault().getName());
+        hideAll();
+    }
+
+    //Button responses tied to GUI
     @FXML
     private void onCreateButtonClicked(ActionEvent e){
             addGrafObject();
@@ -95,8 +102,6 @@ public class GrafDialogController {
         }catch(NullPointerException nullPointer){return;}
         GrafObject currentObject = (GrafObject) objectComboBox.getValue();
         currentObject.loadObjectFields(this);
-
-
     }
 
     @FXML
@@ -112,8 +117,6 @@ public class GrafDialogController {
          if (index != -1) tempGrafList.remove(index);
          objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
     }
-
-
 
     @FXML
     private void onClearButtonClicked(ActionEvent e){
@@ -131,8 +134,9 @@ public class GrafDialogController {
         System.out.println(e.getSource()+ "was Clicked");
     }
 
+    //display appropriate dialog setup for object editing
     @FXML
-    public void showFxEntry()
+    public void showFxEntryDialog()
     {
             Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -149,7 +153,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showFxValue()
+    public void showFxValueDialog()
     {
         gType = GrafType.FVALUE;
         Platform.runLater(new Runnable() {
@@ -167,7 +171,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showFxTangent()
+    public void showFxTangentDialog()
     {
         gType = GrafType.TANGENT;
         Platform.runLater(new Runnable() {
@@ -183,7 +187,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showFxChord()
+    public void showFxChordDialog()
     {
         gType = GrafType.CHORD;
         Platform.runLater(new Runnable() {
@@ -200,7 +204,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showFxZeros()
+    public void showFxZerosDialog()
     {
         gType = GrafType.FZERO;
         Platform.runLater(new Runnable() {
@@ -216,7 +220,7 @@ public class GrafDialogController {
         });
     }
     @FXML
-    public void showFxIntegral()
+    public void showFxIntegralDialog()
     {gType = GrafType.INTEGRAL;
 
         Platform.runLater(new Runnable() {
@@ -234,7 +238,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showFxPoint() {
+    public void showFxPointDialog() {
         gType = GrafType.POINT;
 
         Platform.runLater(new Runnable() {
@@ -248,6 +252,29 @@ public class GrafDialogController {
             }
         });
     }
+
+    public void showFxTextDialog() {
+        gType = GrafType.POINT;
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("TEXT");
+                showTextAndFontButton();
+                showX1Y1();
+                chooseObject.setText("Choose TEXT");
+
+            }
+        });
+    }
+
+    //private halpers for setting up dialog
+    private void showTextAndFontButton(){
+        textLabel.setVisible(true);
+        textForDisplay.setVisible(true);
+        fontName.setVisible(true);
+        fontButton.setVisible(true);
+     }
 
     private void showFunctionChooser(){
         fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));
@@ -289,7 +316,6 @@ public class GrafDialogController {
             }
         });
     }
-
 
     private void showX1X2()
     {
@@ -352,8 +378,7 @@ public class GrafDialogController {
     }
 
 
-
-
+    //had to make this one public for call from outside - probably should refactor relationship
     public void hideAll() //change to hide all
     {
         Platform.runLater(new Runnable() {
@@ -452,7 +477,29 @@ public class GrafDialogController {
         return grafObjects;
     }
 
+    public void functionChosen(ActionEvent actionEvent) {
+        try {
+            if (!fComboBox.getValue().equals("function")) {
+                GrafFunction gf = (GrafFunction) (fComboBox.getValue());
+                functionString.setText(gf.getFunction());
+            }
+        }catch (ClassCastException cce){
+            //System.out.println("Choose a Function.");
+        }catch (NullPointerException npe){
 
+        }
+    }
+
+
+
+
+    public void checkForEnter(KeyEvent keyEvent) {
+        if ((keyEvent.getCode() == KeyCode.ENTER) && (functionString.isEditable())){
+            onCreateButtonClicked(new ActionEvent());
+
+        }
+
+    }
 
     public String getFunctionString(){return functionString.getText();}
     public void setFunctionString(String s){ functionString.setText(s);}
@@ -502,6 +549,8 @@ public class GrafDialogController {
     public void setnText(int n){ nText.setText(""+n);}
 
 
+
+
     public String getDialogMark(){
         if (markToggleGroup.getSelectedToggle().toString().contains(".")) return ".";
         else if (markToggleGroup.getSelectedToggle().toString().contains("x")) return "x";
@@ -519,26 +568,29 @@ public class GrafDialogController {
            }
     }
 
-    public void functionChosen(ActionEvent actionEvent) {
-        try {
-            if (!fComboBox.getValue().equals("function")) {
-                GrafFunction gf = (GrafFunction) (fComboBox.getValue());
-                functionString.setText(gf.getFunction());
-            }
-        }catch (ClassCastException cce){
-             //System.out.println("Choose a Function.");
-        }catch (NullPointerException npe){
-
-        }
+    public TextField getTextForDisplay() {
+        return textForDisplay;
     }
 
+    public void setTextForDisplay(TextField textForDisplay) {
+        this.textForDisplay = textForDisplay;
+    }
 
-    public void checkForEnter(KeyEvent keyEvent) {
-        if ((keyEvent.getCode() == KeyCode.ENTER) && (functionString.isEditable())){
-            onCreateButtonClicked(new ActionEvent());
+    public RadioButton getCharMarkRButton() {
+        return charMarkRButton;
+    }
 
-        }
+    public void setCharMarkRButton(RadioButton charMarkRButton) {
+        this.charMarkRButton = charMarkRButton;
+    }
 
+    public String getFontName() {
+        return this.fontName.getText();
+    }
+
+    public void setFontName(String fontNameString) {
+        this.fontName.setText(fontNameString);
+        Font. 
     }
 
 
