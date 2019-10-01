@@ -68,6 +68,7 @@ public class GrafChord extends GrafObject implements IGrafable
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
         if (gdf.getX1().equals("")) return false;
         if (gdf.getX2().equals("")) return false;
+
         return true;
     }
 
@@ -79,6 +80,7 @@ public class GrafChord extends GrafObject implements IGrafable
         if (!functionString.equals(gc.getFunctionString())) return false;
         if (!(getX1() == gc.getX1())) return false;
         if (!(getX2() == gc.getX2())) return false;
+        if (!getMark().equals(gc.getMark())) return false;
         return true;
     }
 

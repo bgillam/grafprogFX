@@ -284,6 +284,22 @@ public class GrafDialogController {
         });
     }
 
+    public void showFxLineSegmentDialog() {
+        gType = GrafType.LINESEGMENT;
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("LINESEGMENT");
+                showMarks();
+                showX1Y1();
+                showX2Y2();
+                chooseObject.setText("Choose LINESEGMENT");
+
+            }
+        });
+    }
+
     //private halpers for setting up dialog
     private void showTextAndFontButton(){
         textLabel.setVisible(true);
@@ -333,6 +349,17 @@ public class GrafDialogController {
         });
     }
 
+    private void showX2()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                x2Text.setVisible(true);
+                x2Label.setVisible(true);
+
+            }
+        });
+    }
+
     private void showX1X2()
     {
         Platform.runLater(new Runnable() {
@@ -352,6 +379,18 @@ public class GrafDialogController {
                 showX1();
                 y1Label.setVisible(true);
                 y1Text.setVisible(true);
+
+            }
+        });
+    }
+
+    private void showX2Y2()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                showX2();
+                y2Label.setVisible(true);
+                y2Text.setVisible(true);
 
             }
         });
@@ -617,4 +656,6 @@ public class GrafDialogController {
     }
 
     public void setFontSizeText(String fSize){fontSize.setText(fSize); }
+
+
 }

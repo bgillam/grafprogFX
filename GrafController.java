@@ -119,7 +119,13 @@ public class GrafController {
         GrafProg.getDialogStage().show();
     }
 
-    public void table(ActionEvent actionEvent) {
+    public void onLineSegment(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showFxLineSegmentDialog();
+        GrafProg.getDialogStage().show();
+    }
+
+    public void onTable(ActionEvent actionEvent) {
         //GrafStage.showData();
        GrafProg.getTableStage().show();
     }
@@ -134,7 +140,6 @@ public class GrafController {
         GrafProg.closeGraf();
 
     }
-
 
 }
 

@@ -22,6 +22,7 @@ public class GrafSegment extends GrafObject implements IGrafable
         private double x2 = 0;
         private double y1 = 0;
         private double y2 = 0;
+        private String mark =".";
         //private String yString = "";
         
         
@@ -57,56 +58,42 @@ public class GrafSegment extends GrafObject implements IGrafable
    @Override
    public void drawGraf(Graphics2D gc){
        gc.setColor(super.getGrafColor());
+       GrafPrimitives.grafString(gStuff,x1,y1,getMark(),gc);
+       GrafPrimitives.grafString(gStuff,x2,y2,getMark(),gc);
        GrafPrimitives.grafLine(gStuff,x1, y1, x2, y2 ,gc);
        gc.setColor(Color.BLACK);
-       
+   }
+
+    @Override
+    public boolean isValidInput(GrafDialogController gdf){
+        if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+        if (gdf.getX1().equals("")) return false;
+        if (gdf.getX2().equals("")) return false;
+        return true;
     }
- 
-   /*@Override
-   public   GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
-        gfd.setTitle("LINESEGMENT"); 
-        gfd.setPointPanel(gfd.addPointPanel());
-        gfd.getPointPanel().addX1Y1();
-        gfd.getPointPanel().addX2Y2();
-        gfd.setMarkChooser(gfd.addMarkPanel(new FillColorMarkPanel(false, false)));  
-        gfd.setDeleter(gfd.addDeleterPanel(GrafType.LINESEGMENT));
-        gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.LINESEGMENT)));          
-        gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveSegment(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(),GrafType.LINESEGMENT)));        
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveSegment(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-        // gfd.setModal(true);
-        // gfd.pack();
-        // gfd.setVisible(true);  
-        return gfd;
-    }*/
-    
-   
-    
- /*   @Override
-    public  void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-                     GrafSegment lEdit = (GrafSegment)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-                     caller.getPointChooser().setX1(lEdit.getX1());
-                     caller.getPointChooser().setY1(lEdit.getY1());
-                     caller.getPointChooser().setX2(lEdit.getX2());
-                     caller.getPointChooser().setY2(lEdit.getY2());
-                     //caller.getMarkChooser().setTextString(ptEdit.getText());
-                     //caller.getMarkChooser().setCurrentFont(ptEdit.getFont());
-                     caller.getMarkChooser().setColor(lEdit.getGrafColor());   
-       }*/
-    
+
+    @Override
+    public boolean deepEquals(GrafObject o){
+        GrafSegment gc = (GrafSegment) o;
+        if (getType() != o.getType()) return false;
+        if (!getGrafColor().equals(gc.getGrafColor())) return false;
+        if (!(getX1() == gc.getX1())) return false;
+        if (!(getX2() == gc.getX2())) return false;
+        if (!(getY1() == gc.getY1())) return false;
+        if (!(getY2() == gc.getY2())) return false;
+        if (!(getX1() == gc.getX1())) return false;
+        if (!getMark().equals(gc.getMark())) return false;
+        return true;
+    }
+
+    @Override
+    public void loadObjectFields(GrafDialogController gdc){
+        super.loadObjectFields(gdc);
+        gdc.setX1(""+getX1());
+        gdc.setX2(""+getX2());
+        gdc.settDialogMark(getMark());
+    }
+
    public void setX1(double xval){ x1 = xval; }
    public double getX1() { return x1; }
    public void setX2(double xval){ x2 = xval; }
@@ -144,31 +131,11 @@ public class GrafSegment extends GrafObject implements IGrafable
             gfd.getTempList().add(gPlot);
     
     }
+
+    public void setMark(String m){mark = m;}
+    public String getMark(){return mark;}
    
  }
    
  
 
-/* Inherited from GrafObject
-   private GrafProg.GrafType grafType;
-   private Color grafColor = Color.BLACK; 
-   private boolean moveable;
-   private GrafProg myOwner;
-     
-   
-   public void drawGraf(Graphics2D g2D){};
-   
-   public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-   public GrafProg.GrafType getType(){return grafType; }
-   
-   public boolean isMoveable(){ return moveable; } 
-   public void setMoveable(boolean tf){ moveable = tf;  }
-   public boolean getMoveable(){return moveable;}
-   
-   public void setOwner(GrafProg owner){myOwner = owner;}
-   public GrafProg getOwner(){return myOwner;}
-   
-   public void setGrafColor(Color c){grafColor = c;   }
-   public Color getGrafColor() { return grafColor;}
-  */
-   

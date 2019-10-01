@@ -18,16 +18,17 @@ abstract public class GrafObject implements Serializable, IGrafable
    private Color grafColor = Color.BLACK; 
    private boolean moveable;
    private GrafProg myOwner;
-   
-   
+
    protected ColumnChooserPanel columnChooser;
    protected ColorRadioMarkPanel mp;
    protected JDialog jd = new JDialog();
    protected PointPanel ptPanel;
-   
-   public void drawGraf(Graphics2D g2D){};
 
-   public GrafSettings initGrafObject(GrafType gType){
+   public abstract void drawGraf(Graphics2D g2D);
+   public boolean isValidInput(GrafDialogController gdf){return true;}; //make abstract after refactr
+
+
+    public GrafSettings initGrafObject(GrafType gType){
        setGrafType(gType);
        setMoveable(false);
        setGrafColor(Color.BLACK);
@@ -36,7 +37,6 @@ abstract public class GrafObject implements Serializable, IGrafable
 
    public static GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
        switch (gType){
-
                 case TEXT: return new GrafText(Double.parseDouble(
                         gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(),   gdc.getGrafColor());
                 case COLUMN: return new GrafColumnPlot();
@@ -62,7 +62,6 @@ abstract public class GrafObject implements Serializable, IGrafable
     }
     public static GrafObject createGrafObjectFromController(GrafType gType){
         switch (gType){
-
             case TEXT: return new GrafText();
             case COLUMN: return new GrafColumnPlot();
             case BOXPLOT: return new GrafBoxPlot();
@@ -82,23 +81,17 @@ abstract public class GrafObject implements Serializable, IGrafable
             case INTEGRAL: return new GrafIntegral();
             case FZERO: return new GrafZeros();
             default: return null;
-
         }
     }
 
     //load object fields into graf dialog
     public void loadObjectFields(GrafDialogController gdc){
         Color awtColor = getGrafColor();
-        javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(getGrafColor().getRed(), getGrafColor().getGreen(), getGrafColor().getBlue(), 1);
-        //new javafx.scene.paint.Color(awtColor.getRed()/255, (double)awtColor.getGreen()/255, (double)awtColor.getBlue()/255, 1);
+        javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(getGrafColor().getRed(),
+                getGrafColor().getGreen(), getGrafColor().getBlue(), 1);
         gdc.getGrafColorPicker().setValue(fxColor);
     }
 
-
-    public boolean isValidInput(GrafDialogController gdf){
-       //if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
-       return true;
-    }
 
     public boolean deepEquals(GrafObject g) {
        if (getType() != g.getType()) return false;
@@ -120,9 +113,9 @@ abstract public class GrafObject implements Serializable, IGrafable
        return false;
    }
    
-   public String[] getColumnsString(){
+   /*public String[] getColumnsString(){
        return GrafProg.getData().getHeaderArray();
-   }
+   }*/
    
    
    public void setGrafType(GrafType gt){grType = gt;}
