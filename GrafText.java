@@ -66,17 +66,17 @@ public class GrafText extends GrafObject implements IGrafable
     public boolean isValidInput(GrafDialogController gdf){
         if (gdf.getX1().equals("")) return false;
         if (gdf.getY1().equals("")) return false;
-        if (gdf.getCharMarkRButton().isSelected() &&  gdf.getTextForDisplay().equals("") ) return false;
+        if (gdf.getTextForDisplay().getText().equals("") ) return false;
         //eventually need to check font here
         return true;
     }
 
     @Override
     public boolean deepEquals(GrafObject o){
-        GrafPoint gp = (GrafPoint) o;
-        if (getType() != o.getType()) return false;
-        if (!getText().equals(gp.getMark())) return false;
+        GrafText gp = (GrafText) o;
         if (!getGrafColor().equals(gp.getGrafColor())) return false;
+        if (getType() != o.getType()) return false;
+        if (!getText().equals(gp.getText())) return false;
         if (!(getX() == gp.getX())) return false;
         if (!(getY() == gp.getY())) return false;
         //eventually need to check font here
@@ -88,16 +88,14 @@ public class GrafText extends GrafObject implements IGrafable
         super.loadObjectFields(gdc);
         gdc.setX1(""+getX());
         gdc.setY1(""+getY());
-        gdc.settDialogMark(getText());
-        gdc.setFontName(getFont().toString());
+        gdc.getTextForDisplay().setText(getText());
+        javafx.scene.text.Font fxFont =  FontDialog.awtFontToFxFont(getFont());
+        gdc.setFontName(fxFont.getName());
+        gdc.setFontStyleText(fxFont.getStyle());
+        gdc.setFontSizeText(fxFont.getSize()+"");
     }
   
-    
 
-
- 
-
-   
    public void setX(double xval){ x = xval; }
    public double getX() { return x; }   
    public void setY(double yval){ y = yval; }

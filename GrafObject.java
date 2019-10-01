@@ -38,7 +38,7 @@ abstract public class GrafObject implements Serializable, IGrafable
        switch (gType){
 
                 case TEXT: return new GrafText(Double.parseDouble(
-                        gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getCharMarkRButton().getText(),   gdc.getGrafColor());
+                        gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(),   gdc.getGrafColor());
                 case COLUMN: return new GrafColumnPlot();
                 case BOXPLOT: return new GrafBoxPlot();
                 case SCATTER:return new GrafScatterPlot();

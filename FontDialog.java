@@ -6,6 +6,9 @@
 /**
 * Dialog for choosing a font 
  */
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -285,4 +288,58 @@ public class FontDialog extends JDialog {
 	      return chosenFont;
 	    }
 
+	   public static java.awt.Font fxFontToAwtFont(javafx.scene.text.Font fxFont){
+	  		String style = fxFont.getStyle();
+	  		int fontStyle;
+	  		if (style.equals("Regular")) fontStyle = 0;
+	  		else if (style.equals("Bold")) fontStyle = 1;
+	  		else if (style.equals("Italic")) fontStyle = 2;
+	  		else if (style.equals("Bold Italic")) fontStyle = 3;
+	  		else fontStyle = 0;
+	  		java.awt.Font awtFont = new Font(fxFont.getName(), fontStyle, (int)fxFont.getSize());
+	  		return awtFont;
+		}
+
+		public static javafx.scene.text.Font awtFontToFxFont(java.awt.Font awtFont){
+	  	int style = awtFont.getStyle();
+	  	FontWeight fw;
+	  	FontPosture fp;
+	  	switch (style){
+	  		case 0: {
+					fw = FontWeight.NORMAL;
+					fp = FontPosture.REGULAR;
+					break;
+			}
+			case 1: {
+				fw = FontWeight.BOLD;
+				fp = FontPosture.REGULAR;
+				break;
+			}
+			case 2: {
+				fw = FontWeight.NORMAL;
+				fp = FontPosture.ITALIC;
+				break;
+			}
+			case 3: {
+				fw = FontWeight.BOLD;
+				fp = FontPosture.ITALIC;
+				break;
+			}
+			default: {
+				fw = FontWeight.NORMAL;
+				fp = FontPosture.REGULAR;
+				break;
+			}
+			}
+
+	  	return javafx.scene.text.Font.font(awtFont.getFamily(), fw, fp , awtFont.getSize());
+		}
+
+		public static void main(String[] args){
+			javafx.scene.text.Font fxFont = new javafx.scene.text.Font(12);
+			fxFont = javafx.scene.text.Font.font(fxFont.getFamily(),
+					FontWeight.BOLD, FontPosture.ITALIC,  fxFont.getSize());
+			String style = fxFont.getStyle();
+			System.out.println(style);
+		}
 }

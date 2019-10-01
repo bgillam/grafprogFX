@@ -17,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 
 import javax.swing.*;
@@ -136,27 +137,18 @@ public class GrafDialogController {
 
     @FXML
     private void onFontButtonClicked(ActionEvent e){
+        java.awt.Font awtFont = FontDialog.fxFontToAwtFont(fontName.getFont());
+        FontDialog fontDialog = new FontDialog(awtFont);
+        awtFont = fontDialog.showFontDialog();
+        javafx.scene.text.Font fxFont = FontDialog.awtFontToFxFont(awtFont);
+        fontName.setFont(fxFont);
+        fontName.setText(fxFont.getName()+"  ");
+        fontSize.setText(fxFont.getSize()+"  ");
+        fontStyle.setText(fxFont.getStyle());
 
-        FontDialog fontDialog = new FontDialog(
-                new java.awt.Font(javafx.scene.text.Font.getDefault().getName(),
-                        Font.PLAIN,
-                        (int) javafx.scene.text.Font.getDefault().getSize()));
-        Font f = fontDialog.showFontDialog();
-
-        fontName.setText(f.getFontName()+"  ");
-        fontSize.setText(f.getSize()+"  ");
-        String style = "";
-        switch (f.getStyle()){
-            case 0: style = "plain"; break;
-            case 1: style = "bold"; break;
-            case 2: style = "italic"; break;
-            case 3: style = "bold & italic"; break;
-            //otherwise: style = "plain"; break;
-        }
-        /*FontPosture fontPosture =
-        fontStyle.setText(style);
-        fontName.setFont(javafx.scene.text.Font.font(fontName.getText(), , Double.parseDouble(fontSize.getText()));*/
     }
+
+
 
     //display appropriate dialog setup for object editing
     @FXML
@@ -278,7 +270,7 @@ public class GrafDialogController {
     }
 
     public void showFxTextDialog() {
-        gType = GrafType.POINT;
+        gType = GrafType.TEXT;
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -616,8 +608,13 @@ public class GrafDialogController {
         this.fontName.setText(fontNameString);
     }
 
+    public String getFontStyleText() {
+        return fontStyle.getText();
+    }
 
+    public void setFontStyleText(String fontStyle) {
+        this.fontStyle.setText(fontStyle);
+    }
 
-
-
+    public void setFontSizeText(String fSize){fontSize.setText(fSize); }
 }
