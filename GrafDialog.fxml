@@ -84,11 +84,12 @@
                 <Label fx:id="textLabel" text = "Text" maxWidth ="100"/>
                 <TextField fx:id = "textForDisplay" minWidth = "100"/>
             </HBox>
+            <Button fx:id = "fontButton" text = "Font" minWidth = "100" onAction="#onFontButtonClicked"/>
             <HBox>
-                <Button fx:id = "fontButton" text = "Font" minWidth = "100" onAction="#onFontButtonClicked"/>
-                <Label fx:id = "fontName" text = "FontName" minWidth ="100"/>
-                <Label fx:id = "fontSize" text = "FontSize" minWidth = "30"/>
-                <Label fx:id = "fontStyle" text = "FontStyle" minWidth="30"/>
+<!--                <Button fx:id = "fontButton" text = "Font" minWidth = "100" onAction="#onFontButtonClicked"/>-->
+                <Label fx:id = "fontName" text = "FontName" minWidth ="150"/>
+                <Label fx:id = "fontSize" text = "FontSize" minWidth = "50"/>
+                <Label fx:id = "fontStyle" text = "FontStyle" minWidth="50"/>
 
             </HBox>
             <CheckBox fx:id = "fns" text = "FNS"/>

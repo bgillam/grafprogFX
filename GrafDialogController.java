@@ -143,8 +143,8 @@ public class GrafDialogController {
                         (int) javafx.scene.text.Font.getDefault().getSize()));
         Font f = fontDialog.showFontDialog();
 
-        fontName.setText(f.getFontName());
-        fontSize.setText(f.getSize()+" ");
+        fontName.setText(f.getFontName()+"  ");
+        fontSize.setText(f.getSize()+"  ");
         String style = "";
         switch (f.getStyle()){
             case 0: style = "plain"; break;
@@ -153,8 +153,9 @@ public class GrafDialogController {
             case 3: style = "bold & italic"; break;
             //otherwise: style = "plain"; break;
         }
-
+        /*FontPosture fontPosture =
         fontStyle.setText(style);
+        fontName.setFont(javafx.scene.text.Font.font(fontName.getText(), , Double.parseDouble(fontSize.getText()));*/
     }
 
     //display appropriate dialog setup for object editing
