@@ -155,7 +155,7 @@ public class GrafDialogController {
         }
 
         fontStyle.setText(style);
-}
+    }
 
     //display appropriate dialog setup for object editing
     @FXML
