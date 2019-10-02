@@ -77,8 +77,8 @@ public class GrafEllipseTest
     public void setAndGetColorTest(){
         gRect.setGrafColor(Color.RED);
         assertEquals(gRect.getGrafColor(),Color.RED);
-        gRect.setFill(Color.BLUE);
-        assertEquals(gRect.getFill(),Color.BLUE);
+        gRect.setFillColor(Color.BLUE);
+        assertEquals(gRect.getFillColor(),Color.BLUE);
     }
     
     @Test 

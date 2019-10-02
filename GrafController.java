@@ -109,19 +109,25 @@ public class GrafController {
 
     public void onPoint(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showFxPointDialog();
+        GrafProg.getDialogController().showPointDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onText(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showFxTextDialog();
+        GrafProg.getDialogController().showTextDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onLineSegment(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showFxLineSegmentDialog();
+        GrafProg.getDialogController().showLineSegmentDialog();
+        GrafProg.getDialogStage().show();
+    }
+
+    public void onRectangle(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showRectangleDialog();
         GrafProg.getDialogStage().show();
     }
 
@@ -140,6 +146,7 @@ public class GrafController {
         GrafProg.closeGraf();
 
     }
+
 
 }
 

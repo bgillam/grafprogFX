@@ -32,7 +32,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
     }
 
     public GrafEllipse(GrafProg sess) {
-        super(sess);
+        super();
         myOwner = sess;
         gStuff = super.getGrafSettings();
         this.setGrafType(GrafType.ELLIPSE);
@@ -40,7 +40,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
     }
     
      public GrafEllipse(GrafProg sess, double x1, double y1, double width, double height){
-            super(sess, x1, y1, width, height);
+            super(x1, y1, width, height);
             setGrafType(GrafType.ELLIPSE);
             setMoveable(false);
             setGrafColor(Color.BLACK);
@@ -53,7 +53,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
         }
         
         public GrafEllipse(GrafProg sess, double x1, double y1, double width, double height, Color gColor){
-            super(sess, x1, y1, width, height);
+            super(x1, y1, width, height);
             setGrafType(GrafType.ELLIPSE);
             setMoveable(false);
             setGrafColor(gColor);
@@ -70,7 +70,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
      public void drawGraf(Graphics2D gc){
          //System.out.println(super.getFillFlag());
          if (super.getFillFlag()) {
-               gc.setColor(super.getFill());
+               gc.setColor(super.getFillColor());
                GrafPrimitives.fillEllipse(gStuff,getX(), getY(), getWidth(), getHeight(), gc );
            }
            gc.setColor(super.getGrafColor());
@@ -151,7 +151,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
            GrafEllipse gPlot = new GrafEllipse(gs, gfd.getPointPanel().getX1(), gfd.getPointPanel().getY1(), gfd.getPointPanel().getW(), gfd.getPointPanel().getH(),gfd.getMarkChooser().getColor());
            if (gfd.getMarkChooser().fillChecked()) {
                gPlot.setFillFlag(true);
-               gPlot.setFill(gfd.getMarkChooser().getFillColor());
+               gPlot.setFillColor(gfd.getMarkChooser().getFillColor());
             }
            gfd.getTempList().add(gPlot);
         

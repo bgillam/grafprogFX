@@ -38,7 +38,7 @@ public class GrafRectangleTest
     public void setUp()
     {
        gSess = new GrafProg();
-       gRect = new GrafRectangle(gSess, 2, 3, 4, 5);
+       gRect = new GrafRectangle(2, 3, 4, 5);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.RECTANGLE);
     }
@@ -76,8 +76,8 @@ public class GrafRectangleTest
     public void setAndGetColorTest(){
         gRect.setGrafColor(Color.RED);
         assertEquals(gRect.getGrafColor(),Color.RED);
-        gRect.setFill(Color.BLUE);
-        assertEquals(gRect.getFill(),Color.BLUE);
+        gRect.setFillColor(Color.BLUE);
+        assertEquals(gRect.getFillColor(),Color.BLUE);
     }
     
     @Test 

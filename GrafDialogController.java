@@ -254,7 +254,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showFxPointDialog() {
+    public void showPointDialog() {
         gType = GrafType.POINT;
 
         Platform.runLater(new Runnable() {
@@ -269,7 +269,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showFxTextDialog() {
+    public void showTextDialog() {
         gType = GrafType.TEXT;
 
         Platform.runLater(new Runnable() {
@@ -284,7 +284,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showFxLineSegmentDialog() {
+    public void showLineSegmentDialog() {
         gType = GrafType.LINESEGMENT;
 
         Platform.runLater(new Runnable() {
@@ -295,6 +295,23 @@ public class GrafDialogController {
                 showX1Y1();
                 showX2Y2();
                 chooseObject.setText("Choose LINESEGMENT");
+
+            }
+        });
+    }
+
+    public void showRectangleDialog() {
+        gType = GrafType.RECTANGLE;
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("RECTANGLE");
+                fillColorPicker.setVisible(true);
+                fillLabel.setVisible(true);
+                showX1Y1();
+                showWH();
+                chooseObject.setText("Choose RECTANGLE");
 
             }
         });
@@ -407,6 +424,22 @@ public class GrafDialogController {
         });
     }
 
+    private void showWH()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                showX1Y1();
+                x2Label.setVisible(true);
+                x2Text.setVisible(true);
+                x2Label.setText("Width");
+                y2Label.setVisible(true);
+                y2Text.setVisible(true);y2Label.setText("Height");
+
+
+            }
+    });
+    }
+
     private void showX1Y1X2Y2()
     {
         Platform.runLater(new Runnable() {
@@ -463,8 +496,9 @@ public class GrafDialogController {
                 nLabel.setVisible(false);
                 nText.setVisible(false);
                 x2Label.setVisible(false);
-                x2Text.setVisible(false);
+                x2Label.setText("x2:");
                 y2Label.setVisible(false);
+                y2Label.setText("y2:");
                 y2Text.setVisible(false);
                 markLabel.setVisible(false);
                 markLabel.setVisible(false);
@@ -592,6 +626,11 @@ public class GrafDialogController {
     public ColorPicker getFillColorPicker() {return fillColorPicker; }
 
     public void setFillColorPicker(ColorPicker fillColorPicker) {  this.fillColorPicker = fillColorPicker; }
+
+    public void setfillColor(Color awtColor){
+        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
+        getFillColorPicker().setValue(fxColor);
+    }
 
     public ColorPicker getGrafColorPicker() { return grafColorPicker; }
 

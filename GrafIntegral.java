@@ -111,11 +111,9 @@ public class GrafIntegral extends GrafObject implements IGrafable
         gdc.setX1(""+getX1());
         gdc.setX2(""+getX2());
         gdc.setDx(""+getN());
-        gdc.settDialogMark(getMark());
-        Color awtColor = getFillColor();
-        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
-        gdc.getFillColorPicker().setValue(fxColor);
-    }
+        //gdc.settDialogMark(getMark());
+        gdc.setfillColor(getFillColor());
+   }
 
 
 
