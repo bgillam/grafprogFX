@@ -28,7 +28,7 @@ public class MockMaker
            for (int i=0; i<5; i++){
                aList.add(new GrafPoint());
                aList.add(new GrafText());
-               aList.add(new GrafSegment(gSess));
+               aList.add(new GrafSegment());
                aList.add(new GrafRectangle(gSess));
                aList.add(new GrafEllipse(gSess));
                aList.add(new GrafCircle(gSess));

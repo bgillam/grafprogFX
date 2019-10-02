@@ -37,7 +37,7 @@ public class GrafSegmentTest
     public void setUp()
     {
        gSess = new GrafProg();
-       gSeg = new GrafSegment(gSess, 2, 3, 4, 5);
+       gSeg = new GrafSegment(2, 3, 4, 5);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.LINESEGMENT);
     }
