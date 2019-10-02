@@ -305,7 +305,18 @@ public class GrafDialogController {
         textLabel.setVisible(true);
         textForDisplay.setVisible(true);
         fontName.setVisible(true);
+        fontStyle.setVisible(true);
+        fontSize.setVisible(true);
         fontButton.setVisible(true);
+     }
+
+     private void hideTextAndFontButtons(){
+         textLabel.setVisible(false);
+         textForDisplay.setVisible(false);
+         fontName.setVisible(false);
+         fontStyle.setVisible(false);
+         fontSize.setVisible(false);
+         fontButton.setVisible(false);
      }
 
     private void showFunctionChooser(){
@@ -469,6 +480,7 @@ public class GrafDialogController {
                 fns.setVisible(false);
                 fillColorPicker.setVisible(false);
                 fillLabel.setVisible(false);
+                hideTextAndFontButtons();
             }
         });
     }

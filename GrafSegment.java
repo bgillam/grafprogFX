@@ -44,6 +44,11 @@ public class GrafSegment extends GrafObject implements IGrafable
         this(x1, y1, x2, y2);
         setGrafColor(gColor);
     }
+
+    public GrafSegment(double x1, double y1, double x2, double y2, Color gColor, String mark){
+        this(x1, y1, x2, y2, gColor);
+        setMark(mark);
+    }
    
    
    @Override

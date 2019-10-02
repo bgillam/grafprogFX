@@ -174,7 +174,9 @@ public class GrafProg extends Application {
     public static void closeGraf(){
 
         if (!grafSaved) {
-            switch (JOptionPane.showConfirmDialog(null, "Save File?", "File" + grafFile.toString() + "not saved.", JOptionPane.YES_NO_CANCEL_OPTION)) {
+            final JDialog dialog = new JDialog();
+            dialog.setAlwaysOnTop(true);
+            switch (JOptionPane.showConfirmDialog(dialog, "Save File?", "File" + grafFile.toString() + "not saved.", JOptionPane.YES_NO_CANCEL_OPTION)) {
                 case JOptionPane.YES_OPTION: {
                     GrafFiles.saveFile();
                     setGrafSavedAndTitle(true);
