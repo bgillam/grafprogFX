@@ -42,10 +42,10 @@ public class GrafIntegral extends GrafObject implements IGrafable
     }
        
        
-   public GrafIntegral(String yString, double firstX, double secondX, int nVal, Color c, Color FillColor){
+   public GrafIntegral(String yString, double firstX, double secondX, int nVal, Color c, Color fillColor){
         this(yString, firstX, secondX, nVal);
         super.setGrafColor(c);
-        this.fillColor = fillColor;
+        setFillColor(fillColor);
     }
    
    @Override  
@@ -62,16 +62,16 @@ public class GrafIntegral extends GrafObject implements IGrafable
            }catch (FunctionFormatException e) { height = 0; }   
            sum = sum + dx*height;
            if (height >= 0) {
+               gc.setColor(getFillColor());
+               GrafPrimitives.fillRect(gStuff,left, height, dx, height, gc);
                gc.setColor(super.getGrafColor());
                GrafPrimitives.grafRect(gStuff,left, height, dx, height, gc);
-               /*gc.setColor(getFillColor());
-               GrafPrimitives.fillRect(gStuff,left, height, dx, height, gc);*/
            }
            else {
+               gc.setColor(getFillColor());
+               GrafPrimitives.fillRect(gStuff,left, 0, dx, height, gc);
                gc.setColor(super.getGrafColor());
                GrafPrimitives.grafRect(gStuff,left, 0, dx, height, gc);
-              /* gc.setColor(getFillColor());
-               GrafPrimitives.fillRect(gStuff,left, 0, dx, height, gc);*/
            }
           // gStuff.grafRect(left, 0, dx, height, gc);
            myOwner.setMessage3("Sum = "+sum);
@@ -96,7 +96,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
         GrafIntegral gi = (GrafIntegral) o;
         if (getType() != o.getType()) return false;
         if (!getGrafColor().equals(gi.getGrafColor())) return false;
-        //if (!)
+        if (!getFillColor().equals(gi.getFillColor())) return false;
         if (!functionString.equals(gi.getFunctionString())) return false;
         if (!(getX1() == gi.getX1())) return false;
         if (!(getX2() == gi.getX2())) return false;
@@ -111,7 +111,6 @@ public class GrafIntegral extends GrafObject implements IGrafable
         gdc.setX1(""+getX1());
         gdc.setX2(""+getX2());
         gdc.setDx(""+getN());
-        //gdc.settDialogMark(getMark());
         gdc.setfillColor(getFillColor());
    }
 

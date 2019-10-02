@@ -63,7 +63,7 @@ abstract public class GrafObject implements Serializable, IGrafable
 
         }
     }
-    public static GrafObject createGrafObjectFromController(GrafType gType){
+        public static GrafObject createGrafObjectFromController(GrafType gType){
         switch (gType){
             case TEXT: return new GrafText();
             case COLUMN: return new GrafColumnPlot();

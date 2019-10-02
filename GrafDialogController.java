@@ -497,6 +497,7 @@ public class GrafDialogController {
                 nText.setVisible(false);
                 x2Label.setVisible(false);
                 x2Label.setText("x2:");
+                x2Text.setVisible(false);
                 y2Label.setVisible(false);
                 y2Label.setText("y2:");
                 y2Text.setVisible(false);

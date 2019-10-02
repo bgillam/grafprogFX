@@ -48,15 +48,17 @@ public class GrafRectangle extends GrafObject implements IGrafable {
 
     @Override
     public void drawGraf(Graphics2D gc) {
-        if (fillFlag) {
+        /*if (fillFlag) {
             gc.setColor(fill);
             GrafPrimitives.fillRect(gStuff, x, y, width, height, gc);
-        }
-
+        }*/
+        gc.setColor(getFillColor());
+        GrafPrimitives.fillRect(gStuff, x, y, width, height, gc);
         gc.setColor(super.getGrafColor());
         GrafPrimitives.grafRect(gStuff, x, y, width, height, gc);
-        gc.setColor(Color.BLACK);
-        gc.setPaint(Color.WHITE);
+
+       /* gc.setColor(Color.BLACK);
+        gc.setPaint(Color.WHITE);*/
 
     }
 
