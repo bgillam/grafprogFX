@@ -31,7 +31,7 @@ public class MockMaker
                aList.add(new GrafSegment());
                aList.add(new GrafRectangle());
                aList.add(new GrafEllipse());
-               aList.add(new GrafCircle(gSess));
+               aList.add(new GrafCircle());
                aList.add(new GrafScatterPlot(gSess));
                aList.add(new GrafColumnPlot(gSess));
                aList.add(new GrafBoxPlot(gSess));

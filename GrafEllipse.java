@@ -70,7 +70,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
         }
 
 
-    @Override
+    /*@Override
     public boolean isValidInput(GrafDialogController gdf) {
         if (gdf.getX1().equals("")) return false;
         if (gdf.getX2().equals("")) return false;
@@ -101,7 +101,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
         gdc.setY2("" + getHeight());
         gdc.setfillColor(getFillColor());
 
-    }
+    }*/
         
      public String toString(){
            return "ELLIPSE: ("+getX()+", "+getY()+"); ("+getWidth()+", "+getHeight();//+ " "+getGrafColor()+")";

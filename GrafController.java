@@ -137,6 +137,12 @@ public class GrafController {
         GrafProg.getDialogStage().show();
     }
 
+    public void onCircle(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showCircleDialog();
+        GrafProg.getDialogStage().show();
+    }
+
     public void onTable(ActionEvent actionEvent) {
         //GrafStage.showData();
        GrafProg.getTableStage().show();
@@ -152,6 +158,7 @@ public class GrafController {
         GrafProg.closeGraf();
 
     }
+
 
 
 }

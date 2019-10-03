@@ -334,6 +334,22 @@ public class GrafDialogController {
         });
     }
 
+    public void showCircleDialog() {
+        gType = GrafType.CIRCLE;
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("CIRCLE");
+                fillColorPicker.setVisible(true);
+                fillLabel.setVisible(true);
+                showX1Y1();
+                showR();
+                chooseObject.setText("Choose CIRCLE");
+
+            }
+        });
+    }
 
     //private halpers for setting up dialog
     private void showTextAndFontButton(){
@@ -490,6 +506,17 @@ public class GrafDialogController {
                 nLabel.setVisible(true);
                 nLabel.setText("dx:");
                 nText.setVisible(true);
+            }
+        });
+    }
+
+    private void showR()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                x2Label.setVisible(true);
+                x2Label.setText("r:");
+                x2Text.setVisible(true);
             }
         });
     }
