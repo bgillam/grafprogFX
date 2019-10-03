@@ -23,7 +23,7 @@ public class GrafRectangle extends GrafObject implements IGrafable {
 
 
     public GrafRectangle() {
-        gStuff = super.initGrafObject(GrafType.CHORD);
+        gStuff = super.initGrafObject(GrafType.RECTANGLE);
 
     }
 

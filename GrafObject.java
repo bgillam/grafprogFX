@@ -51,7 +51,9 @@ abstract public class GrafObject implements Serializable, IGrafable
                 case RECTANGLE: return new GrafRectangle(Double.parseDouble(gdc.getX1()),
                         Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
                         Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
-                case ELLIPSE: return new GrafEllipse();
+                case ELLIPSE: return new GrafEllipse(Double.parseDouble(gdc.getX1()),
+                        Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
+                        Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
                 case CIRCLE: return new GrafCircle();
                 case FUNCTION: return new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
                 case FVALUE: return new GrafValue( gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());

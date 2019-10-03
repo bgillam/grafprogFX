@@ -317,6 +317,24 @@ public class GrafDialogController {
         });
     }
 
+    public void showEllipseDialog() {
+        gType = GrafType.ELLIPSE;
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("ELLIPSE");
+                fillColorPicker.setVisible(true);
+                fillLabel.setVisible(true);
+                showX1Y1();
+                showWH();
+                chooseObject.setText("Choose ELLIPSE");
+
+            }
+        });
+    }
+
+
     //private halpers for setting up dialog
     private void showTextAndFontButton(){
         textLabel.setVisible(true);
@@ -708,6 +726,7 @@ public class GrafDialogController {
     }
 
     public void setFontSizeText(String fSize){fontSize.setText(fSize); }
+
 
 
 }

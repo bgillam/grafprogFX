@@ -64,7 +64,7 @@
                         <MenuItem fx:id="pointItem" text="Point" onAction="#onPoint"/>
                         <MenuItem fx:id="lineItem" text="Line Segment" onAction="#onLineSegment"/>
                         <MenuItem fx:id="rectangleItem" text="Rectangle" onAction="#onRectangle"/>
-                        <MenuItem fx:id="ellipseItem" text="Ellipse"/>
+                        <MenuItem fx:id="ellipseItem" text="Ellipse" onAction="#onEllipse"/>
                         <MenuItem fx:id="circleItem" text="Circle"/>
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="textItem" text="Text" onAction="#onText"/>

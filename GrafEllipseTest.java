@@ -38,7 +38,7 @@ public class GrafEllipseTest
     public void setUp()
     {
        gSess = new GrafProg();
-       gRect = new GrafEllipse(gSess, 2, 3, 4, 5);
+       gRect = new GrafEllipse(2, 3, 4, 5);
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.ELLIPSE);
     }

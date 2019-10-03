@@ -131,6 +131,12 @@ public class GrafController {
         GrafProg.getDialogStage().show();
     }
 
+    public void onEllipse(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showEllipseDialog();
+        GrafProg.getDialogStage().show();
+    }
+
     public void onTable(ActionEvent actionEvent) {
         //GrafStage.showData();
        GrafProg.getTableStage().show();
