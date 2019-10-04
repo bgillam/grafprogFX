@@ -29,17 +29,22 @@ public class GrafProg extends Application {
     private static Stage dialogStage = new Stage();
     private static Stage tableStage = new Stage();
     private static Stage statStage = new Stage();
+    private static Stage freqTableStage = new Stage();
     //static Stage spreadStage = new Stage();  for better spreadsheet later
 
     private static GrafController grafController;
     private static GrafDialogController dialogController;
     private static TableController tableController;
+
     private static OneVarStatsController statController;
 
     private static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
     private static GrafPanel grafPanel = new GrafPanel(); //Graphics Panel in swing
     private static SwingNode swingTableNode = new SwingNode();
     private static GrafTable data = new GrafTable(100,10);  //table for data
+
+    private static FrequencyChartDialog frequencyChartDialog = new FrequencyChartDialog(); //Graphics Panel in swing
+
 
     //instance variables
     private static File grafFile = new File("");  //File associated with the current Graf object
@@ -103,6 +108,7 @@ public class GrafProg extends Application {
         setSizeChangeListener(tableStage, data.getDataPanel());
         //tableStage.show();
 
+
         //Set up main graf window
         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
         Parent grafRoot = grafLoader.load();
@@ -150,7 +156,7 @@ public class GrafProg extends Application {
     }
 
 
-
+    //public static void showFreqTableDialog(){ frequencyChartDialog. }
 
     public static void showData(){
        tableStage.show();

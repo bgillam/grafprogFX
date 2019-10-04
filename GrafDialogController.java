@@ -351,6 +351,8 @@ public class GrafDialogController {
         });
     }
 
+
+
     //private halpers for setting up dialog
     private void showTextAndFontButton(){
         textLabel.setVisible(true);

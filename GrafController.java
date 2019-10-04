@@ -143,6 +143,12 @@ public class GrafController {
         GrafProg.getDialogStage().show();
     }
 
+    public void onFreqTable(ActionEvent actionEvent) {
+         FrequencyChartDialog fcd = new FrequencyChartDialog();
+         fcd.setVisible(true);
+
+    }
+
     public void onTable(ActionEvent actionEvent) {
         //GrafStage.showData();
        GrafProg.getTableStage().show();
