@@ -26,7 +26,7 @@ public class OneVarStatsController {
     @FXML private TextField textFieldMin;
     @FXML private TextField textFieldN;
     @FXML private TextField textFieldRange;
-    @FXML private  ComboBox functionComboBox;
+    @FXML private  ComboBox columnComboBox;
 
 
 
@@ -35,14 +35,14 @@ public class OneVarStatsController {
         // setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
         //System.out.println("Headers:"+GrafProg.getData().getHeaderArray()[3]);
 
-        functionComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
+        columnComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
                 //= new ComboBox(FXCollections.observableArrayList(GrafProg.getData().getHeaderArray()));
     }
 
 
 
     public void doStats(){
-        int selectedColumn = functionComboBox.getSelectionModel().getSelectedIndex()+1;
+        int selectedColumn = columnComboBox.getSelectionModel().getSelectedIndex()+1;
 
         //check for empty column.
         if (GrafStats.nullArray(GrafStats.getRidOfNulls(GrafProg.getData().getColumnValues(selectedColumn)), "Stats generator")) {

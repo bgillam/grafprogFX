@@ -254,6 +254,23 @@ public class GrafDialogController {
         });
     }
 
+    @FXML
+    public void showColumnPlotDialog()
+    {gType = GrafType.COLUMN;
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("COLUMN");
+                showColumnChooser();
+                showMarks();
+                showConnectedCheckBox();
+                chooseObject.setText("Choose COLUMN");
+
+            }
+        });
+    }
+
     public void showPointDialog() {
         gType = GrafType.POINT;
 
@@ -382,9 +399,34 @@ public class GrafDialogController {
             fComboBox.setValue(getTempGrafList().get(1));
         }catch (IndexOutOfBoundsException iob){ fComboBox.setValue("function");}
         fxLabel.setVisible(true);
-        functionString.setVisible(true);
-        functionString.setEditable(false);
+        //functionString.setVisible(true);
+        //functionString.setEditable(false);
     }
+
+    private void showColumnChooser(){
+        fComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
+        fChoiceLabel.setText("Choose Column: ");
+        fChoiceLabel.setVisible(true);
+        fComboBox.setVisible(true);
+        //fComboBox.setValue("function");
+        try {
+            fComboBox.setValue(getTempGrafList().get(1));
+        }catch (IndexOutOfBoundsException iob){ fComboBox.setValue("Column");}
+
+    }
+
+    private void showColumnChooser2(){
+        fComboBox2.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
+        fChoiceLabel2.setText("Choose Column: ");
+        fChoiceLabel2.setVisible(true);
+        fComboBox2.setVisible(true);
+        //fComboBox.setValue("function");
+        try {
+            fComboBox2.setValue(getTempGrafList().get(1));
+        }catch (IndexOutOfBoundsException iob){ fComboBox2.setValue("Column");}
+
+    }
+
 
     private void showMarks()
     {
@@ -519,6 +561,16 @@ public class GrafDialogController {
                 x2Label.setVisible(true);
                 x2Label.setText("r:");
                 x2Text.setVisible(true);
+            }
+        });
+    }
+
+    private void showConnectedCheckBox(){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                fns.setVisible(true);
+                fns.setText("Connected");
+
             }
         });
     }
@@ -670,18 +722,15 @@ public class GrafDialogController {
         javafx.scene.paint.Color fxColor = fillColorPicker.getValue();
         java.awt.Color awtColor = new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
         return awtColor;}
-
-    public ColorPicker getFillColorPicker() {return fillColorPicker; }
-
-    public void setFillColorPicker(ColorPicker fillColorPicker) {  this.fillColorPicker = fillColorPicker; }
-
     public void setfillColor(Color awtColor){
         javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
         getFillColorPicker().setValue(fxColor);
     }
 
-    public ColorPicker getGrafColorPicker() { return grafColorPicker; }
+    public ColorPicker getFillColorPicker() {return fillColorPicker; }
+    public void setFillColorPicker(ColorPicker fillColorPicker) {  this.fillColorPicker = fillColorPicker; }
 
+    public ColorPicker getGrafColorPicker() { return grafColorPicker; }
     public void setGrafColorPicker(ColorPicker grafColorPicker) {this.grafColorPicker = grafColorPicker; }
 
     public String getX1() { return x1Text.getText(); }
@@ -721,6 +770,7 @@ public class GrafDialogController {
                charMarkText.setText(mark);
            }
     }
+
 
     public TextField getTextForDisplay() {
         return textForDisplay;

@@ -68,57 +68,39 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
                 if (val != null) {
                     if (myOwner.getGrafSettings().getReverseXY()) GrafPrimitives.grafString(gStuff,val, i , mark, gc);
                     else GrafPrimitives.grafString(gStuff,i,val, mark, gc);
-                        
                 }
         }
         gc.setColor(Color.BLACK);
     }
-    
-  /*  @Override
-      public GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
-        gfd.setTitle("Column Plot");  
-        //gfd.setColumnChooser(gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false));
-        gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false);
-        //gfd.setColumnChooser(gfd.getColumnChooser());
-        gfd.setMarkChooser(gfd.addMarkPanel(new ColorRadioMarkPanel(true))); //addMarkPanel(gSess.getGraphics().getFont(), true, false, false, true, false, false, false);
-        gfd.addSeparatorPanel();
-        gfd.setDeleter(gfd.addDeleterPanel(GrafType.COLUMN)); 
-        
-        gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(),GrafType.COLUMN)));  
-        
-        gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveColumn(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(),GrafType.COLUMN)));  
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveColumn(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-        // gfd.setModal(true);
-        // gfd.pack();
-        // gfd.setVisible(true); 
-        return gfd;
+
+   /* @Override
+    public boolean isValidInput(GrafDialogController gdf){
+        if (gdf.getColumn1().equals("") && gdf.getColumn1.isVisible()) return false;
+        return true;
     }
-    */
-    
+
+    @Override
+    public boolean deepEquals(GrafObject o){
+        GrafColumnPlot gi = (GrafColumnPlot) o;
+        if (getType() != o.getType()) return false;
+        if (!getGrafColor().equals(gi.getGrafColor())) return false;
+        if (!getMark().equals(gi.getMark())) return false;
+        if (!getColumn1().equals(gi.getColumn1())) return false;
+        if (!(isConnected() == gi.isConnected())) return false;
+        return true;
+    }
+
+    @Override
+    public void loadObjectFields(GrafDialogController gdc){
+        super.loadObjectFields(gdc);
+        gdc.setFunctionString(getFunctionString());
+        gdc.setX1(""+getX1());
+        gdc.setX2(""+getX2());
+        gdc.setDx(""+getN());
+        gdc.setfillColor(getFillColor());
+    }*/
     
 
-    /*@Override
-    public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-             GrafColumnPlot cEdit = (GrafColumnPlot)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-             caller.getColumnChooser().setInputIndex(cEdit.getColumnNumber());
-             caller.getMarkChooser().setMark(cEdit.getMark());
-             caller.getMarkChooser().setConnectedChecked(cEdit.getConnected());
-             caller.getMarkChooser().setColor(cEdit.getGrafColor()); 
-}*/
     //Setters and Getters
     public void setColumnNumber(int c){ columnNumber = c;}
     public int getColumnNumber(){ return columnNumber;}
@@ -159,21 +141,6 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     
     }
     
-    /* Setters and Getters from Parent GrafObject
-     *  public void drawGraf(Graphics2D g2D){};
-   
-        public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-        public GrafProg.GrafType getType(){return grafType; }
-   
-        public boolean isMoveable(){ return moveable; } 
-        public void setMoveable(boolean tf){ moveable = tf;  }
-        public boolean getMoveable(){return moveable;}
-   
-        public void setOwner(GrafProg owner){myOwner = owner;}
-        public GrafProg getOwner(){return myOwner;}
-   
-        public void setGrafColor(Color c){grafColor = Color.BLACK;   }
-        public Color getGrafColor() { return grafColor;}
-     */
-    
+
+
 }
