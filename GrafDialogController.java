@@ -175,6 +175,7 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 functionString.setVisible(true);
+                functionString.setEditable(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("VALUE");
                 showFunctionChooser();
@@ -192,6 +193,8 @@ public class GrafDialogController {
         gType = GrafType.TANGENT;
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                functionString.setVisible(true);
+                functionString.setEditable(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("TANGENT");
                 showFunctionChooser();
@@ -208,6 +211,8 @@ public class GrafDialogController {
         gType = GrafType.CHORD;
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                functionString.setVisible(true);
+                functionString.setEditable(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("FCHORD");
                 showFunctionChooser();
@@ -225,6 +230,8 @@ public class GrafDialogController {
         gType = GrafType.FZERO;
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                functionString.setVisible(true);
+                functionString.setEditable(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("FZEROS");
                 showFunctionChooser();
@@ -241,6 +248,8 @@ public class GrafDialogController {
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                functionString.setVisible(true);
+                functionString.setEditable(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("INTEGRAL");
                 showFunctionChooser();
@@ -276,6 +285,7 @@ public class GrafDialogController {
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                functionString.setVisible(true);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("POINT");
                 showMarks();
@@ -679,15 +689,16 @@ public class GrafDialogController {
     }
 
     public void functionChosen(ActionEvent actionEvent) {
-        try {
-            if (!fComboBox.getValue().equals("function")) {
-                GrafFunction gf = (GrafFunction) (fComboBox.getValue());
-                functionString.setText(gf.getFunction());
+        if (functionString.isVisible()) {
+            try {
+                if (!fComboBox.getValue().equals("function")) {
+                    GrafFunction gf = (GrafFunction) (fComboBox.getValue());
+                    functionString.setText(gf.getFunction());
+                }
+            } catch (ClassCastException cce) {
+                //System.out.println("Choose a Function.");
+            } catch (NullPointerException npe) {
             }
-        }catch (ClassCastException cce){
-            //System.out.println("Choose a Function.");
-        }catch (NullPointerException npe){
-
         }
     }
 
