@@ -699,6 +699,16 @@ public class GrafDialogController {
                 //System.out.println("Choose a Function.");
             } catch (NullPointerException npe) {
             }
+        }else{
+            try {
+                if (!fComboBox.getValue().equals("Column")) {
+                    fComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
+
+                }
+            } catch (ClassCastException cce) {
+                //System.out.println("Choose a Function.");
+            } catch (NullPointerException npe) {
+            }
         }
     }
 
