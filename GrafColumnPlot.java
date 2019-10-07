@@ -23,34 +23,27 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         
     //Constructor
     public GrafColumnPlot(){
-     setGrafType(GrafType.COLUMN);
-     setMoveable(false);
-     setGrafColor(Color.BLACK);
-     setColumnNumber(1);
-    }
-    
-    public GrafColumnPlot(GrafProg sess){
-        int column = 1;
-        setGrafType(GrafType.COLUMN);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
-        setColumnNumber(column);
+        gStuff = super.initGrafObject(GrafType.COLUMN);
+        setColumnNumber(1);
         table = myOwner.getData();
-        sess.setMessage1("Plotting Column "+columnNumber);
+        GrafProg.setMessage1("Plotting Column "+columnNumber);
     }
     
+
         
-    public GrafColumnPlot(GrafProg sess, int column){
-        setGrafType(GrafType.COLUMN);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
+    public GrafColumnPlot(int column){
+        this();
         setColumnNumber(column);
-        table = myOwner.getData();
-        sess.setMessage1("Plotting Column "+columnNumber);
+        GrafProg.setMessage1("Plotting Column "+columnNumber);
+    }
+
+    public GrafColumnPlot(int column, String mark, boolean connected, Color c){
+        this();
+        setColumnNumber(column);
+        GrafProg.setMessage1("Plotting Column "+columnNumber);
+        setMark(mark);
+        setConnected(connected);
+        setGrafColor(c);
     }
     
        
@@ -65,6 +58,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
        
         for (int i = 1; i < table.getNumRows(); i++){
                 Double val = table.getCellValue(i, columnNumber);
+            System.out.println(i+" "+val);
                 if (val != null) {
                     if (myOwner.getGrafSettings().getReverseXY()) GrafPrimitives.grafString(gStuff,val, i , mark, gc);
                     else GrafPrimitives.grafString(gStuff,i,val, mark, gc);
@@ -73,9 +67,10 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         gc.setColor(Color.BLACK);
     }
 
-   /* @Override
+    @Override
     public boolean isValidInput(GrafDialogController gdf){
-        if (gdf.getColumn1().equals("") && gdf.getColumn1.isVisible()) return false;
+        //if (gdf.getColumn1VaLue()).eq
+        //if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
         return true;
     }
 
@@ -85,20 +80,18 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         if (getType() != o.getType()) return false;
         if (!getGrafColor().equals(gi.getGrafColor())) return false;
         if (!getMark().equals(gi.getMark())) return false;
-        if (!getColumn1().equals(gi.getColumn1())) return false;
-        if (!(isConnected() == gi.isConnected())) return false;
+        if (!(getColumnNumber() == gi.getColumnNumber())) return false;
+        if (!(getConnected() == gi.getConnected())) return false;
         return true;
     }
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
-        gdc.setFunctionString(getFunctionString());
-        gdc.setX1(""+getX1());
-        gdc.setX2(""+getX2());
-        gdc.setDx(""+getN());
-        gdc.setfillColor(getFillColor());
-    }*/
+        gdc.setColumn1ChooserColumn(getColumnNumber());
+        gdc.settDialogMark(getMark());
+        gdc.setFNS(connected);
+    }
     
 
     //Setters and Getters
@@ -128,7 +121,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     private static void addColumn(GrafProg gs, GrafInputDialog gfd){
         int input = gfd.getInput();
         if (input == 0)  return;
-        GrafColumnPlot gPlot = new GrafColumnPlot(gs, input);
+        GrafColumnPlot gPlot = new GrafColumnPlot(input);
         gPlot.setGrafColor(gfd.getMarkChooser().getGrafColor());
         //set correct mark for points
         if (gfd.getMarkChooser().xMark()) gPlot.setMark("x"); 

@@ -31,7 +31,6 @@ public class GrafDialogController {
     @FXML    private ColorPicker fillColorPicker;
     @FXML    private Label fillLabel;
     @FXML    private ColorPicker grafColorPicker;
-    @FXML    private ComboBox fComboBox;
     @FXML    private Label fChoiceLabel;
     @FXML    private TextField x1Text;
     @FXML    private Label x1Label;
@@ -62,6 +61,7 @@ public class GrafDialogController {
     @FXML    private Pane grafPane;
     @FXML    private CheckBox fns;
     @FXML    private Label fChoiceLabel2;
+    @FXML    private ComboBox fComboBox;
     @FXML    private ComboBox fComboBox2;
     @FXML    private ComboBox objectComboBox;
 
@@ -729,6 +729,7 @@ public class GrafDialogController {
         return functionString.isVisible();
     }
 
+
     public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
     public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = GrafProg.getGrafList();}
 
@@ -827,6 +828,32 @@ public class GrafDialogController {
 
     public void setFontSizeText(String fSize){fontSize.setText(fSize); }
 
+    public boolean getFNS() {
+        return fns.isSelected();
+    }
 
+    public void setFNS(boolean fnsFlag) {
+        this.fns.setSelected(fnsFlag);
+    }
+
+    public void setColumn1ChooserColumn(int choice){
+        fComboBox.getSelectionModel().select(choice);
+    }
+
+    public int getColumn1ChooserColumn(){
+        return fComboBox.getSelectionModel().getSelectedIndex()+1;
+    }
+
+    //public String getColumn1String(){
+    //    return getFunctionString();
+    //}
+
+    public boolean isConnected(){
+        return fns.isSelected();
+    }
+
+    public Object getColumn1VaLue(){
+        return fComboBox.getValue();
+    }
 
 }

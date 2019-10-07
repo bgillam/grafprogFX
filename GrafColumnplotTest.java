@@ -37,7 +37,7 @@ public class GrafColumnplotTest
     public void setUp()
     {
        gSess = new GrafProg();
-       gCPlot = new GrafColumnPlot(gSess);
+       gCPlot = new GrafColumnPlot();
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.COLUMN);
                  
