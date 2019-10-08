@@ -270,7 +270,7 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
-                GrafProg.getDialogStage().setTitle("COLUMN");
+                GrafProg.getDialogStage().setTitle("COLUMN PLOT");
                 showColumnChooser();
                 showMarks();
                 showConnectedCheckBox();
@@ -420,7 +420,7 @@ public class GrafDialogController {
         fComboBox.setVisible(true);
         //fComboBox.setValue("function");
         try {
-            fComboBox.setValue(getTempGrafList().get(1));
+            fComboBox.getSelectionModel().select(0);
         }catch (IndexOutOfBoundsException iob){ fComboBox.setValue("Column");}
 
     }
@@ -432,7 +432,7 @@ public class GrafDialogController {
         fComboBox2.setVisible(true);
         //fComboBox.setValue("function");
         try {
-            fComboBox2.setValue(getTempGrafList().get(1));
+            fComboBox2.getSelectionModel().select(0);
         }catch (IndexOutOfBoundsException iob){ fComboBox2.setValue("Column");}
 
     }

@@ -55,13 +55,21 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
       
         double x = xMin;
         gc.setColor(super.getGrafColor());
-       
+        Double val, preval = 0.0;
         for (int i = 1; i < table.getNumRows(); i++){
-                Double val = table.getCellValue(i, columnNumber);
-            System.out.println(i+" "+val);
+              val = table.getCellValue(i, columnNumber);
+              //System.out.println(i+" "+val);
                 if (val != null) {
-                    if (myOwner.getGrafSettings().getReverseXY()) GrafPrimitives.grafString(gStuff,val, i , mark, gc);
-                    else GrafPrimitives.grafString(gStuff,i,val, mark, gc);
+                    if (myOwner.getGrafSettings().getReverseXY()) {
+                        GrafPrimitives.grafString(gStuff,val, i , mark, gc);
+                        if (connected) if (i != 1) GrafPrimitives.grafLine(gStuff, preval, i-1, val, i, gc);
+                        preval=val;
+                    }
+                    else {
+                        GrafPrimitives.grafString(gStuff,i,val, mark, gc);
+                        if (connected) if (i != 1) GrafPrimitives.grafLine(gStuff, i-1, preval, i, val, gc);
+                        preval=val;
+                    }
                 }
         }
         gc.setColor(Color.BLACK);
