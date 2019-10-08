@@ -414,7 +414,7 @@ public class GrafDialogController {
     }
 
     private void showColumnChooser(){
-        fComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
+        fComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
         fChoiceLabel.setText("Choose Column: ");
         fChoiceLabel.setVisible(true);
         fComboBox.setVisible(true);
@@ -426,7 +426,7 @@ public class GrafDialogController {
     }
 
     private void showColumnChooser2(){
-        fComboBox2.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
+        fComboBox2.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
         fChoiceLabel2.setText("Choose Column: ");
         fChoiceLabel2.setVisible(true);
         fComboBox2.setVisible(true);
@@ -702,7 +702,7 @@ public class GrafDialogController {
         }else{
             try {
                 if (!fComboBox.getValue().equals("Column")) {
-                    fComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
+                    fComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
 
                 }
             } catch (ClassCastException cce) {

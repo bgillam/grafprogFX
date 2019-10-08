@@ -35,14 +35,13 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
     private RandomDialog rd;
     private RecursiveDialog recDialog;
      
-    
+
     // Constructor of Table
     public GrafTable(int row, int col)              //GrafStage sess, int row, int col)
     {
         // Create a panel to hold all other components
         dataPanel = new JPanel();
         dataPanel.setLayout( new BorderLayout() );
-
 
         // Make column 0 non-editable 
         model = new DefaultTableModel()
@@ -64,7 +63,6 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
         // Add the table to a scrolling pane
         scrollPane = new JScrollPane( table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         dataPanel.add( scrollPane, BorderLayout.CENTER );
-        
 
         labelHeaders();
         numberTheRows();
@@ -89,9 +87,8 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
                     table.setRowSelectionAllowed(true);
                }
             }
-      });
-        
-      table.addKeyListener(this);       
+        });
+       // table.addKeyListener(this);
     }
       
         
@@ -102,29 +99,19 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
         int cols = getNumCols();
         for (int i = 1; i <= cols; i++) // have adjusted our column count by 1. 
             setHeaderString(i,"Data"+i);
-            
     }
     
     public void numberTheRows(){
     int rows = getNumRows();
     for (int i = 1; i <= rows; i++)
         setCellValueInteger(i , 0, i );
-        
     }
 
-    public JTable getTable(){
-            return table;
-    }
-    
-    public JPanel getDataPanel(){
-        return dataPanel;
-
-    }
-     //change the table dimensions
-   private void resizeData(){
+    //change the table dimensions
+    private void resizeData(){
       DataSizeDialog dataDialog = new DataSizeDialog(new JFrame(), getNumRows(), getNumCols());
       Point xy = dataDialog.showDataSizeDialog();
-      String [] oldHeaders = saveHeaders();
+      String [] oldHeaders = getHeaderArray();
       try{
           setNumRows((int)xy.getX());
           setNumCols((int)xy.getY());
@@ -133,31 +120,18 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
          } catch (NumberFormatException e){
           gSess.setMessage1("bad number format for row or column count");
       }
-     
-      
-       
-  }
-   
-   public String[] saveHeaders(){
-       String[] headerHolder = new String[getNumCols()+1];
-       int cols = getNumCols();
-       for (int i = 1; i<= cols; i++) {           // don't use index 0 just to keep indexes concurrent with Table calls
-               headerHolder[i] = getHeaderString(i);
-            
-       }
-       return headerHolder;
-   }
-    
-    /*public String[] getHeaderStringArray(){
-       String[] headerHolder = new String[getNumCols()+1];
-       int cols = getNumCols();
-       for (int i = 1; i<= cols; i++) {           // don't use index 0 just to keep indexes concurrent with Table calls
-               headerHolder[i] = getHeaderString(i);
-            
-       }
-       return headerHolder;
-   }*/
+    }
 
+     /*//Saves Headers in String[] and returns
+     public String[] createHeaderArray() {
+         String[] headerHolder = new String[getNumCols() + 1];
+         int cols = getNumCols();
+         for (int i = 1; i <= cols; i++) {           // don't use index 0 just to keep indexes concurrent with Table calls
+             headerHolder[i] = getHeaderString(i);
+         }
+         return headerHolder;
+     }*/
+    
      public String[] getHeaderArray(){
          String[] headerArray = new String[getNumCols()+1];
          for (int i = 0; i <= getNumCols(); i++)
@@ -165,22 +139,19 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
          return headerArray;
      }
 
-     public String[] getHeaderArrayTrunc(){
+     public String[] getHeaderArrayCdr(){
          String[] headerArray = new String[getNumCols()];
          for (int i = 1; i <= getNumCols(); i++)
              headerArray[i-1] = getHeaderString(i);
          return headerArray;
      }
 
-
      public void setHeaderString(int c, String s){
          table.getColumnModel().getColumn(c).setHeaderValue(s);
      }
-
      public String getHeaderString(int c){
          return (String)table.getColumnModel().getColumn(c).getHeaderValue();
      }
-
 
      public void setHeaderArray(String[] headers){
          for (int i=0; i <= getNumCols(); i++)
@@ -202,30 +173,6 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
            setHeaderString(i, headerHolder[i]);
    }
       
-    //use column zero to number the rows
-    //private void numberTheRows(){
-    //int rows = getNumRows();
-    //for (int i = 1; i <= rows; i++)
-    //    setCellValueInteger(i , 0, i );
-    //    
-    //}
-         
-   //change the table dimensions
-   //private void resizeData(){
-   //   DataSizeDialog dataDialog = new DataSizeDialog(new JFrame(), getNumRows(), getNumCols());
-   //   Point xy = dataDialog.showDataSizeDialog();
-   //   String [] oldHeaders = saveHeaders();
-   //   try{
-   //       setNumRows((int)xy.getX());
-   //       setNumCols((int)xy.getY());
-   //       restoreHeaders(oldHeaders);
-   //       numberTheRows();
-   //   } catch (NumberFormatException e){
-   //       gSess.setMessage1("bad number format for row or column count");
-   //   }
-   // }
-   
-   
    //row and column manipulations
    public void deleteRows(){
        int rowCount = table.getRowCount();
@@ -278,7 +225,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
                 model.setValueAt(table.getValueAt(currentRow, currentColumn+1), currentRow, currentColumn);
                 setHeaderString(currentColumn, getHeaderString(currentColumn+1));
             }
-        String[] headerHolder = saveHeaders();
+        String[] headerHolder = getHeaderArray();
         model.setColumnCount(model.getColumnCount()-1);
         restoreHeaders(headerHolder);
           //copy next column into this column and repeat until end of model
@@ -464,7 +411,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
 
     //respond to menu commands
     public void actionPerformed(ActionEvent event)
-   {  
+   {    //System.out.println(event.getActionCommand().toString());
         if (event.getActionCommand().equals("Done")) //setVisible(false);
         if (event.getActionCommand().equals("Resize")) resizeData();
         if (event.getActionCommand().equals("Delete Row")) deleteRows();
@@ -570,8 +517,13 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
         }
         return null;
     }
-    
-    
+
+    public JTable getTable(){
+         return table;
+     }
+
+    public JPanel getDataPanel(){ return dataPanel; }
+
     public void setCellValueDouble(int row, int col, double value){
            model.setValueAt(value, row-1,  col);
     }
@@ -608,16 +560,24 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        
-        // TODO Auto-generated method stub
-        
-    }
+    public void keyReleased(KeyEvent e) {// TODO Auto-generated method stub
+         }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        
-         //TODO Auto-generated method stub
-        
+    public void keyTyped(KeyEvent e) {   //TODO Auto-generated method stub
+         }
+
+    public static void main(String[] args){
+        GrafTable table = new GrafTable(10,10);
+
+        System.out.println("getHeaderArray");
+        String[] headerArray = table.getHeaderArray();
+        for(int i = 0; i < headerArray.length; i++)
+            System.out.print(i+") "+headerArray[i]+" ");
+        System.out.println();
+        System.out.println("getHeaderArrayTrunc");
+        headerArray = table.getHeaderArrayCdr();
+        for(int i = 0; i < headerArray.length; i++)
+            System.out.print(i+") "+headerArray[i]+" ");
     }
 }

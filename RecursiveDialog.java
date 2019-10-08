@@ -177,8 +177,10 @@ public class RecursiveDialog extends JDialog {
 		}
 		
 	}
-		
-	private void generateFunctionValues(){
+
+
+
+    private void generateFunctionValues(){
 		//System.out.println("in");
 		double startA = 1;
 		String functionString = "";

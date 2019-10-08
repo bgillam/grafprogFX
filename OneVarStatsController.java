@@ -35,7 +35,7 @@ public class OneVarStatsController {
         // setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
         //System.out.println("Headers:"+GrafProg.getData().getHeaderArray()[3]);
 
-        columnComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayTrunc()));
+        columnComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
                 //= new ComboBox(FXCollections.observableArrayList(GrafProg.getData().getHeaderArray()));
     }
 

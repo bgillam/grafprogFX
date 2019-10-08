@@ -215,7 +215,9 @@ public class TableFunctionDialog extends JDialog {
         }
         
     }
-        
+
+
+
     private void generateFunctionValues(){
         int beginRow, endRow;
         //myDaddy.setHeaderString(selectedColumn, beginTextField.getText());

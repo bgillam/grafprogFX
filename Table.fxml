@@ -38,7 +38,7 @@
                     <Menu fx:id="columnActionTableMenu" text="Column Action">
                         <MenuItem fx:id="headingTableItem" text="Heading" />
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="randomTableItem" text="Random"/>
+                        <MenuItem fx:id="randomTableItem" text="Random" onAction="#onRandom"/>
                         <MenuItem fx:id="functionTableItem" text = "Function"/>
                         <MenuItem fx:id="recursionTableItem" text="Recursion"/>
                         <SeparatorMenuItem/>

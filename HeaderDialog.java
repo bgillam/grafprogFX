@@ -116,8 +116,10 @@ public class HeaderDialog extends JDialog {
 			}
 		}
 	}
-	
-	private void saveHeaderEdit(){
+
+
+
+    private void saveHeaderEdit(){
 		myDaddy.setHeaderString(selectedColumn, headerTextField.getText());
 		headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(myDaddy.getHeaderArray()));
 		headerTextField.setEditable(false);

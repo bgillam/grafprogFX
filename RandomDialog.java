@@ -71,13 +71,13 @@ public class RandomDialog extends JDialog {
 				headerComboBox = new JComboBox();
 				headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(myDaddy.getHeaderArray()));
 				panel.add(headerComboBox, BorderLayout.CENTER);
+
 				headerComboBox.addItemListener(new ItemListener() {
 			        public void itemStateChanged(ItemEvent event) {
-			            if ((event.getStateChange() == ItemEvent.SELECTED) && !(headerComboBox.getSelectedIndex() == 0)) {
-			            	 selectedColumn = headerComboBox.getSelectedIndex();
-			            	 allowEdits();
-			                 
-			            }
+							if ((event.getStateChange() == ItemEvent.SELECTED) && !(headerComboBox.getSelectedIndex() == 0)) {
+								selectedColumn = headerComboBox.getSelectedIndex();
+								allowEdits();
+							}
 			        }
 			    });
 			}
@@ -207,8 +207,10 @@ public class RandomDialog extends JDialog {
 		}
 		
 	}
-	
-	private void generateRandomIntegers(){
+
+
+
+    private void generateRandomIntegers(){
 		double lower = Double.parseDouble(beginNumTextField.getText());
 		double upper = Double.parseDouble(endNumTextField.getText());
 		int begin = Integer.parseInt(beginRowTextField.getText());
@@ -278,6 +280,7 @@ public class RandomDialog extends JDialog {
     public void showDialog(){
     	//setVisible(true);	
     	//setModal(false);
+		System.out.println("showDialog");
 		beginRowTextField.setText("1");
 		endRowTextField.setText(""+myDaddy.getNumRows());
 		beginNumTextField.setText("0");
@@ -285,6 +288,7 @@ public class RandomDialog extends JDialog {
 		resetChooser();
 		setVisible(true);	
     	//setModal(true);
+		//GrafProg.getTableStage().isAlwaysOnTop();
 		
     }
 	
