@@ -37,7 +37,7 @@ public class GrafBoxplotTest
     public void setUp()
     {
        gSess = new GrafProg();
-       gBPlot = new GrafBoxPlot(gSess);
+       gBPlot = new GrafBoxPlot();
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.BOXPLOT);
        

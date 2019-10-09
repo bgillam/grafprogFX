@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class GrafColumnPlot extends GrafObject implements IGrafable{
     //Instance Variables
     private int columnNumber;
-    private GrafProg myOwner;
+    //private GrafProg myOwner;
     private GrafSettings gStuff;
     private GrafTable table;
     private String mark =".";
@@ -25,7 +25,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     public GrafColumnPlot(){
         gStuff = super.initGrafObject(GrafType.COLUMN);
         setColumnNumber(1);
-        table = myOwner.getData();
+        table = GrafProg.getData();
         GrafProg.setMessage1("Plotting Column "+columnNumber);
     }
     
@@ -60,7 +60,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
               val = table.getCellValue(i, columnNumber);
               //System.out.println(i+" "+val);
                 if (val != null) {
-                    if (myOwner.getGrafSettings().getReverseXY()) {
+                    if (GrafProg.getGrafSettings().getReverseXY()) {
                         GrafPrimitives.grafString(gStuff,val, i , mark, gc);
                         if (connected) if (i != 1) GrafPrimitives.grafLine(gStuff, preval, i-1, val, i, gc);
                         preval=val;

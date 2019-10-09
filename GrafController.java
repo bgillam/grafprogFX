@@ -154,6 +154,18 @@ public class GrafController {
         GrafProg.getDialogStage().show();
     }
 
+    public void onBoxplot(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showBoxplotDialog();
+        GrafProg.getDialogStage().show();
+    }
+
+    public void onHistogram(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        //GrafProg.getDialogController().showHistogramDialog();
+        GrafProg.getDialogStage().show();
+    }
+
     public void onTable(ActionEvent actionEvent) {
         //GrafStage.showData();
        GrafProg.getTableStage().show();
@@ -162,6 +174,7 @@ public class GrafController {
     public void oneVStats(ActionEvent actionEvent) {
        GrafProg.getStatStage().show();
     }
+
 
     public AnchorPane getGrafPane(){return grafPane;}
 

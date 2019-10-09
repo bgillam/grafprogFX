@@ -29,12 +29,13 @@ public class GrafProg extends Application {
     private static Stage dialogStage = new Stage();
     private static Stage tableStage = new Stage();
     private static Stage statStage = new Stage();
-    private static Stage freqTableStage = new Stage();
+    //private static Stage freqTableStage = new Stage();
     //static Stage spreadStage = new Stage();  for better spreadsheet later
 
     private static GrafController grafController;
     private static GrafDialogController dialogController;
     private static TableController tableController;
+
 
     private static OneVarStatsController statController;
 
@@ -42,6 +43,8 @@ public class GrafProg extends Application {
     private static GrafPanel grafPanel = new GrafPanel(); //Graphics Panel in swing
     private static SwingNode swingTableNode = new SwingNode();
     private static GrafTable data = new GrafTable(100,10);  //table for data
+    /*private static SwingNode swingHistoNode = new SwingNode();
+    private static HistoPanel histoPanel = new HistoPanel();  //table for data*/
 
     private static FrequencyChartDialog frequencyChartDialog = new FrequencyChartDialog(); //Graphics Panel in swing
 
@@ -90,6 +93,8 @@ public class GrafProg extends Application {
         statStage.initModality(Modality.APPLICATION_MODAL);
         statStage.setTitle("DATA");
 
+        //Set up Histogram Dialog Box
+
 
         //Set up Table
         FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("Table.fxml"));
@@ -106,6 +111,7 @@ public class GrafProg extends Application {
         AnchorPane.setRightAnchor(swingTableNode, 0.0);
         AnchorPane.setBottomAnchor(swingTableNode, 0.0);
         setSizeChangeListener(tableStage, data.getDataPanel());
+        tableStage.setAlwaysOnTop(true);
         //tableStage.show();
 
 
@@ -262,7 +268,7 @@ public class GrafProg extends Application {
     }
     public void setBoxPlotsPlotted(int numBoxPlots){boxPlotsPlotted=numBoxPlots;}
 
-    public void incrementBoxPlotsPlotted(){
+    public static void incrementBoxPlotsPlotted(){
         boxPlotsPlotted++;
     }
 
@@ -274,7 +280,7 @@ public class GrafProg extends Application {
         boxPlotsPlotted = 0;
     }
 
-    public int getNumType(GrafType gType){
+    public static int getNumType(GrafType gType){
         int count = 0;
         for (GrafObject o: grafObjectList)
             if (o.getType().equals(gType)) count++;

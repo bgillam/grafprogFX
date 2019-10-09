@@ -40,7 +40,7 @@ abstract public class GrafObject implements Serializable, IGrafable
                 case TEXT: return new GrafText(Double.parseDouble(
                         gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(),   gdc.getGrafColor());
                 case COLUMN: return new GrafColumnPlot(gdc.getColumn1ChooserColumn(), gdc.getDialogMark(), gdc.isConnected(), gdc.getGrafColor());
-                case BOXPLOT: return new GrafBoxPlot();
+                case BOXPLOT: return new GrafBoxPlot(gdc.getColumn1ChooserColumn(), gdc.getGrafColor(), gdc.getFNS());
                 case SCATTER:return new GrafScatterPlot();
                 case HISTOGRAM: return new GrafHistogram();
                 case FREQPOLYGON: return new GrafFreqPolygon();

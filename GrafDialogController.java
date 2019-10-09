@@ -280,6 +280,21 @@ public class GrafDialogController {
         });
     }
 
+    @FXML
+    public void showBoxplotDialog()
+    {gType = GrafType.BOXPLOT;
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("BOXPLOT");
+                showColumnChooser();
+                showFNS();
+                chooseObject.setText("Choose BOXPLOT");
+
+            }
+        });
+    }
+
     public void showPointDialog() {
         gType = GrafType.POINT;
 
@@ -575,6 +590,16 @@ public class GrafDialogController {
         });
     }
 
+    private void showFNS(){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                fns.setVisible(true);
+                fns.setText("FNS");
+
+            }
+        });
+    }
+
     private void showConnectedCheckBox(){
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -855,5 +880,6 @@ public class GrafDialogController {
     public Object getColumn1VaLue(){
         return fComboBox.getValue();
     }
+
 
 }
