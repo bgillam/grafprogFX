@@ -63,10 +63,8 @@ public class RandomDialog extends JDialog {
 			JPanel panel = new JPanel();
 			contentPanel.add(panel, BorderLayout.NORTH);
 			panel.setLayout(new BorderLayout(0, 0));
-			{
-				chooseLabel = new JLabel("Choose Column to Place Values:");
-				panel.add(chooseLabel, BorderLayout.WEST);
-			}
+			chooseLabel = new JLabel("Choose Column to Place Values:");
+			panel.add(chooseLabel, BorderLayout.WEST);
 			{
 				headerComboBox = new JComboBox();
 				headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(myDaddy.getHeaderArray()));

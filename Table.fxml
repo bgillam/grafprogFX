@@ -18,35 +18,35 @@
             <VBox>
                 <MenuBar fx:id="mainTableMenu" onKeyPressed="#onMenuChoice">
                     <Menu fx:id="fileTableMenu" text="File">
-                        <MenuItem fx:id="newTableItem" text="New/Clear" />
+                        <MenuItem fx:id="newTableItem" text="New/Clear" onAction="#onNewClear"/>
                         <MenuItem fx:id="importTableItem" text="Import"/>
                         <MenuItem fx:id="ExprotTableItem" text="Export"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="doneTableItem" text="Done"/>
+                        <MenuItem fx:id="doneTableItem" text="Done" onAction="#onDone"/>
                         <MenuItem fx:id="saveAsItem" text="Save As"/>
                     </Menu>
                     <Menu fx:id="editTableMenu" text="Edit">
-                        <MenuItem fx:id="cutTableItem" text="Cut"/>
-                        <MenuItem fx:id="copyTableItem" text="Copy"/>
-                        <MenuItem fx:id="pasteTableItem" text="Paste"/>
+                        <MenuItem fx:id="cutTableItem" text="Cut" onAction="#onCut"/>
+                        <MenuItem fx:id="copyTableItem" text="Copy" onAction="#onCopy"/>
+                        <MenuItem fx:id="pasteTableItem" text="Paste" onAction="#onPaste"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="deleteRowTableItem" text="Delete Row" />
-                        <MenuItem fx:id="deleteColumnTableItem" text="Delete Column" />
-                        <MenuItem fx:id="resizeTableItem" text="Resize Table" />
+                        <MenuItem fx:id="deleteRowTableItem" text="Delete Row" onAction="#onDeleteRow" />
+                        <MenuItem fx:id="deleteColumnTableItem" text="Delete Column" onAction="#onDeleteColumn"/>
+                        <MenuItem fx:id="resizeTableItem" text="Resize Table" onAction="#onResize"/>
 
                     </Menu>
                     <Menu fx:id="columnActionTableMenu" text="Column Action">
                         <MenuItem fx:id="headingTableItem" text="Heading" />
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="randomTableItem" text="Random" onAction="#onRandom"/>
-                        <MenuItem fx:id="functionTableItem" text = "Function"/>
-                        <MenuItem fx:id="recursionTableItem" text="Recursion"/>
+                        <MenuItem fx:id="functionTableItem" text = "Function" onAction="#onFunction"/>
+                        <MenuItem fx:id="recursionTableItem" text="Recursion" onAction="#onRecursion"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="clearColumnTableItem" text="Clear Column"/>
-                        <MenuItem fx:id="zeroColumnTableItem" text="Zero Column"/>
+                        <MenuItem fx:id="clearColumnTableItem" text="Clear Column" onAction="#onClearColumn"/>
+                        <MenuItem fx:id="zeroColumnTableItem" text="Zero Column" onAction="#onZeroColumn"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="sortATableItem" text="Sort Ascending"/>
-                        <MenuItem fx:id="sortDTableItem" text="Sort Descending"/>
+                        <MenuItem fx:id="sortATableItem" text="Sort Ascending" onAction="#onSortAscend"/>
+                        <MenuItem fx:id="sortDTableItem" text="Sort Descending" onAction="#onSortDescend"/>
 
                     </Menu>
 

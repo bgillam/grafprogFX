@@ -227,7 +227,7 @@ public class GrafProg extends Application {
 
     public static GrafDialogController getDialogController(){return dialogController;}
 
-    public void setData(GrafTable dt) { data = dt; }
+    public static void setData(GrafTable dt) { data = dt; }
     public static GrafTable getData(){return data;}
 
     public static File getGrafFile(){return grafFile;}

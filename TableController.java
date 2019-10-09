@@ -21,7 +21,62 @@ public class TableController {
 
     public void onRandom(ActionEvent actionEvent) {
         RandomDialog rd = new RandomDialog(GrafProg.getData());
-        rd.showDialog();
-        //GrafProg.getTableStage().setFocused(true);
+        rd.showDialog();   }
+
+    public void onFunction(ActionEvent actionEvent) {
+        TableFunctionDialog  tfd = new TableFunctionDialog(GrafProg.getData());
+        tfd.showDialog();    }
+
+    public void onRecursion(ActionEvent actionEvent) {
+        RecursiveDialog recDialog = new RecursiveDialog(GrafProg.getData());
+        recDialog.showDialog();
+    }
+
+    public void onClearColumn(ActionEvent actionEvent) {
+        GrafProg.getData().clearColumns();
+    }
+
+    public void onZeroColumn(ActionEvent actionEvent) {
+        GrafProg.getData().zeroColumns();
+    }
+
+    public void onSortAscend(ActionEvent actionEvent) {
+        GrafProg.getData().sortColumns(true);
+    }
+
+    public void onSortDescend(ActionEvent actionEvent) {
+        GrafProg.getData().sortColumns(false);
+    }
+
+    public void onDone(ActionEvent actionEvent) {
+        GrafProg.getTableStage().hide();
+    }
+
+    public void onNewClear(ActionEvent actionEvent) {
+        GrafProg.setData(new GrafTable(100,10));
+    }
+
+    public void onCut(ActionEvent actionEvent) {
+        GrafProg.getData().cutValues();
+    }
+
+    public void onCopy(ActionEvent actionEvent) {
+        GrafProg.getData().getClipper().setClipboardContents(GrafProg.getData().getSelectedData());
+    }
+
+    public void onPaste(ActionEvent actionEvent) {
+        GrafProg.getData().pasteValues();
+    }
+
+    public void onDeleteRow(ActionEvent actionEvent) {
+        GrafProg.getData().deleteRows();
+    }
+
+    public void onDeleteColumn(ActionEvent actionEvent) {
+        GrafProg.getData().deleteColumns();
+    }
+
+    public void onResize(ActionEvent actionEvent) {
+        GrafProg.getData().resizeData();
     }
 }

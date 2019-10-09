@@ -108,7 +108,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
     }
 
     //change the table dimensions
-    private void resizeData(){
+    public void resizeData(){
       DataSizeDialog dataDialog = new DataSizeDialog(new JFrame(), getNumRows(), getNumCols());
       Point xy = dataDialog.showDataSizeDialog();
       String [] oldHeaders = getHeaderArray();
@@ -249,7 +249,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
        return 0;
    }
    
-   private void clearColumns(){
+   public void clearColumns(){
        ArrayList<Integer> selected = getSelectedColumns();
        if (selected.size() == 0) { gSess.setMessage1("No columns selected!"); return;}
        String msgString = "Clear columns ";
@@ -269,7 +269,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
    }
 
 
-   private void sortColumns(boolean ascending){
+   public void sortColumns(boolean ascending){
        ArrayList<Integer> selected = getSelectedColumns();
        if (selected.size() == 0) { gSess.setMessage1("No columns selected!"); return;}
        String msgString = "Sort columns";
@@ -296,7 +296,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
        }
    }
    
-   private void zeroColumns(){
+   public void zeroColumns(){
        ArrayList<Integer> selected = getSelectedColumns();
        if (selected.size() == 0) { gSess.setMessage1("No columns selected!"); return;}
        String msgString = "Zero columns ";
@@ -321,12 +321,12 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
     
     
     //cut and paste procedures   
-    private void cutValues(){
+    public void cutValues(){
         clipper.setClipboardContents(getSelectedData()); 
         deleteSelectedCells();
     }
     
-    private void pasteValues(){
+    public void pasteValues(){
         String toParse = clipper.getClipboardContents();
         String item = "";
         int row =table.getSelectedRow();
@@ -377,7 +377,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
        
    }
    
-   private String getSelectedData(){
+   public String getSelectedData(){
         String copied = "";
         int rows = getNumRows();
         int cols = getNumCols();
@@ -513,9 +513,14 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
                     catch (ClassCastException e3){
                         System.out.println(o.getClass());
                     }
+                    catch (NumberFormatException nfe){return null;}
                 }
         }
         return null;
+    }
+
+    public ClipboardHandler getClipper(){
+         return clipper;
     }
 
     public JTable getTable(){
@@ -570,14 +575,5 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
     public static void main(String[] args){
         GrafTable table = new GrafTable(10,10);
 
-        System.out.println("getHeaderArray");
-        String[] headerArray = table.getHeaderArray();
-        for(int i = 0; i < headerArray.length; i++)
-            System.out.print(i+") "+headerArray[i]+" ");
-        System.out.println();
-        System.out.println("getHeaderArrayTrunc");
-        headerArray = table.getHeaderArrayCdr();
-        for(int i = 0; i < headerArray.length; i++)
-            System.out.print(i+") "+headerArray[i]+" ");
     }
 }
