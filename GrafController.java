@@ -162,7 +162,7 @@ public class GrafController {
 
     public void onHistogram(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        //GrafProg.getDialogController().showHistogramDialog();
+        GrafProg.getDialogController().showHistogramDialog();
         GrafProg.getDialogStage().show();
     }
 

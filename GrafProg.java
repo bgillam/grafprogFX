@@ -52,8 +52,8 @@ public class GrafProg extends Application {
     //instance variables
     private static File grafFile = new File("");  //File associated with the current Graf object
     private static boolean grafSaved = false;     //has the current graf been saved?
-    private static final int initWidth = 600;
-    private static final int initHeight = 600;
+    private static final int initWidth = 750;
+    private static final int initHeight = 750;
     private static GrafSettings    grafSet = new GrafSettings();  //Stores window settings
     private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
 
@@ -79,7 +79,7 @@ public class GrafProg extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
         dialogController = loader.getController();
-        Scene dialogScene = new Scene (dialogRoot, 500, 420); //.getWidth(), grafStage.getHeight());
+        Scene dialogScene = new Scene (dialogRoot, 600, 500); //.getWidth(), grafStage.getHeight());
         dialogStage.setScene(dialogScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         //dialogController.hideAll();

@@ -27,7 +27,8 @@ import java.util.ArrayList;
 public class GrafDialogController {
 
 
-//instance variables tied to GUI
+
+    //instance variables tied to GUI
     @FXML    private ColorPicker fillColorPicker;
     @FXML    private Label fillLabel;
     @FXML    private ColorPicker grafColorPicker;
@@ -64,6 +65,12 @@ public class GrafDialogController {
     @FXML    private ComboBox fComboBox;
     @FXML    private ComboBox fComboBox2;
     @FXML    private ComboBox objectComboBox;
+    @FXML    private CheckBox countCheckBox;
+    @FXML    private CheckBox boundariesCheckBox;
+    @FXML    private Button maxMinButton;
+    @FXML    private TextField classWidthText;
+    @FXML    private RadioButton classSizeButton;
+    @FXML    private RadioButton numClassButton;
 
     //other instance variables
     private GrafType gType;
@@ -290,6 +297,24 @@ public class GrafDialogController {
                 showColumnChooser();
                 showFNS();
                 chooseObject.setText("Choose BOXPLOT");
+
+            }
+        });
+    }
+
+    @FXML
+    public void showHistogramDialog()
+    {gType = GrafType.HISTOGRAM;
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("HISTOGRAM");
+                showColumnChooser();
+                showX1X2();
+                x1Label.setText("Begin");
+                x2Label.setText("End");
+                showHistoBoxes();
+                chooseObject.setText("Choose HISTOGRAM");
 
             }
         });
@@ -610,6 +635,24 @@ public class GrafDialogController {
         });
     }
 
+    private void showHistoBoxes(){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                boundariesCheckBox.setVisible(true);
+                countCheckBox.setVisible(true);
+                fns.setVisible(true);
+                fns.setText("Relative Frequency");
+                fillColorPicker.setVisible(true);
+                fillLabel.setVisible(true);
+                maxMinButton.setVisible(true);
+                classWidthText.setVisible(true);
+                numClassButton.setVisible(true);
+                classSizeButton.setVisible(true);
+
+            }
+        });
+    }
+
 
     //had to make this one public for call from outside - probably should refactor relationship
     public void hideAll() //change to hide all
@@ -624,6 +667,8 @@ public class GrafDialogController {
                 fxLabel.setVisible(false);
                 functionString.setVisible(false);
                 x1Text.setVisible(false);
+                x1Label.setText("x1");
+                x2Label.setText("x2");
                 x1Label.setVisible(false);
                 y1Label.setVisible(false);
                 y1Text.setVisible(false);
@@ -650,6 +695,12 @@ public class GrafDialogController {
                 fillColorPicker.setVisible(false);
                 fillLabel.setVisible(false);
                 hideTextAndFontButtons();
+                boundariesCheckBox.setVisible(false);
+                countCheckBox.setVisible(false);
+                maxMinButton.setVisible(false);
+                classWidthText.setVisible(false);
+                classSizeButton.setVisible(false);
+                numClassButton.setVisible(false);
             }
         });
     }

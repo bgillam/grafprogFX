@@ -155,59 +155,35 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         gc.setColor(Color.BLACK);
         
     }
-    
-   /*  @Override
-    public GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(new GrafProg());
-        gfd.setTitle("Histogram"); 
-        gfd.setHistoPanel(addHistoPanel(gs, gfd));
-        //gfd.setColumnChooser(gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false));
-        gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false);
-        //gfd.setColumnChooser(gfd.getColumnChooser());
-        gfd.setMarkChooser(gfd.addMarkPanel(new FillColorMarkPanel(true, false)));  //addMarkPanel(gSess.getGraphics().getFont(), true, true, true, false, false, false, false);
-        gfd.setDeleter(gfd.addDeleterPanel(GrafType.HISTOGRAM)); 
-        
-        gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.HISTOGRAM)));  
-        
-        gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveHistogram(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(),GrafType.HISTOGRAM))); 
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveHistogram(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-        // gfd.setModal(true);
-        // gfd.pack();
-        // gfd.setVisible(true);     
-        return gfd;
+
+
+    @Override
+    public boolean isValidInput(GrafDialogController gdf){
+        //if (gdf.getColumn1VaLue()).eq
+        //if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+        return true;
     }
-*/
+
+    @Override
+    public boolean deepEquals(GrafObject o){
+        GrafBoxPlot gi = (GrafBoxPlot) o;
+        if (getType() != o.getType()) return false;
+        if (!getGrafColor().equals(gi.getGrafColor())) return false;
+        if (!(getColumnNumber() == gi.getColumnNumber())) return false;
+        if (!(getShowFNS() == gi.getShowFNS())) return false;
+        return true;
+    }
+
+    @Override
+    public void loadObjectFields(GrafDialogController gdc){
+        super.loadObjectFields(gdc);
+        gdc.setColumn1ChooserColumn(getColumnNumber());
+        gdc.setFNS(showFNS);
+    }
     
+
     
-   /*
-     @Override
-    public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-                    GrafHistogram histEdit = (GrafHistogram)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-                    caller.getColumnChooser().setInputIndex(histEdit.getColumnNumber());
-                    caller.getMarkChooser().setFillChecked(histEdit.getFillFlag());
-                    caller.getMarkChooser().setColor(histEdit.getGrafColor());  
-                    caller.getMarkChooser().setFillColor(histEdit.getFill());  
-                    caller.getHisto().setBegin(histEdit.getBegin());
-                    caller.getHisto().setEnd(histEdit.getEnd());
-                    caller.getHisto().setnumClassesChecked(histEdit.getByNumClassChecked());
-                    caller.getHisto().setNumClasses(histEdit.getNumClasses());
-                    caller.getHisto().setClassSize(histEdit.getClassWidth());
-       }*/
-    
-       protected static HistoPanel addHistoPanel(GrafProg gs, GrafInputDialog gfd){
+       /*protected static HistoPanel addHistoPanel(GrafProg gs, GrafInputDialog gfd){
         HistoPanel histoPanel = new HistoPanel();
         histoPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
         histoPanel.setBackground(UIManager.getColor("Button.background"));
@@ -217,10 +193,10 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         histoPanel.setNumClasses(10);
         gfd.getContentPane().add(histoPanel, BorderLayout.CENTER);
         return histoPanel;
-    }
+    }*/
     
     
-    private static void saveHistogram(GrafProg gs, GrafInputDialog gfd){
+    /*private static void saveHistogram(GrafProg gs, GrafInputDialog gfd){
         int col = gfd.getColumnChooser().getInputColumn();
         if (gfd.getFinalSave() == true && col == 0) return; 
         addHisto(gs,gfd);
@@ -242,7 +218,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
           if (gfd.getMarkChooser().fillChecked()) { hPlot.setFillFlag(true); hPlot.setFill(gfd.getMarkChooser().getFillColor()); }
           gfd.getTempList().add(hPlot);
     
-    }
+    }*/
        
     //Setters and Getters
     public void setColumnNumber(int c){ columnNumber = c;}

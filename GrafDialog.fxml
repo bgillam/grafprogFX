@@ -49,6 +49,7 @@
                 <Separator orientation="VERTICAL"/>
                 <Label fx:id="nLabel" text ="n" minWidth="15"/>
                 <TextField fx:id = "nText" maxWidth = "75"/>
+                <Button fx:id = "maxMinButton" text = "Max/Min"/>
             </HBox>
             <HBox spacing ="5">
                 <Label fx:id="x2Label" text="x2" minWidth="15"/>
@@ -57,6 +58,16 @@
                 <Separator orientation="VERTICAL"/>
                 <Label fx:id="y2Label" text ="y2" minWidth="15"/>
                 <TextField fx:id = "y2Text" prefWidth = "75"/>
+                <Separator orientation="VERTICAL"/>
+
+                <Label fx:id = "classLabel" text = "Class Width:" maxWidth="100"/>
+                <fx:define>
+                    <ToggleGroup fx:id="classWidthGroup"/>
+                </fx:define>
+                <RadioButton fx:id = "numClassButton" text = "# classes" toggleGroup="$classWidthGroup" selected = "true" />
+                <RadioButton fx:id="classSizeButton" text = "Class size" toggleGroup="$classWidthGroup" />
+                <TextField fx:id="classWidthText" maxWidth="30"/>
+
             </HBox>
             <Separator orientation="HORIZONTAL"/>
         </VBox>
@@ -92,6 +103,8 @@
                 <Label fx:id = "fontStyle" text = "FontStyle" minWidth="50"/>
 
             </HBox>
+            <CheckBox fx:id="boundariesCheckBox" text= "Label by Boundaries"/>
+            <CheckBox fx:id = "countCheckBox" text = "Show Counts"/>
             <CheckBox fx:id = "fns" text = "FNS"/>
             <HBox>
                 <Label text="Color:"></Label>
