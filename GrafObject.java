@@ -42,7 +42,12 @@ abstract public class GrafObject implements Serializable, IGrafable
                 case COLUMN: return new GrafColumnPlot(gdc.getColumn1ChooserColumn(), gdc.getDialogMark(), gdc.isConnected(), gdc.getGrafColor());
                 case BOXPLOT: return new GrafBoxPlot(gdc.getColumn1ChooserColumn(), gdc.getGrafColor(), gdc.getFNS());
                 case SCATTER:return new GrafScatterPlot();
-                case HISTOGRAM: return new GrafHistogram();
+                case HISTOGRAM:{
+                    if (gdc.getNumClassButton().isSelected())
+                        return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                                gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getFNS());
+                    else  return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                            Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getFNS()); }
                 case FREQPOLYGON: return new GrafFreqPolygon();
                 case OGIVE: return new GrafOgive();
                 case POINT: return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(),   gdc.getGrafColor());

@@ -28,7 +28,9 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     private GrafSettings gStuff;
     private GrafTable table;
     //private FrequencyChartDialog fcd;
-    
+
+
+
     private boolean relative = false;
     private boolean labelAxisByBoundries = true;
     private boolean byNumClasses = true;
@@ -40,38 +42,30 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     private Color fill = Color.WHITE;
     private boolean fillFlag = false;
     private double[] classLimits;
-    private double[] counts;
+    //private double[] counts;
     
     
         
     //Constructor
     public GrafHistogram(){
-       setGrafType(GrafType.HISTOGRAM);
-       setMoveable(false);
-       setGrafColor(Color.BLACK); 
-       setColumnNumber(1);
+        gStuff = super.initGrafObject(GrafType.HISTOGRAM);
+        setColumnNumber(1);
+        table = GrafProg.getData();
+        GrafProg.setMessage1("Plotting Column "+columnNumber);
     }
     
-    public GrafHistogram(GrafProg sess){
-        setGrafType(GrafType.HISTOGRAM);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
-        //fcd = 
-        table = myOwner.getData();
-        //sess.setMessage1("Histogram for Column "+columnNumber);
-    }
+
     
     //constructor 
-    public GrafHistogram(GrafProg sess, int column){
-        this(sess);
+    public GrafHistogram(int column){
+        this();
         setColumnNumber(column);
-        sess.setMessage1("Histogram for Column "+columnNumber);
+        GrafProg.setMessage1("Histogram for Column "+columnNumber);
     }
     
-    public GrafHistogram(GrafProg sess, int column, double b, double e, int numCl, Color c, boolean rel){
-        this(sess, column);
+    public GrafHistogram(int column, double b, double e, int numCl, Color c, Color fillColor, boolean rel){
+        this(column);
+        setFill(fillColor);
         relative = rel;
         begin = b;
         end = e;
@@ -81,8 +75,10 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         classLimits = GrafStats.getClassesByNumber(numClasses, begin, end);    //problem here!
         classWidth = classLimits[1] - classLimits[0];
     }
-    public GrafHistogram(GrafProg sess, int column, double b, double e, double classW, Color c, boolean rel){
-        this(sess, column);
+
+    public GrafHistogram( int column, double b, double e, double classW, Color c, Color fillColor, boolean rel){
+        this(column);
+        setFill(fillColor);
         relative = rel;
         begin = b;
         end = e;
@@ -93,6 +89,10 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         numClasses = classLimits.length;
     }
 
+
+
+
+
     
     //drawGraf overriding method in parent GrafObject
     @Override
@@ -100,27 +100,15 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         gc.setColor(super.getGrafColor());
         Double[] temp = GrafStats.getRidOfNulls(myOwner.getData().getColumnValues(columnNumber));
         Arrays.sort(temp);
-        int binCount = 0;
         int totalCount = 0;
-        int upperBoundIndex = 1;
-        int i = 0;
         int numValues = temp.length;
         String formatString = "%."+gStuff.getDecPlaces()+"f";
-        double[] counts = new double[classLimits.length];
-        while (i < numValues){
-            if (temp[i] < classLimits[upperBoundIndex]){  
-                binCount++;
-                i++;
-            }
-            else{ 
-                counts[upperBoundIndex-1] = binCount;
-                binCount = 0;
-                upperBoundIndex++;
-            }
-            
-        }
-        counts[upperBoundIndex-1] = binCount;
-        double height;       
+        double[] counts = getCounts(numValues,temp);
+        if (myOwner.getGrafSettings().getReverseXY()) grafOnY(numValues, counts, gc);
+        else grafOnX(numValues, counts, gc);
+
+
+        /*double height;
         for (int j = 0; j < classLimits.length-1; j++){
             if (relative) height = counts[j]/numValues; else height = counts[j];
             if (labelAxisByBoundries){
@@ -134,12 +122,8 @@ public class GrafHistogram extends GrafObject implements IGrafable{
                }
             }
             if ((j == classLimits.length - 2) && (counts[j] == 0)) break;
-            if (fillFlag) {
-                gc.setColor(fill);
-                if (myOwner.getGrafSettings().getReverseXY())  GrafPrimitives.fillRect(gStuff,0, classLimits[j]+classWidth, height, classWidth, gc ); 
-                else GrafPrimitives.fillRect(gStuff,classLimits[j], height, classWidth, height, gc );
-            }
-            gc.setColor(super.getGrafColor());
+
+            //gc.setColor(super.getGrafColor());
             if (myOwner.getGrafSettings().getReverseXY())  GrafPrimitives.grafRect(gStuff,0, classLimits[j]+classWidth, height, classWidth, gc ); 
             else GrafPrimitives.grafRect(gStuff,classLimits[j], height, classWidth, height, gc );
             if (displayCounts){
@@ -148,7 +132,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
             }
             gc.setColor(super.getGrafColor());
             
-        }
+        }*/
            //gStuff.grafLine(GrafStats.getMin(table.getColumnValues(columnNumber)), , x2, y2, gc);
         myOwner.setMessage2("");
         myOwner.incrementBoxPlotsPlotted();     
@@ -156,21 +140,74 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         
     }
 
+    private void grafOnX(int numValues, double[] counts, Graphics2D gc){
+        double height;
+        for (int j = 0; j < classLimits.length-1; j++) {
+            if (relative) height = counts[j]/numValues; else height = counts[j];
+            gc.setColor(getFillColor());
+            GrafPrimitives.fillRect(gStuff, classLimits[j], height, classWidth, height   , gc);
+            gc.setColor(getGrafColor());
+            GrafPrimitives.grafRect(gStuff, classLimits[j], height, classWidth, height   , gc);
+            if (labelAxisByBoundries) {
+                String formatString = "%."+gStuff.getDecPlaces()+"f";
+                GrafPrimitives.grafLine(gStuff,classLimits[j], gStuff.getGrafHeight()/50, classLimits[j], -gStuff.getGrafHeight()/50, gc);
+                GrafPrimitives.grafString(gStuff,classLimits[j], -gStuff.getGrafHeight()/25, ""+String.format(formatString, classLimits[j], gc), gc);
+            }
+            if (displayCounts)  GrafPrimitives.grafString(gStuff,classLimits[j],height+gStuff.getGrafHeight()/50, ""+counts[j], gc);
+            System.out.println(counts[j]);
+        }
+    }
 
-    @Override
-    public boolean isValidInput(GrafDialogController gdf){
-        //if (gdf.getColumn1VaLue()).eq
-        //if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
-        return true;
+    private void grafOnY(int numValues, double[] counts, Graphics2D gc){}
+
+
+    private double[] getCounts(int numValues, Double[] temp){
+        int upperBoundIndex = 1;
+        int binCount = 0;
+        int i = 0;
+        double[] counts = new double[classLimits.length];
+        while (i < numValues){
+            if (temp[i] < classLimits[upperBoundIndex]){
+                binCount++;
+                i++;
+            }
+            else{
+                counts[upperBoundIndex-1] = binCount;
+                binCount = 0;
+                upperBoundIndex++;
+            }
+
+        }
+        counts[upperBoundIndex-1] = binCount;
+        return counts;
     }
 
     @Override
+    public boolean isValidInput(GrafDialogController gdf){
+        if (!GrafInputHelpers.isDouble(gdf.getX1())) return false;
+        if (!GrafInputHelpers.isDouble(gdf.getX2())) return false;
+        if (gdf.getClassSizeButton().isSelected() && !GrafInputHelpers.isDouble(gdf.getClassWidthText())) return false;
+        return true;
+    }
+
+
+
+    @Override
     public boolean deepEquals(GrafObject o){
-        GrafBoxPlot gi = (GrafBoxPlot) o;
+        GrafHistogram gh = (GrafHistogram) o;
         if (getType() != o.getType()) return false;
-        if (!getGrafColor().equals(gi.getGrafColor())) return false;
-        if (!(getColumnNumber() == gi.getColumnNumber())) return false;
-        if (!(getShowFNS() == gi.getShowFNS())) return false;
+        if (!getGrafColor().equals(gh.getGrafColor())) return false;
+        if (!getFillColor().equals(gh.getFillColor())) return false;
+        if (!(getColumnNumber() == gh.getColumnNumber())) return false;
+        if (!(getBegin()==gh.getBegin())) return false;
+        if (!(getEnd()==gh.getBegin())) return false;
+        if (!(getClassWidth()==gh.getClassWidth())) return false;
+        if (!isRelative()==gh.isRelative()) return false;
+        if (!isLabelAxisByBoundries()==gh.isLabelAxisByBoundries()) return false;
+        if (!isDisplayCounts()==gh.isDisplayCounts()) return false;
+        if (!isByNumClasses()==gh.isByNumClasses()) return false;
+        if (!isFillFlag()==gh.isFillFlag()) return false;
+
         return true;
     }
 
@@ -178,47 +215,18 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
         gdc.setColumn1ChooserColumn(getColumnNumber());
-        gdc.setFNS(showFNS);
+        gdc.setfillColor(getFillColor());
+        gdc.setX1(""+getBegin());
+        gdc.setX1(""+getEnd());
+        gdc.setClassWidthText(getClassWidth()+"");
+        gdc.setFNS(isRelative());
+        gdc.getCountCheckBox().setSelected(getShowCounts());
+        gdc.getBoundariesCheckBox().setSelected(labelAxisByBoundries);
+        gdc.getNumClassButton().setSelected(getByNumClassChecked());
+        gdc.getClassSizeButton().setSelected(!getByNumClassChecked());
     }
     
 
-    
-       /*protected static HistoPanel addHistoPanel(GrafProg gs, GrafInputDialog gfd){
-        HistoPanel histoPanel = new HistoPanel();
-        histoPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-        histoPanel.setBackground(UIManager.getColor("Button.background"));
-        Double[] col1 = gs.getData().getColumnValues(1);
-        histoPanel.setBegin(GrafStats.getMin(col1));
-        histoPanel.setEnd(GrafStats.getMax(col1));
-        histoPanel.setNumClasses(10);
-        gfd.getContentPane().add(histoPanel, BorderLayout.CENTER);
-        return histoPanel;
-    }*/
-    
-    
-    /*private static void saveHistogram(GrafProg gs, GrafInputDialog gfd){
-        int col = gfd.getColumnChooser().getInputColumn();
-        if (gfd.getFinalSave() == true && col == 0) return; 
-        addHisto(gs,gfd);
-        gfd.getColumnChooser().setInputIndex(0);
-    
-    }
-    
-    private static void addHisto(GrafProg gs, GrafInputDialog gfd){
-          int input = gfd.getInput();
-          if (input == 0) return;
-          GrafHistogram hPlot;
-          if (gfd.getHistoPanel().numClassesChecked()){
-              hPlot = new GrafHistogram(gs, input, gfd.getHistoPanel().getBegin(), gfd.getHistoPanel().getEnd(), gfd.getHistoPanel().getNumClasses(), gfd.getMarkChooser().getGrafColor(), gfd.getHistoPanel().relativeHisto());
-          }else
-          {
-              hPlot = new GrafHistogram(gs, input, gfd.getHistoPanel().getBegin(), gfd.getHistoPanel().getEnd(), gfd.getHistoPanel().getClassSize(), gfd.getMarkChooser().getGrafColor(), gfd.getHistoPanel().relativeHisto());
-          }
-                 
-          if (gfd.getMarkChooser().fillChecked()) { hPlot.setFillFlag(true); hPlot.setFill(gfd.getMarkChooser().getFillColor()); }
-          gfd.getTempList().add(hPlot);
-    
-    }*/
        
     //Setters and Getters
     public void setColumnNumber(int c){ columnNumber = c;}
@@ -229,7 +237,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     public boolean getFillFlag(){
         return fillFlag;
     }
-    public Color getFill(){
+    public Color getFillColor(){
         return fill;
     }
     public void setFill(Color c){
@@ -250,7 +258,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     public double getClassWidth(){
         return classWidth;
     }
-    public boolean relativeHisto(){
+    public boolean isRelativeHisto(){
         return relative;
     }
     public void setRelativeHisto(boolean tf){
@@ -268,26 +276,19 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     public void setLabelAxis(boolean tf){
         labelAxisByBoundries = tf;
     }
-   
-    
+    public boolean isRelative() {        return relative;    }
+    public void setRelative(boolean relative) {        this.relative = relative;    }
+    public boolean isLabelAxisByBoundries() {   return labelAxisByBoundries;    }
+    public void setLabelAxisByBoundries(boolean labelAxisByBoundries) {        this.labelAxisByBoundries = labelAxisByBoundries;    }
+    public boolean isByNumClasses() {        return byNumClasses;    }
+    public void setByNumClasses(boolean byNumClasses) {        this.byNumClasses = byNumClasses;    }
+    public boolean isDisplayCounts() {        return displayCounts;    }
+    public void setDisplayCounts(boolean displayCounts) {        this.displayCounts = displayCounts;    }
+
+    public boolean isFillFlag() {        return fillFlag;    }
+
     public String toString(){
         return "HISTOGRAM: Col "+getColumnNumber();//+", "+ getGrafColor();
     }
-    /* Setters and Getters from Parent GrafObject
-     *  public void drawGraf(Graphics2D g2D){};
-   
-        public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-        public GrafProg.GrafType getType(){return grafType; }
-   
-        public boolean isMoveable(){ return moveable; } 
-        public void setMoveable(boolean tf){ moveable = tf;  }
-        public boolean getMoveable(){return moveable;}
-   
-        public void setOwner(GrafProg owner){myOwner = owner;}
-        public GrafProg getOwner(){return myOwner;}
-   
-        public void setGrafColor(Color c){grafColor = Color.BLACK;   }
-        public Color getGrafColor() { return grafColor;}
-     */
-    
+
 }

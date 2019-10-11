@@ -65,8 +65,9 @@
                     <ToggleGroup fx:id="classWidthGroup"/>
                 </fx:define>
                 <RadioButton fx:id = "numClassButton" text = "# classes" toggleGroup="$classWidthGroup" selected = "true" />
+                <TextField fx:id="numClasses" maxWidth="50"/>
                 <RadioButton fx:id="classSizeButton" text = "Class size" toggleGroup="$classWidthGroup" />
-                <TextField fx:id="classWidthText" maxWidth="30"/>
+                <TextField fx:id="classWidthText" maxWidth="50"/>
 
             </HBox>
             <Separator orientation="HORIZONTAL"/>

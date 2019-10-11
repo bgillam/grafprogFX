@@ -71,6 +71,7 @@ public class GrafDialogController {
     @FXML    private TextField classWidthText;
     @FXML    private RadioButton classSizeButton;
     @FXML    private RadioButton numClassButton;
+    @FXML private TextField numClasses;
 
     //other instance variables
     private GrafType gType;
@@ -907,7 +908,6 @@ public class GrafDialogController {
     public boolean getFNS() {
         return fns.isSelected();
     }
-
     public void setFNS(boolean fnsFlag) {
         this.fns.setSelected(fnsFlag);
     }
@@ -920,9 +920,8 @@ public class GrafDialogController {
         return fComboBox.getSelectionModel().getSelectedIndex()+1;
     }
 
-    //public String getColumn1String(){
-    //    return getFunctionString();
-    //}
+    public String getClassWidthText(){        return classWidthText.getText();    }
+    public void setClassWidthText(String s){ classWidthText.setText(s);}
 
     public boolean isConnected(){
         return fns.isSelected();
@@ -930,6 +929,24 @@ public class GrafDialogController {
 
     public Object getColumn1VaLue(){
         return fComboBox.getValue();
+    }
+
+    public CheckBox getCountCheckBox() {        return countCheckBox;    }
+    public void setCountCheckBox(CheckBox countCheckBox) {        this.countCheckBox = countCheckBox;    }
+
+    public CheckBox getBoundariesCheckBox() {        return boundariesCheckBox;    }
+    public void setBoundariesCheckBox(CheckBox boundariesCheckBox) {        this.boundariesCheckBox = boundariesCheckBox;    }
+
+    public RadioButton getNumClassButton() {       return numClassButton;    }
+    public void setNumClassButton(RadioButton numClassButton) {        this.numClassButton = numClassButton;    }
+
+    public RadioButton getClassSizeButton(){ return classSizeButton;}
+    public void setClassSizeButton(RadioButton classSizeButton) {        this.classSizeButton = classSizeButton;    }
+
+    public int getNumClasses(){
+        if (GrafInputHelpers.isInt(numClasses.getText())) return Integer.parseInt(numClasses.getText());
+        if (GrafInputHelpers.isDouble((numClasses.getText()))) return (int)(Math.round(Double.parseDouble(numClasses.getText())));
+        return 7;
     }
 
 
