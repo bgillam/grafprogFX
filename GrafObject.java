@@ -20,7 +20,7 @@ abstract public class GrafObject implements Serializable, IGrafable
    private GrafProg myOwner;
 
    protected ColumnChooserPanel columnChooser;
-   protected ColorRadioMarkPanel mp;
+   //protected ColorRadioMarkPanel mp;
    protected JDialog jd = new JDialog();
    protected PointPanel ptPanel;
 
@@ -45,9 +45,9 @@ abstract public class GrafObject implements Serializable, IGrafable
                 case HISTOGRAM:{
                     if (gdc.getNumClassButton().isSelected())
                         return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
-                                gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getFNS());
+                                gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
                     else  return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
-                            Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getFNS()); }
+                            Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
                 case FREQPOLYGON: return new GrafFreqPolygon();
                 case OGIVE: return new GrafOgive();
                 case POINT: return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(),   gdc.getGrafColor());

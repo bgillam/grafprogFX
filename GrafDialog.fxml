@@ -49,7 +49,7 @@
                 <Separator orientation="VERTICAL"/>
                 <Label fx:id="nLabel" text ="n" minWidth="15"/>
                 <TextField fx:id = "nText" maxWidth = "75"/>
-                <Button fx:id = "maxMinButton" text = "Max/Min"/>
+                <Button fx:id = "maxMinButton" text = "Max/Min" onAction="#onMaxMin"/>
             </HBox>
             <HBox spacing ="5">
                 <Label fx:id="x2Label" text="x2" minWidth="15"/>
@@ -65,7 +65,7 @@
                     <ToggleGroup fx:id="classWidthGroup"/>
                 </fx:define>
                 <RadioButton fx:id = "numClassButton" text = "# classes" toggleGroup="$classWidthGroup" selected = "true" />
-                <TextField fx:id="numClasses" maxWidth="50"/>
+                <TextField fx:id="numClasses" maxWidth="50" text = "7" />
                 <RadioButton fx:id="classSizeButton" text = "Class size" toggleGroup="$classWidthGroup" />
                 <TextField fx:id="classWidthText" maxWidth="50"/>
 
@@ -104,9 +104,9 @@
                 <Label fx:id = "fontStyle" text = "FontStyle" minWidth="50"/>
 
             </HBox>
-            <CheckBox fx:id="boundariesCheckBox" text= "Label by Boundaries"/>
-            <CheckBox fx:id = "countCheckBox" text = "Show Counts"/>
-            <CheckBox fx:id = "fns" text = "FNS"/>
+            <CheckBox fx:id="boundariesCheckBox" text= "Label by Boundaries" selected = "true"/>
+            <CheckBox fx:id = "countCheckBox" text = "Show Counts" selected="true"/>
+            <CheckBox fx:id = "fns" text = "FNS" selected = "false" />
             <HBox>
                 <Label text="Color:"></Label>
                 <ColorPicker fx:id ="grafColorPicker">

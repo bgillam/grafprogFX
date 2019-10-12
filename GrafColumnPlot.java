@@ -96,7 +96,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
-        gdc.setColumn1ChooserColumn(getColumnNumber());
+        gdc.setColumn1ChooserColumn(getColumnNumber()-1);
         gdc.settDialogMark(getMark());
         gdc.setFNS(connected);
     }
@@ -118,30 +118,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         return "COLUMNPLOT: Col "+getColumnNumber()+","+", "+getMark();//+", "+ getGrafColor();
     }
     
-    private static void saveColumn(GrafProg gs, GrafInputDialog gfd){
-        int col = gfd.getColumnChooser().getInputColumn();
-        if (gfd.getFinalSave() == true && col == 0) return; 
-        addColumn(gs, gfd); 
-        gfd.getColumnChooser().setInputIndex(0);
-    
-    }
-    
-    private static void addColumn(GrafProg gs, GrafInputDialog gfd){
-        int input = gfd.getInput();
-        if (input == 0)  return;
-        GrafColumnPlot gPlot = new GrafColumnPlot(input);
-        gPlot.setGrafColor(gfd.getMarkChooser().getGrafColor());
-        //set correct mark for points
-        if (gfd.getMarkChooser().xMark()) gPlot.setMark("x"); 
-        else if (gfd.getMarkChooser().oMark()) gPlot.setMark("o"); 
-        else if (gfd.getMarkChooser().periodMark()) gPlot.setMark("."); 
-        else { String text = gfd.getMarkChooser().getTextMark(); 
-        gPlot.setMark(text);} 
-        if (gfd.getMarkChooser().isLineGraph()) gPlot.setConnected(true); else gPlot.setConnected(false);
-        gfd.getTempList().add(gPlot);
-    
-    }
-    
+
 
 
 }

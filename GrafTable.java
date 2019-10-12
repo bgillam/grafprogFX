@@ -546,8 +546,28 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
             setCellValueDouble(i, col, a[i]);
         }
     }
-    
 
+   public Double getMin(Double[] values){
+         values = getRidOfNulls(values);
+         if (values.length == 0) return null;
+         Double min = values[0];
+         for(Double d:values){
+            // System.out.println(d+" "+min);
+             if (d < min) min=d;
+         }
+         return min;
+   }
+
+     public Double getMax(Double[] values){
+         values = getRidOfNulls(values);
+         if (values.length == 0) return null;
+         Double max = values[0];
+         for(Double d:values){
+             if (d > max) max = d;
+             //System.out.println(d+" "+max);
+         }
+         return max;
+     }
 
 
     // Key Handling override for paste methods
@@ -575,5 +595,9 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
     public static void main(String[] args){
         GrafTable table = new GrafTable(10,10);
 
+    }
+
+    public static Double[] getRidOfNulls(Double[] d){
+         return GrafStats.getRidOfNulls(d);
     }
 }

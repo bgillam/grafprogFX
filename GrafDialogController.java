@@ -71,7 +71,8 @@ public class GrafDialogController {
     @FXML    private TextField classWidthText;
     @FXML    private RadioButton classSizeButton;
     @FXML    private RadioButton numClassButton;
-    @FXML private TextField numClasses;
+    @FXML    private TextField numClasses;
+    @FXML    private Label classLabel;
 
     //other instance variables
     private GrafType gType;
@@ -156,6 +157,12 @@ public class GrafDialogController {
 
     }
 
+    public void onMaxMin(ActionEvent actionEvent) {
+        Double[] currentColumn = GrafProg.getData().getColumnValues(getColumn1ChooserColumn());
+        setX1(""+GrafProg.getData().getMin(currentColumn));
+        setX2(""+GrafProg.getData().getMax(currentColumn));
+    }
+
 
 
     //display appropriate dialog setup for object editing
@@ -185,6 +192,7 @@ public class GrafDialogController {
                 functionString.setVisible(true);
                 functionString.setEditable(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+
                 GrafProg.getDialogStage().setTitle("VALUE");
                 showFunctionChooser();
                 showX1();
@@ -204,6 +212,7 @@ public class GrafDialogController {
                 functionString.setVisible(true);
                 functionString.setEditable(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+
                 GrafProg.getDialogStage().setTitle("TANGENT");
                 showFunctionChooser();
                 showX1();
@@ -260,6 +269,7 @@ public class GrafDialogController {
                 functionString.setEditable(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("INTEGRAL");
+
                 showFunctionChooser();
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
@@ -297,8 +307,8 @@ public class GrafDialogController {
                 GrafProg.getDialogStage().setTitle("BOXPLOT");
                 showColumnChooser();
                 showFNS();
+                setFNS(true);
                 chooseObject.setText("Choose BOXPLOT");
-
             }
         });
     }
@@ -315,8 +325,8 @@ public class GrafDialogController {
                 x1Label.setText("Begin");
                 x2Label.setText("End");
                 showHistoBoxes();
+                onMaxMin(new ActionEvent());
                 chooseObject.setText("Choose HISTOGRAM");
-
             }
         });
     }
@@ -441,14 +451,16 @@ public class GrafDialogController {
      }
 
     private void showFunctionChooser(){
+
         fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));
         fChoiceLabel.setText("Choose f(x): ");
         fChoiceLabel.setVisible(true);
         fComboBox.setVisible(true);
-        //fComboBox.setValue("function");
         try {
-            fComboBox.setValue(getTempGrafList().get(1));
-        }catch (IndexOutOfBoundsException iob){ fComboBox.setValue("function");}
+            fComboBox.setValue(getFirstInTempList(GrafType.FUNCTION));
+        }catch (NullPointerException npe) {
+            fComboBox.setValue("function");
+        }
         fxLabel.setVisible(true);
         //functionString.setVisible(true);
         //functionString.setEditable(false);
@@ -463,7 +475,6 @@ public class GrafDialogController {
         try {
             fComboBox.getSelectionModel().select(0);
         }catch (IndexOutOfBoundsException iob){ fComboBox.setValue("Column");}
-
     }
 
     private void showColumnChooser2(){
@@ -648,11 +659,14 @@ public class GrafDialogController {
                 maxMinButton.setVisible(true);
                 classWidthText.setVisible(true);
                 numClassButton.setVisible(true);
+                numClasses.setVisible(true);
                 classSizeButton.setVisible(true);
 
             }
         });
     }
+
+
 
 
     //had to make this one public for call from outside - probably should refactor relationship
@@ -700,6 +714,8 @@ public class GrafDialogController {
                 countCheckBox.setVisible(false);
                 maxMinButton.setVisible(false);
                 classWidthText.setVisible(false);
+                classLabel.setVisible(false);
+                numClasses.setVisible(false);
                 classSizeButton.setVisible(false);
                 numClassButton.setVisible(false);
             }
@@ -759,10 +775,17 @@ public class GrafDialogController {
     private ArrayList<GrafObject> createObjectList(GrafType gtype){
         ArrayList<GrafObject> grafObjects = new ArrayList<>();
         for (GrafObject g: tempGrafList){
+
             if (g.getType() == gtype) grafObjects.add(g);
         }
+
         //return (GrafObject[]) grafObjects.toArray();
         return grafObjects;
+    }
+
+    private GrafObject getFirstInTempList(GrafType gt){
+        for (GrafObject g: tempGrafList) if (g.getType().equals(gt)) return g;
+        return null;
     }
 
     public void functionChosen(ActionEvent actionEvent) {
@@ -816,13 +839,16 @@ public class GrafDialogController {
         java.awt.Color awtColor = new java.awt.Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
         return awtColor;}
 
-    public Color getFillColor(){
+    public java.awt.Color getFillColor(){
         //System.out.println(grafColorPicker.getValue());
         javafx.scene.paint.Color fxColor = fillColorPicker.getValue();
         java.awt.Color awtColor = new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
         return awtColor;}
+
+
     public void setfillColor(Color awtColor){
-        javafx.scene.paint.Color fxColor = new javafx.scene.paint.Color((double)awtColor.getRed(), (double)awtColor.getRed(), (double)awtColor.getBlue(), 1);
+        javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(getFillColor().getRed(),
+                getGrafColor().getGreen(), getGrafColor().getBlue(), 1);
         getFillColorPicker().setValue(fxColor);
     }
 
@@ -908,9 +934,8 @@ public class GrafDialogController {
     public boolean getFNS() {
         return fns.isSelected();
     }
-    public void setFNS(boolean fnsFlag) {
-        this.fns.setSelected(fnsFlag);
-    }
+    public void setFNS(boolean fnsFlag) {      this.fns.setSelected(fnsFlag);    }
+
 
     public void setColumn1ChooserColumn(int choice){
         fComboBox.getSelectionModel().select(choice);
@@ -948,6 +973,7 @@ public class GrafDialogController {
         if (GrafInputHelpers.isDouble((numClasses.getText()))) return (int)(Math.round(Double.parseDouble(numClasses.getText())));
         return 7;
     }
+
 
 
 }

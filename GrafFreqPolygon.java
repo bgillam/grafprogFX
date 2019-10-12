@@ -161,28 +161,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
     }
 
        
-        private static void saveFreqPolygon(GrafProg gs, GrafInputDialog gfd){
-            int col = gfd.getColumnChooser().getInputColumn();
-            if (gfd.getFinalSave() == true && col == 0) return; 
-            addFreqPoly(gs, gfd);
-            gfd.getColumnChooser().setInputIndex(0);
-    
-    }
-    
-    private static void addFreqPoly(GrafProg gs, GrafInputDialog gfd){
-              int input = gfd.getInput();
-              if (input == 0) return;
-              GrafFreqPolygon gfpPlot;
-              if (gfd.getHistoPanel().numClassesChecked()){
-                  gfpPlot = new GrafFreqPolygon(gs, input, gfd.getHistoPanel().getBegin(), gfd.getHistoPanel().getEnd(), gfd.getHistoPanel().getNumClasses(), gfd.getMarkChooser().getGrafColor(), gfd.getHistoPanel().relativeHisto());
-              }else
-              {
-                  gfpPlot = new GrafFreqPolygon(gs, input, gfd.getHistoPanel().getBegin(), gfd.getHistoPanel().getEnd(), gfd.getHistoPanel().getClassSize(), gfd.getMarkChooser().getGrafColor(), gfd.getHistoPanel().relativeHisto());
-              }
-              // if (markChooser.verticalChecked()) gPlot.myOwner;
-              gfd.getTempList().add(gfpPlot);
-    
-    }
+
     
     //Setters and Getters
     public void setColumnNumber(int c){ columnNumber = c;}
@@ -237,21 +216,6 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
         return "FREQPOLYGON: Col "+getColumnNumber();//+", "+ getGrafColor();
     }
     
-    /* Setters and Getters from Parent GrafObject
-     *  public void drawGraf(Graphics2D g2D){};
-   
-        public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-        public GrafProg.GrafType getType(){return grafType; }
-   
-        public boolean isMoveable(){ return moveable; } 
-        public void setMoveable(boolean tf){ moveable = tf;  }
-        public boolean getMoveable(){return moveable;}
-   
-        public void setOwner(GrafProg owner){myOwner = owner;}
-        public GrafProg getOwner(){return myOwner;}
-   
-        public void setGrafColor(Color c){grafColor = Color.BLACK;   }
-        public Color getGrafColor() { return grafColor;}
-     */
+
     
 }

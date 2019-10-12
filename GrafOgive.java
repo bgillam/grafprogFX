@@ -173,76 +173,9 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
         gc.setColor(Color.BLACK);
     }
     
-   /* @Override
-    public GrafInputDialog createInputDialog(GrafProg gs){
-        GrafInputDialog gfd = new GrafInputDialog(gs); 
-        gfd.setTitle("Ogive"); 
-        gfd.setHistoPanel(addHistoPanel(gs, gfd));
-        //gfd.setColumnChooser(gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false));
-        gfd.addColumnChooserPanel(gfd.getColumnsString(),true, false);
-        //gfd.setColumnChooser(gfd.getColumnChooser());
-        gfd.setMarkChooser(gfd.addMarkPanel(new FillColorMarkPanel(false, false)));  //addMarkPanel(gSess.getGraphics().getFont(), true, true, true, false, false, false, false);
-        gfd.setDeleter(gfd.addDeleterPanel(GrafType.OGIVE)); 
-        gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.OGIVE)));          
-        gfd.getCreateButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0    ) {
-                saveOgive(gs,gfd);
-                gfd.getDeleter().getDeleteComboBox().setModel(new javax.swing.DefaultComboBoxModel(getPlotList(gfd.getTempList(), gfd.getDeleter().getPlotIndex(), GrafType.OGIVE)));     
-            }
-        });
-        gfd.getSaveChanges().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gfd.setFinalSave(true);
-                saveOgive(gs,gfd);
-                gs.setGrafList(gfd.getTempList());
-                gfd.dispose();
-            }
-        });
-        GrafObject.closeGFD(gfd);
-        // gfd.setModal(true);
-        // gfd.pack();
-        // gfd.setVisible(true);  
-        return gfd;
-    }*/
-    
-     
-  
-    /*@Override
-    public void setDeleteValues(int index, GrafInputDialog caller, ArrayList<GrafObject> tempList ){
-                    GrafOgive oEdit = (GrafOgive)tempList.get(caller.getDeleter().getPlotIndex().get(index));
-                    caller.getColumnChooser().setInputIndex(oEdit.getColumnNumber());
-                    caller.getMarkChooser().setFillChecked(oEdit.getFillFlag());
-                    caller.getMarkChooser().setColor(oEdit.getGrafColor());  
-                    caller.getMarkChooser().setFillColor(oEdit.getFill());  
-                    caller.getHisto().setBegin(oEdit.getBegin());
-                    caller.getHisto().setEnd(oEdit.getEnd());
-                    caller.getHisto().setnumClassesChecked(oEdit.getByNumClassChecked());
-                    caller.getHisto().setNumClasses(oEdit.getNumClasses());
-                    caller.getHisto().setClassSize(oEdit.getClassWidth());   
-       }*/
+
        
-        private static void saveOgive(GrafProg gs, GrafInputDialog gfd){
-        int col = gfd.getColumnChooser().getInputColumn();
-        if (gfd.getFinalSave() == true && col == 0) return; 
-        addOgive(gs, gfd);
-        gfd.getColumnChooser().setInputIndex(0);
-    
-    }
-    
-    private static void addOgive(GrafProg gs, GrafInputDialog gfd){
-          int input = gfd.getInput();
-          if (input == 0) return;
-          GrafOgive oPlot;
-          if (gfd.getHistoPanel().numClassesChecked()){
-              oPlot = new GrafOgive(gs, input, gfd.getHistoPanel().getBegin(), gfd.getHistoPanel().getEnd(), gfd.getHistoPanel().getNumClasses(), gfd.getMarkChooser().getColor(), gfd.getHistoPanel().relativeHisto());
-          }else
-          {
-              oPlot = new GrafOgive(gs, input, gfd.getHistoPanel().getBegin(), gfd.getHistoPanel().getEnd(), gfd.getHistoPanel().getClassSize(), gfd.getMarkChooser().getColor(), gfd.getHistoPanel().relativeHisto());
-          }
-          // if (markChooser.verticalChecked()) gPlot.myOwner;
-          gfd.getTempList().add(oPlot);
-    
-    }
+
     
     //Setters and Getters
     public void setColumnNumber(int c){ columnNumber = c;}
@@ -297,21 +230,6 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
         return "OGIVE: Col "+getColumnNumber();//+", "+ getGrafColor();
     }
     
-    /* Setters and Getters from Parent GrafObject
-     *  public void drawGraf(Graphics2D g2D){};
-   
-        public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-        public GrafProg.GrafType getType(){return grafType; }
-   
-        public boolean isMoveable(){ return moveable; } 
-        public void setMoveable(boolean tf){ moveable = tf;  }
-        public boolean getMoveable(){return moveable;}
-   
-        public void setOwner(GrafProg owner){myOwner = owner;}
-        public GrafProg getOwner(){return myOwner;}
-   
-        public void setGrafColor(Color c){grafColor = Color.BLACK;   }
-        public Color getGrafColor() { return grafColor;}
-     */
+
     
 }

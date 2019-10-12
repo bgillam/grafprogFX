@@ -33,6 +33,7 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         setColumnNumber(1);
         table = GrafProg.getData();
         GrafProg.setMessage1("Plotting Column "+columnNumber);
+        setShowFNS(true);
     }
     
 
@@ -46,6 +47,8 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         this(column);
         setGrafColor(c);
         setShowFNS(fns);
+
+
         
         
     }
@@ -138,8 +141,10 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
-        gdc.setColumn1ChooserColumn(getColumnNumber());
+        //System.out.println(columnNumber);
+        gdc.setColumn1ChooserColumn(getColumnNumber()-1);
         gdc.setFNS(showFNS);
+
     }
 
 
