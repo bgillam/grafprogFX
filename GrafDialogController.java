@@ -612,6 +612,7 @@ public class GrafDialogController {
                 nLabel.setVisible(true);
                 nLabel.setText("dx:");
                 nText.setVisible(true);
+                nText.setText(".01");
             }
         });
     }

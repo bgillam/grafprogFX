@@ -118,17 +118,12 @@ public class GrafZeros extends GrafObject implements IGrafable
     }
     
    private void findZeroPoints(){
-        //if (!checkInputValues()) return;
-        //double leftValue = Double.parseDouble(textFieldLeft.getText());
-        //double right =  Double.parseDouble(textFieldRight.getText());
-        //double dx = Double.parseDouble(textFieldDx.getText());
         double f1, f2;
         double currentRoot;
         zeroString = "";
         //String functionStr = functionLabel.getText();
         for (double left = startX; left < endX; left=left+dx){
-            try {
-                f1 =  FunctionString.fValue(functionString, left);
+            try { f1 =  FunctionString.fValue(functionString, left);
             } catch (DomainViolationException e) {
                 continue;
             }catch (FunctionFormatException e) {continue;}   
