@@ -336,7 +336,7 @@ public class GrafDialogController {
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                functionString.setVisible(true);
+                //functionString.setVisible(true);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("POINT");
                 showMarks();
@@ -975,6 +975,10 @@ public class GrafDialogController {
         return 7;
     }
 
+    public java.awt.Font getDefaultFont() {
+           return FontDialog.fxFontToAwtFont(javafx.scene.text.Font.getDefault());
+
+    }
 
 
 }

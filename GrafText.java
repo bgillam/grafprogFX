@@ -25,10 +25,11 @@ public class GrafText extends GrafObject implements IGrafable
         
         
    public GrafText(){
-     super();
+       //super();
        gStuff = super.initGrafObject(GrafType.TEXT);
        setText("");
        setFont(new TextField().getFont());
+
     }
         
 
@@ -45,8 +46,8 @@ public class GrafText extends GrafObject implements IGrafable
    }
    
    public GrafText(double x, double y, String t, Font f, Color c){
-        this(x, y, t);
-        setGrafColor(c);
+        this(x, y, t, c);
+        //setGrafColor(c);
         setFont(f);
    }
    

@@ -38,7 +38,7 @@ abstract public class GrafObject implements Serializable, IGrafable
    public static GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
        switch (gType){
                 case TEXT: return new GrafText(Double.parseDouble(
-                        gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(),   gdc.getGrafColor());
+                        gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(), gdc.getDefaultFont(),  gdc.getGrafColor());
                 case COLUMN: return new GrafColumnPlot(gdc.getColumn1ChooserColumn(), gdc.getDialogMark(), gdc.isConnected(), gdc.getGrafColor());
                 case BOXPLOT: return new GrafBoxPlot(gdc.getColumn1ChooserColumn(), gdc.getGrafColor(), gdc.getFNS());
                 case SCATTER:return new GrafScatterPlot();
@@ -50,7 +50,7 @@ abstract public class GrafObject implements Serializable, IGrafable
                             Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
                 case FREQPOLYGON: return new GrafFreqPolygon();
                 case OGIVE: return new GrafOgive();
-                case POINT: return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(),   gdc.getGrafColor());
+                case POINT: return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(), gdc.getDefaultFont(),  gdc.getGrafColor());
                 case LINESEGMENT: return new GrafSegment(Double.parseDouble(gdc.getX1()),
                         Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()), Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getDialogMark());
                 case RECTANGLE: return new GrafRectangle(Double.parseDouble(gdc.getX1()),

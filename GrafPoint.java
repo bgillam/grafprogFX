@@ -18,7 +18,8 @@ public class GrafPoint extends GrafText implements IGrafable
    //Constructors      
    public GrafPoint(){
        super();
-       gStuff = super.initGrafObject(GrafType.POINT);
+       //gStuff = super.initGrafObject(GrafType.POINT);
+       setGrafType(GrafType.POINT);
        super.setText(".");
    }
    
@@ -49,7 +50,7 @@ public class GrafPoint extends GrafText implements IGrafable
      @Override
      public void drawGraf(Graphics2D gc){
        gc.setColor(getGrafColor());
-       System.out.println(this);
+    //   System.out.println(this);
        GrafPrimitives.grafString(gStuff, getX(), getY(), getText(),  gc);
        gc.setColor(Color.BLACK);
     }
@@ -76,6 +77,7 @@ public class GrafPoint extends GrafText implements IGrafable
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
+
         gdc.setX1(""+getX());
         gdc.setY1(""+getY());
         gdc.settDialogMark(getMark());
