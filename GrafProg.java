@@ -29,12 +29,14 @@ public class GrafProg extends Application {
     private static Stage dialogStage = new Stage();
     private static Stage tableStage = new Stage();
     private static Stage statStage = new Stage();
+    private static Stage genStage = new Stage();
     //private static Stage freqTableStage = new Stage();
     //static Stage spreadStage = new Stage();  for better spreadsheet later
 
     private static GrafController grafController;
     private static GrafDialogController dialogController;
     private static TableController tableController;
+    private static TableColumnGeneratorController tableGenController;
 
 
     private static OneVarStatsController statController;
@@ -71,10 +73,12 @@ public class GrafProg extends Application {
 
 
 
+
     //UI elements start
     @Override
     public void start(Stage grafStage) throws Exception{
         this.grafStage = grafStage;
+
         //Set up Dialog Box
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
@@ -114,6 +118,15 @@ public class GrafProg extends Application {
         tableStage.setAlwaysOnTop(true);
         //tableStage.show();
 
+        //Set up column generator Dialog Box
+        FXMLLoader genLoader = new FXMLLoader(getClass().getResource("TableColumnGenerator.fxml"));
+        Parent genRoot = genLoader.load();
+        tableGenController = genLoader.getController();
+        Scene genScene = new Scene (genRoot, 500, 150); //.getWidth(), grafStage.getHeight());
+        genStage.setScene(genScene);
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        genStage.setTitle("Column Actions");
+        genStage.show();
 
         //Set up main graf window
         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
@@ -289,11 +302,25 @@ public class GrafProg extends Application {
 
 
 
+
     public static void main(String[] args) {
         //new GrafProg().launch(args);
         launch(args);
     }
 
+    public static TableColumnGeneratorController getTableGenController() {
+        return tableGenController;
+    }
 
+    public static void setTableGenController(TableColumnGeneratorController tableGenController) {
+        GrafProg.tableGenController = tableGenController;
+    }
 
+    public static Stage getGenStage() {
+        return genStage;
+    }
+
+    public static void setGenStage(Stage genStage) {
+        GrafProg.genStage = genStage;
+    }
 }

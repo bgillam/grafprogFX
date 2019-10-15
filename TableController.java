@@ -20,8 +20,12 @@ public class TableController {
     }
 
     public void onRandom(ActionEvent actionEvent) {
-        RandomDialog rd = new RandomDialog(GrafProg.getData());
-        rd.showDialog();   }
+        GrafProg.getTableGenController().hideAll();
+        GrafProg.getTableGenController().showRandomDialog();
+        GrafProg.getGenStage().show();
+        /*RandomDialog rd = new RandomDialog(GrafProg.getData());
+        rd.showDialog()*/;
+    }
 
     public void onFunction(ActionEvent actionEvent) {
         TableFunctionDialog  tfd = new TableFunctionDialog(GrafProg.getData());

@@ -16,13 +16,13 @@ abstract public class GrafObject implements Serializable, IGrafable
 {
    private GrafType grType;
    private Color grafColor = Color.BLACK; 
-   private boolean moveable;
-   private GrafProg myOwner;
+    private boolean moveable;
+    private GrafProg myOwner;
 
-   protected ColumnChooserPanel columnChooser;
+   //protected ColumnChooserPanel columnChooser;
    //protected ColorRadioMarkPanel mp;
    protected JDialog jd = new JDialog();
-   protected PointPanel ptPanel;
+   //protected PointPanel ptPanel;
 
    public abstract void drawGraf(Graphics2D g2D);
    public boolean isValidInput(GrafDialogController gdf){return true;}; //make abstract after refactr
