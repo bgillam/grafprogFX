@@ -61,7 +61,7 @@ public class TableColumnGeneratorController {
         rowStartText.setVisible(true);
         rowEnd.setVisible(true);
         rowEndText.setVisible(true);
-        
+
     }
 
 
