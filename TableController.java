@@ -32,8 +32,12 @@ public class TableController {
         tfd.showDialog();    }
 
     public void onRecursion(ActionEvent actionEvent) {
-        RecursiveDialog recDialog = new RecursiveDialog(GrafProg.getData());
-        recDialog.showDialog();
+        GrafProg.getTableGenController().hideAll();
+        GrafProg.getTableGenController().showRecursiveDialog();
+        GrafProg.getGenStage().show();
+
+        /*RecursiveDialog recDialog = new RecursiveDialog(GrafProg.getData());
+        recDialog.showDialog();*/
     }
 
     public void onClearColumn(ActionEvent actionEvent) {
