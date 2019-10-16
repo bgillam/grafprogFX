@@ -122,7 +122,7 @@ public class GrafProg extends Application {
         FXMLLoader genLoader = new FXMLLoader(getClass().getResource("TableColumnGenerator.fxml"));
         Parent genRoot = genLoader.load();
         tableGenController = genLoader.getController();
-        Scene genScene = new Scene (genRoot, 500, 150); //.getWidth(), grafStage.getHeight());
+        Scene genScene = new Scene (genRoot, 625, 200); //.getWidth(), grafStage.getHeight());
         genStage.setScene(genScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         genStage.setTitle("Column Actions");

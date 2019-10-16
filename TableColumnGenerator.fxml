@@ -51,6 +51,16 @@
             <Label fx:id = "rowEnd" text="End row:" />
             <TextField fx:id = "rowEndText" prefWidth="50"/>
         </HBox>
+        <Separator orientation="HORIZONTAL"/>
+        <fx:define>
+            <ToggleGroup fx:id="toggleGroup1"/>
+        </fx:define>
+        <HBox>
+            <RadioButton fx:id = "rdbtnIntegers" text = "Integers" toggleGroup="$toggleGroup1"/>
+            <RadioButton fx:id="rdbtnDoubles" text = "Doubles" toggleGroup="$toggleGroup1" selected = "true"/>
+        </HBox>
+
+
 
         <Separator orientation="HORIZONTAL"/>
         <HBox>
@@ -58,9 +68,9 @@
                 <Insets left="10" top="10" right="10" bottom="10"/>
             </padding>
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id = "cancelButton" text="Cancel" />
+            <Button fx:id = "cancelButton" text="Cancel" onAction="#onCancel"/>
             <Label text=" "  />
-            <Button fx:id = "okButton" text="OK"  />
+            <Button fx:id = "okButton" text="OK" onAction="#onOK" />
 
         </HBox>
     </VBox>
