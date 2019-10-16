@@ -30,7 +30,7 @@ public class GrafPanel extends JPanel implements Serializable
      */
     public GrafPanel()
     {
-        
+
 
     }
 
