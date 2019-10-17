@@ -23,7 +23,7 @@
             <Label fx:id="anLabel1" text = "An:"/>
             <TextField fx:id = "t2" />
         </HBox>
-        <Label fx:id = "anLabel2" text="Use @ for A(n-1). Ex: A1 = 1; An = 3*@+1 --> 5, 17, 53..."/>
+        <Label fx:id = "anLabel2" text="Use @ for A(n-1). Ex: A1 = 1; An = 3*@+1 --> 4,13,40..."/>
         <Separator orientation="HORIZONTAL"/>
         <HBox>
             <Label fx:id = "col1ChoiceLabel" text="OutPut Column"/>

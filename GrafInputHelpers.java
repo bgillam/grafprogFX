@@ -10,6 +10,8 @@
 *  2/25/15                              *
 *****************************************/
 
+import javafx.scene.control.TextField;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -50,12 +52,13 @@ public class GrafInputHelpers {
     	return false;
     }
 	
-	public static boolean isANumberChar(String fString, int counter){
-   	 int keyCode;
-   	 if (  (counter <0) || (counter >fString.length()-1) ) return false;
-   	 keyCode = KeyEvent.getExtendedKeyCodeForChar(fString.charAt(counter));
-        if ((keyCode > 47) && (keyCode < 58 )) return true;
-        return false;
+	public static boolean isANumberChar(String fString, int counter) {
+		int keyCode;
+		if ((counter < 0) || (counter > fString.length() - 1)) return false;
+		keyCode = KeyEvent.getExtendedKeyCodeForChar(fString.charAt(counter));
+		if ((keyCode > 47) && (keyCode < 58)) return true;
+		return false;
+	}
 	
 	 //checks to see if char at position counter is an alphtebetic character
     public static boolean isAnAlphaChar(String fString, int counter){
@@ -66,9 +69,9 @@ public class GrafInputHelpers {
     	 else return false;
     }
 
-    public static void setTextFieldColor( t, String c){
+    public static void setTextFieldColor(TextField t, String c){
     	String css = "-fx-text-fill: "+c;
-    	t.setStyle
+    	t.setStyle(css);
 
 	}
 

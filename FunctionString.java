@@ -97,9 +97,10 @@ public class FunctionString {
     //used to find the number to the right of an operator located at count
     private static int getEndRightNumPos(int counter, String fString){
         counter++;
+        //if (counter > fString.length()-1) return fString.length()-1;
         do {
-            if (!GrafInputHelpers.isANumberChar(fString, counter)) 
-                if (fString.charAt(counter) == '-') {  
+            if (!GrafInputHelpers.isANumberChar(fString, counter))
+                if (fString.charAt(counter) == '-') {
                     if (GrafInputHelpers.isANumberChar(fString, counter-1) ) return counter-1;
                 }              
                 else if  (  (fString.charAt(counter) != '.')  &&  (fString.charAt(counter) != 'E')  ) return counter-1; 
@@ -230,6 +231,11 @@ public class FunctionString {
              //else if ((fString.charAt(counter) =='^') && (fString.charAt(counter+1) == '-')) errorCode = 3; //not sure why I disallowed negative exponents
              else if (isaNonMinusOperator(fString.charAt(counter)) && (isaNonMinusOperator(fString.charAt(counter+1)))) return 4; //don't allow two consecutive operators
              else if ((fString.charAt(counter) == '-') && (isaNonMinusOperator(fString.charAt(counter+1)))) return 4;
+             else if (fString.substring(fString.length()-1) == "-") return 4;
+             else if (fString.substring(fString.length()-1) == "+") return 4;
+             else if (fString.substring(fString.length()-1) == "*") return 4;
+             else if (fString.substring(fString.length()-1) == "/") return 4;
+             else if (fString.substring(fString.length()-1) == "(") return 4;
         }
      }else return 6; //bad tokens in string
      if (leftCount != rightCount)  return 2;//non-matching parentheses
@@ -590,6 +596,8 @@ public class FunctionString {
     }
 
     public static int checkFunctionString(String fString) {
+
+
         double r;
         int errorCode = 0;
         if (fString.equals("")) return -1;

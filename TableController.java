@@ -28,8 +28,10 @@ public class TableController {
     }
 
     public void onFunction(ActionEvent actionEvent) {
-        TableFunctionDialog  tfd = new TableFunctionDialog(GrafProg.getData());
-        tfd.showDialog();    }
+        GrafProg.getTableGenController().hideAll();
+        GrafProg.getTableGenController().showFunctionDialog();
+        GrafProg.getGenStage().show();
+    }
 
     public void onRecursion(ActionEvent actionEvent) {
         GrafProg.getTableGenController().hideAll();

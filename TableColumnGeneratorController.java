@@ -137,21 +137,18 @@ public class TableColumnGeneratorController {
         //headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(myDaddy.getHeaderArray()));
         boolean ok = true;
         if (!GrafInputHelpers.isInt(rowStartText.getText())) {
-            rowStartText.setStyle("-fx-text-fill: red;");  ok = false;}
+            GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
         if (!GrafInputHelpers.isInt(rowEndText.getText())) {
-            rowEndText.setStyle("-fx-text-fill: red;");  ok = false;
-        }
+            GrafInputHelpers.setTextFieldColor(rowEndText, "red");  ok = false;      }
         if (!GrafInputHelpers.isInt(numStartText.getText())) {
-            numStartText.setStyle("-fx-text-fill: red;");  ok = false;
-        }
+            GrafInputHelpers.setTextFieldColor(numStartText, "red");   ok = false;  }
         if (!GrafInputHelpers.isDouble(numEndText.getText())) {
-            numEndText.setStyle("-fx-text-fill: red;");  ok = false;
-        }
-        if (!ok) return ok;
-        rowStartText.setStyle("-fx-text-fill: black;");
-        rowEndText.setStyle("-fx-text-fill: black;");
-        numStartText.setStyle("-fx-text-fill: black");
-        numEndText.setStyle("-fx-text-fill: black;");
+            GrafInputHelpers.setTextFieldColor(numEndText, "red"); ok = false;  }
+        if (!ok) return false;
+        GrafInputHelpers.setTextFieldColor(rowStartText, "black");
+        GrafInputHelpers.setTextFieldColor(rowEndText, "black");
+        GrafInputHelpers.setTextFieldColor(numStartText, "black");
+        GrafInputHelpers.setTextFieldColor(numEndText, "black");
         if (rdbtnIntegers.isSelected()) generateRandomIntegers();
         else if (rdbtnDoubles.isSelected()) generateRandomDoubles();
         //resetChooser();
@@ -166,7 +163,7 @@ public class TableColumnGeneratorController {
         ya1.setVisible(true);
         t1.setVisible(true);
         t1.setEditable(true);
-        anLabel1.setText("A1:");
+        anLabel1.setText("An:");
         anLabel1.setVisible(true);
         t2.setVisible(true);
         t2.setEditable(true);
@@ -192,43 +189,18 @@ public class TableColumnGeneratorController {
         genType = GenType.RECURSIVE;
     }
 
-    private void generateFunctionValues(){
-        int beginRow, endRow;
-        //myDaddy.setHeaderString(selectedColumn, beginTextField.getText());
-        //headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(myDaddy.getHeaderArray()));
-        if (!GrafInputHelpers.isAnIntegerWithMessage(rowStartText.getText()))
-            return;
-        beginRow = Integer.parseInt(rowStartText.getText());
-        if (!GrafInputHelpers.isAnIntegerWithMessage(rowEndText.getText()))
-            return;
-        endRow = Integer.parseInt(rowEndText.getText());
-        if (endRow > myDaddy.getNumRows()) endRow = myDaddy.getNumRows();
-        if (!FunctionString.isValidAtXIgnoreDomainError(t1.getText(), 1)) {System.out.println("error"); return; }
-        for (int row = beginRow; row <= endRow; row++)
-            try {
-                myDaddy.setCellValueDouble(row, col1Chooser.getSelectionModel().getSelectedIndex()+1,
-                        FunctionString.fValue(t1.getText(), myDaddy.getCellValue(row,
-                                col1Chooser.getSelectionModel().getSelectedIndex()+1)));
-            } catch (NullPointerException e)  { } //empty cells
-            catch (DomainViolationException e) { }   //we know we will not get an exception because tested in previous if statement
-            catch (FunctionFormatException e) {}
-        //myDaddy.repaint();
-    }
 
-    private void generateRecursiveValues(){
+
+    private boolean generateRecursiveValues(){
         //System.out.println("in");
         double startA = 1;
         String functionString = "";
         int pos = -1;
         int fLength = -1;
-        int beginRow, endRow;
-        //myDaddy.setHeaderString(selectedColumn, beginTextField.getText());
-        //headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(myDaddy.getHeaderArray()));
-       /* if (outputComboBox.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Choose an Output Column", "Choose Output" , JOptionPane.ERROR_MESSAGE);
-            return;
-        }*/
-        if (!GrafInputHelpers.isAnInteger(t1.getText())) 	return;
+        int beginRow = 1;
+        int endRow = myDaddy.getNumRows();
+        boolean ok = true;
+        if (!GrafInputHelpers.isAnInteger(t1.getText())) 	{GrafInputHelpers.setTextFieldColor(t1, "red");  ok = false;  }
         startA = Integer.parseInt(t1.getText());
         functionString =  t2.getText();
         fLength = functionString.length();
@@ -240,13 +212,20 @@ public class TableColumnGeneratorController {
             if (pos+1 == fLength) last = ""; else  last = functionString.substring(pos+1, fLength);
             functionString = first+"X"+last;
         }
-        if (!FunctionString.isValidAtXIgnoreDomainError(functionString, 1)) return;
-        if (!GrafInputHelpers.isInt(rowStartText.getText())) return;
+        if (FunctionString.checkFunctionString(functionString)!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
+        else if (!FunctionString.isValidAtXIgnoreDomainError(functionString, 1)) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
+        if (!GrafInputHelpers.isInt(rowStartText.getText())) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
         else beginRow = Integer.parseInt(rowStartText.getText());
-        if (!GrafInputHelpers.isInt(rowEndText.getText())) return;
+        if (!GrafInputHelpers.isInt(rowEndText.getText())) {GrafInputHelpers.setTextFieldColor(rowEndText, "red");  ok = false;  }
         else endRow = Integer.parseInt(rowEndText.getText());
         /*beginRow = 1;
         endRow = myDaddy.getNumRows();*/
+        if (!ok) return false;
+        System.out.println("past tests");
+        GrafInputHelpers.setTextFieldColor(t1, "black");
+        GrafInputHelpers.setTextFieldColor(t2, "black");
+        GrafInputHelpers.setTextFieldColor(rowStartText, "black");
+        GrafInputHelpers.setTextFieldColor(rowEndText, "black");
         double anMinus1 = startA;
         double newVal = startA;
         for (int row = beginRow; row <= endRow; row++)
@@ -257,15 +236,83 @@ public class TableColumnGeneratorController {
             } catch (DomainViolationException e) { }  //we know we should not get an exception because tested previously
             catch (FunctionFormatException e) {}
         //myDaddy.repaint();
+        return true;
     }
 
-    private void allowEdits(){
+    public void showFunctionDialog() {
+        hideAll();
+        GrafProg.getGenStage().setTitle("Generate Function Values");
+        ya1.setText("Y1:");
+        ya1.setVisible(true);
+        t1.setVisible(true);
+        t1.setEditable(true);
+
+
+        col1ChoiceLabel.setVisible(true);
+        col1Chooser.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+        col1Chooser.getSelectionModel().select(0);
+        col1Chooser.setVisible(true);
+
+        col2ChoiceLabel.setVisible(true);
+        col2Chooser.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArray()));
+        col2Chooser.getSelectionModel().select(0);
+        col2Chooser.setVisible(true);
+
+        rowStart.setVisible(true);
+        rowStartText.setVisible(true);
+        rowStartText.setText("1");
+        rowEnd.setVisible(true);
+        rowEndText.setVisible(true);
+        rowEndText.setText(GrafProg.getData().getNumRows()+"");
+
+        okButton.setVisible(true);
+        cancelButton.setVisible(true);
+        GrafProg.getTableStage().setAlwaysOnTop(false);
+        GrafProg.getGenStage().setAlwaysOnTop(true);
+        //resetChooser();
+        genType = GenType.FUNCTION;
+    }
+
+    private boolean generateFunctionValues(){
+        int beginRow = 1;
+        int endRow =  myDaddy.getNumRows();
+        boolean ok = true;
+        //myDaddy.setHeaderString(selectedColumn, beginTextField.getText());
+        //headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(myDaddy.getHeaderArray()));
+        if (!GrafInputHelpers.isAnIntegerWithMessage(rowStartText.getText())) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
+        else
+            beginRow = Integer.parseInt(rowStartText.getText());
+        if (!GrafInputHelpers.isAnIntegerWithMessage(rowEndText.getText())) {GrafInputHelpers.setTextFieldColor(rowEndText, "red");  ok = false;  }
+        else
+            endRow = Integer.parseInt(rowEndText.getText());
+        if (endRow > myDaddy.getNumRows()) endRow = myDaddy.getNumRows();
+        if (FunctionString.checkFunctionString(t1.getText())!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
+        if (!FunctionString.isValidAtXIgnoreDomainError(t1.getText(), 1)) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
+        if (!ok) return false;
+        //System.out.println("made it here");
+        GrafInputHelpers.setTextFieldColor(rowStartText, "black");
+        GrafInputHelpers.setTextFieldColor(rowEndText, "black");
+        GrafInputHelpers.setTextFieldColor(t1, "black");
+        int inputColumn = col2Chooser.getSelectionModel().getSelectedIndex();
+        int outputColumn = col1Chooser.getSelectionModel().getSelectedIndex()+1;
+        //System.out.println(inputColumn);
+        for (int row = beginRow; row <= endRow; row++)
+            try {
+                myDaddy.setCellValueDouble(row, outputColumn, FunctionString.fValue(t1.getText(), myDaddy.getCellValue(row, inputColumn)));
+            } catch (NullPointerException e)  { } //empty cells
+            catch (DomainViolationException e) { }   //we know we will not get an exception because tested in previous if statement
+            catch (FunctionFormatException e) {}
+        return true;
+        //myDaddy.repaint();
+    }
+
+    /*private void allowEdits(){
         rowStartText.setEditable(true);
         rowEndText.setEditable(true);
         numStartText.setEditable(true);
         numEndText.setEditable(true);
         //.setText("Enter Limits and Destination");
-    }
+    }*/
 
    /* private void resetChooser(){
         col1Chooser.getSelectionModel().select(0);
@@ -287,8 +334,8 @@ public class TableColumnGeneratorController {
         boolean ok = true;
         switch (genType){
             case RANDOM: ok =  generateRandom(); break;
-            case FUNCTION:  generateFunctionValues(); break;
-            case RECURSIVE:  generateRecursiveValues(); break;
+            case FUNCTION:  ok = generateFunctionValues(); break;
+            case RECURSIVE: ok = generateRecursiveValues(); break;
             case HEADER:
         }
 
