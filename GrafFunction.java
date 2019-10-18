@@ -68,7 +68,8 @@ public class GrafFunction extends GrafObject implements IGrafable{
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
         int errorCode = FunctionString.checkFunctionString(gdf.getFunctionString());
         if (errorCode != 0) {
-            FunctionString.errorMsg(errorCode);
+            //FunctionString.errorMsg(errorCode);
+            GrafInputHelpers.setTextFieldColor(GrafProg.getDialogController().getFunctionStringTextField(), "red");
             return false;
         }
         return true;

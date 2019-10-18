@@ -100,10 +100,12 @@ public class GrafDialogController {
 
     @FXML
     private void onExitButtonClicked(ActionEvent e){
-        addGrafObject();
-        GrafProg.setGrafList(tempGrafList);
-        GrafProg.setMessage1("changes saved");
-        resetDialog();
+        boolean ok = addGrafObject();
+        if (ok) {
+            GrafProg.setGrafList(tempGrafList);
+            GrafProg.setMessage1("changes saved");
+            resetDialog();
+        }
         //GrafProg.getGrafPanel().repaint();
     }
 
@@ -728,11 +730,17 @@ public class GrafDialogController {
         GrafProg.getDialogStage().hide();
         functionString.setText("");
         x1Text.setText("");
+        GrafInputHelpers.setTextFieldColor(getX1TextField(), "black");
         x2Text.setText("");
+        GrafInputHelpers.setTextFieldColor(getX2TextField(), "black");
         y1Text.setText("");
+        GrafInputHelpers.setTextFieldColor(getY1TextField(), "black");
         y2Text.setText("");
+        GrafInputHelpers.setTextFieldColor(getY2TextField(), "black");
         nText.setText("");
+        GrafInputHelpers.setTextFieldColor(getNTextField(), "black");
         textForDisplay.setText("");
+        GrafInputHelpers.setTextFieldColor(getTextForDisplay(), "black");
         getGrafColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         getFillColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
@@ -745,15 +753,16 @@ public class GrafDialogController {
         GrafProg.setMessage1("changes saved");
     }*/
 
-    private void addGrafObject(){
+    private boolean addGrafObject(){
 
         GrafObject newObject = GrafObject.createGrafObjectFromController(gType);
         if (!newObject.isValidInput(this)) {
             GrafProg.setMessage1("not a valid "+gType);
-            return;
+            return false;
         }
         newObject = GrafObject.createGrafObjectFromController(this, gType);
         if (!duplicate(newObject)) getTempGrafList().add(newObject);
+        return true;
     }
 
     private boolean duplicate(GrafObject newObject){
@@ -829,6 +838,7 @@ public class GrafDialogController {
     public boolean functionStringIsVisible(){
         return functionString.isVisible();
     }
+    public TextField getFunctionStringTextField(){return functionString;}
 
 
     public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
@@ -861,21 +871,27 @@ public class GrafDialogController {
 
     public String getX1() { return x1Text.getText(); }
     public void setX1(String x1String) { this.x1Text.setText(x1String); }
+    public TextField getX1TextField(){return x1Text;}
 
     public String getX2(){return x2Text.getText();}
     public void setX2(String x2String){this.x2Text.setText(x2String);}
+    public TextField getX2TextField(){return x2Text;}
 
     public String getY1() { return y1Text.getText(); }
     public void setY1(String x1String) { this.y1Text.setText(x1String); }
+    public TextField getY1TextField(){return y1Text;}
 
     public String getY2(){return y2Text.getText();}
     public void setY2(String x2String){this.y2Text.setText(x2String);}
+    public TextField getY2TextField(){return y2Text;}
 
     public String getDx(){return nText.getText();}
     public void setDx(String dx){ nText.setText(dx);}
+    public TextField getDxTextField(){return nText;}
 
     public String getNText(){return nText.getText();}
     public void setnText(int n){ nText.setText(""+n);}
+    public TextField getNTextField(){return nText;}
 
 
 

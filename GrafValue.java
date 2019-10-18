@@ -59,7 +59,9 @@ public class GrafValue extends GrafObject implements IGrafable{
     public boolean isValidInput(GrafDialogController gdf){
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
         if (gdf.getX1().equals("")) return false;
-        return true;
+        if (GrafInputHelpers.isDouble(gdf.getX1())) return true;
+        GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red");
+        return false;
     }
 
     @Override
