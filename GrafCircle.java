@@ -71,10 +71,24 @@ public class GrafCircle extends GrafEllipse implements IGrafable{
 
         @Override
     public boolean isValidInput(GrafDialogController gdf) {
+        boolean ok = true;
         if (gdf.getX1().equals("")) return false;
         if (gdf.getX2().equals("")) return false;
         if (gdf.getY1().equals("")) return false;
-        return true;
+            if (!GrafInputHelpers.isDouble(gdf.getX1())) {
+                GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red" );
+                ok = false;
+            }
+            if (!GrafInputHelpers.isDouble(gdf.getX2())) {
+                GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red" );
+                ok = false;
+            }
+            if (!GrafInputHelpers.isDouble(gdf.getY1())) {
+                GrafInputHelpers.setTextFieldColor(gdf.getY1TextField(), "red" );
+                ok = false;
+            }
+
+        return ok;
     }
 
     /*@Override
