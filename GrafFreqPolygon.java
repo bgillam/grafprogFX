@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.geom.Path2D;
 import java.util.Arrays;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -110,15 +111,20 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
             double height;
             double lastCount = 0;
             double lastX = 0;
+            double[] x = new double[classLimits.length];
+            double[] y = new double[classLimits.length];;
             for (int j = 0; j < classLimits.length-1; j++) {
                 if (relative) height = counts[j]/numValues; else height = counts[j];
                //implement fill here
                 gc.setColor(getGrafColor());
+
                 GrafPrimitives.grafLine(gStuff,classLimits[j]-0.5*getClassWidth(), lastCount, classLimits[j]+0.5*getClassWidth(), height, gc);
+                x[j] = classLimits[j]-0.5*getClassWidth();
+                y[j] = lastCount;
+
+
                 lastCount = height;
                 lastX = classLimits[j]+0.5*getClassWidth();
-                //GrafPrimitives.grafLine(gStuff,classLimits[j]+getClassWidth(), height, classLimits[j]+getClassWidth(), 0, gc);
-                //GrafPrimitives.grafRect(gStuff, classLimits[j], height, classWidth, height   , gc);
                 if (labelAxisByBoundries) {
                     String formatString = "%."+gStuff.getDecPlaces()+"f";
                     GrafPrimitives.grafLine(gStuff,classLimits[j], gStuff.getGrafHeight()/50, classLimits[j], -gStuff.getGrafHeight()/50, gc);
@@ -128,6 +134,24 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
                 //System.out.println(counts[j]);
             }
             GrafPrimitives.grafLine(gStuff,lastX, lastCount, lastX+getClassWidth(), 0, gc);
+
+            //This should fill, but does not
+            Path2D path = new Path2D.Double();
+            path.moveTo(x[0], y[0]);
+            for(int i = 1; i < x.length; ++i) {
+                GrafPrimitives.grafString(gStuff, x[i], y[i] , "X", gc);
+                path.lineTo(x[i], y[i]);
+            }
+            path.lineTo(lastX, lastCount);
+            GrafPrimitives.grafString(gStuff, lastX, lastCount , "X", gc);
+            path.lineTo(lastX+getClassWidth(), 0);
+            //path.lineTo(x[0],y[0]);
+            path.closePath();
+            gc.setColor(getFillColor());
+            gc.fill(path);
+            gc.setColor(getGrafColor());
+            //End fill
+
         }
 
         private void grafOnY(int numValues, double[] counts, Graphics2D gc){
@@ -292,7 +316,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
         //public boolean isFillFlag() {        return fillFlag;    }
 
         public String toString(){
-            return "HISTOGRAM: Col "+getColumnNumber();//+", "+ getGrafColor();
+            return "freqpolygon: Col "+getColumnNumber();//+", "+ getGrafColor();
         }
 
         public GrafSettings getGStuff() {
