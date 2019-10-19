@@ -164,6 +164,13 @@ public class GrafController {
         GrafProg.getDialogController().hideAll();
         GrafProg.getDialogController().showHistogramDialog();
         GrafProg.getDialogStage().show();
+
+    }
+
+    public void onFreqPolygon(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showFreqPolyDialog();
+        GrafProg.getDialogStage().show();
     }
 
     public void onTable(ActionEvent actionEvent) {

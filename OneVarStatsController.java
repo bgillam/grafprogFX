@@ -29,6 +29,27 @@ public class OneVarStatsController {
     @FXML private  ComboBox columnComboBox;
 
 
+    public void initialize(){
+        columnComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+        columnComboBox.getSelectionModel().select(0);
+        textFieldN.setEditable(false);
+        textFieldMin.setEditable(false);
+        textFieldQ1.setEditable(false);
+        textFieldMedian.setEditable(false);
+        textFieldQ3.setEditable(false);
+        textFieldMax.setEditable(false);
+        textFieldRange.setEditable(false);
+        textFieldMean.setEditable(false);
+        textFieldVarP.setEditable(false);
+        textFieldVarS.setEditable(false);
+        textFieldStDevP.setEditable(false);
+        textFieldStDevS.setEditable(false);
+        textFieldIQR.setEditable(false);
+        textFieldModes.setEditable(false);
+        clearForm();
+
+    }
+
 
     public void pullDownMoused(MouseEvent mouseEvent) {
       // functionComboBox.setSelectionModel(FXCollections.observableArrayList(GrafProg.getData().getHeaderArray());

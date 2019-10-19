@@ -126,7 +126,7 @@ public class GrafProg extends Application {
         genStage.setScene(genScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         genStage.setTitle("Column Actions");
-        genStage.show();
+        //genStage.show();
 
         //Set up main graf window
         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));

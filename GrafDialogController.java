@@ -333,6 +333,23 @@ public class GrafDialogController {
         });
     }
 
+    public void showFreqPolyDialog() {
+        gType = GrafType.FREQPOLYGON;
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("Frequency Polygon");
+                showColumnChooser();
+                showX1X2();
+                x1Label.setText("Begin");
+                x2Label.setText("End");
+                showHistoBoxes();
+                onMaxMin(new ActionEvent());
+                chooseObject.setText("Choose Frequency Polygon");
+            }
+        });
+    }
+
     public void showPointDialog() {
         gType = GrafType.POINT;
 
@@ -964,6 +981,7 @@ public class GrafDialogController {
 
     public String getClassWidthText(){        return classWidthText.getText();    }
     public void setClassWidthText(String s){ classWidthText.setText(s);}
+    public TextField getClassWidthTextField(){return classWidthText;    }
 
     public boolean isConnected(){
         return fns.isSelected();
@@ -995,6 +1013,7 @@ public class GrafDialogController {
            return FontDialog.fxFontToAwtFont(javafx.scene.text.Font.getDefault());
 
     }
+
 
 
 }

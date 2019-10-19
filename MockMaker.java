@@ -37,7 +37,7 @@ public class MockMaker
                aList.add(new GrafBoxPlot());
                aList.add(new GrafHistogram());
                aList.add(new GrafOgive(gSess));
-               aList.add(new GrafFreqPolygon(gSess));
+               aList.add(new GrafFreqPolygon());
                aList.add(new GrafFunction());
                aList.add(new GrafValue());
                aList.add(new GrafTangent());
