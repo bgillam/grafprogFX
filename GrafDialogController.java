@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -26,7 +27,8 @@ import java.util.ArrayList;
 
 public class GrafDialogController {
 
-
+    //UI Areas
+    @FXML   private HBox functionChoiceHBox;
 
     //instance variables tied to GUI
     @FXML    private ColorPicker fillColorPicker;
