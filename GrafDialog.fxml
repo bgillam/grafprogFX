@@ -16,9 +16,9 @@
 <?import javafx.scene.control.ComboBox?>
 
 <?import javafx.scene.control.ColorPicker?>
-<?import javafx.scene.paint.Color?>
-<BorderPane fx:controller="GrafDialogController"
-            xmlns:fx="http://javafx.com/fxml" >
+    <?import javafx.scene.paint.Color?>
+    <BorderPane fx:controller="GrafDialogController"
+                xmlns:fx="http://javafx.com/fxml" >
 
         <top>
         <VBox spacing = "5" >
@@ -26,11 +26,11 @@
                 <Insets left="10" top="10"  right="10"   bottom="10"/>
             </padding>
             <HBox fx:id = "functionChoiceHBox" spacing = "5" >
-                <Label fx:id="fChoiceLabel" text = "choicetype" />
+               <!-- <Label fx:id="fChoiceLabel" text = "choicetype" />
                 <ComboBox fx:id="fComboBox" value="column or fstring" onAction="#functionChosen"/>
                 <Separator orientation="VERTICAL"/>
                 <Label fx:id="fChoiceLabel2" text = "choicetype"/>
-                <ComboBox fx:id="fComboBox2" value="column or fstring"/>
+                <ComboBox fx:id="fComboBox2" value="column or fstring"/>-->
             </HBox>
             <HBox spacing = "5">
                 <Label fx:id = "fxLabel" text = "f(x)=" minWidth="30"/>

@@ -4,24 +4,15 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Modality;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -34,7 +25,6 @@ public class GrafDialogController {
     @FXML    private ColorPicker fillColorPicker;
     @FXML    private Label fillLabel;
     @FXML    private ColorPicker grafColorPicker;
-    @FXML    private Label fChoiceLabel;
     @FXML    private TextField x1Text;
     @FXML    private Label x1Label;
     @FXML    private Label y1Label;
@@ -63,9 +53,8 @@ public class GrafDialogController {
     @FXML    private Label chooseObject;
     @FXML    private Pane grafPane;
     @FXML    private CheckBox fns;
-    @FXML    private Label fChoiceLabel2;
-    @FXML    private ComboBox fComboBox;
-    @FXML    private ComboBox fComboBox2;
+
+
     @FXML    private ComboBox objectComboBox;
     @FXML    private CheckBox countCheckBox;
     @FXML    private CheckBox boundariesCheckBox;
@@ -75,6 +64,11 @@ public class GrafDialogController {
     @FXML    private RadioButton numClassButton;
     @FXML    private TextField numClasses;
     @FXML    private Label classLabel;
+
+    private Label fChoiceLabel = new Label("fx:");
+    private ComboBox fComboBox = new ComboBox();
+    private Label fChoiceLabel2 = new Label("Output Column");
+    private ComboBox fComboBox2 = new ComboBox();
 
     //other instance variables
     private GrafType gType;
@@ -96,6 +90,7 @@ public class GrafDialogController {
 
     @FXML
     private void onDiscardButtonClicked(ActionEvent e){
+        GrafProg.setMessage2("Changes Discarded");
         resetDialog();
         //GrafProg.getGrafPanel().repaint();
     }
@@ -273,7 +268,6 @@ public class GrafDialogController {
                 functionString.setEditable(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("INTEGRAL");
-
                 showFunctionChooser();
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
@@ -473,6 +467,11 @@ public class GrafDialogController {
 
     private void showFunctionChooser(){
 
+        functionChoiceHBox.getChildren().add(fChoiceLabel);
+        functionChoiceHBox.getChildren().add(fComboBox);
+        fComboBox.setOnAction((e) -> { functionChosen();});
+        fChoiceLabel.setVisible(true);
+        fComboBox.setVisible(true);
         fComboBox.setItems(FXCollections.observableArrayList(createFunctionList()));
         fChoiceLabel.setText("Choose f(x): ");
         fChoiceLabel.setVisible(true);
@@ -488,6 +487,9 @@ public class GrafDialogController {
     }
 
     private void showColumnChooser(){
+        functionChoiceHBox.getChildren().add(fChoiceLabel);
+        functionChoiceHBox.getChildren().add(fComboBox);
+        fComboBox.setOnAction((e) -> { functionChosen();});
         fComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
         fChoiceLabel.setText("Choose Column: ");
         fChoiceLabel.setVisible(true);
@@ -499,6 +501,10 @@ public class GrafDialogController {
     }
 
     private void showColumnChooser2(){
+        functionChoiceHBox.getChildren().add(fChoiceLabel2);
+        functionChoiceHBox.getChildren().add(fComboBox2);
+        fComboBox.setOnAction((e) -> { functionChosen();});
+
         fComboBox2.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
         fChoiceLabel2.setText("Choose Column: ");
         fChoiceLabel2.setVisible(true);
@@ -696,11 +702,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                //functionString.setText("");
-                fChoiceLabel.setVisible(false);
-                fComboBox.setVisible(false);
-                fChoiceLabel2.setVisible(false);
-                fComboBox2.setVisible(false);
+                functionChoiceHBox.getChildren().clear();
                 fxLabel.setVisible(false);
                 functionString.setVisible(false);
                 x1Text.setVisible(false);
@@ -762,8 +764,10 @@ public class GrafDialogController {
         GrafInputHelpers.setTextFieldColor(getTextForDisplay(), "black");
         getGrafColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         getFillColorPicker().setValue(javafx.scene.paint.Color.BLACK);
-        GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
+        //GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
+        hideAll();
         GrafProg.getGrafPanel().repaint();
+
     }
 
     /*private void saveChanges(){
@@ -817,9 +821,10 @@ public class GrafDialogController {
         return null;
     }
 
-    public void functionChosen(ActionEvent actionEvent) {
+    public void functionChosen() {
         if (functionString.isVisible()) {
             try {
+                System.out.println(fComboBox.getValue());
                 if (!fComboBox.getValue().equals("function")) {
                     GrafFunction gf = (GrafFunction) (fComboBox.getValue());
                     functionString.setText(gf.getFunction());
