@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,30 +15,28 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import javax.crypto.SealedObject;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class GrafDialogController {
 
+
+
     //UI Areas
     @FXML   private HBox functionChoiceHBox;
+    @FXML   private HBox functionStringBox;
+    @FXML   private HBox xy1pointBox;
 
     //instance variables tied to GUI
     @FXML    private ColorPicker fillColorPicker;
     @FXML    private Label fillLabel;
     @FXML    private ColorPicker grafColorPicker;
-    @FXML    private TextField x1Text;
-    @FXML    private Label x1Label;
-    @FXML    private Label y1Label;
-    @FXML    private TextField y1Text;
-    @FXML    private Label nLabel;
-    @FXML    private TextField nText;
-    @FXML    private Label x2Label;
-    @FXML    private TextField x2Text;
-    @FXML    private Label y2Label;
-    @FXML    private TextField y2Text;
-    @FXML    private Label fxLabel;
-    @FXML    private TextField functionString;
+    @FXML private Label x2Label = new Label("x2");
+    @FXML private TextField x2Text;
+    @FXML private Label y2Label;
+    @FXML private TextField y2Text;
+
     @FXML    private Label markLabel;
     @FXML    private ToggleGroup markToggleGroup;
     @FXML    private RadioButton pointMarkRButton;
@@ -53,12 +53,13 @@ public class GrafDialogController {
     @FXML    private Label chooseObject;
     @FXML    private Pane grafPane;
     @FXML    private CheckBox fns;
+    @FXML    private TextField msg;
 
 
     @FXML    private ComboBox objectComboBox;
     @FXML    private CheckBox countCheckBox;
     @FXML    private CheckBox boundariesCheckBox;
-    @FXML    private Button maxMinButton;
+
     @FXML    private TextField classWidthText;
     @FXML    private RadioButton classSizeButton;
     @FXML    private RadioButton numClassButton;
@@ -69,6 +70,19 @@ public class GrafDialogController {
     private ComboBox fComboBox = new ComboBox();
     private Label fChoiceLabel2 = new Label("Output Column");
     private ComboBox fComboBox2 = new ComboBox();
+    private Label fxLabel = new Label("fx:");
+    private TextField functionString = new TextField("");
+    private TextField x1Text = new TextField("");
+    private Label x1Label = new Label("x1:");
+    private Label y1Label = new Label("y1:");
+    private TextField y1Text = new TextField("");
+    private Label nLabel = new Label("n:");
+    private TextField nText = new TextField("");
+    private Button maxMinButton =  new Button("max/min");
+   /* private Label x2Label = new Label("x2");
+    private TextField x2Text;
+    private Label y2Label;
+    private TextField y2Text;*/
 
     //other instance variables
     private GrafType gType;
@@ -78,6 +92,7 @@ public class GrafDialogController {
         fontName.setText(javafx.scene.text.Font.getDefault().getName());
         fontSize.setText(javafx.scene.text.Font.getDefault().getSize()+"  ");
         fontStyle.setText(javafx.scene.text.Font.getDefault().getStyle());
+        msg.setText("");
         hideAll();
     }
 
@@ -174,8 +189,7 @@ public class GrafDialogController {
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("FUNCTION");
                 fxLabel.setVisible(true);
-                functionString.setVisible(true);
-                functionString.setEditable(true);
+                showFunctionString(true);
                 chooseObject.setText("Choose FUNCTION");
                 //pack();
             }
@@ -188,10 +202,8 @@ public class GrafDialogController {
         gType = GrafType.FVALUE;
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                functionString.setVisible(true);
-                functionString.setEditable(false);
+                showFunctionString(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
-
                 GrafProg.getDialogStage().setTitle("VALUE");
                 showFunctionChooser();
                 showX1();
@@ -208,8 +220,7 @@ public class GrafDialogController {
         gType = GrafType.TANGENT;
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                functionString.setVisible(true);
-                functionString.setEditable(false);
+                showFunctionString(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
 
                 GrafProg.getDialogStage().setTitle("TANGENT");
@@ -227,8 +238,7 @@ public class GrafDialogController {
         gType = GrafType.CHORD;
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                functionString.setVisible(true);
-                functionString.setEditable(false);
+                showFunctionString(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("FCHORD");
                 showFunctionChooser();
@@ -246,8 +256,7 @@ public class GrafDialogController {
         gType = GrafType.FZERO;
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                functionString.setVisible(true);
-                functionString.setEditable(false);
+                showFunctionString(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("FZEROS");
                 showFunctionChooser();
@@ -264,8 +273,7 @@ public class GrafDialogController {
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                functionString.setVisible(true);
-                functionString.setEditable(false);
+                showFunctionString(false);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("INTEGRAL");
                 showFunctionChooser();
@@ -351,7 +359,6 @@ public class GrafDialogController {
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                //functionString.setVisible(true);
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("POINT");
                 showMarks();
@@ -478,12 +485,22 @@ public class GrafDialogController {
         fComboBox.setVisible(true);
         try {
             fComboBox.setValue(getFirstInTempList(GrafType.FUNCTION));
+            functionChosen();
         }catch (NullPointerException npe) {
             fComboBox.setValue("function");
         }
         fxLabel.setVisible(true);
         //functionString.setVisible(true);
         //functionString.setEditable(false);
+    }
+
+    private void showFunctionString(boolean editable){
+        functionStringBox.getChildren().add(fxLabel);
+        functionStringBox.getChildren().add(functionString);
+        fxLabel.setVisible(true);
+        functionString.setVisible(true);
+        functionString.setEditable(editable);
+
     }
 
     private void showColumnChooser(){
@@ -537,12 +554,29 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                xy1pointBox.getChildren().add(x1Label);
+                xy1pointBox.getChildren().add(x1Text);
                 x1Text.setVisible(true);
                 x1Label.setVisible(true);
 
             }
         });
     }
+
+    private void showY1()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                xy1pointBox.getChildren().add(new Separator(Orientation.VERTICAL));
+                xy1pointBox.getChildren().add(y1Label);
+                xy1pointBox.getChildren().add(y1Text);
+                y1Text.setVisible(true);
+                y1Label.setVisible(true);
+
+            }
+        });
+    }
+
 
     private void showX2()
     {
@@ -572,9 +606,7 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showX1();
-                y1Label.setVisible(true);
-                y1Text.setVisible(true);
-
+                showY1();
             }
         });
     }
@@ -624,6 +656,9 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                xy1pointBox.getChildren().add(new Separator(Orientation.VERTICAL));
+                xy1pointBox.getChildren().add(nLabel);
+                xy1pointBox.getChildren().add(x1Text);
                 nLabel.setVisible(true);
                 nLabel.setText("n:");
                 nText.setVisible(true);
@@ -636,6 +671,9 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                xy1pointBox.getChildren().add(new Separator(Orientation.VERTICAL));
+                xy1pointBox.getChildren().add(nLabel);
+                xy1pointBox.getChildren().add(x1Text);
                 nLabel.setVisible(true);
                 nLabel.setText("dx:");
                 nText.setVisible(true);
@@ -703,6 +741,8 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 functionChoiceHBox.getChildren().clear();
+                functionStringBox.getChildren().clear();
+                xy1pointBox.getChildren().clear();
                 fxLabel.setVisible(false);
                 functionString.setVisible(false);
                 x1Text.setVisible(false);
@@ -765,6 +805,7 @@ public class GrafDialogController {
         getGrafColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         getFillColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         //GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
+        msg.setText("");
         hideAll();
         GrafProg.getGrafPanel().repaint();
 
@@ -780,11 +821,12 @@ public class GrafDialogController {
 
         GrafObject newObject = GrafObject.createGrafObjectFromController(gType);
         if (!newObject.isValidInput(this)) {
-            GrafProg.setMessage1("not a valid "+gType);
-            return false;
+            msg.setText("Not a valid "+gType);
+           return false;
         }
         newObject = GrafObject.createGrafObjectFromController(this, gType);
         if (!duplicate(newObject)) getTempGrafList().add(newObject);
+        msg.setText(gType+" added.");
         return true;
     }
 
@@ -1021,6 +1063,11 @@ public class GrafDialogController {
 
     }
 
+    public TextField getMsg() {
+        return msg;
+    }
 
-
+    public void setMsg(TextField msg) {
+        this.msg = msg;
+    }
 }

@@ -32,24 +32,21 @@
                 <Label fx:id="fChoiceLabel2" text = "choicetype"/>
                 <ComboBox fx:id="fComboBox2" value="column or fstring"/>-->
             </HBox>
-            <HBox spacing = "5">
-                <Label fx:id = "fxLabel" text = "f(x)=" minWidth="30"/>
-                <TextField fx:id = "functionString" minWidth = "250" onKeyPressed="#checkForEnter"/>
+            <HBox fx:id="functionStringBox" spacing = "5">
+                <!--<Label fx:id = "fxLabel" text = "f(x)=" minWidth="30"/>
+                <TextField fx:id = "functionString" minWidth = "250" onKeyPressed="#checkForEnter"/>-->
             </HBox>
-            <Separator orientation="HORIZONTAL"/>
-            <HBox spacing="5">
-
+            <HBox fx:id="xy1pointBox"  spacing="5">
+               <!-- <Separator orientation="HORIZONTAL"/>
                 <Label fx:id = "x1Label" text ="x1" minWidth="15"/>
                 <TextField fx:id = "x1Text"  prefWidth="75"/>
-<!--                <Label fx:id = "separator1" text = "|" minWidth = "10"/>-->
                 <Separator orientation="VERTICAL"/>
                 <Label fx:id="y1Label" text="y1" minWidth="15"/>
                 <TextField fx:id = "y1Text"  prefWidth="75"/>
-<!--                <Label fx:id= "separator2" text = "|" minWidth = "10"/>-->
                 <Separator orientation="VERTICAL"/>
                 <Label fx:id="nLabel" text ="n" minWidth="15"/>
                 <TextField fx:id = "nText" maxWidth = "75"/>
-                <Button fx:id = "maxMinButton" text = "Max/Min" onAction="#onMaxMin"/>
+                <Button fx:id = "maxMinButton" text = "Max/Min" onAction="#onMaxMin"/>-->
             </HBox>
             <HBox spacing ="5">
                 <Label fx:id="x2Label" text="x2" minWidth="15"/>
@@ -149,7 +146,8 @@
             </padding>
             <Separator orientation="HORIZONTAL"/>
             <HBox spacing="20" alignment="CENTER_RIGHT">
-
+                <Label text="message:"/>
+                <TextField fx:id="msg" text=" " minWidth="225" editable="false" />
                 <Button text = "Create" minWidth = "75" onAction="#onCreateButtonClicked"/>
                 <Button text = "Exit|Discard" minWidth = "75" onAction="#onDiscardButtonClicked"/>
                 <Button text = "Exit|Save" minWidth = "75" onAction="#onExitButtonClicked"/>

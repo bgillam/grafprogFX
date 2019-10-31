@@ -10,6 +10,7 @@
 *  2/25/15                              *
 *****************************************/
 
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.awt.*;
@@ -72,8 +73,12 @@ public class GrafInputHelpers {
     public static void setTextFieldColor(TextField t, String c){
     	String css = "-fx-text-fill: "+c;
     	t.setStyle(css);
-
 	}
 
+
+	public static void setLabelColor(Label t, String c){
+		String css = "-fx-text-fill: "+c;
+		t.setStyle(css);
+	}
 
 }
