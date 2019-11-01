@@ -261,7 +261,9 @@ public class GrafDialogController {
                 GrafProg.getDialogStage().setTitle("FZEROS");
                 showFunctionChooser();
                 showMarks();
-                showX1X2();
+                //showDx();
+                showX1();
+                showX2();
                 showDx();
                 chooseObject.setText("Choose FZEROS");
             }
@@ -279,8 +281,9 @@ public class GrafDialogController {
                 showFunctionChooser();
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
-                showX1X2();
+                showX1();
                 showN();
+                showX2();
                 chooseObject.setText("Choose INTEGRAL");
 
             }
@@ -327,10 +330,13 @@ public class GrafDialogController {
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("HISTOGRAM");
                 showColumnChooser();
-                showX1X2();
+                showX1();
+                showHistoBoxes();
+                showX2();
+                //showX1();
                 x1Label.setText("Begin");
                 x2Label.setText("End");
-                showHistoBoxes();
+                //showHistoBoxes();
                 onMaxMin(new ActionEvent());
                 chooseObject.setText("Choose HISTOGRAM");
             }
@@ -344,10 +350,12 @@ public class GrafDialogController {
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("Frequency Polygon");
                 showColumnChooser();
-                showX1X2();
+                showX1();
+                showHistoBoxes();
+                showX2();
                 x1Label.setText("Begin");
                 x2Label.setText("End");
-                showHistoBoxes();
+
                 onMaxMin(new ActionEvent());
                 chooseObject.setText("Choose Frequency Polygon");
             }
@@ -658,7 +666,7 @@ public class GrafDialogController {
             @Override public void run() {
                 xy1pointBox.getChildren().add(new Separator(Orientation.VERTICAL));
                 xy1pointBox.getChildren().add(nLabel);
-                xy1pointBox.getChildren().add(x1Text);
+                xy1pointBox.getChildren().add(nText);
                 nLabel.setVisible(true);
                 nLabel.setText("n:");
                 nText.setVisible(true);
@@ -673,7 +681,7 @@ public class GrafDialogController {
             @Override public void run() {
                 xy1pointBox.getChildren().add(new Separator(Orientation.VERTICAL));
                 xy1pointBox.getChildren().add(nLabel);
-                xy1pointBox.getChildren().add(x1Text);
+                xy1pointBox.getChildren().add(nText);
                 nLabel.setVisible(true);
                 nLabel.setText("dx:");
                 nText.setVisible(true);
@@ -722,6 +730,7 @@ public class GrafDialogController {
                 fns.setText("Relative Frequency");
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
+                xy1pointBox.getChildren().add(maxMinButton);
                 maxMinButton.setVisible(true);
                 classWidthText.setVisible(true);
                 numClassButton.setVisible(true);
