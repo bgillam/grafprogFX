@@ -36,7 +36,7 @@
                 <!--<Label fx:id = "fxLabel" text = "f(x)=" minWidth="30"/>
                 <TextField fx:id = "functionString" minWidth = "250" onKeyPressed="#checkForEnter"/>-->
             </HBox>
-            <HBox fx:id="xy1pointBox"  spacing="5">
+            <HBox fx:id="xy1PointBox"  spacing="5">
                <!-- <Separator orientation="HORIZONTAL"/>
                 <Label fx:id = "x1Label" text ="x1" minWidth="15"/>
                 <TextField fx:id = "x1Text"  prefWidth="75"/>
@@ -48,10 +48,9 @@
                 <TextField fx:id = "nText" maxWidth = "75"/>
                 <Button fx:id = "maxMinButton" text = "Max/Min" onAction="#onMaxMin"/>-->
             </HBox>
-            <HBox spacing ="5">
-                <Label fx:id="x2Label" text="x2" minWidth="15"/>
+            <HBox fx:id="xy2PointBox" spacing="5">
+               <!-- <Label fx:id="x2Label" text="x2" minWidth="15"/>
                 <TextField fx:id = "x2Text" prefWidth="75"/>
-<!--                <Label fx:id="separator3" text= "|" minWidth = "10"/>-->
                 <Separator orientation="VERTICAL"/>
                 <Label fx:id="y2Label" text ="y2" minWidth="15"/>
                 <TextField fx:id = "y2Text" prefWidth = "75"/>
@@ -64,7 +63,7 @@
                 <RadioButton fx:id = "numClassButton" text = "# classes" toggleGroup="$classWidthGroup" selected = "true" />
                 <TextField fx:id="numClasses" maxWidth="50" text = "7" />
                 <RadioButton fx:id="classSizeButton" text = "Class size" toggleGroup="$classWidthGroup" />
-                <TextField fx:id="classWidthText" maxWidth="50"/>
+                <TextField fx:id="classWidthText" maxWidth="50"/>-->
 
             </HBox>
             <Separator orientation="HORIZONTAL"/>

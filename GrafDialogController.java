@@ -26,16 +26,13 @@ public class GrafDialogController {
     //UI Areas
     @FXML   private HBox functionChoiceHBox;
     @FXML   private HBox functionStringBox;
-    @FXML   private HBox xy1pointBox;
+    @FXML   private HBox xy1PointBox;
+    @FXML   private HBox xy2PointBox;
 
     //instance variables tied to GUI
     @FXML    private ColorPicker fillColorPicker;
     @FXML    private Label fillLabel;
     @FXML    private ColorPicker grafColorPicker;
-    @FXML private Label x2Label = new Label("x2");
-    @FXML private TextField x2Text;
-    @FXML private Label y2Label;
-    @FXML private TextField y2Text;
 
     @FXML    private Label markLabel;
     @FXML    private ToggleGroup markToggleGroup;
@@ -60,11 +57,7 @@ public class GrafDialogController {
     @FXML    private CheckBox countCheckBox;
     @FXML    private CheckBox boundariesCheckBox;
 
-    @FXML    private TextField classWidthText;
-    @FXML    private RadioButton classSizeButton;
-    @FXML    private RadioButton numClassButton;
-    @FXML    private TextField numClasses;
-    @FXML    private Label classLabel;
+
 
     private Label fChoiceLabel = new Label("fx:");
     private ComboBox fComboBox = new ComboBox();
@@ -79,10 +72,16 @@ public class GrafDialogController {
     private Label nLabel = new Label("n:");
     private TextField nText = new TextField("");
     private Button maxMinButton =  new Button("max/min");
-   /* private Label x2Label = new Label("x2");
-    private TextField x2Text;
-    private Label y2Label;
-    private TextField y2Text;*/
+    private Label x2Label = new Label("x2");
+    private TextField x2Text = new TextField("");
+    private Label y2Label = new Label("Y2");
+    private TextField y2Text = new TextField("");
+    private TextField classWidthText = new TextField("");
+    private RadioButton classSizeButton = new RadioButton("Class Size:");
+    private RadioButton numClassButton = new RadioButton("# Classes");
+    private TextField numClasses = new TextField("");
+    private Label classLabel = new Label("Class Width");
+
 
     //other instance variables
     private GrafType gType;
@@ -562,8 +561,9 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                xy1pointBox.getChildren().add(x1Label);
-                xy1pointBox.getChildren().add(x1Text);
+                xy1PointBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
+                xy1PointBox.getChildren().add(x1Label);
+                xy1PointBox.getChildren().add(x1Text);
                 x1Text.setVisible(true);
                 x1Label.setVisible(true);
 
@@ -575,9 +575,9 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                xy1pointBox.getChildren().add(new Separator(Orientation.VERTICAL));
-                xy1pointBox.getChildren().add(y1Label);
-                xy1pointBox.getChildren().add(y1Text);
+                xy1PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
+                xy1PointBox.getChildren().add(y1Label);
+                xy1PointBox.getChildren().add(y1Text);
                 y1Text.setVisible(true);
                 y1Label.setVisible(true);
 
@@ -590,8 +590,25 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                xy2PointBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
+                xy2PointBox.getChildren().add(x2Label);
+                xy2PointBox.getChildren().add(x2Text);
                 x2Text.setVisible(true);
                 x2Label.setVisible(true);
+
+            }
+        });
+    }
+
+    private void showY2()
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                xy2PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
+                xy2PointBox.getChildren().add(y2Label);
+                xy2PointBox.getChildren().add(y2Text);
+                y2Text.setVisible(true);
+                y2Label.setVisible(true);
 
             }
         });
@@ -602,8 +619,9 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showX1();
-                x2Label.setVisible(true);
-                x2Text.setVisible(true);
+                showX2();
+               /* x2Label.setVisible(true);
+                x2Text.setVisible(true);*/
 
             }
         });
@@ -624,8 +642,9 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showX2();
-                y2Label.setVisible(true);
-                y2Text.setVisible(true);
+                showY2();
+                /*y2Label.setVisible(true);
+                y2Text.setVisible(true);*/
 
             }
         });
@@ -635,7 +654,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                showX1Y1();
+                showX2Y2();
                 x2Label.setVisible(true);
                 x2Text.setVisible(true);
                 x2Label.setText("Width");
@@ -652,10 +671,11 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showX1Y1();
-                x2Label.setVisible(true);
+                showX2Y2();
+                /*x2Label.setVisible(true);
                 x2Text.setVisible(true);
                 y2Label.setVisible(true);
-                y2Text.setVisible(true);
+                y2Text.setVisible(true);*/
             }
         });
     }
@@ -664,9 +684,9 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                xy1pointBox.getChildren().add(new Separator(Orientation.VERTICAL));
-                xy1pointBox.getChildren().add(nLabel);
-                xy1pointBox.getChildren().add(nText);
+                xy1PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
+                xy1PointBox.getChildren().add(nLabel);
+                xy1PointBox.getChildren().add(nText);
                 nLabel.setVisible(true);
                 nLabel.setText("n:");
                 nText.setVisible(true);
@@ -679,9 +699,9 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                xy1pointBox.getChildren().add(new Separator(Orientation.VERTICAL));
-                xy1pointBox.getChildren().add(nLabel);
-                xy1pointBox.getChildren().add(nText);
+                xy1PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
+                xy1PointBox.getChildren().add(nLabel);
+                xy1PointBox.getChildren().add(nText);
                 nLabel.setVisible(true);
                 nLabel.setText("dx:");
                 nText.setVisible(true);
@@ -694,6 +714,8 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                xy2PointBox.getChildren().add(x2Label);
+                xy2PointBox.getChildren().add(x2Text);
                 x2Label.setVisible(true);
                 x2Label.setText("r:");
                 x2Text.setVisible(true);
@@ -730,11 +752,15 @@ public class GrafDialogController {
                 fns.setText("Relative Frequency");
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
-                xy1pointBox.getChildren().add(maxMinButton);
+                xy1PointBox.getChildren().add(maxMinButton);
                 maxMinButton.setVisible(true);
+                xy2PointBox.getChildren().add(classWidthText);
                 classWidthText.setVisible(true);
+                xy2PointBox.getChildren().add(numClassButton);
                 numClassButton.setVisible(true);
+                xy2PointBox.getChildren().add(numClasses);
                 numClasses.setVisible(true);
+                xy2PointBox.getChildren().add(classSizeButton);
                 classSizeButton.setVisible(true);
 
             }
@@ -751,7 +777,8 @@ public class GrafDialogController {
             @Override public void run() {
                 functionChoiceHBox.getChildren().clear();
                 functionStringBox.getChildren().clear();
-                xy1pointBox.getChildren().clear();
+                xy1PointBox.getChildren().clear();
+                xy2PointBox.getChildren().clear();
                 fxLabel.setVisible(false);
                 functionString.setVisible(false);
                 x1Text.setVisible(false);
