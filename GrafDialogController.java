@@ -28,25 +28,18 @@ public class GrafDialogController {
     @FXML   private HBox functionStringBox;
     @FXML   private HBox xy1PointBox;
     @FXML   private HBox xy2PointBox;
+    @FXML   private HBox markButtonBox;
+    @FXML   private HBox textHBox;
+    @FXML   private HBox fontHBox;
 
     //instance variables tied to GUI
     @FXML    private ColorPicker fillColorPicker;
     @FXML    private Label fillLabel;
     @FXML    private ColorPicker grafColorPicker;
 
-    @FXML    private Label markLabel;
-    @FXML    private ToggleGroup markToggleGroup;
-    @FXML    private RadioButton pointMarkRButton;
-    @FXML    private RadioButton xMarkRButton;
-    @FXML    private RadioButton oMarkRButton;
-    @FXML    private RadioButton charMarkRButton;
-    @FXML    private TextField charMarkText;
-    @FXML    private Label textLabel;
-    @FXML    private TextField textForDisplay;
-    @FXML    private Label fontName;
-    @FXML    private Label fontSize;
-    @FXML    private Label fontStyle;
-    @FXML    private Button fontButton;
+
+
+
     @FXML    private Label chooseObject;
     @FXML    private Pane grafPane;
     @FXML    private CheckBox fns;
@@ -58,13 +51,15 @@ public class GrafDialogController {
     @FXML    private CheckBox boundariesCheckBox;
 
 
-
+    //function/column input/choosing
     private Label fChoiceLabel = new Label("fx:");
     private ComboBox fComboBox = new ComboBox();
     private Label fChoiceLabel2 = new Label("Output Column");
     private ComboBox fComboBox2 = new ComboBox();
     private Label fxLabel = new Label("fx:");
     private TextField functionString = new TextField("");
+
+    //Points
     private TextField x1Text = new TextField("");
     private Label x1Label = new Label("x1:");
     private Label y1Label = new Label("y1:");
@@ -76,6 +71,8 @@ public class GrafDialogController {
     private TextField x2Text = new TextField("");
     private Label y2Label = new Label("Y2");
     private TextField y2Text = new TextField("");
+
+    //Histogram setup
     private TextField classWidthText = new TextField("");
     private ToggleGroup classToggleGroup = new ToggleGroup();
     private RadioButton classSizeButton = new RadioButton("Class Size:");
@@ -83,6 +80,22 @@ public class GrafDialogController {
     private TextField numClasses = new TextField("");
     private Label classLabel = new Label("Class Width");
 
+    //mark chooser
+    private Label markLabel = new Label("Mark:");
+    private ToggleGroup markToggleGroup = new ToggleGroup();
+    private RadioButton pointMarkRButton = new RadioButton(".");
+    private RadioButton xMarkRButton = new RadioButton("x");
+    private RadioButton oMarkRButton = new RadioButton("o");
+    private RadioButton charMarkRButton = new RadioButton("char");
+    private TextField charMarkText = new TextField("x");
+
+    //Text and Font
+    private Label textLabel = new Label("Text: ");
+    private TextField textForDisplay = new TextField("");
+    private Label fontName = new Label("Font");
+    private Label fontSize = new Label("Size");
+    private Label fontStyle = new Label("Style");
+    private Button fontButton =  new Button("Font");
 
     //other instance variables
     private GrafType gType;
@@ -94,15 +107,25 @@ public class GrafDialogController {
         y1Text.setPrefWidth(75);
         y2Text.setPrefWidth(75);
         numClasses.setPrefWidth(75);
+        textForDisplay.setPrefWidth(150);
         classWidthText.setPrefWidth(75);
+        fontName.setPrefWidth(150);
+        fontStyle.setPrefWidth(75);
+        fontSize.setPrefWidth(50);
         numClassButton.setSelected(true);
         numClasses.setText("7");
+        xMarkRButton.setSelected(true);
         classSizeButton.setToggleGroup(classToggleGroup);
         numClassButton.setToggleGroup(classToggleGroup);
+        xMarkRButton.setToggleGroup(markToggleGroup);
+        oMarkRButton.setToggleGroup(markToggleGroup);
+        pointMarkRButton.setToggleGroup(markToggleGroup);
+        charMarkRButton.setToggleGroup(markToggleGroup);
         fontName.setText(javafx.scene.text.Font.getDefault().getName());
         fontSize.setText(javafx.scene.text.Font.getDefault().getSize()+"  ");
         fontStyle.setText(javafx.scene.text.Font.getDefault().getStyle());
         msg.setText("");
+
         hideAll();
     }
 
@@ -397,6 +420,7 @@ public class GrafDialogController {
                 GrafProg.getDialogStage().setTitle("TEXT");
                 showTextAndFontButton();
                 showX1Y1();
+                fontButton.setOnAction((e) -> { onFontButtonClicked(e);});
                 chooseObject.setText("Choose TEXT");
 
             }
@@ -474,7 +498,14 @@ public class GrafDialogController {
 
     //private halpers for setting up dialog
     private void showTextAndFontButton(){
-        textLabel.setVisible(true);
+        textHBox.getChildren().add(textLabel);
+        textHBox.getChildren().add(textForDisplay);
+        fontHBox.getChildren().add(fontButton);
+        fontHBox.getChildren().add(fontName);
+        fontHBox.getChildren().add(fontStyle);
+        fontHBox.getChildren().add(fontSize);
+
+        fontHBox.setVisible(true);
         textForDisplay.setVisible(true);
         fontName.setVisible(true);
         fontStyle.setVisible(true);
@@ -482,14 +513,14 @@ public class GrafDialogController {
         fontButton.setVisible(true);
      }
 
-     private void hideTextAndFontButtons(){
+     /*private void hideTextAndFontButtons(){
          textLabel.setVisible(false);
          textForDisplay.setVisible(false);
          fontName.setVisible(false);
          fontStyle.setVisible(false);
          fontSize.setVisible(false);
          fontButton.setVisible(false);
-     }
+     }*/
 
     private void showFunctionChooser(){
 
@@ -557,6 +588,12 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                markButtonBox.getChildren().add(markLabel);
+                markButtonBox.getChildren().add(pointMarkRButton);
+                markButtonBox.getChildren().add(xMarkRButton);
+                markButtonBox.getChildren().add(oMarkRButton);
+                markButtonBox.getChildren().add(charMarkRButton);
+                markButtonBox.getChildren().add(charMarkText);
                 markLabel.setVisible(true);
                 pointMarkRButton.setVisible(true);
                 xMarkRButton.setVisible(true);
@@ -794,8 +831,11 @@ public class GrafDialogController {
                 functionStringBox.getChildren().clear();
                 xy1PointBox.getChildren().clear();
                 xy2PointBox.getChildren().clear();
+                markButtonBox.getChildren().clear();
+                textHBox.getChildren().clear();
+                fontHBox.getChildren().clear();
                 fxLabel.setVisible(false);
-                functionString.setVisible(false);
+                /*functionString.setVisible(false);
                 x1Text.setVisible(false);
                 x1Label.setText("x1");
                 x2Label.setText("x2");
@@ -820,19 +860,19 @@ public class GrafDialogController {
                 textLabel.setVisible(false);
                 textForDisplay.setVisible(false);
                 fontName.setVisible(false);
-                fontButton.setVisible(false);
+                fontButton.setVisible(false);*/
                 fns.setVisible(false);
                 fillColorPicker.setVisible(false);
                 fillLabel.setVisible(false);
-                hideTextAndFontButtons();
+                //hideTextAndFontButtons();
                 boundariesCheckBox.setVisible(false);
                 countCheckBox.setVisible(false);
-                maxMinButton.setVisible(false);
-                classWidthText.setVisible(false);
-                classLabel.setVisible(false);
-                numClasses.setVisible(false);
-                classSizeButton.setVisible(false);
-                numClassButton.setVisible(false);
+                //maxMinButton.setVisible(false);
+                //classWidthText.setVisible(false);
+                //classLabel.setVisible(false);
+                //numClasses.setVisible(false);
+                //classSizeButton.setVisible(false);
+                //numClassButton.setVisible(false);
             }
         });
     }

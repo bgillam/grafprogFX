@@ -76,7 +76,8 @@
             <padding>
                 <Insets left="10" top="10"  right="10"   bottom="10"/>
             </padding>
-            <HBox spacing = "5">
+            <HBox fx:id="markButtonBox" spacing = "5">
+<!--
 
                 <Label fx:id = "markLabel" text = "mark:" maxWidth="100"/>
                 <fx:define>
@@ -87,18 +88,21 @@
                 <RadioButton fx:id="oMarkRButton" text = "o" toggleGroup="$markToggleGroup"/>
                 <RadioButton fx:id="charMarkRButton" text = "char" toggleGroup="$markToggleGroup"/>
                 <TextField fx:id="charMarkText" maxWidth="30"/>
+-->
 
             </HBox>
-            <HBox>
-                <Label fx:id="textLabel" text = "Text" maxWidth ="100"/>
-                <TextField fx:id = "textForDisplay" minWidth = "100"/>
+            <HBox fx:id="textHBox">
+                <!--Label fx:id="textLabel" text = "Text:  " maxWidth ="100"/>
+                <TextField fx:id = "textForDisplay" minWidth = "150"/>-->
+               <!-- <Button fx:id = "fontButton" text = "Font" minWidth = "100" onAction="#onFontButtonClicked"/>-->
             </HBox>
-            <Button fx:id = "fontButton" text = "Font" minWidth = "100" onAction="#onFontButtonClicked"/>
-            <HBox>
+            <!--<Button fx:id = "fontButton" text = "Font" minWidth = "100" onAction="#onFontButtonClicked"/>-->
+            <HBox fx:id="fontHBox">
 <!--                <Button fx:id = "fontButton" text = "Font" minWidth = "100" onAction="#onFontButtonClicked"/>-->
+               <!-- <Button fx:id = "fontButton" text = "Font" minWidth = "75" onAction="#onFontButtonClicked"/>
                 <Label fx:id = "fontName" text = "FontName" minWidth ="150"/>
                 <Label fx:id = "fontSize" text = "FontSize" minWidth = "50"/>
-                <Label fx:id = "fontStyle" text = "FontStyle" minWidth="50"/>
+                <Label fx:id = "fontStyle" text = "FontStyle" minWidth="50"/>-->
 
             </HBox>
             <CheckBox fx:id="boundariesCheckBox" text= "Label by Boundaries" selected = "true"/>
