@@ -36,8 +36,9 @@
                 <!--<Label fx:id = "fxLabel" text = "f(x)=" minWidth="30"/>
                 <TextField fx:id = "functionString" minWidth = "250" onKeyPressed="#checkForEnter"/>-->
             </HBox>
+            <Separator orientation="HORIZONTAL"/>
             <HBox fx:id="xy1PointBox"  spacing="5">
-               <!-- <Separator orientation="HORIZONTAL"/>
+                <!--<Separator orientation="HORIZONTAL" visible="true"/>
                 <Label fx:id = "x1Label" text ="x1" minWidth="15"/>
                 <TextField fx:id = "x1Text"  prefWidth="75"/>
                 <Separator orientation="VERTICAL"/>

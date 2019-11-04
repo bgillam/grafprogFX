@@ -77,6 +77,7 @@ public class GrafDialogController {
     private Label y2Label = new Label("Y2");
     private TextField y2Text = new TextField("");
     private TextField classWidthText = new TextField("");
+    private ToggleGroup classToggleGroup = new ToggleGroup();
     private RadioButton classSizeButton = new RadioButton("Class Size:");
     private RadioButton numClassButton = new RadioButton("# Classes");
     private TextField numClasses = new TextField("");
@@ -88,6 +89,16 @@ public class GrafDialogController {
     private ArrayList<GrafObject> tempGrafList = GrafProg.getGrafList();
 
     public void initialize(){
+        x1Text.setPrefWidth(75);
+        x2Text.setPrefWidth(75);
+        y1Text.setPrefWidth(75);
+        y2Text.setPrefWidth(75);
+        numClasses.setPrefWidth(75);
+        classWidthText.setPrefWidth(75);
+        numClassButton.setSelected(true);
+        numClasses.setText("7");
+        classSizeButton.setToggleGroup(classToggleGroup);
+        numClassButton.setToggleGroup(classToggleGroup);
         fontName.setText(javafx.scene.text.Font.getDefault().getName());
         fontSize.setText(javafx.scene.text.Font.getDefault().getSize()+"  ");
         fontStyle.setText(javafx.scene.text.Font.getDefault().getStyle());
@@ -330,8 +341,9 @@ public class GrafDialogController {
                 GrafProg.getDialogStage().setTitle("HISTOGRAM");
                 showColumnChooser();
                 showX1();
-                showHistoBoxes();
                 showX2();
+                showHistoBoxes();
+                //showX2();
                 //showX1();
                 x1Label.setText("Begin");
                 x2Label.setText("End");
@@ -561,7 +573,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                xy1PointBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
+                //xy1PointBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
                 xy1PointBox.getChildren().add(x1Label);
                 xy1PointBox.getChildren().add(x1Text);
                 x1Text.setVisible(true);
@@ -590,7 +602,7 @@ public class GrafDialogController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                xy2PointBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
+                //xy2PointBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
                 xy2PointBox.getChildren().add(x2Label);
                 xy2PointBox.getChildren().add(x2Text);
                 x2Text.setVisible(true);
@@ -754,14 +766,17 @@ public class GrafDialogController {
                 fillLabel.setVisible(true);
                 xy1PointBox.getChildren().add(maxMinButton);
                 maxMinButton.setVisible(true);
-                xy2PointBox.getChildren().add(classWidthText);
-                classWidthText.setVisible(true);
+                xy2PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
                 xy2PointBox.getChildren().add(numClassButton);
                 numClassButton.setVisible(true);
-                xy2PointBox.getChildren().add(numClasses);
-                numClasses.setVisible(true);
+                xy2PointBox.getChildren().add(classWidthText);
+                classWidthText.setVisible(true);
+                xy2PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
                 xy2PointBox.getChildren().add(classSizeButton);
                 classSizeButton.setVisible(true);
+                xy2PointBox.getChildren().add(numClasses);
+                numClasses.setVisible(true);
+
 
             }
         });
