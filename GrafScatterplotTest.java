@@ -37,7 +37,7 @@ public class GrafScatterplotTest
     public void setUp()
     {
        gSess = new GrafProg();
-       gScat = new GrafScatterPlot(gSess);
+       gScat = new GrafScatterPlot();
        aList = MockMaker.createMockObjectList(gSess);
        indexList = MockMaker.createMockIndexList(aList, GrafType.SCATTER);
                  

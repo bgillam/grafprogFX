@@ -407,6 +407,24 @@ public class GrafDialogController {
         });
     }
 
+    public void showScatterDialog() {
+        gType = GrafType.SCATTER;
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("SCATTERPLOT");
+                showColumnChooser();
+                showColumnChooser2();
+                showMarks();
+                showConnectedCheckBox();
+                chooseObject.setText("Choose SCATTERPLOT");
+
+            }
+        });
+
+    }
+
     public void showTextDialog() {
         gType = GrafType.TEXT;
 
@@ -1134,6 +1152,14 @@ public class GrafDialogController {
         return fComboBox.getSelectionModel().getSelectedIndex()+1;
     }
 
+    public void setColumn2ChooserColumn(int choice){
+        fComboBox2.getSelectionModel().select(choice);
+    }
+
+    public int getColumn2ChooserColumn(){
+        return fComboBox2.getSelectionModel().getSelectedIndex()+1;
+    }
+
     public String getClassWidthText(){        return classWidthText.getText();    }
     public void setClassWidthText(String s){ classWidthText.setText(s);}
     public TextField getClassWidthTextField(){return classWidthText;    }
@@ -1176,4 +1202,6 @@ public class GrafDialogController {
     public void setMsg(TextField msg) {
         this.msg = msg;
     }
+
+
 }

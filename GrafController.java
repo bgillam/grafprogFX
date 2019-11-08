@@ -177,6 +177,14 @@ public class GrafController {
         GrafProg.getDialogController().hideAll();
         GrafProg.getDialogController().showOgiveDialog();
         GrafProg.getDialogStage().show();
+
+
+    }
+
+    public void onScatterPlot(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showScatterDialog();
+        GrafProg.getDialogStage().show();
     }
 
     public void onTable(ActionEvent actionEvent) {

@@ -41,29 +41,22 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
         
     //Constructor
     public GrafOgive(){
-     setGrafType(GrafType.OGIVE);
-     setMoveable(false);
-     setGrafColor(Color.BLACK);
-     setColumnNumber(1);
+         super();
+         gStuff = super.getGStuff();
+         setGrafType(GrafType.OGIVE);
+
     }
     
-    public GrafOgive(GrafProg sess){
-        super();
-        setGrafType(GrafType.OGIVE);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
-        table = myOwner.getData();//sess.setMessage1("Histogram for Column "+columnNumber);
-    }
-    
+
     //constructor 
-    public GrafOgive(GrafProg sess, int column){
-        this(sess);
+    public GrafOgive(int column){
+        this();
         setColumnNumber(column);
-        sess.setMessage1("Histogram for Column "+columnNumber);
+        GrafProg.setMessage1("Histogram for Column "+columnNumber);
     }
     
-    public GrafOgive(GrafProg sess, int column, double b, double e, int numCl, Color c, boolean rel){
-        this(sess, column);
+    public GrafOgive(int column, double b, double e, int numCl, Color c, boolean rel){
+        this(column);
         relative = rel;
         begin = b;
         end = e;
@@ -73,8 +66,9 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
         classLimits = GrafStats.getClassesByNumber(numClasses, begin, end);    //problem here!
         classWidth = classLimits[1] - classLimits[0];
     }
-    public GrafOgive(GrafProg sess, int column, double b, double e, double classW, Color c, boolean rel){
-        this(sess, column);
+
+    public GrafOgive(int column, double b, double e, double classW, Color c, boolean rel){
+        this(column);
         relative = rel;
         begin = b;
         end = e;
@@ -82,6 +76,37 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
         setGrafColor(c);
         byNumClasses = false;
         classLimits = GrafStats.getClassesByClassSize(classW, begin, end);  
+        numClasses = classLimits.length;
+    }
+
+
+    public GrafOgive(int column, double b, double e, int numCl, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
+        this(column);
+        setFillColor(fillColor);
+        setLabelAxisByBoundries(boundries);
+        setDisplayCounts(counts);
+        relative = rel;
+        begin = b;
+        end = e;
+        numClasses = numCl;
+        setGrafColor(c);
+        byNumClasses = true;
+        classLimits = GrafStats.getClassesByNumber(numClasses, begin, end);    //problem here!
+        classWidth = classLimits[1] - classLimits[0];
+    }
+
+    public GrafOgive( int column, double b, double e, double classW, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
+        this(column);
+        setFillColor(fillColor);
+        setLabelAxisByBoundries(boundries);
+        setDisplayCounts(counts);
+        relative = rel;
+        begin = b;
+        end = e;
+        classWidth = classW;
+        setGrafColor(c);
+        byNumClasses = false;
+        classLimits = GrafStats.getClassesByClassSize(classW, begin, end);
         numClasses = classLimits.length;
     }
    

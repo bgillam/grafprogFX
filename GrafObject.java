@@ -41,7 +41,7 @@ abstract public class GrafObject implements Serializable, IGrafable
                         gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(), gdc.getDefaultFont(),  gdc.getGrafColor());
                 case COLUMN: return new GrafColumnPlot(gdc.getColumn1ChooserColumn(), gdc.getDialogMark(), gdc.isConnected(), gdc.getGrafColor());
                 case BOXPLOT: return new GrafBoxPlot(gdc.getColumn1ChooserColumn(), gdc.getGrafColor(), gdc.getFNS());
-                case SCATTER:return new GrafScatterPlot();
+                case SCATTER:return new GrafScatterPlot(gdc.getColumn1ChooserColumn(), gdc.getColumn2ChooserColumn(), gdc.getGrafColor(), gdc.getDialogMark(), gdc.isConnected());
                 case HISTOGRAM:{
                     if (gdc.getNumClassButton().isSelected())
                         return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
@@ -54,7 +54,14 @@ abstract public class GrafObject implements Serializable, IGrafable
                                 gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
                     else  return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
                             Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
-                case OGIVE: return new GrafOgive();
+                case OGIVE:{
+                    if (gdc.getNumClassButton().isSelected())
+                        return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                                gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
+                    else  return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                            Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
+
+
                 case POINT: return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(), gdc.getDefaultFont(),  gdc.getGrafColor());
                 case LINESEGMENT: return new GrafSegment(Double.parseDouble(gdc.getX1()),
                         Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()), Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getDialogMark());

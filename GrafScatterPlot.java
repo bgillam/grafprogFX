@@ -26,30 +26,36 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
         
     //Constructor
     public GrafScatterPlot(){
+       gStuff = super.initGrafObject(GrafType.COLUMN);
+       table = GrafProg.getData();
        setGrafType(GrafType.SCATTER);
        setMoveable(false);
        setGrafColor(Color.BLACK);
        setInputColumnNumber(1);
        setOutputColumnNumber(2);
+       GrafProg.setMessage1("Plotting Columns "+getInputColumnNumber()+" vs "+getOutputColumnNumber() );
     }
     
-    public GrafScatterPlot(GrafProg sess){
-        setGrafType(GrafType.SCATTER);
-        setMoveable(false);
-        setGrafColor(Color.BLACK);
-        myOwner = sess;
-        gStuff = myOwner.getGrafSettings();
-        table = myOwner.getData();
-        sess.setMessage1("Plotting Column "+inputColumnNumber+" vs. column "+outputColumnNumber);
-    }
-    
+
     //constructor 
-    public GrafScatterPlot(GrafProg sess, int inputCol, int outputCol){
-        this(sess);
+    public GrafScatterPlot(int inputCol, int outputCol){
+        this();
         setInputColumnNumber(inputCol);
         setOutputColumnNumber(outputCol);
         
     }
+
+    public GrafScatterPlot(int inputCol, int outputCol, Color color, String mark, boolean connected){
+        this();
+        setInputColumnNumber(inputCol);
+        setOutputColumnNumber(outputCol);
+        setGrafColor(color);
+        setMark(mark);
+        setConnected(connected);
+
+    }
+
+
     
     //drawGraf overriding method in parent GrafObject
     @Override

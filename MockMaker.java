@@ -32,11 +32,11 @@ public class MockMaker
                aList.add(new GrafRectangle());
                aList.add(new GrafEllipse());
                aList.add(new GrafCircle());
-               aList.add(new GrafScatterPlot(gSess));
+               aList.add(new GrafScatterPlot());
                aList.add(new GrafColumnPlot());
                aList.add(new GrafBoxPlot());
                aList.add(new GrafHistogram());
-               aList.add(new GrafOgive(gSess));
+               aList.add(new GrafOgive());
                aList.add(new GrafFreqPolygon());
                aList.add(new GrafFunction());
                aList.add(new GrafValue());
