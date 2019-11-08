@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import javax.crypto.SealedObject;
 import java.awt.*;
@@ -31,25 +32,17 @@ public class GrafDialogController {
     @FXML   private HBox markButtonBox;
     @FXML   private HBox textHBox;
     @FXML   private HBox fontHBox;
+    @FXML   private VBox checkboxVBox;
 
     //instance variables tied to GUI
+    //fxml variables
     @FXML    private ColorPicker fillColorPicker;
     @FXML    private Label fillLabel;
     @FXML    private ColorPicker grafColorPicker;
-
-
-
-
     @FXML    private Label chooseObject;
     @FXML    private Pane grafPane;
-    @FXML    private CheckBox fns;
     @FXML    private TextField msg;
-
-
     @FXML    private ComboBox objectComboBox;
-    @FXML    private CheckBox countCheckBox;
-    @FXML    private CheckBox boundariesCheckBox;
-
 
     //function/column input/choosing
     private Label fChoiceLabel = new Label("fx:");
@@ -97,11 +90,18 @@ public class GrafDialogController {
     private Label fontStyle = new Label("Style");
     private Button fontButton =  new Button("Font");
 
+    //checkboxes
+    private CheckBox boundariesCheckBox = new CheckBox("Label by Boundaries");
+    private CheckBox countCheckBox = new CheckBox("Show Counts");
+    private CheckBox fns = new CheckBox("FNS");
+
     //other instance variables
     private GrafType gType;
     private ArrayList<GrafObject> tempGrafList = GrafProg.getGrafList();
 
     public void initialize(){
+        boundariesCheckBox.setSelected(true);
+        countCheckBox.setSelected(true);
         x1Text.setPrefWidth(75);
         x2Text.setPrefWidth(75);
         y1Text.setPrefWidth(75);
@@ -362,16 +362,7 @@ public class GrafDialogController {
             @Override public void run() {
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("HISTOGRAM");
-                showColumnChooser();
-                showX1();
-                showX2();
-                showHistoBoxes();
-                //showX2();
-                //showX1();
-                x1Label.setText("Begin");
-                x2Label.setText("End");
-                //showHistoBoxes();
-                onMaxMin(new ActionEvent());
+                setupHisto();
                 chooseObject.setText("Choose HISTOGRAM");
             }
         });
@@ -383,15 +374,20 @@ public class GrafDialogController {
             @Override public void run() {
                 objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
                 GrafProg.getDialogStage().setTitle("Frequency Polygon");
-                showColumnChooser();
-                showX1();
-                showHistoBoxes();
-                showX2();
-                x1Label.setText("Begin");
-                x2Label.setText("End");
-
-                onMaxMin(new ActionEvent());
+                setupHisto();
                 chooseObject.setText("Choose Frequency Polygon");
+            }
+        });
+    }
+
+    public void showOgiveDialog() {
+        gType = GrafType.OGIVE;
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("Ogive");
+                setupHisto();
+                chooseObject.setText("Ogive");
             }
         });
     }
@@ -775,6 +771,7 @@ public class GrafDialogController {
     private void showFNS(){
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                checkboxVBox.getChildren().add(fns);
                 fns.setVisible(true);
                 fns.setText("FNS");
 
@@ -785,6 +782,7 @@ public class GrafDialogController {
     private void showConnectedCheckBox(){
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                checkboxVBox.getChildren().add(fns);
                 fns.setVisible(true);
                 fns.setText("Connected");
 
@@ -792,11 +790,26 @@ public class GrafDialogController {
         });
     }
 
+    private void setupHisto(){
+        showColumnChooser();
+        showX1();
+        showX2();
+        x1Label.setText("Begin");
+        x2Label.setText("End");
+        showHistoBoxes();
+        onMaxMin(new ActionEvent());
+        maxMinButton.setOnAction((e) -> { onMaxMin(e);});
+
+    }
+
     private void showHistoBoxes(){
         Platform.runLater(new Runnable() {
             @Override public void run() {
+                checkboxVBox.getChildren().add(boundariesCheckBox);
                 boundariesCheckBox.setVisible(true);
+                checkboxVBox.getChildren().add(countCheckBox);
                 countCheckBox.setVisible(true);
+                checkboxVBox.getChildren().add(fns);
                 fns.setVisible(true);
                 fns.setText("Relative Frequency");
                 fillColorPicker.setVisible(true);
@@ -806,13 +819,13 @@ public class GrafDialogController {
                 xy2PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
                 xy2PointBox.getChildren().add(numClassButton);
                 numClassButton.setVisible(true);
-                xy2PointBox.getChildren().add(classWidthText);
-                classWidthText.setVisible(true);
+                xy2PointBox.getChildren().add(numClasses);
+                numClasses.setVisible(true);
                 xy2PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
                 xy2PointBox.getChildren().add(classSizeButton);
                 classSizeButton.setVisible(true);
-                xy2PointBox.getChildren().add(numClasses);
-                numClasses.setVisible(true);
+                xy2PointBox.getChildren().add(classWidthText);
+                classWidthText.setVisible(true);
 
 
             }
@@ -834,7 +847,9 @@ public class GrafDialogController {
                 markButtonBox.getChildren().clear();
                 textHBox.getChildren().clear();
                 fontHBox.getChildren().clear();
-                fxLabel.setVisible(false);
+                checkboxVBox.getChildren().clear();
+
+                //fxLabel.setVisible(false);
                 /*functionString.setVisible(false);
                 x1Text.setVisible(false);
                 x1Label.setText("x1");
@@ -861,12 +876,12 @@ public class GrafDialogController {
                 textForDisplay.setVisible(false);
                 fontName.setVisible(false);
                 fontButton.setVisible(false);*/
-                fns.setVisible(false);
+                //fns.setVisible(false);
                 fillColorPicker.setVisible(false);
                 fillLabel.setVisible(false);
                 //hideTextAndFontButtons();
-                boundariesCheckBox.setVisible(false);
-                countCheckBox.setVisible(false);
+                //boundariesCheckBox.setVisible(false);
+                //countCheckBox.setVisible(false);
                 //maxMinButton.setVisible(false);
                 //classWidthText.setVisible(false);
                 //classLabel.setVisible(false);

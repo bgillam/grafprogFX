@@ -53,7 +53,7 @@
 
                         <MenuItem fx:id="histoItemItem" text="Histogram" onAction="#onHistogram"/>
                         <MenuItem fx:id="freqPloyItem" text="Frequency Polygon" onAction="#onFreqPolygon"/>
-                        <MenuItem fx:id="ogiveItem" text="Ogive"/>
+                        <MenuItem fx:id="ogiveItem" text="Ogive" onAction="#onOgive"/>
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="scatterItem" text="Scatter Plot"/>
                         <MenuItem fx:id="regressItem" text="Regression"/>

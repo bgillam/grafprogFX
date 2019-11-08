@@ -173,6 +173,12 @@ public class GrafController {
         GrafProg.getDialogStage().show();
     }
 
+    public void onOgive(ActionEvent actionEvent) {
+        GrafProg.getDialogController().hideAll();
+        GrafProg.getDialogController().showOgiveDialog();
+        GrafProg.getDialogStage().show();
+    }
+
     public void onTable(ActionEvent actionEvent) {
         //GrafStage.showData();
        GrafProg.getTableStage().show();

@@ -106,9 +106,9 @@
 
             </HBox>
             <VBox fx:id="checkboxVBox" >
-                <CheckBox fx:id="boundariesCheckBox" text= "Label by Boundaries" selected = "true"/>
+               <!-- <CheckBox fx:id="boundariesCheckBox" text= "Label by Boundaries" selected = "true"/>
                 <CheckBox fx:id = "countCheckBox" text = "Show Counts" selected="true"/>
-                <CheckBox fx:id = "fns" text = "FNS" selected = "false" />
+                <CheckBox fx:id = "fns" text = "FNS" selected = "false" />-->
             </VBox>
             <HBox>
                 <Label text="Color:"></Label>
