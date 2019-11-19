@@ -392,21 +392,6 @@ public class GrafDialogController {
         });
     }
 
-    public void showPointDialog() {
-        gType = GrafType.POINT;
-
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
-                GrafProg.getDialogStage().setTitle("POINT");
-                showMarks();
-                showX1Y1();
-                chooseObject.setText("Choose POINT");
-
-            }
-        });
-    }
-
     public void showScatterDialog() {
         gType = GrafType.SCATTER;
 
@@ -424,6 +409,32 @@ public class GrafDialogController {
         });
 
     }
+
+    public void showRegressionDialog() {
+
+
+
+    }
+
+
+
+
+    public void showPointDialog() {
+        gType = GrafType.POINT;
+
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                GrafProg.getDialogStage().setTitle("POINT");
+                showMarks();
+                showX1Y1();
+                chooseObject.setText("Choose POINT");
+
+            }
+        });
+    }
+
+
 
     public void showTextDialog() {
         gType = GrafType.TEXT;
@@ -1202,6 +1213,7 @@ public class GrafDialogController {
     public void setMsg(TextField msg) {
         this.msg = msg;
     }
+
 
 
 }

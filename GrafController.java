@@ -7,6 +7,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.AnchorPaneBuilder;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import sun.plugin.javascript.navig.Anchor;
 
 import javax.swing.*;
@@ -30,10 +31,13 @@ public class GrafController {
         Platform.exit();
     }
 
+    @FXML
+    private void fileNew(ActionEvent actionEvent) {
 
-    public void fileNew(ActionEvent actionEvent) {
-        System.out.print("new");
+
     }
+
+
     public void showCalc(ActionEvent actionEvent) {
 
         GrafCalc calc= new GrafCalc();
@@ -148,6 +152,7 @@ public class GrafController {
          fcd.setVisible(true);
     }
 
+
     public void onColumnPlot(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
         GrafProg.getDialogController().showColumnPlotDialog();
@@ -185,6 +190,12 @@ public class GrafController {
         GrafProg.getDialogController().hideAll();
         GrafProg.getDialogController().showScatterDialog();
         GrafProg.getDialogStage().show();
+    }
+
+        public void onRegression(ActionEvent actionEvent) {
+            RegressionDialog rd = new RegressionDialog();
+            rd.setVisible(true);
+
     }
 
     public void onTable(ActionEvent actionEvent) {
