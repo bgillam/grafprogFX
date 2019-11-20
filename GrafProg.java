@@ -30,49 +30,38 @@ public class GrafProg extends Application {
     private static Stage tableStage = new Stage();
     private static Stage statStage = new Stage();
     private static Stage genStage = new Stage();
+
+    //Current swing components to be converted later
     //private static Stage freqTableStage = new Stage();
-    //static Stage spreadStage = new Stage();  for better spreadsheet later
+    //static Stage spreadStage = new Stage();
 
     private static GrafController grafController;
     private static GrafDialogController dialogController;
     private static TableController tableController;
     private static TableColumnGeneratorController tableGenController;
-
-
     private static OneVarStatsController statController;
 
     private static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
     private static GrafPanel grafPanel = new GrafPanel(); //Graphics Panel in swing
     private static SwingNode swingTableNode = new SwingNode();
     private static GrafTable data = new GrafTable(100,10);  //table for data
-    /*private static SwingNode swingHistoNode = new SwingNode();
-    private static HistoPanel histoPanel = new HistoPanel();  //table for data*/
 
-    private static FrequencyChartDialog frequencyChartDialog = new FrequencyChartDialog(); //Graphics Panel in swing
+    //swing item to be made JavaFX
+    //private static FrequencyChartDialog frequencyChartDialog = new FrequencyChartDialog();
 
-
-    //instance variables
+    //static variables
     private static File grafFile = new File("");  //File associated with the current Graf object
     private static boolean grafSaved = false;     //has the current graf been saved?
     private static final int initWidth = 750;
     private static final int initHeight = 750;
     private static GrafSettings    grafSet = new GrafSettings();  //Stores window settings
-    private GrafPrimitives grafPrim = new GrafPrimitives(this);  //draw line, point or character
-
+    private static GrafPrimitives grafPrim = new GrafPrimitives();  //draw line, point or character
     private static ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //should make this class and use here and in DialogController
     private static GrafAxes axes = new GrafAxes();   //axes object
-    private String copiedText = "";
-    private JPanel messagePanel;
+    private static String copiedText = "";
+    private static JPanel messagePanel;
     private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
     private static GrafCalc calc;                 //calculator for enteriung expressions
-
-    //bottom status bar messages
-    /*private JLabel message1;
-    private JLabel message2;
-    private JLabel message3;*/
-
-
-
 
     //UI elements start
     @Override
@@ -83,7 +72,7 @@ public class GrafProg extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
         Parent dialogRoot = loader.load();
         dialogController = loader.getController();
-        Scene dialogScene = new Scene (dialogRoot, 650, 500); //.getWidth(), grafStage.getHeight());
+        Scene dialogScene = new Scene (dialogRoot, 650, 350); //.getWidth(), grafStage.getHeight());
         dialogStage.setScene(dialogScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         //dialogController.hideAll();
@@ -96,9 +85,6 @@ public class GrafProg extends Application {
         statStage.setScene(statScene);
         statStage.initModality(Modality.APPLICATION_MODAL);
         statStage.setTitle("DATA");
-
-        //Set up Histogram Dialog Box
-
 
         //Set up Table
         FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("Table.fxml"));

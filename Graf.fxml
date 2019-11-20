@@ -58,7 +58,7 @@
                         <MenuItem fx:id="scatterItem" text="Scatter Plot" onAction="#onScatterPlot"/>
                         <MenuItem fx:id="regressItem" text="Regression" onAction = "#onRegression"/>
                         <SeparatorMenuItem/>
-                        <CheckMenuItem fx:id="yAxisItem" text="Graph on Y-Axis"/>
+                        <CheckMenuItem fx:id="yAxisItem" text="Stats on Y-Axis" onAction="#onYaxis"/>
                     </Menu>
                     <Menu fx:id="shapeMenu" text="Shape">
                         <MenuItem fx:id="pointItem" text="Point" onAction="#onPoint"/>

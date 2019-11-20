@@ -216,6 +216,8 @@ public class GrafController {
     }
 
 
-
+    public void onYaxis(ActionEvent actionEvent) {
+        GrafProg.getGrafSettings().toggleReverseXY();
+    }
 }
 

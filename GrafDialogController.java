@@ -240,6 +240,7 @@ public class GrafDialogController {
                 GrafProg.getDialogStage().setTitle("VALUE");
                 showFunctionChooser();
                 showX1();
+                x1Label.setText("x1:");
                 showMarks();
                 chooseObject.setText("Choose VALUE");
 
@@ -259,6 +260,7 @@ public class GrafDialogController {
                 GrafProg.getDialogStage().setTitle("TANGENT");
                 showFunctionChooser();
                 showX1();
+                x1Label.setText("x1:");
                 showMarks();
                 chooseObject.setText("Choose TANGENT");
             }
@@ -276,6 +278,8 @@ public class GrafDialogController {
                 GrafProg.getDialogStage().setTitle("FCHORD");
                 showFunctionChooser();
                 showX1X2();
+                x1Label.setText("x1:");
+                x2Label.setText("x2:");
                 showMarks();
                 chooseObject.setText("Choose FCHORD");
 
@@ -296,7 +300,9 @@ public class GrafDialogController {
                 showMarks();
                 //showDx();
                 showX1();
+                x1Label.setText("Start:");
                 showX2();
+                x2Label.setText("End:");
                 showDx();
                 chooseObject.setText("Choose FZEROS");
             }
@@ -317,6 +323,8 @@ public class GrafDialogController {
                 showX1();
                 showN();
                 showX2();
+                x1Label.setText("Begin:");
+                x2Label.setText("End:");
                 chooseObject.setText("Choose INTEGRAL");
 
             }
@@ -410,14 +418,6 @@ public class GrafDialogController {
 
     }
 
-    public void showRegressionDialog() {
-
-
-
-    }
-
-
-
 
     public void showPointDialog() {
         gType = GrafType.POINT;
@@ -428,6 +428,8 @@ public class GrafDialogController {
                 GrafProg.getDialogStage().setTitle("POINT");
                 showMarks();
                 showX1Y1();
+                x1Label.setText("x1:");
+                y1Label.setText("y1:");
                 chooseObject.setText("Choose POINT");
 
             }
@@ -445,6 +447,8 @@ public class GrafDialogController {
                 GrafProg.getDialogStage().setTitle("TEXT");
                 showTextAndFontButton();
                 showX1Y1();
+                x1Label.setText("x1:");
+                y1Label.setText("y1:");
                 fontButton.setOnAction((e) -> { onFontButtonClicked(e);});
                 chooseObject.setText("Choose TEXT");
 
@@ -462,6 +466,10 @@ public class GrafDialogController {
                 showMarks();
                 showX1Y1();
                 showX2Y2();
+                x1Label.setText("x1:");
+                y1Label.setText("y1:");
+                x2Label.setText("x2:");
+                y2Label.setText("y2:");
                 chooseObject.setText("Choose LINESEGMENT");
 
             }
@@ -479,6 +487,10 @@ public class GrafDialogController {
                 fillLabel.setVisible(true);
                 showX1Y1();
                 showWH();
+                x1Label.setText("x1:");
+                y1Label.setText("y1:");
+                x2Label.setText("width:");
+                y2Label.setText("height:");
                 chooseObject.setText("Choose RECTANGLE");
 
             }
@@ -496,6 +508,10 @@ public class GrafDialogController {
                 fillLabel.setVisible(true);
                 showX1Y1();
                 showWH();
+                x1Label.setText("x1:");
+                y1Label.setText("y1:");
+                x2Label.setText("width:");
+                y2Label.setText("height:");
                 chooseObject.setText("Choose ELLIPSE");
 
             }
@@ -512,6 +528,9 @@ public class GrafDialogController {
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
                 showX1Y1();
+                x1Label.setText("x1:");
+                y1Label.setText("y1:");
+                x2Label.setText("r:");
                 showR();
                 chooseObject.setText("Choose CIRCLE");
 
@@ -538,14 +557,6 @@ public class GrafDialogController {
         fontButton.setVisible(true);
      }
 
-     /*private void hideTextAndFontButtons(){
-         textLabel.setVisible(false);
-         textForDisplay.setVisible(false);
-         fontName.setVisible(false);
-         fontStyle.setVisible(false);
-         fontSize.setVisible(false);
-         fontButton.setVisible(false);
-     }*/
 
     private void showFunctionChooser(){
 
@@ -637,6 +648,7 @@ public class GrafDialogController {
             @Override public void run() {
                 //xy1PointBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
                 xy1PointBox.getChildren().add(x1Label);
+                //x1Label.setText("X1:");
                 xy1PointBox.getChildren().add(x1Text);
                 x1Text.setVisible(true);
                 x1Label.setVisible(true);
@@ -651,6 +663,7 @@ public class GrafDialogController {
             @Override public void run() {
                 xy1PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
                 xy1PointBox.getChildren().add(y1Label);
+                //y1Label.setText("Y1:");
                 xy1PointBox.getChildren().add(y1Text);
                 y1Text.setVisible(true);
                 y1Label.setVisible(true);
@@ -666,6 +679,7 @@ public class GrafDialogController {
             @Override public void run() {
                 //xy2PointBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
                 xy2PointBox.getChildren().add(x2Label);
+                //x2Label.setText("X2:");
                 xy2PointBox.getChildren().add(x2Text);
                 x2Text.setVisible(true);
                 x2Label.setVisible(true);
@@ -680,6 +694,7 @@ public class GrafDialogController {
             @Override public void run() {
                 xy2PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
                 xy2PointBox.getChildren().add(y2Label);
+                //y2Label.setText("Y2:");
                 xy2PointBox.getChildren().add(y2Text);
                 y2Text.setVisible(true);
                 y2Label.setVisible(true);
@@ -877,46 +892,8 @@ public class GrafDialogController {
                 textHBox.getChildren().clear();
                 fontHBox.getChildren().clear();
                 checkboxVBox.getChildren().clear();
-
-                //fxLabel.setVisible(false);
-                /*functionString.setVisible(false);
-                x1Text.setVisible(false);
-                x1Label.setText("x1");
-                x2Label.setText("x2");
-                x1Label.setVisible(false);
-                y1Label.setVisible(false);
-                y1Text.setVisible(false);
-                nLabel.setVisible(false);
-                nText.setVisible(false);
-                x2Label.setVisible(false);
-                x2Label.setText("x2:");
-                x2Text.setVisible(false);
-                y2Label.setVisible(false);
-                y2Label.setText("y2:");
-                y2Text.setVisible(false);
-                markLabel.setVisible(false);
-                markLabel.setVisible(false);
-                pointMarkRButton.setVisible(false);
-                xMarkRButton.setVisible(false);
-                oMarkRButton.setVisible(false);
-                charMarkRButton.setVisible(false);
-                charMarkText.setVisible(false);
-                textLabel.setVisible(false);
-                textForDisplay.setVisible(false);
-                fontName.setVisible(false);
-                fontButton.setVisible(false);*/
-                //fns.setVisible(false);
                 fillColorPicker.setVisible(false);
                 fillLabel.setVisible(false);
-                //hideTextAndFontButtons();
-                //boundariesCheckBox.setVisible(false);
-                //countCheckBox.setVisible(false);
-                //maxMinButton.setVisible(false);
-                //classWidthText.setVisible(false);
-                //classLabel.setVisible(false);
-                //numClasses.setVisible(false);
-                //classSizeButton.setVisible(false);
-                //numClassButton.setVisible(false);
             }
         });
     }
