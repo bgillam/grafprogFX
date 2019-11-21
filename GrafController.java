@@ -219,5 +219,16 @@ public class GrafController {
     public void onYaxis(ActionEvent actionEvent) {
         GrafProg.getGrafSettings().toggleReverseXY();
     }
+
+    public void onAbout(ActionEvent actionEvent) {
+        About about = new About();
+        about.setVisible(true);
+        //about.setModal(true);
+    }
+
+    public void onSet(ActionEvent actionEvent) {
+        WindowSizeDialog wsd = new WindowSizeDialog();
+        wsd.setVisible(true);
+    }
 }
 

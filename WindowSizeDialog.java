@@ -233,6 +233,7 @@ public class WindowSizeDialog extends JDialog implements ActionListener  //, Ser
         if (saveValues()){ 
               setVisible(false); 
               dispose();
+              GrafProg.getGrafPanel().repaint();
         }
 //    }
 //    else JOptionPane.showMessageDialog(null , "Range Entered is Invalid.", "ERROR!", JOptionPane.WARNING_MESSAGE);

@@ -70,7 +70,7 @@
                         <MenuItem fx:id="textItem" text="Text" onAction="#onText"/>
                     </Menu>
                     <Menu fx:id="windowMenu" text="Window">
-                        <MenuItem fx:id="setItem" text="Set"/>
+                        <MenuItem fx:id="setItem" text="Set" onAction="#onSet"/>
                         <MenuItem fx:id="autoItem" text="Auto"/>
                         <MenuItem fx:id="standardItem" text="Standard"/>
                         <SeparatorMenuItem/>
@@ -81,7 +81,7 @@
                         <CheckMenuItem fx:id="leftITem" text="Left"/>
                     </Menu>
                     <Menu fx:id="helpMenu" text="Help">
-                        <MenuItem fx:id="aboutItem" text="About"/>
+                        <MenuItem fx:id="aboutItem" text="About" onAction="#onAbout"/>
                         <MenuItem fx:id="calcItem" text="Calculator" onAction = "#showCalc"/>
                         <SeparatorMenuItem/>
                         <CheckMenuItem fx:id="toolItem" text="Toolbar"/>
