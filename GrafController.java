@@ -229,6 +229,12 @@ public class GrafController {
     public void onSet(ActionEvent actionEvent) {
         WindowSizeDialog wsd = new WindowSizeDialog();
         wsd.setVisible(true);
+
+    }
+
+    public void onStandard(ActionEvent actionEvent) {
+        GrafProg.getGrafSettings().setStandardAxes();
+        GrafProg.getGrafPanel().repaint();
     }
 }
 

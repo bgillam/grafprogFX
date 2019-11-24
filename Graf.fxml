@@ -72,7 +72,7 @@
                     <Menu fx:id="windowMenu" text="Window">
                         <MenuItem fx:id="setItem" text="Set" onAction="#onSet"/>
                         <MenuItem fx:id="autoItem" text="Auto"/>
-                        <MenuItem fx:id="standardItem" text="Standard"/>
+                        <MenuItem fx:id="standardItem" text="Standard" onAction="#onStandard"/>
                         <SeparatorMenuItem/>
                         <CheckMenuItem fx:id="hideXScaleItem" text="Hide X Scale"/>
                         <CheckMenuItem fx:id="hideYScaleItem" text="Hide y Scale"/>

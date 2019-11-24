@@ -309,4 +309,18 @@ public class GrafProg extends Application {
     public static void setGenStage(Stage genStage) {
         GrafProg.genStage = genStage;
     }
+
+    //because sometimes just repainting grafPanel doesn't work.
+    public static void repaintGraf(){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                grafStage.hide();
+                grafPanel.repaint();
+                grafStage.show();
+            }
+        });
+    }
+
 }
+
+
