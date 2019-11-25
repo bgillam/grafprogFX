@@ -112,6 +112,12 @@ public class GrafRectangle extends GrafObject implements IGrafable {
 
     }
 
+    @Override
+    public void autoRange(){
+        GrafProg.getGrafSettings().setYMax(getY()+GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafSettings().setYMin(getY()-getHeight()-GrafProg.getGrafSettings().getTenthWindowY());
+    }
+
 
     public void setX(double xval) {
         x = xval;

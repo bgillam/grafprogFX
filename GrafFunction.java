@@ -90,6 +90,12 @@ public class GrafFunction extends GrafObject implements IGrafable{
         gdc.setFunctionString(getFunction());
 
     }
+
+    @Override
+    public void autoRange(){
+        Scales.autoRange(GrafProg.getGrafSettings(), getFunction());
+
+    }
     
 
     private String shortColorString(Color c){

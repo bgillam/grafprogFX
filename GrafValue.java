@@ -82,6 +82,17 @@ public class GrafValue extends GrafObject implements IGrafable{
         gdc.settDialogMark(getMark());
 
     }
+
+    @Override
+    public void autoRange(){
+       double y1 = 0;
+        try{
+            y1 = FunctionString.fValue(getFunctionString(), getX());
+        }catch(Exception e){JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;};
+        double max, min;
+        GrafProg.getGrafSettings().setYMax(y1+GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafSettings().setYMin(y1-GrafProg.getGrafSettings().getTenthWindowY());
+    }
    
 
    

@@ -111,6 +111,12 @@ public class GrafText extends GrafObject implements IGrafable
         gdc.setFontStyleText(fxFont.getStyle());
         gdc.setFontSizeText(fxFont.getSize()+"");
     }
+
+    @Override
+    public void autoRange(){
+        GrafProg.getGrafSettings().setYMax(getY()+5);
+        GrafProg.getGrafSettings().setYMin(getY()-5);
+    }
   
 
    public void setX(double xval){ x = xval; }

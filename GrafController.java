@@ -1,7 +1,11 @@
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +17,8 @@ import sun.plugin.javascript.navig.Anchor;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Optional;
 
 public class GrafController {
 
@@ -236,5 +242,33 @@ public class GrafController {
         GrafProg.getGrafSettings().setStandardAxes();
         GrafProg.getGrafPanel().repaint();
     }
-}
+
+    public void onAuto(ActionEvent actionEvent) {
+           Platform.runLater(new Runnable() {
+                @Override public void run() {
+                    ObservableList objectList = FXCollections.observableArrayList(GrafProg.getGrafList());
+                    if (objectList.size() > 1) {
+                        objectList.remove(0);
+                        ChoiceDialog autoDialog = new ChoiceDialog(objectList.get(0), objectList);
+                        autoDialog.setTitle("AutoRange");
+                        autoDialog.setHeaderText("Select Item for AutoRange\n Axes --> Standard Window");
+                        Optional<GrafObject> result = autoDialog.showAndWait();
+                        GrafObject chosenObject = result.get();
+                        chosenObject.autoRange();
+                    }
+                    else {
+                         Alert noObjects = new Alert(Alert.AlertType.ERROR);
+                         noObjects.setTitle("No GrafObjects!");
+                         noObjects.setHeaderText("No GrafObjects have been created. \nCan't AutoRange.");
+                         noObjects.showAndWait();
+                    }
+
+
+
+                }
+            });
+
+        //Scales.autoRange(GrafProg.getGrafSettings(), );
+            }
+    }
 

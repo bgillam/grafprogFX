@@ -48,9 +48,6 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         setGrafColor(c);
         setShowFNS(fns);
 
-
-        
-        
     }
     
     //drawG   raf overriding method in parent GrafObject
@@ -145,6 +142,12 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         gdc.setColumn1ChooserColumn(getColumnNumber()-1);
         gdc.setFNS(showFNS);
 
+    }
+
+    @Override
+    public void autoRange(){
+        GrafProg.getGrafSettings().setYMax(GrafProg.getBoxPlotsPlotted()*5);
+        GrafProg.getGrafSettings().setYMin(-5);
     }
 
 

@@ -80,6 +80,14 @@ public class GrafSettings implements Serializable
    public void setStandardAxes(){
        setXMin(-10); setXMax(10); setYMin(-10); setYMax(10); setXAxisScale(1); setYAxisScale(1); 
    }
+
+   public double getTenthWindowY(){
+        return (getYMax() - getYMin())/10;
+   }
+
+   public double getTenthWindowX(){
+        return (getXMax()- getXMin())/10;
+   }
     
     public GrafProg getOwner(){return myStage;}
     public void setOwner(GrafProg g){myStage = g;}

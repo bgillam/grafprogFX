@@ -100,6 +100,12 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         gdc.settDialogMark(getMark());
         gdc.setFNS(connected);
     }
+
+    @Override
+    public void autoRange(){
+        GrafProg.getGrafSettings().setYMax(GrafStats.getMax(GrafProg.getData().getColumnValues(getColumnNumber()))+GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafSettings().setYMin(GrafStats.getMin(GrafProg.getData().getColumnValues(getColumnNumber()))-GrafProg.getGrafSettings().getTenthWindowY());
+    }
     
 
     //Setters and Getters

@@ -25,6 +25,7 @@ abstract public class GrafObject implements Serializable, IGrafable
    //protected PointPanel ptPanel;
 
    public abstract void drawGraf(Graphics2D g2D);
+   public abstract void autoRange();
    public boolean isValidInput(GrafDialogController gdf){return true;}; //make abstract after refactr
 
 

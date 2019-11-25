@@ -65,9 +65,21 @@ public class GrafZeros extends GrafObject implements IGrafable
        gc.setColor(Color.BLACK);
        //gStuff.getGrafPanel().repaint();
     }
-   
 
 
+    @Override
+    public void autoRange(){
+        double y1 = 10;
+        double y2 = -10;
+        try{
+            y1 = FunctionString.fValue(getFunctionString(), getX1());
+            y2 = FunctionString.fValue(getFunctionString(),  getX2());
+        }catch(Exception e){JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;};
+        double max, min;
+        if (y1<y2){ max = y2; min = y1;} else {max = y1; min = y2; }
+        GrafProg.getGrafSettings().setYMax(max+GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafSettings().setYMin(min-GrafProg.getGrafSettings().getTenthWindowY());
+    }
 
     
    public void setStartX(double xval){ startX = xval; }

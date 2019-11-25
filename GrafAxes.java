@@ -63,6 +63,11 @@ public class GrafAxes extends GrafObject
         gc.setColor(Color.BLACK);
     }
 
+    @Override
+    public void autoRange(){
+
+    }
+
     public Font getCurrentFont() {
         return currentFont;
     }

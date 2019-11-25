@@ -47,6 +47,17 @@ public class GrafStats {
     	 }
     	 return min;
      }
+
+	public static double getMin(double[] dArray)
+	{
+		if (dArray.length == 0) return 0;
+		double min = dArray[0];
+		for (int i = 1; i < dArray.length; i++){
+			//if (cellIsNull(dArray, i)) continue;
+			if (dArray[i] < min) min = dArray[i];
+		}
+		return min;
+	}
      
      public static double getMax(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray); 
@@ -58,6 +69,16 @@ public class GrafStats {
     	 }
     	 return max;
      }
+
+	public static double getMax(double[] dArray){
+		if (dArray.length == 0) return 0;
+		double max = dArray[0];
+		for (int i = 1; i < dArray.length; i++){
+			//if (cellIsNull(temp, i)) continue;
+			if (dArray[i] > max) max = dArray[i];
+		}
+		return max;
+	}
      
      public static double getMedian(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray);  // Arrays.copyOf(dArray,dArray.length);

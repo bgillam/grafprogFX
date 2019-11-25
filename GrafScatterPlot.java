@@ -86,10 +86,14 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
         }
         gc.setColor(Color.BLACK);
     }
-    
-    
 
-    
+
+
+    @Override
+    public void autoRange(){
+        GrafProg.getGrafSettings().setYMax(GrafStats.getMax(GrafProg.getData().getColumnValues(getOutputColumnNumber())));
+        GrafProg.getGrafSettings().setYMin(GrafStats.getMin(GrafProg.getData().getColumnValues(getOutputColumnNumber())));
+    }
   
 
    

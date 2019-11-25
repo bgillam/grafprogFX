@@ -3,6 +3,7 @@
  * @author Bill Gillam
  * @version 1/27/17]
  */
+import javax.swing.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -107,6 +108,14 @@ public class GrafSegment extends GrafObject implements IGrafable
         gdc.setX1(""+getX1());
         gdc.setX2(""+getX2());
         gdc.settDialogMark(getMark());
+    }
+
+    @Override
+    public void autoRange(){
+        double max, min;
+        if (getY1() < getY2()){ max = getY2(); min = getY1();} else {max = getY1(); min = getY2(); }
+        GrafProg.getGrafSettings().setYMax(max+GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafSettings().setYMin(min-GrafProg.getGrafSettings().getTenthWindowY());
     }
 
    public void setX1(double xval){ x1 = xval; }

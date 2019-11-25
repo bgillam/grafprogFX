@@ -2,6 +2,7 @@
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
@@ -19,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javax.crypto.SealedObject;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class GrafDialogController {
 
@@ -537,6 +539,9 @@ public class GrafDialogController {
             }
         });
     }
+
+
+
 
 
 

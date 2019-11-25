@@ -4,6 +4,11 @@
 *  @author Bill Gillam           *
 *  2/3/17                       *
 **********************************/
+
+
+
+
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.*;
@@ -17,6 +22,8 @@ import java.awt.BorderLayout;
 import javax.swing.UIManager;
 
 import javax.swing.border.BevelBorder;
+
+import java.lang.*;
 
 
 
@@ -225,6 +232,15 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         gdc.getBoundariesCheckBox().setSelected(labelAxisByBoundries);
         gdc.getNumClassButton().setSelected(getByNumClassChecked());
         gdc.getClassSizeButton().setSelected(!getByNumClassChecked());
+    }
+
+    @Override
+    public void autoRange(){
+        Double[] temp = GrafStats.getRidOfNulls(myOwner.getData().getColumnValues(columnNumber));
+        double[] counts = getCounts(temp.length,temp);
+        if (GrafStats.getMax(counts) < 10) GrafProg.getGrafSettings().setYMax(10);
+        else GrafProg.getGrafSettings().setYMax(GrafStats.getMax(counts)+GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafSettings().setYMin(-GrafProg.getGrafSettings().getTenthWindowY());
     }
     
 

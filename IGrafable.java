@@ -12,6 +12,6 @@ public interface IGrafable
     
     public void drawGraf(Graphics2D gc);
     public void loadObjectFields(GrafDialogController gdc);
-    
+    public void autoRange();
     
 }

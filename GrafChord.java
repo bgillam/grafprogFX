@@ -101,6 +101,14 @@ public class GrafChord extends GrafObject implements IGrafable
         gdc.settDialogMark(getMark());
     }
 
+    @Override
+    public void autoRange(){
+       double max, min;
+       if (y1<y2){ max = y2; min = y1;} else {max = y1; min = y2; }
+        GrafProg.getGrafSettings().setYMax(max+GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafSettings().setYMin(min-GrafProg.getGrafSettings().getTenthWindowY());
+    }
+
 
 
    public void setX1(double xval){ x1 = xval; }
