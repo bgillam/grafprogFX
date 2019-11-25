@@ -147,14 +147,14 @@ public class GrafProg extends Application {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 gPanel.repaint();
-                stage.show();
+                //stage.show();
             }
         });
         stage.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 gPanel.repaint();
-                stage.show();
+                //stage.show();
             }
         });
 
