@@ -35,24 +35,29 @@ public class Scales  // implements Serializable
 	}
 	
 	public static void autoRange(GrafSettings stuff, String f){
+
 		double tempYMin = 0;
 		double tempYMax = 0;
 		double yVal = 0;
 		double stuffMin = stuff.getXMin();
 		double stuffMax = stuff.getXMax();
+
 		double dx = (stuffMax-stuffMin)/100;
 		for (double i = stuffMin; i<stuffMax; i = i + dx){
 			try {
 				yVal = FunctionString.fValue(f, i);
 			} catch (DomainViolationException e) {
 				//ignore for autorange
-			}catch (FunctionFormatException e) {}   
+			}catch (FunctionFormatException e) {JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;}
 			if (yVal < tempYMin) tempYMin = yVal;
 			else if (yVal > tempYMax) tempYMax = yVal;
-		stuff.setYMin(tempYMin);
-		stuff.setYMax(tempYMax);
-		scalesFromRange(stuff);
+
 		}
+
+		stuff.setYMin(tempYMin-GrafProg.getGrafSettings().getTenthWindowY());
+		stuff.setYMax(tempYMax+GrafProg.getGrafSettings().getTenthWindowY());
+		scalesFromRange(stuff);
+		GrafProg.repaintGraf();
 	}
 	
 	//compute scales that are powers of 10
