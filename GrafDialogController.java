@@ -142,7 +142,7 @@ public class GrafDialogController {
     private void onDiscardButtonClicked(ActionEvent e){
         GrafProg.setMessage2("Changes Discarded");
         resetDialog();
-        //GrafProg.getGrafPanel().repaint();
+        GrafProg.getGrafPanel().repaint();
     }
 
     @FXML

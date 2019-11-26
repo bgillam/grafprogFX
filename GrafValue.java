@@ -89,9 +89,9 @@ public class GrafValue extends GrafObject implements IGrafable{
         try{
             y1 = FunctionString.fValue(getFunctionString(), getX());
         }catch(Exception e){JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;};
-        double max, min;
         GrafProg.getGrafSettings().setYMax(y1+GrafProg.getGrafSettings().getTenthWindowY());
         GrafProg.getGrafSettings().setYMin(y1-GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafPanel().repaint();
     }
    
 
