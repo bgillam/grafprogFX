@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.value.WeakChangeListener;
 import javafx.embed.swing.SwingNode;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,12 +14,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.awt.event.WindowEvent;
 
 
 public class GrafProg extends Application {
@@ -101,7 +103,7 @@ public class GrafProg extends Application {
         AnchorPane.setRightAnchor(swingTableNode, 0.0);
         AnchorPane.setBottomAnchor(swingTableNode, 0.0);
         setSizeChangeListener(tableStage, data.getDataPanel());
-        tableStage.setAlwaysOnTop(true);
+        //tableStage.setAlwaysOnTop(true);
         //tableStage.show();
 
         //Set up column generator Dialog Box
@@ -131,6 +133,7 @@ public class GrafProg extends Application {
         AnchorPane.setBottomAnchor(swingGrafNode, 0.0);
         setSizeChangeListener(grafStage, getGrafPanel());
         grafObjectList.add(axes);
+        //grafController.getGrafPane().getChildren().get(0).autosize();
         grafStage.show();
 
         grafStage.setOnCloseRequest(event -> {
@@ -146,15 +149,27 @@ public class GrafProg extends Application {
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                gPanel.repaint();
-                //stage.show();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        gPanel.repaint();
+
+                    }
+                });
             }
         });
         stage.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                gPanel.repaint();
-                //stage.show();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        gPanel.repaint();
+
+                    }
+                });
             }
         });
 
@@ -309,6 +324,8 @@ public class GrafProg extends Application {
     public static void setGenStage(Stage genStage) {
         GrafProg.genStage = genStage;
     }
+
+
 
     //because sometimes just repainting grafPanel doesn't work.
     public static void repaintGraf(){
