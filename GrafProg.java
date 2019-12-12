@@ -26,27 +26,42 @@ import java.util.ArrayList;
 public class GrafProg extends Application {
     private static final long serialVersionUID = 1L;
 
-    //static UI variables
-    private static Stage grafStage = new Stage();
-    private static Stage dialogStage = new Stage();
-    private static Stage tableStage = new Stage();
-    private static Stage statStage = new Stage();
+    //Stages, Scenes and Nodes
+    //UI or Generator for column data
     private static Stage genStage = new Stage();
-
-    //Current swing components to be converted later
-    //private static Stage freqTableStage = new Stage();
-    //static Stage spreadStage = new Stage();
-
-    private static GrafController grafController;
-    private static GrafDialogController dialogController;
-    private static TableController tableController;
+    private static Scene genScene;
     private static TableColumnGeneratorController tableGenController;
-    private static OneVarStatsController statController;
+    private static Parent genRoot;
 
+    //UI for creating GrafObjects
+    private static Stage dialogStage = new Stage();
+    private static Scene dialogScene;
+    private static GrafDialogController dialogController;
+    private static Parent dialogRoot;
+
+    //UI for one variable stats
+    private static Stage statStage = new Stage();
+    private static Scene statScene;
+    private static OneVarStatsController statController;
+    private static Parent statRoot;
+
+    //UI for x-y axes and graphs
+    private static Stage grafStage = new Stage();
+    private static Scene grafScene;
+    private static GrafController grafController;
+    private static Parent grafRoot;
     private static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
     private static GrafPanel grafPanel = new GrafPanel(); //Graphics Panel in swing
+
+    //Data table for statistics
+    private static Stage tableStage = new Stage();
+    private static Scene tableScene;
+    private static TableController tableController;
+    private static Parent tableRoot;
     private static SwingNode swingTableNode = new SwingNode();
-    private static GrafTable data = new GrafTable(100,10);  //table for data
+    private static GrafTable data = new GrafTable(100,10);  //Swing table for data
+
+
 
     //swing item to be made JavaFX
     //private static FrequencyChartDialog frequencyChartDialog = new FrequencyChartDialog();
@@ -72,27 +87,27 @@ public class GrafProg extends Application {
 
         //Set up Dialog Box
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
-        Parent dialogRoot = loader.load();
+        dialogRoot = loader.load();
         dialogController = loader.getController();
-        Scene dialogScene = new Scene (dialogRoot, 650, 350); //.getWidth(), grafStage.getHeight());
+        dialogScene = new Scene (dialogRoot, 650, 350); //.getWidth(), grafStage.getHeight());
         dialogStage.setScene(dialogScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         //dialogController.hideAll();
 
         //Set up One Variable Stats Dialog Box
         FXMLLoader statLoader = new FXMLLoader(getClass().getResource("OneVarStats.fxml"));
-        Parent statRoot = statLoader.load();
+        statRoot = statLoader.load();
         statController = statLoader.getController();
-        Scene statScene = new Scene (statRoot, 580, 250); //.getWidth(), grafStage.getHeight());
+        statScene = new Scene (statRoot, 580, 250); //.getWidth(), grafStage.getHeight());
         statStage.setScene(statScene);
         statStage.initModality(Modality.APPLICATION_MODAL);
         statStage.setTitle("DATA");
 
         //Set up Table
         FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("Table.fxml"));
-        Parent tableRoot = tableLoader.load();
+        tableRoot = tableLoader.load();
         tableController = (tableLoader.getController());
-        Scene tableScene = new Scene (tableRoot, initWidth, initHeight);
+        tableScene = new Scene (tableRoot, initWidth, initHeight);
         tableStage.setScene(tableScene);
         tableStage.setTitle("Data");
         swingTableNode.setContent(data.getDataPanel());
@@ -108,9 +123,9 @@ public class GrafProg extends Application {
 
         //Set up column generator Dialog Box
         FXMLLoader genLoader = new FXMLLoader(getClass().getResource("TableColumnGenerator.fxml"));
-        Parent genRoot = genLoader.load();
+        genRoot = genLoader.load();
         tableGenController = genLoader.getController();
-        Scene genScene = new Scene (genRoot, 625, 200); //.getWidth(), grafStage.getHeight());
+        genScene = new Scene (genRoot, 625, 200); //.getWidth(), grafStage.getHeight());
         genStage.setScene(genScene);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         genStage.setTitle("Column Actions");
@@ -118,9 +133,9 @@ public class GrafProg extends Application {
 
         //Set up main graf window
         FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
-        Parent grafRoot = grafLoader.load();
+        grafRoot = grafLoader.load();
         grafController = (grafLoader.getController());
-        Scene grafScene = new Scene (grafRoot, initWidth, initHeight);
+        grafScene = new Scene (grafRoot, initWidth, initHeight);
         grafStage.setScene(grafScene);
         grafStage.setTitle("GrafProg");
         swingGrafNode.setContent(getGrafPanel());
