@@ -20,6 +20,7 @@ import javafx.stage.WindowEvent;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -85,79 +86,59 @@ public class GrafProg extends Application {
     public void start(Stage grafStage) throws Exception{
         this.grafStage = grafStage;
 
-        //Set up Dialog Box
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GrafDialog.fxml"));
-        dialogRoot = loader.load();
-        dialogController = loader.getController();
-        dialogScene = new Scene (dialogRoot, 650, 350); //.getWidth(), grafStage.getHeight());
-        dialogStage.setScene(dialogScene);
+        //Set up Object Creation Dialog Box
+        dialogController = createScene(dialogRoot, dialogStage, dialogScene, 650, 350, "GrafDialog.fxml", "");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
-        //dialogController.hideAll();
 
         //Set up One Variable Stats Dialog Box
-        FXMLLoader statLoader = new FXMLLoader(getClass().getResource("OneVarStats.fxml"));
-        statRoot = statLoader.load();
-        statController = statLoader.getController();
-        statScene = new Scene (statRoot, 580, 250); //.getWidth(), grafStage.getHeight());
-        statStage.setScene(statScene);
+        statController = createScene(statRoot, statStage, statScene, 580, 250, "OneVarStats.fxml" , "One-Variable Statistics");
         statStage.initModality(Modality.APPLICATION_MODAL);
-        statStage.setTitle("DATA");
-
-        //Set up Table
-        FXMLLoader tableLoader = new FXMLLoader(getClass().getResource("Table.fxml"));
-        tableRoot = tableLoader.load();
-        tableController = (tableLoader.getController());
-        tableScene = new Scene (tableRoot, initWidth, initHeight);
-        tableStage.setScene(tableScene);
-        tableStage.setTitle("Data");
-        swingTableNode.setContent(data.getDataPanel());
-        tableController.getTablePane().getChildren().add(swingTableNode);
-        //anchor graphing node to root BorderPane - need to figure out how to do this in Graf.fxml
-        AnchorPane.setTopAnchor(swingTableNode, 0.0);
-        AnchorPane.setLeftAnchor(swingTableNode, 0.0);
-        AnchorPane.setRightAnchor(swingTableNode, 0.0);
-        AnchorPane.setBottomAnchor(swingTableNode, 0.0);
-        setSizeChangeListener(tableStage, data.getDataPanel());
-        //tableStage.setAlwaysOnTop(true);
-        //tableStage.show();
 
         //Set up column generator Dialog Box
-        FXMLLoader genLoader = new FXMLLoader(getClass().getResource("TableColumnGenerator.fxml"));
-        genRoot = genLoader.load();
-        tableGenController = genLoader.getController();
-        genScene = new Scene (genRoot, 625, 200); //.getWidth(), grafStage.getHeight());
-        genStage.setScene(genScene);
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        genStage.setTitle("Column Actions");
-        //genStage.show();
+        tableGenController = createScene(genRoot, genStage, genScene,  625, 200, "TableColumnGenerator.fxml", "Column Actions");
+        tableStage.initModality(Modality.APPLICATION_MODAL);
+
+        //Set up Table
+        tableController = createScene(tableRoot, tableStage, tableScene, initWidth, initHeight, "Table.fxml" , "Data");
+        swingTableNode.setContent(data.getDataPanel());
+        tableController.getTablePane().getChildren().add(swingTableNode);
+        anchorSwingNode(swingTableNode);
+        setSizeChangeListener(tableStage, data.getDataPanel());
 
         //Set up main graf window
-        FXMLLoader grafLoader = new FXMLLoader(getClass().getResource("Graf.fxml"));
-        grafRoot = grafLoader.load();
-        grafController = (grafLoader.getController());
-        grafScene = new Scene (grafRoot, initWidth, initHeight);
-        grafStage.setScene(grafScene);
-        grafStage.setTitle("GrafProg");
-        swingGrafNode.setContent(getGrafPanel());
-        //place graphing window node in pane
-        grafController.getGrafPane().getChildren().add(swingGrafNode);
-        //anchor graphing node to root BorderPane - need to figure out how to do this in Graf.fxml
-        AnchorPane.setTopAnchor(swingGrafNode, 0.0);
-        AnchorPane.setLeftAnchor(swingGrafNode, 0.0);
-        AnchorPane.setRightAnchor(swingGrafNode, 0.0);
-        AnchorPane.setBottomAnchor(swingGrafNode, 0.0);
-        setSizeChangeListener(grafStage, getGrafPanel());
-        grafObjectList.add(axes);
-        //grafController.getGrafPane().getChildren().get(0).autosize();
+        grafController = createScene(grafRoot, grafStage, grafScene, initWidth, initHeight, "Graf.fxml", "GrafProg");
+        swingGrafNode.setContent(getGrafPanel()); //put grafPanel into a JavaFX node
+        grafController.getGrafPane().getChildren().add(swingGrafNode);   //place graphing window node in pane
+        anchorSwingNode(swingGrafNode);
+        setSizeChangeListener(grafStage, grafPanel);
+
         grafStage.show();
+
+        grafObjectList.add(axes);
+
 
         grafStage.setOnCloseRequest(event -> {
             closeGraf();
             event.consume();
         });
 
+    }
 
+    private <T> T createScene(Parent root, Stage stage, Scene scene, int width, int height, String path, String title) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        root = loader.load();
+        scene = new Scene (root, width, height); //.getWidth(), grafStage.getHeight());
+        stage.setScene(scene);
+        //stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle(title);
+        return (T) loader.getController();
+    }
 
+    private void anchorSwingNode(SwingNode node){
+        AnchorPane.setTopAnchor(node, 0.0);
+        AnchorPane.setLeftAnchor(node, 0.0);
+        AnchorPane.setRightAnchor(node, 0.0);
+        AnchorPane.setBottomAnchor(node, 0.0);
     }
 
     public void setSizeChangeListener(Stage stage, JPanel gPanel){
@@ -169,7 +150,9 @@ public class GrafProg extends Application {
                     public void run() {
 
                         gPanel.repaint();
-
+                        //hack to repaint correctly
+                        stage.setX(stage.getX()+1);
+                        stage.setX(stage.getX()-1);
                     }
                 });
             }
@@ -180,9 +163,10 @@ public class GrafProg extends Application {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-
                         gPanel.repaint();
-
+                        //hack to repaint correctly
+                        stage.setX(stage.getX()+1);
+                        stage.setX(stage.getX()-1);
                     }
                 });
             }
