@@ -148,11 +148,11 @@ public class GrafProg extends Application {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-
-                        gPanel.repaint();
+                        //gPanel.repaint();
                         //hack to repaint correctly
                         stage.setX(stage.getX()+1);
                         stage.setX(stage.getX()-1);
+                        gPanel.repaint();
                     }
                 });
             }
@@ -163,10 +163,11 @@ public class GrafProg extends Application {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        gPanel.repaint();
+                        //gPanel.repaint();
                         //hack to repaint correctly
                         stage.setX(stage.getX()+1);
                         stage.setX(stage.getX()-1);
+                        gPanel.repaint();
                     }
                 });
             }
