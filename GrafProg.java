@@ -150,8 +150,8 @@ public class GrafProg extends Application {
                     public void run() {
                         //gPanel.repaint();
                         //hack to repaint correctly
-                        stage.setX(stage.getX()+1);
-                        stage.setX(stage.getX()-1);
+                        /*stage.setY(stage.getX()+1);
+                        stage.setY(stage.getX()-1);*/
                         gPanel.repaint();
                     }
                 });
@@ -165,8 +165,8 @@ public class GrafProg extends Application {
                     public void run() {
                         //gPanel.repaint();
                         //hack to repaint correctly
-                        stage.setX(stage.getX()+1);
-                        stage.setX(stage.getX()-1);
+                        /*stage.setX(stage.getX()+1);
+                        stage.setX(stage.getX()-1);*/
                         gPanel.repaint();
                     }
                 });
