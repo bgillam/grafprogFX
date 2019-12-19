@@ -9,7 +9,7 @@
 <?import javafx.embed.swing.SwingNode?>
 
 <?import javafx.scene.text.Text?>
-<BorderPane fx:controller="GrafController" xmlns:fx="http://javafx.com/fxml" >
+<BorderPane fx:id = "mainPane" fx:controller="GrafController" xmlns:fx="http://javafx.com/fxml" >
     <top>
         <HBox>
             <VBox>

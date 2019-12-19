@@ -201,11 +201,11 @@ public class GrafProg extends Application {
 
         if (!grafSaved) {
             final JDialog dialog = new JDialog();
-            dialog.setAlwaysOnTop(true);
-            switch (JOptionPane.showConfirmDialog(dialog, "Save File?", "File" + grafFile.toString() + "not saved.", JOptionPane.YES_NO_CANCEL_OPTION)) {
-                case JOptionPane.YES_OPTION: {
-                    GrafFiles.saveFile();
-                    setGrafSavedAndTitle(true);
+                    dialog.setAlwaysOnTop(true);
+                    switch (JOptionPane.showConfirmDialog(dialog, "Save File?", "File" + grafFile.toString() + "not saved.", JOptionPane.YES_NO_CANCEL_OPTION)) {
+                        case JOptionPane.YES_OPTION: {
+                            GrafFiles.saveFile();
+                            setGrafSavedAndTitle(true);
                     System.exit(0);
                     break;
                 }
@@ -220,6 +220,7 @@ public class GrafProg extends Application {
             }
         }
     }
+
 
 
     public static void setMessage1(String message){ grafController.setMessage1(message); }
