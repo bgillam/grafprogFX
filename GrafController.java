@@ -47,7 +47,7 @@ public class GrafController {
         //need Cancel/yes/no here
         
         FileChooser saveChooser = new FileChooser();
-        saveChooser.setTitle("Save CurrentGraf?");
+        saveChooser.setTitle("Save CurrentGraf");
         saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
         File file = saveChooser.showSaveDialog(grafPane.getScene().getWindow());
         if (file != null) {

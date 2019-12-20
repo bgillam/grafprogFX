@@ -11,6 +11,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -200,26 +202,24 @@ public class GrafProg extends Application {
     public static void closeGraf(){
 
         if (!grafSaved) {
-            final JDialog dialog = new JDialog();
-                    dialog.setAlwaysOnTop(true);
-                    switch (JOptionPane.showConfirmDialog(dialog, "Save File?", "File" + grafFile.toString() + "not saved.", JOptionPane.YES_NO_CANCEL_OPTION)) {
-                        case JOptionPane.YES_OPTION: {
-                            GrafFiles.saveFile();
-                            setGrafSavedAndTitle(true);
-                    System.exit(0);
-                    break;
-                }
-                case JOptionPane.CANCEL_OPTION: {
-                    break;
-                }
-                case JOptionPane.NO_OPTION:{
-                    System.exit(0);
-                    break;
-                }
-                default:{System.exit(0);}
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Graf?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.CANCEL) return;
+            if (alert.getResult() == ButtonType.YES) {
+
+                GrafFiles.saveFile();
+                setGrafSavedAndTitle(true);
             }
+            System.exit(0);
+
+
         }
     }
+
+
+
+
 
 
 
