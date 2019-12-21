@@ -51,6 +51,7 @@ public class GrafController {
         saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
         File file = saveChooser.showSaveDialog(grafPane.getScene().getWindow());
         if (file != null) {
+            //System.out.println(file);
             GrafProg.setGrafFile(file);
             GrafFiles.saveFile();
         }
@@ -285,4 +286,6 @@ public class GrafController {
         //Scales.autoRange(GrafProg.getGrafSettings(), );
             }
     }
+
+
 

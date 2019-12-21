@@ -326,6 +326,10 @@ public class GrafProg extends Application {
         GrafProg.genStage = genStage;
     }
 
+    public static GrafController getGrafController(){
+        return grafController;
+    }
+
 
 
     //because sometimes just repainting grafPanel doesn't work.

@@ -4,6 +4,8 @@
  * @author (Bill Gillam)
  * @version (4/6/18)
  */
+import javafx.stage.FileChooser;
+
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;
@@ -57,7 +59,7 @@ public class GrafFiles
   
     public static File saveFile(){
         File f = GrafProg.getGrafFile();
-        if (f.toString().equals("") || !f.exists()) f = getFile(f);
+        if (f.toString().equals("") || !f.exists()) f = getFile();
         GrafFiles gf = new GrafFiles();
         saveObjectToFile(f,gf);
         return f;
@@ -67,7 +69,7 @@ public class GrafFiles
     
     public static File saveFileAs(){
         File f = GrafProg.getGrafFile();
-        getFile(f);
+        f = getFile();
         GrafFiles gf = new GrafFiles();
         saveObjectToFile(f,gf);
         return f;
@@ -75,16 +77,24 @@ public class GrafFiles
 
     private static void saveObjectToFile(File f, Object obj){
         try{
+            System.out.println("file: "+f);
             FileOutputStream fout = new FileOutputStream(f.toString());
             ObjectOutputStream oos = new ObjectOutputStream(fout);   
             oos.writeObject(obj);
             oos.close();
-        }catch(Exception ex){ JOptionPane.showMessageDialog(null, "Error saving file! ", "Error!" , JOptionPane.ERROR_MESSAGE); }  
+        }catch(Exception ex){ JOptionPane.showMessageDialog(null, "Error saving file! ", "Error!" , JOptionPane.ERROR_MESSAGE);
+        System.out.println(ex);}
     } 
      
    
-    private static File getFile(File f){
-      int typeCheck;
+    private static File getFile(){
+        FileChooser saveChooser = new FileChooser();
+        saveChooser.setTitle("Save CurrentGraf");
+        saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
+        File file = saveChooser.showSaveDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
+
+
+      /*int typeCheck;
       JFrame parent = new JFrame();
       JFileChooser saveChooser = new JFileChooser();
       FileNameExtensionFilter filter = new FileNameExtensionFilter("grf", "GRF");
@@ -104,8 +114,8 @@ public class GrafFiles
                 if (n == 1) {return f;}   
               }
           } else break;
-      } while(true);
-      return f;
+      } while(true);*/
+      return file;
     }
   
   //read an object from a file - not finished yet
@@ -164,4 +174,7 @@ public class GrafFiles
       grafProg.setData(gf.data);
       return grafProg;
   }
+
+
+
 }
