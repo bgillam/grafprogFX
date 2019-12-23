@@ -60,8 +60,10 @@ public class GrafFiles
     public static File saveFile(){
         File f = GrafProg.getGrafFile();
         if (f.toString().equals("") || !f.exists()) f = getFile();
-        GrafFiles gf = new GrafFiles();
-        saveObjectToFile(f,gf);
+        if (!(f == null)) {
+            GrafFiles gf = new GrafFiles();
+            saveObjectToFile(f, gf);
+        }
         return f;
     }
 
@@ -77,7 +79,7 @@ public class GrafFiles
 
     private static void saveObjectToFile(File f, Object obj){
         try{
-            System.out.println("file: "+f);
+
             FileOutputStream fout = new FileOutputStream(f.toString());
             ObjectOutputStream oos = new ObjectOutputStream(fout);   
             oos.writeObject(obj);
@@ -92,30 +94,7 @@ public class GrafFiles
         saveChooser.setTitle("Save CurrentGraf");
         saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
         File file = saveChooser.showSaveDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
-
-
-      /*int typeCheck;
-      JFrame parent = new JFrame();
-      JFileChooser saveChooser = new JFileChooser();
-      FileNameExtensionFilter filter = new FileNameExtensionFilter("grf", "GRF");
-      saveChooser.setFileFilter(filter);
-      do{
-          typeCheck = saveChooser.showSaveDialog(parent);
-          //check for ".grf" and add if not there
-          if (typeCheck == JFileChooser.APPROVE_OPTION) {
-              f = saveChooser.getSelectedFile();
-              if (!f.toString().substring(f.toString().length()-4, f.toString().length()).equals(".grf")){
-                  File tempFile = new File(f.toString()+".grf");
-                  f.renameTo(tempFile);                    
-              }
-              if (!f.exists()){ return f; }  
-              else {       
-                int n = JOptionPane.showConfirmDialog(parent, "File Name "+ f.toString()+ " Exists. \n Overwrite It?", "Overwrite "+ f.toString()+ " ?",  JOptionPane.YES_NO_OPTION);
-                if (n == 1) {return f;}   
-              }
-          } else break;
-      } while(true);*/
-      return file;
+    return file;
     }
   
   //read an object from a file - not finished yet
