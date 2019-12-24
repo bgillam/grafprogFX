@@ -83,6 +83,8 @@ public class GrafProg extends Application {
     private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
     private static GrafCalc calc;                 //calculator for enteriung expressions
 
+
+
     //UI elements start
     @Override
     public void start(Stage grafStage) throws Exception{
@@ -216,6 +218,8 @@ public class GrafProg extends Application {
 
         }
     }
+
+
 
 
 

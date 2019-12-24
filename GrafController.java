@@ -43,9 +43,9 @@ public class GrafController {
 
     @FXML
     private void fileNew(ActionEvent actionEvent) {
-
+          //       GraFiles.fileNew();
         //need Cancel/yes/no here
-        
+
         FileChooser saveChooser = new FileChooser();
         saveChooser.setTitle("Save CurrentGraf");
         saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
