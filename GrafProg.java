@@ -75,7 +75,7 @@ public class GrafProg extends Application {
     private static final int initWidth = 750;
     private static final int initHeight = 750;
     private static GrafSettings    grafSet = new GrafSettings();  //Stores window settings
-    private static GrafPrimitives grafPrim = new GrafPrimitives();  //draw line, point or character
+    //private static GrafPrimitives grafPrim = new GrafPrimitives();  //draw line, point or character
     private static ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //should make this class and use here and in DialogController
     private static GrafAxes axes = new GrafAxes();   //axes object
     private static String copiedText = "";
@@ -123,7 +123,9 @@ public class GrafProg extends Application {
 
         grafStage.setOnCloseRequest(event -> {
             closeGraf();
+            System.exit(0);
             event.consume();
+
         });
 
     }
@@ -213,7 +215,7 @@ public class GrafProg extends Application {
                 GrafFiles.saveFile();
                 setGrafSavedAndTitle(true);
             }
-            System.exit(0);
+            //System.exit(0);
 
 
         }
@@ -271,8 +273,8 @@ public class GrafProg extends Application {
     public static GrafSettings getGrafSettings() {return grafSet;}
     public static void setGrafSettings(GrafSettings gs) { grafSet = gs; }
 
-    public GrafPrimitives getGrafPrimitives(){  return grafPrim; }
-    public void setGrafPrim(GrafPrimitives gp){}
+    /*public GrafPrimitives getGrafPrimitives(){  return grafPrim; }
+    public void setGrafPrim(GrafPrimitives gp){}*/
 
     public String getCopiedText(){return copiedText;}
     public void setCopiedText(String s){ copiedText = s;}
@@ -345,6 +347,22 @@ public class GrafProg extends Application {
                 grafStage.show();
             }
         });
+    }
+
+    public static void resetGraf(){
+        grafFile = new File("");  //File associated with the current Graf object
+        grafSaved = false;     //has the current graf been saved?
+        GrafSettings    grafSet = new GrafSettings();  //Stores window settings
+        //private static GrafPrimitives grafPrim = new GrafPrimitives();  //draw line, point or character
+        grafObjectList = new ArrayList<GrafObject>(); //should make this class and use here and in DialogController
+        axes = new GrafAxes();   //axes object
+        grafObjectList.add(axes);
+        //private static String copiedText = "";
+        setMessage1("");
+        setMessage2("");
+        setMessage3("");
+        boxPlotsPlotted = 0;              //for formatting multiple boxplots
+        repaintGraf();
     }
 
 }

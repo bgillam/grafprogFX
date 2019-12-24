@@ -23,7 +23,7 @@ public class GrafPrimitives implements Serializable
    private GrafProg myFrame;
    private GrafPanel myPanel;
 
-    public GrafPrimitives()
+    /*public GrafPrimitives()
     {
         //myFrame = GrafProg.;
         myPanel = GrafProg.getGrafPanel();
@@ -36,7 +36,7 @@ public class GrafPrimitives implements Serializable
       myFrame = frame;  
       myPanel = frame.getGrafPanel();
       //mySettings = frame.getGrafSettings();
-    }
+    }*/
        
      
     //Graph a point at (x,y) in the virtual plane

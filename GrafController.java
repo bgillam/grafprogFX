@@ -43,19 +43,8 @@ public class GrafController {
 
     @FXML
     private void fileNew(ActionEvent actionEvent) {
-          //       GraFiles.fileNew();
-        //need Cancel/yes/no here
-
-        FileChooser saveChooser = new FileChooser();
-        saveChooser.setTitle("Save CurrentGraf");
-        saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
-        File file = saveChooser.showSaveDialog(grafPane.getScene().getWindow());
-        if (file != null) {
-            //System.out.println(file);
-            GrafProg.setGrafFile(file);
-            GrafFiles.saveFile();
-        }
-
+       GrafProg.closeGraf();
+       GrafProg.resetGraf();
     }
 
 
@@ -231,8 +220,9 @@ public class GrafController {
 
     public AnchorPane getGrafPane(){return grafPane;}
 
-    public void closeGraf(ActionEvent actionEvent) {
+    public void onCloseGraf(ActionEvent actionEvent) {
         GrafProg.closeGraf();
+        System.exit(0);
 
     }
 
