@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class GrafFiles
+public class GrafFiles implements Serializable
 {
 
     private double xMin=GrafProg.getGrafSettings().getXMin();
@@ -94,6 +94,10 @@ public class GrafFiles
         saveChooser.setTitle("Save CurrentGraf");
         saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
         File file = saveChooser.showSaveDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
+        String filePath = file.getAbsolutePath();
+        if(!filePath.endsWith(".grf")){
+            file = new File(filePath+".grf");
+        }
     return file;
     }
   
