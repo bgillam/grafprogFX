@@ -232,9 +232,11 @@ public class GrafController {
     }
 
     public void onAbout(ActionEvent actionEvent) {
-        About about = new About();
-        about.setVisible(true);
-        //about.setModal(true);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("GrafProg");
+        alert.setTitle("About");
+        alert.setContentText("A Simple Graphing Program \nVerson FX1.0 \nhttp://www.bgillam.com");
+        alert.show();
     }
 
     public void onSet(ActionEvent actionEvent) {
@@ -267,8 +269,6 @@ public class GrafController {
                          noObjects.setHeaderText("No GrafObjects have been created. \nCan't AutoRange.");
                          noObjects.showAndWait();
                     }
-
-
 
                 }
             });
