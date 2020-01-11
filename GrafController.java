@@ -221,8 +221,8 @@ public class GrafController {
     public AnchorPane getGrafPane(){return grafPane;}
 
     public void onCloseGraf(ActionEvent actionEvent) {
-        GrafProg.closeGraf();
-        System.exit(0);
+        if (GrafProg.closeGraf())
+            System.exit(0);
 
     }
 

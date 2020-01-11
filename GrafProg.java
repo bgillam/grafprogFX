@@ -31,8 +31,8 @@ public class GrafProg extends Application {
     private static final long serialVersionUID = 1L;
 
     //Stages, Scenes and Nodes
-    //UI or Generator for column data
-    private static Stage genStage = new Stage();
+    //UI for column data generator
+     private static Stage genStage = new Stage();
     private static Scene genScene;
     private static TableColumnGeneratorController tableGenController;
     private static Parent genRoot;
@@ -65,18 +65,12 @@ public class GrafProg extends Application {
     private static SwingNode swingTableNode = new SwingNode();
     private static GrafTable data = new GrafTable(100,10);  //Swing table for data
 
-
-
-    //swing item to be made JavaFX
-    //private static FrequencyChartDialog frequencyChartDialog = new FrequencyChartDialog();
-
     //static variables
     private static File grafFile = new File("");  //File associated with the current Graf object
     private static boolean grafSaved = false;     //has the current graf been saved?
     private static final int initWidth = 750;
     private static final int initHeight = 750;
-    private static GrafSettings    grafSet = new GrafSettings();  //Stores window settings
-    //private static GrafPrimitives grafPrim = new GrafPrimitives();  //draw line, point or character
+    private static GrafSettings grafSet = new GrafSettings();  //Stores window settings
     private static ArrayList<GrafObject> grafObjectList = new ArrayList<GrafObject>(); //should make this class and use here and in DialogController
     private static GrafAxes axes = new GrafAxes();   //axes object
     private static String copiedText = "";
@@ -86,7 +80,7 @@ public class GrafProg extends Application {
 
 
 
-    //UI elements start
+    //UI thread start
     @Override
     public void start(Stage grafStage) throws Exception{
         this.grafStage = grafStage;
@@ -116,31 +110,28 @@ public class GrafProg extends Application {
         grafController.getGrafPane().getChildren().add(swingGrafNode);   //place graphing window node in pane
         anchorSwingNode(swingGrafNode);
         setSizeChangeListener(grafStage, grafPanel);
-
+        grafObjectList.add(axes);
         grafStage.show();
 
-        grafObjectList.add(axes);
-
-
         grafStage.setOnCloseRequest(event -> {
-            closeGraf();
-            System.exit(0);
-            event.consume();
-
-        });
+           if (closeGraf()) System.exit(0);
+           else
+               event.consume();
+           });
 
     }
 
+    //creates a scene within passed stage
     private <T> T createScene(Parent root, Stage stage, Scene scene, int width, int height, String path, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         root = loader.load();
-        scene = new Scene (root, width, height); //.getWidth(), grafStage.getHeight());
+        scene = new Scene (root, width, height);
         stage.setScene(scene);
-        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle(title);
         return (T) loader.getController();
     }
 
+    //anchor a swing node to the pane edges
     private void anchorSwingNode(SwingNode node){
         AnchorPane.setTopAnchor(node, 0.0);
         AnchorPane.setLeftAnchor(node, 0.0);
@@ -148,6 +139,7 @@ public class GrafProg extends Application {
         AnchorPane.setBottomAnchor(node, 0.0);
     }
 
+    //should not need these listeners, but do. Sort of a hack.
     public void setSizeChangeListener(Stage stage, JPanel gPanel){
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -155,11 +147,7 @@ public class GrafProg extends Application {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        //gPanel.repaint();
-                        //hack to repaint correctly
-                        /*stage.setY(stage.getX()+1);
-                        stage.setY(stage.getX()-1);*/
-                        gPanel.repaint();
+                       gPanel.repaint();
                     }
                 });
             }
@@ -170,11 +158,7 @@ public class GrafProg extends Application {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        //gPanel.repaint();
-                        //hack to repaint correctly
-                        /*stage.setX(stage.getX()+1);
-                        stage.setX(stage.getX()-1);*/
-                        gPanel.repaint();
+                       gPanel.repaint();
                     }
                 });
             }
@@ -182,13 +166,16 @@ public class GrafProg extends Application {
 
     }
 
-
-    //public static void showFreqTableDialog(){ frequencyChartDialog. }
-
-    public static void showData(){
-       tableStage.show();
+    //because sometimes just repainting grafPanel doesn't work. Another hack I should not need
+    public static void repaintGraf(){
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                grafStage.hide();
+                grafPanel.repaint();
+                grafStage.show();
+            }
+        });
     }
-
 
     //Set Titles and saved status after saving file
     private static void setGrafSavedAndTitle(boolean tf){
@@ -199,56 +186,31 @@ public class GrafProg extends Application {
         }else{
             grafSaved = false;
         }
-
     }
 
 
     //Close an open file
-    public static void closeGraf(){
-
+    public static boolean closeGraf(){
         if (!grafSaved) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Graf?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
 
-            if (alert.getResult() == ButtonType.CANCEL) return;
+            if (alert.getResult() == ButtonType.CANCEL) return false;
             if (alert.getResult() == ButtonType.YES) {
-
                 GrafFiles.saveFile();
                 setGrafSavedAndTitle(true);
             }
-            //System.exit(0);
-
-
         }
+        return true;
     }
-
-
-
-
-
-
-
-
 
     public static void setMessage1(String message){ grafController.setMessage1(message); }
     public static void setMessage2(String message){ grafController.setMessage2(message); }
     public static void setMessage3(String message){ grafController.setMessage3(message); }
 
-
-
-    /*//Setters and Getters
-    public static int getWidth(){return (int) primaryStage.getWidth();}
-    //public static void setTheWidth(int w) {width = w;}
-
-    public static int getHeight(){return (int) primaryStage.getHeight();}
-    //public static void setTheHeight(int h) {height = h;}*/
-
     public static Stage getGrafStage(){ return grafStage;  }
-
     public static Stage getDialogStage(){return dialogStage;}
-
     public static Stage getTableStage() { return tableStage; }
-
     public static Stage getStatStage(){
         return statStage;
     }
@@ -260,7 +222,6 @@ public class GrafProg extends Application {
 
     public static File getGrafFile(){return grafFile;}
     public static void setGrafFile(File f) {grafFile = f;}
-
 
     public static void setGrafSaved(boolean tf){grafSaved = tf;}
     public static boolean getGrafSaved(){return grafSaved;}
@@ -274,16 +235,11 @@ public class GrafProg extends Application {
     public static GrafSettings getGrafSettings() {return grafSet;}
     public static void setGrafSettings(GrafSettings gs) { grafSet = gs; }
 
-    /*public GrafPrimitives getGrafPrimitives(){  return grafPrim; }
-    public void setGrafPrim(GrafPrimitives gp){}*/
-
     public String getCopiedText(){return copiedText;}
     public void setCopiedText(String s){ copiedText = s;}
 
     public static void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
     public static ArrayList<GrafObject> getGrafList(){return grafObjectList;}
-
-
 
     public static int getBoxPlotsPlotted(){
         return boxPlotsPlotted;
@@ -309,14 +265,6 @@ public class GrafProg extends Application {
         return count;
     }
 
-
-
-
-    public static void main(String[] args) {
-        //new GrafProg().launch(args);
-        launch(args);
-    }
-
     public static TableColumnGeneratorController getTableGenController() {
         return tableGenController;
     }
@@ -337,33 +285,24 @@ public class GrafProg extends Application {
         return grafController;
     }
 
-
-
-    //because sometimes just repainting grafPanel doesn't work.
-    public static void repaintGraf(){
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                grafStage.hide();
-                grafPanel.repaint();
-                grafStage.show();
-            }
-        });
-    }
-
     public static void resetGraf(){
         grafFile = new File("");  //File associated with the current Graf object
         grafSaved = false;     //has the current graf been saved?
-        GrafSettings    grafSet = new GrafSettings();  //Stores window settings
+        grafSet = new GrafSettings();  //Stores window settings
         grafObjectList = new ArrayList<GrafObject>();
         axes = new GrafAxes();   //axes object
         grafObjectList.add(axes);
-        dialogController.initTempGrafList();
         copiedText = "";
         setMessage1("");
         setMessage2("");
         setMessage3("");
         boxPlotsPlotted = 0;              //for formatting multiple boxplots
         repaintGraf();
+    }
+
+    public static void main(String[] args) {
+        //new GrafProg().launch(args);
+        launch(args);
     }
 
 }

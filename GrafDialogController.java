@@ -899,6 +899,7 @@ public class GrafDialogController {
                 checkboxVBox.getChildren().clear();
                 fillColorPicker.setVisible(false);
                 fillLabel.setVisible(false);
+                initTempGrafList();
             }
         });
     }
@@ -921,18 +922,12 @@ public class GrafDialogController {
         GrafInputHelpers.setTextFieldColor(getTextForDisplay(), "black");
         getGrafColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         getFillColorPicker().setValue(javafx.scene.paint.Color.BLACK);
-        //GrafProg.getDialogController().hideAll();  //this should hide all; add points for each box
         msg.setText("");
         hideAll();
         GrafProg.getGrafPanel().repaint();
-
+        //setTempGrafList(new ArrayList<>());
     }
 
-    /*private void saveChanges(){
-
-        GrafProg.setGrafList(tempGrafList);
-        GrafProg.setMessage1("changes saved");
-    }*/
 
     private boolean addGrafObject(){
 
