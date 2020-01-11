@@ -47,6 +47,19 @@ public class GrafController {
        GrafProg.resetGraf();
     }
 
+    public void fileOpen(ActionEvent actionEvent) {
+        GrafFiles.openGrafFromFile();
+    }
+
+    public void fileSave(ActionEvent actionEvent) {
+       GrafFiles.saveFile();
+    }
+
+    public void fileSaveAs(ActionEvent actionEvent) {
+        GrafFiles.saveFileAs();
+    }
+
+
 
     public void showCalc(ActionEvent actionEvent) {
 
@@ -275,7 +288,10 @@ public class GrafController {
 
         //Scales.autoRange(GrafProg.getGrafSettings(), );
             }
-    }
+
+
+
+}
 
 
 

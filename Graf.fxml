@@ -16,11 +16,11 @@
                 <MenuBar fx:id="mainMenu" onKeyPressed="#onMenuChoice">
                     <Menu fx:id="fileMenu" text="File">
                         <MenuItem fx:id="newItem" text="New" onAction="#fileNew"/>
-                        <MenuItem fx:id="openItem" text="Open"/>
+                        <MenuItem fx:id="openItem" text="Open" onAction="#fileOpen"/>
                         <MenuItem fx:id="importItem" text="Import"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="saveItem" text="Save"/>
-                        <MenuItem fx:id="saveAsItem" text="Save As"/>
+                        <MenuItem fx:id="saveItem" text="Save" onAction="#fileSave"/>
+                        <MenuItem fx:id="saveAsItem" text="Save As" onAction="#fileSaveAs"/>
                         <MenuItem fx:id="saveImageItem" text="Save Image"/>
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="printItem" text="Print"/>

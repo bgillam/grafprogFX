@@ -79,18 +79,17 @@ public class GrafFiles implements Serializable
 
     private static void saveObjectToFile(File f, Object obj){
         try{
-
             FileOutputStream fout = new FileOutputStream(f.toString());
             ObjectOutputStream oos = new ObjectOutputStream(fout);   
             oos.writeObject(obj);
             oos.close();
-        }catch(Exception ex){ JOptionPane.showMessageDialog(null, "Error saving file! ", "Error!" , JOptionPane.ERROR_MESSAGE);
+        }catch(Exception ex){ GrafProg.setMessage1("File not saved");
         System.out.println(ex);}
     } 
      
    
     private static File getFile(){
-        javafx.stage.FileChooser saveChooser = new FileChooser();
+        FileChooser saveChooser = new FileChooser();
         saveChooser.setTitle("Save CurrentGraf");
         saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
         File file = saveChooser.showSaveDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
@@ -104,7 +103,9 @@ public class GrafFiles implements Serializable
   
   //read an object from a file - not finished yet
   public static Object openFileObject(String ext){
-      JFrame parent = new JFrame();
+
+
+      /*JFrame parent = new JFrame();
       File file;
       int typeCheck;
       JFileChooser openChooser = new JFileChooser();
@@ -112,23 +113,26 @@ public class GrafFiles implements Serializable
       String extHigh = ext.toUpperCase();
       FileNameExtensionFilter filter = new FileNameExtensionFilter(extLow, extHigh);
       openChooser.setFileFilter(filter);
-      typeCheck = openChooser.showOpenDialog(parent);
-      if (typeCheck == JFileChooser.APPROVE_OPTION){
-         file = openChooser.getSelectedFile();
-         try{
+      typeCheck = openChooser.showOpenDialog(parent);*/
+
+      FileChooser openChooser = new FileChooser();
+      openChooser.setTitle("Open Graf");
+      openChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
+      File file = openChooser.showOpenDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
+      //if (file == null) return null;
+      //String filePath = file.getAbsolutePath();
+      Object obj = null;
+      try{
              FileInputStream fileIn = new FileInputStream(file.toString());
              ObjectInputStream ois = new ObjectInputStream(fileIn);
-             Object obj = ois.readObject();
+             obj = ois.readObject();
+             ois.close();
 
-             ois.close();  
-             return obj;
-                      
-          }catch(Exception ex){ JOptionPane.showMessageDialog(null, "Error opening file. ", "Error!" , JOptionPane.ERROR_MESSAGE); }
-          
-      } 
-      return null;
-   
-  }
+          }catch(Exception ex){
+              GrafProg.setMessage1("Error Opening File"+ ex);
+          }
+          return obj;
+   }
     
   
   public static GrafProg openGrafFromFile(){
