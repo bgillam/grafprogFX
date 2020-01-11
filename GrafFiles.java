@@ -90,10 +90,11 @@ public class GrafFiles implements Serializable
      
    
     private static File getFile(){
-        FileChooser saveChooser = new FileChooser();
+        javafx.stage.FileChooser saveChooser = new FileChooser();
         saveChooser.setTitle("Save CurrentGraf");
         saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
         File file = saveChooser.showSaveDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
+        if (file == null) return null;
         String filePath = file.getAbsolutePath();
         if(!filePath.endsWith(".grf")){
             file = new File(filePath+".grf");

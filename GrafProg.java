@@ -204,6 +204,13 @@ public class GrafProg extends Application {
         return true;
     }
 
+    public static int getNumType(GrafType gType){
+        int count = 0;
+        for (GrafObject o: grafObjectList)
+            if (o.getType().equals(gType)) count++;
+        return count;
+    }
+
     public static void setMessage1(String message){ grafController.setMessage1(message); }
     public static void setMessage2(String message){ grafController.setMessage2(message); }
     public static void setMessage3(String message){ grafController.setMessage3(message); }
@@ -258,13 +265,6 @@ public class GrafProg extends Application {
         boxPlotsPlotted = 0;
     }
 
-    public static int getNumType(GrafType gType){
-        int count = 0;
-        for (GrafObject o: grafObjectList)
-            if (o.getType().equals(gType)) count++;
-        return count;
-    }
-
     public static TableColumnGeneratorController getTableGenController() {
         return tableGenController;
     }
@@ -273,13 +273,7 @@ public class GrafProg extends Application {
         GrafProg.tableGenController = tableGenController;
     }
 
-    public static Stage getGenStage() {
-        return genStage;
-    }
-
-    public static void setGenStage(Stage genStage) {
-        GrafProg.genStage = genStage;
-    }
+    public static Stage getGenStage() {return genStage; }
 
     public static GrafController getGrafController(){
         return grafController;
