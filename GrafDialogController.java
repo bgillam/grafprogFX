@@ -1025,7 +1025,8 @@ public class GrafDialogController {
 
 
     public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
-    public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = GrafProg.getGrafList();}
+    public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = t;}
+    public void initTempGrafList(){ tempGrafList = GrafProg.getGrafList();}
 
     public java.awt.Color getGrafColor(){
         //System.out.println(grafColorPicker.getValue());
@@ -1186,6 +1187,10 @@ public class GrafDialogController {
     public java.awt.Font getDefaultFont() {
            return FontDialog.fxFontToAwtFont(javafx.scene.text.Font.getDefault());
 
+    }
+
+    public ComboBox getObjectComboBox(){
+        return objectComboBox;
     }
 
     public TextField getMsg() {

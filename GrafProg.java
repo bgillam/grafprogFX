@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.value.WeakChangeListener;
+import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingNode;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -353,11 +354,11 @@ public class GrafProg extends Application {
         grafFile = new File("");  //File associated with the current Graf object
         grafSaved = false;     //has the current graf been saved?
         GrafSettings    grafSet = new GrafSettings();  //Stores window settings
-        //private static GrafPrimitives grafPrim = new GrafPrimitives();  //draw line, point or character
-        grafObjectList = new ArrayList<GrafObject>(); //should make this class and use here and in DialogController
+        grafObjectList = new ArrayList<GrafObject>();
         axes = new GrafAxes();   //axes object
         grafObjectList.add(axes);
-        //private static String copiedText = "";
+        dialogController.initTempGrafList();
+        copiedText = "";
         setMessage1("");
         setMessage2("");
         setMessage3("");
