@@ -33,14 +33,14 @@
                         <MenuItem fx:id="pasteItem" text="Paste"/>
                     </Menu>
                     <Menu fx:id="functionMenu" text="Function">
-                        <MenuItem fx:id="fxInputItem" text="Input" onAction="#fxInput"/>
+                        <MenuItem fx:id="fxInputItem" text="Input" onAction="#onFxInput"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="valueItem" text="Value" onAction="#fxValue"/>
-                        <MenuItem fx:id="tangentItem" text="Tangent" onAction= "#fxTangent"/>
-                        <MenuItem fx:id="chordItem" text="Chord" onAction= "#fxChord"/>
-                        <MenuItem fx:id="zerosItem" text="Zeros" onAction= "#fxZeros"/>
+                        <MenuItem fx:id="valueItem" text="Value" onAction="#onFxValue"/>
+                        <MenuItem fx:id="tangentItem" text="Tangent" onAction= "#onFxTangent"/>
+                        <MenuItem fx:id="chordItem" text="Chord" onAction= "#onFxChord"/>
+                        <MenuItem fx:id="zerosItem" text="Zeros" onAction= "#onFxZeros"/>
                         <SeparatorMenuItem/>
-                        <MenuItem fx:id="integrateIetm" text="Integrate" onAction= "#fxIntegral"/>
+                        <MenuItem fx:id="integrateIetm" text="Integrate" onAction= "#onFxIntegral"/>
                     </Menu>
                     <Menu fx:id="statMenu" text="Stats">
                         <MenuItem fx:id="dataItem" text="Data" onAction= "#onTable"/>

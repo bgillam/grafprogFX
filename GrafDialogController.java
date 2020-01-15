@@ -931,12 +931,12 @@ public class GrafDialogController {
 
     private boolean addGrafObject(){
 
-        GrafObject newObject = GrafObject.createGrafObjectFromController(gType);
+        GrafObject newObject = createGrafObjectFromController(gType);
         if (!newObject.isValidInput(this)) {
             msg.setText("Not a valid "+gType);
            return false;
         }
-        newObject = GrafObject.createGrafObjectFromController(this, gType);
+        newObject = createGrafObjectFromController(this, gType);
         if (!duplicate(newObject)) getTempGrafList().add(newObject);
         msg.setText(gType+" added.");
         return true;
@@ -1003,12 +1003,87 @@ public class GrafDialogController {
 
 
 
-    public void checkForEnter(KeyEvent keyEvent) {
+    /*public void checkForEnter(KeyEvent keyEvent) {
         if ((keyEvent.getCode() == KeyCode.ENTER) && (functionString.isEditable())){
             onCreateButtonClicked(new ActionEvent());
 
         }
 
+    }*/
+
+
+    public static GrafObject createGrafObjectFromController(GrafType gType){
+        switch (gType){
+            case TEXT: return new GrafText();
+            case COLUMN: return new GrafColumnPlot();
+            case BOXPLOT: return new GrafBoxPlot();
+            case SCATTER:return new GrafScatterPlot();
+            case HISTOGRAM: return new GrafHistogram();
+            case FREQPOLYGON: return new GrafFreqPolygon();
+            case OGIVE: return new GrafOgive();
+            case POINT: return new GrafPoint();
+            case LINESEGMENT: return new GrafSegment();
+            case RECTANGLE: return new GrafRectangle();
+            case ELLIPSE: return new GrafEllipse();
+            case CIRCLE: return new GrafCircle();
+            case FUNCTION: return new GrafFunction();
+            case FVALUE: return new GrafValue();
+            case TANGENT: return new GrafTangent();
+            case CHORD: return new GrafChord();
+            case INTEGRAL: return new GrafIntegral();
+            case FZERO: return new GrafZeros();
+            default: return null;
+        }
+    }
+
+    public static GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
+        switch (gType){
+            case TEXT: return new GrafText(Double.parseDouble(
+                    gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(), gdc.getDefaultFont(),  gdc.getGrafColor());
+            case COLUMN: return new GrafColumnPlot(gdc.getColumn1ChooserColumn(), gdc.getDialogMark(), gdc.isConnected(), gdc.getGrafColor());
+            case BOXPLOT: return new GrafBoxPlot(gdc.getColumn1ChooserColumn(), gdc.getGrafColor(), gdc.getFNS());
+            case SCATTER:return new GrafScatterPlot(gdc.getColumn1ChooserColumn(), gdc.getColumn2ChooserColumn(), gdc.getGrafColor(), gdc.getDialogMark(), gdc.isConnected());
+            case HISTOGRAM:{
+                if (gdc.getNumClassButton().isSelected())
+                    return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                            gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
+                else  return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                        Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
+            case FREQPOLYGON: {
+                if (gdc.getNumClassButton().isSelected())
+                    return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                            gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
+                else  return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                        Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
+            case OGIVE:{
+                if (gdc.getNumClassButton().isSelected())
+                    return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                            gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
+                else  return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                        Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
+
+
+            case POINT: return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(), gdc.getDefaultFont(),  gdc.getGrafColor());
+            case LINESEGMENT: return new GrafSegment(Double.parseDouble(gdc.getX1()),
+                    Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()), Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getDialogMark());
+            case RECTANGLE: return new GrafRectangle(Double.parseDouble(gdc.getX1()),
+                    Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
+                    Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
+            case ELLIPSE: return new GrafEllipse(Double.parseDouble(gdc.getX1()),
+                    Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
+                    Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
+            case CIRCLE: return new GrafCircle(Double.parseDouble(gdc.getX1()),
+                    Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2())
+                    , gdc.getGrafColor(), gdc.getFillColor());
+            case FUNCTION: return new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
+            case FVALUE: return new GrafValue( gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
+            case TANGENT: return new GrafTangent(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
+            case CHORD: return new GrafChord(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),   gdc.getGrafColor(), gdc.getDialogMark());
+            case INTEGRAL: return new GrafIntegral(gdc.getFunctionString(),Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()), Integer.parseInt(gdc.getNText()), gdc.getGrafColor(), gdc.getFillColor());
+            case FZERO: return new GrafZeros(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),  Double.parseDouble(gdc.getDx()), gdc.getGrafColor(),gdc.getDialogMark() );
+            default: return null;
+
+        }
     }
 
     public String getFunctionString(){return functionString.getText();}
