@@ -114,6 +114,12 @@ public class GrafCircle extends GrafEllipse implements IGrafable{
 
     }
 
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafCircle(Double.parseDouble(gdc.getX1()),
+                Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2())
+                , gdc.getGrafColor(), gdc.getFillColor());
+    }
+
 
   /* public double getWidth() { return super.getWidth()
    public double getHeight() { return 2*r; }

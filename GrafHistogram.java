@@ -242,6 +242,15 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         else GrafProg.getGrafSettings().setYMax(GrafStats.getMax(counts)+GrafProg.getGrafSettings().getTenthWindowY());
         GrafProg.getGrafSettings().setYMin(-GrafProg.getGrafSettings().getTenthWindowY());
     }
+
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        if (gdc.getNumClassButton().isSelected())
+            return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                    gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
+        else  return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS());
+    }
     
 
        

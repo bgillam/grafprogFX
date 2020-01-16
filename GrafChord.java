@@ -109,6 +109,11 @@ public class GrafChord extends GrafObject implements IGrafable
         GrafProg.getGrafSettings().setYMin(min-GrafProg.getGrafSettings().getTenthWindowY());
     }
 
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafChord(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),   gdc.getGrafColor(), gdc.getDialogMark());
+    }
+
 
 
    public void setX1(double xval){ x1 = xval; }

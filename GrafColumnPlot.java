@@ -106,6 +106,11 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         GrafProg.getGrafSettings().setYMax(GrafStats.getMax(GrafProg.getData().getColumnValues(getColumnNumber()))+GrafProg.getGrafSettings().getTenthWindowY());
         GrafProg.getGrafSettings().setYMin(GrafStats.getMin(GrafProg.getData().getColumnValues(getColumnNumber()))-GrafProg.getGrafSettings().getTenthWindowY());
     }
+
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafColumnPlot(gdc.getColumn1ChooserColumn(), gdc.getDialogMark(), gdc.isConnected(), gdc.getGrafColor());
+    }
     
 
     //Setters and Getters

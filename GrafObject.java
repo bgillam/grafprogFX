@@ -26,7 +26,10 @@ abstract public class GrafObject implements Serializable, IGrafable
 
    public abstract void drawGraf(Graphics2D g2D);
    public abstract void autoRange();
-   public boolean isValidInput(GrafDialogController gdf){return true;}; //make abstract after refactr
+   public abstract GrafObject createGrafObjectFromController(GrafDialogController gdc);
+   public abstract boolean isValidInput(GrafDialogController gdf);
+   //{return true;}; //make abstract after refactr
+
 
 
     public GrafSettings initGrafObject(GrafType gType){
@@ -85,7 +88,7 @@ abstract public class GrafObject implements Serializable, IGrafable
    
    public void setGrafColor(Color c){grafColor = c;   }
    public Color getGrafColor() { return grafColor;}
-    
 
-      
+
+
 }

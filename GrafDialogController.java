@@ -98,7 +98,8 @@ public class GrafDialogController {
     private CheckBox fns = new CheckBox("FNS");
 
     //other instance variables
-    private GrafType gType;
+    //private GrafType gType;
+    private GrafObject workingObject;
     private ArrayList<GrafObject> tempGrafList = GrafProg.getGrafList();
 
     public void initialize(){
@@ -135,7 +136,7 @@ public class GrafDialogController {
     @FXML
     private void onCreateButtonClicked(ActionEvent e){
             addGrafObject();
-            objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+            objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
     }
 
     @FXML
@@ -179,18 +180,18 @@ public class GrafDialogController {
          GrafObject currentObject = (GrafObject)objectComboBox.getValue();
          int index = findGrafObject(currentObject, tempGrafList);
          if (index != -1) tempGrafList.remove(index);
-         objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+         objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
     }
 
     @FXML
     private void onClearButtonClicked(ActionEvent e){
         for (int i = 1; i<tempGrafList.size(); i++){
-                if (tempGrafList.get(i).getType().equals(gType)) {
+                if (tempGrafList.get(i).getType().equals(getGrafType())) {
                 tempGrafList.remove(i);
                 i--;
             }
         }
-        objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+        objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
     }
 
     @FXML
@@ -220,8 +221,9 @@ public class GrafDialogController {
     {
             Platform.runLater(new Runnable() {
             @Override public void run() {
-                gType = GrafType.FUNCTION;
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                //gType = GrafType.FUNCTION;
+                workingObject = new GrafFunction();
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("FUNCTION");
                 fxLabel.setVisible(true);
                 showFunctionString(true);
@@ -234,11 +236,12 @@ public class GrafDialogController {
     @FXML
     public void showFxValueDialog()
     {
-        gType = GrafType.FVALUE;
+        //gType = GrafType.FVALUE;
+        workingObject = new GrafValue();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("VALUE");
                 showFunctionChooser();
                 showX1();
@@ -253,11 +256,12 @@ public class GrafDialogController {
     @FXML
     public void showFxTangentDialog()
     {
-        gType = GrafType.TANGENT;
+        //gType = GrafType.TANGENT;
+        workingObject = new GrafTangent();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
 
                 GrafProg.getDialogStage().setTitle("TANGENT");
                 showFunctionChooser();
@@ -272,11 +276,12 @@ public class GrafDialogController {
     @FXML
     public void showFxChordDialog()
     {
-        gType = GrafType.CHORD;
+        //gType = GrafType.CHORD;
+        workingObject = new GrafChord();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("FCHORD");
                 showFunctionChooser();
                 showX1X2();
@@ -292,11 +297,12 @@ public class GrafDialogController {
     @FXML
     public void showFxZerosDialog()
     {
-        gType = GrafType.FZERO;
+        //gType = GrafType.FZERO;
+        workingObject = new GrafZeros();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("FZEROS");
                 showFunctionChooser();
                 showMarks();
@@ -312,12 +318,13 @@ public class GrafDialogController {
     }
     @FXML
     public void showFxIntegralDialog()
-    {gType = GrafType.INTEGRAL;
-
+    {
+        //gType = GrafType.INTEGRAL;
+        workingObject = new GrafIntegral();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("INTEGRAL");
                 showFunctionChooser();
                 fillColorPicker.setVisible(true);
@@ -335,11 +342,12 @@ public class GrafDialogController {
 
     @FXML
     public void showColumnPlotDialog()
-    {gType = GrafType.COLUMN;
-
+    {
+        //gType = GrafType.COLUMN;
+        workingObject = new GrafColumnPlot();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("COLUMN PLOT");
                 showColumnChooser();
                 showMarks();
@@ -352,10 +360,12 @@ public class GrafDialogController {
 
     @FXML
     public void showBoxplotDialog()
-    {gType = GrafType.BOXPLOT;
+    {
+        //gType = GrafType.BOXPLOT;
+        workingObject = new GrafBoxPlot();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("BOXPLOT");
                 showColumnChooser();
                 showFNS();
@@ -367,10 +377,12 @@ public class GrafDialogController {
 
     @FXML
     public void showHistogramDialog()
-    {gType = GrafType.HISTOGRAM;
+    {
+        //gType = GrafType.HISTOGRAM;
+        workingObject = new GrafHistogram();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("HISTOGRAM");
                 setupHisto();
                 chooseObject.setText("Choose HISTOGRAM");
@@ -379,10 +391,11 @@ public class GrafDialogController {
     }
 
     public void showFreqPolyDialog() {
-        gType = GrafType.FREQPOLYGON;
+        //gType = GrafType.FREQPOLYGON;
+        workingObject = new GrafFreqPolygon();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("Frequency Polygon");
                 setupHisto();
                 chooseObject.setText("Choose Frequency Polygon");
@@ -391,10 +404,11 @@ public class GrafDialogController {
     }
 
     public void showOgiveDialog() {
-        gType = GrafType.OGIVE;
+        //gType = GrafType.OGIVE;
+        workingObject = new GrafOgive();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("Ogive");
                 setupHisto();
                 chooseObject.setText("Ogive");
@@ -403,11 +417,12 @@ public class GrafDialogController {
     }
 
     public void showScatterDialog() {
-        gType = GrafType.SCATTER;
+        //  gType = GrafType.SCATTER;
+        workingObject = new GrafScatterPlot();
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("SCATTERPLOT");
                 showColumnChooser();
                 showColumnChooser2();
@@ -422,11 +437,12 @@ public class GrafDialogController {
 
 
     public void showPointDialog() {
-        gType = GrafType.POINT;
+        //gType = GrafType.POINT;
+        workingObject = new GrafPoint();
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("POINT");
                 showMarks();
                 showX1Y1();
@@ -441,11 +457,12 @@ public class GrafDialogController {
 
 
     public void showTextDialog() {
-        gType = GrafType.TEXT;
+        //gType = GrafType.TEXT;
+        workingObject = new GrafText();
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("TEXT");
                 showTextAndFontButton();
                 showX1Y1();
@@ -459,11 +476,12 @@ public class GrafDialogController {
     }
 
     public void showLineSegmentDialog() {
-        gType = GrafType.LINESEGMENT;
+        //gType = GrafType.LINESEGMENT;
+        workingObject = new GrafSegment();
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("LINESEGMENT");
                 showMarks();
                 showX1Y1();
@@ -479,11 +497,12 @@ public class GrafDialogController {
     }
 
     public void showRectangleDialog() {
-        gType = GrafType.RECTANGLE;
+        //gType = GrafType.RECTANGLE;
+        workingObject = new GrafRectangle();
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("RECTANGLE");
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
@@ -500,11 +519,12 @@ public class GrafDialogController {
     }
 
     public void showEllipseDialog() {
-        gType = GrafType.ELLIPSE;
+        //gType = GrafType.ELLIPSE;
+        workingObject = new GrafEllipse();
 
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("ELLIPSE");
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
@@ -521,11 +541,11 @@ public class GrafDialogController {
     }
 
     public void showCircleDialog() {
-        gType = GrafType.CIRCLE;
-
+        //gType = GrafType.CIRCLE;
+        workingObject = new GrafCircle();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(gType)));
+                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
                 GrafProg.getDialogStage().setTitle("CIRCLE");
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
@@ -931,20 +951,21 @@ public class GrafDialogController {
 
     private boolean addGrafObject(){
 
-        GrafObject newObject = createGrafObjectFromController(gType);
+        GrafObject newObject = workingObject;
         if (!newObject.isValidInput(this)) {
-            msg.setText("Not a valid "+gType);
+            msg.setText("Not a valid "+ getGrafType());
            return false;
         }
-        newObject = createGrafObjectFromController(this, gType);
+        newObject = newObject.createGrafObjectFromController(this);
+
         if (!duplicate(newObject)) getTempGrafList().add(newObject);
-        msg.setText(gType+" added.");
+        msg.setText(newObject.getType()+" added.");
         return true;
     }
 
     private boolean duplicate(GrafObject newObject){
         for (GrafObject grafObject: tempGrafList) {
-            if (grafObject.getType().equals(gType))
+            if (grafObject.getType().equals(getGrafType()))
                 if (grafObject.deepEquals(newObject)) return true;
         }
         return false;
@@ -1012,7 +1033,7 @@ public class GrafDialogController {
     }*/
 
 
-    public static GrafObject createGrafObjectFromController(GrafType gType){
+    /*public static GrafObject createGrafObjectFromController(GrafType gType){
         switch (gType){
             case TEXT: return new GrafText();
             case COLUMN: return new GrafColumnPlot();
@@ -1026,7 +1047,7 @@ public class GrafDialogController {
             case RECTANGLE: return new GrafRectangle();
             case ELLIPSE: return new GrafEllipse();
             case CIRCLE: return new GrafCircle();
-            case FUNCTION: return new GrafFunction();
+            //case FUNCTION: return new GrafFunction();
             case FVALUE: return new GrafValue();
             case TANGENT: return new GrafTangent();
             case CHORD: return new GrafChord();
@@ -1034,9 +1055,9 @@ public class GrafDialogController {
             case FZERO: return new GrafZeros();
             default: return null;
         }
-    }
+    }*/
 
-    public static GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
+    /*public GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
         switch (gType){
             case TEXT: return new GrafText(Double.parseDouble(
                     gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(), gdc.getDefaultFont(),  gdc.getGrafColor());
@@ -1075,7 +1096,7 @@ public class GrafDialogController {
             case CIRCLE: return new GrafCircle(Double.parseDouble(gdc.getX1()),
                     Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2())
                     , gdc.getGrafColor(), gdc.getFillColor());
-            case FUNCTION: return new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
+            case FUNCTION: return workingObject.createGrafObjectGFromController(this);
             case FVALUE: return new GrafValue( gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
             case TANGENT: return new GrafTangent(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
             case CHORD: return new GrafChord(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),   gdc.getGrafColor(), gdc.getDialogMark());
@@ -1084,7 +1105,7 @@ public class GrafDialogController {
             default: return null;
 
         }
-    }
+    }*/
 
     public String getFunctionString(){return functionString.getText();}
     public void setFunctionString(String s){ functionString.setText(s);}
@@ -1167,6 +1188,7 @@ public class GrafDialogController {
            }
     }
 
+    private GrafType getGrafType(){return workingObject.getType();}
 
     public TextField getTextForDisplay() {
         return textForDisplay;

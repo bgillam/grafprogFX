@@ -64,7 +64,7 @@ public class GrafSegment extends GrafObject implements IGrafable
     @Override
     public boolean isValidInput(GrafDialogController gdf){
        boolean ok = true;
-        if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
+        //if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
         if (gdf.getX1().equals("")) return false;
         if (gdf.getX2().equals("")) return false;
         if (gdf.getY1().equals("")) return false;
@@ -116,6 +116,12 @@ public class GrafSegment extends GrafObject implements IGrafable
         if (getY1() < getY2()){ max = getY2(); min = getY1();} else {max = getY1(); min = getY2(); }
         GrafProg.getGrafSettings().setYMax(max+GrafProg.getGrafSettings().getTenthWindowY());
         GrafProg.getGrafSettings().setYMin(min-GrafProg.getGrafSettings().getTenthWindowY());
+    }
+
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafSegment(Double.parseDouble(gdc.getX1()),
+                Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()), Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getDialogMark());
     }
 
    public void setX1(double xval){ x1 = xval; }

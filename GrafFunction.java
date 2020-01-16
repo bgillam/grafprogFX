@@ -96,6 +96,11 @@ public class GrafFunction extends GrafObject implements IGrafable{
         Scales.autoRange(GrafProg.getGrafSettings(), getFunction());
 
     }
+
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+       return new GrafFunction(gdc.getFunctionString(), gdc.getGrafColor());
+    }
     
 
     private String shortColorString(Color c){

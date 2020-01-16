@@ -81,7 +81,11 @@ public class GrafZeros extends GrafObject implements IGrafable
         GrafProg.getGrafSettings().setYMin(min-GrafProg.getGrafSettings().getTenthWindowY());
     }
 
-    
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafZeros(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),  Double.parseDouble(gdc.getDx()), gdc.getGrafColor(),gdc.getDialogMark() );
+    }
+
    public void setStartX(double xval){ startX = xval; }
    public double getStartX() { return startX; } 
    public void setEndX(double xval){ endX = xval; }

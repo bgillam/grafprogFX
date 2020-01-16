@@ -68,6 +68,16 @@ public class GrafAxes extends GrafObject
 
     }
 
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController g){
+            return null;
+    }
+
+    @Override
+    public boolean isValidInput(GrafDialogController g){
+            return true;
+    }
+
     public Font getCurrentFont() {
         return currentFont;
     }
@@ -75,6 +85,8 @@ public class GrafAxes extends GrafObject
     public void setCurrentFont(Font currentFont) {
         this.currentFont = currentFont;
     }
+
+
 
     // Getters and setters
     /* Defined in the parent class GrafObject

@@ -112,6 +112,11 @@ public class GrafPoint extends GrafText implements IGrafable
        GrafPoint gPlot = new GrafPoint(gfd.getPointPanel().getX1(), gfd.getPointPanel().getY1(), gfd.getMark(), gfd.getMarkChooser().getColor());
        gfd.getTempList().add(gPlot);
     }*/
+
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(), gdc.getDefaultFont(),  gdc.getGrafColor());
+    }
     
 }
 

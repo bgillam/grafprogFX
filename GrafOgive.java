@@ -197,9 +197,16 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
         myOwner.incrementBoxPlotsPlotted();     
         gc.setColor(Color.BLACK);
     }
-    
 
-       
+
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        if (gdc.getNumClassButton().isSelected())
+            return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                    gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
+        else  return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS());
+    }
 
     
     //Setters and Getters

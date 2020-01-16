@@ -102,6 +102,12 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
         gdc.setfillColor(getFillColor());
 
     }*/
+
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafEllipse(Double.parseDouble(gdc.getX1()),
+                Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
+                Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
+    }
         
      public String toString(){
            return "ELLIPSE: ("+getX()+", "+getY()+"); ("+getWidth()+", "+getHeight();//+ " "+getGrafColor()+")";

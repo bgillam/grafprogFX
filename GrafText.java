@@ -117,7 +117,13 @@ public class GrafText extends GrafObject implements IGrafable
         GrafProg.getGrafSettings().setYMax(getY()+5);
         GrafProg.getGrafSettings().setYMin(getY()-5);
     }
-  
+
+
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafText(Double.parseDouble(
+                gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(), gdc.getDefaultFont(),  gdc.getGrafColor());
+    }
 
    public void setX(double xval){ x = xval; }
    public double getX() { return x; }   

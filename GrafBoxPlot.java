@@ -150,6 +150,11 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         GrafProg.getGrafSettings().setYMin(-5);
     }
 
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafBoxPlot(gdc.getColumn1ChooserColumn(), gdc.getGrafColor(), gdc.getFNS());
+    }
+
 
     //Setters and Getters
     public void setColumnNumber(int c){ columnNumber = c;}

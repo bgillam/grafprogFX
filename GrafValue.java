@@ -93,7 +93,11 @@ public class GrafValue extends GrafObject implements IGrafable{
         GrafProg.getGrafSettings().setYMin(y1-GrafProg.getGrafSettings().getTenthWindowY());
         GrafProg.getGrafPanel().repaint();
     }
-   
+
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafValue( gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
+    }
 
    
    public void setX(double xval){ x = xval; }

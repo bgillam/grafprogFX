@@ -141,6 +141,11 @@ public class GrafIntegral extends GrafObject implements IGrafable
         GrafProg.getGrafSettings().setYMin(min-GrafProg.getGrafSettings().getTenthWindowY());
     }
 
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafIntegral(gdc.getFunctionString(),Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()), Integer.parseInt(gdc.getNText()), gdc.getGrafColor(), gdc.getFillColor());
+    }
+
    public void setX1(double xval){ x1 = xval; }
    public double getX1() { return x1; } 
    public void setX2(double xval){ x2 = xval; }

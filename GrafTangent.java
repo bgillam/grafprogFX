@@ -117,7 +117,10 @@ public class GrafTangent extends GrafObject implements IGrafable
         GrafProg.getGrafSettings().setYMin(y1-GrafProg.getGrafSettings().getTenthWindowY());
     }
 
-       
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafTangent(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
+    }
 
    public void setX(double xval){ x = xval; }
    public double getX() { return x; }   

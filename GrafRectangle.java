@@ -118,6 +118,13 @@ public class GrafRectangle extends GrafObject implements IGrafable {
         GrafProg.getGrafSettings().setYMin(getY()-getHeight()-GrafProg.getGrafSettings().getTenthWindowY());
     }
 
+    @Override
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        return new GrafRectangle(Double.parseDouble(gdc.getX1()),
+                Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
+                Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
+    }
+
 
     public void setX(double xval) {
         x = xval;

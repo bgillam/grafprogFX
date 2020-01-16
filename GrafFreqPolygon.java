@@ -255,6 +255,14 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
         }
 */
 
+    public GrafObject createGrafObjectFromController(GrafDialogController gdc){
+        if (gdc.getNumClassButton().isSelected())
+            return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                    gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
+        else  return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+                Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS());
+    }
+
 
         //Setters and Getters
         public void setColumnNumber(int c){ columnNumber = c;}
