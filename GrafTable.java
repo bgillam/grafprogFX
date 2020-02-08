@@ -9,6 +9,11 @@
  * Table/spreadsheet object for data input 
  * 
  */
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.util.Pair;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -16,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 //class header
 class GrafTable  implements ActionListener, KeyListener //extends JDialog implements ActionListener, KeyListener
@@ -109,20 +115,52 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
 
     //change the table dimensions
     public void resizeData(){
-      DataSizeDialog dataDialog = new DataSizeDialog(new JFrame(), getNumRows(), getNumCols());
-      Point xy = dataDialog.showDataSizeDialog();
-      String [] oldHeaders = getHeaderArray();
-      try{
-          setNumRows((int)xy.getX());
-          setNumCols((int)xy.getY());
+      String[] oldHeaders = getHeaderArray();
+      for (int i=0; i<oldHeaders.length; i++) System.out.println("-"+oldHeaders[i]);
+      //DataSizeDialog dataDialog = new DataSizeDialog(new JFrame(), getNumRows(), getNumCols());
+      javafx.scene.control.Dialog<Pair<Integer, Integer>> dataSizeDialog = new javafx.scene.control.Dialog<>();
+        dataSizeDialog.setTitle("Resize Table Dimensions");
+        dataSizeDialog.setHeaderText("Enter number of rows and columns");
+        dataSizeDialog.setContentText("Save Changes?");
+        dataSizeDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        GridPane grid = new GridPane();
+        javafx.scene.control.Label rowLabel = new javafx.scene.control.Label("#rows:");
+        javafx.scene.control.Label colLabel = new javafx.scene.control.Label("#cols:");
+        javafx.scene.control.TextField rowInput = new javafx.scene.control.TextField(Integer.toString(getNumRows()));
+        javafx.scene.control.TextField colInput = new TextField(Integer.toString(getNumCols()));
+        grid.add(rowLabel, 0, 0);
+        grid.add(rowInput, 1, 0);
+        grid.add(colLabel, 0, 1);
+        grid.add(colInput, 1, 1);
+        dataSizeDialog.getDialogPane().setContent(grid);
+        dataSizeDialog.setResultConverter(choice -> {
+            if (choice == ButtonType.OK) {
+                String inputValue = rowInput.getText();
+                if (GrafInputHelpers.isAnInteger(inputValue)) setNumRows(Integer.parseInt(inputValue));
+                inputValue = colInput.getText();
+                if (GrafInputHelpers.isAnInteger(inputValue)) setNumCols(Integer.valueOf(inputValue));
+                //return new Pair<>(myRows, myCols);
+            }
+            return null;
+        });
+        Optional<Pair<Integer, Integer>> result = dataSizeDialog.showAndWait();
+        model.setColumnCount(model.getColumnCount());
+        model.setRowCount(model.getRowCount());
+        restoreHeaders(oldHeaders);
+        numberTheRows();
+      //String [] oldHeaders = getHeaderArray();
+     /* try{
+          System.out.println("restoring headers");
+
           restoreHeaders(oldHeaders);
           numberTheRows();
          } catch (NumberFormatException e){
+          System.out.println("Error");
           gSess.setMessage1("bad number format for row or column count");
-      }
+      }*/
     }
 
-     /*//Saves Headers in String[] and returns
+     //Saves Headers in String[] and returns
      public String[] createHeaderArray() {
          String[] headerHolder = new String[getNumCols() + 1];
          int cols = getNumCols();
@@ -130,12 +168,14 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
              headerHolder[i] = getHeaderString(i);
          }
          return headerHolder;
-     }*/
+     }
     
      public String[] getHeaderArray(){
          String[] headerArray = new String[getNumCols()+1];
-         for (int i = 0; i <= getNumCols(); i++)
+         for (int i = 0; i <= getNumCols(); i++) {
              headerArray[i] = getHeaderString(i);
+             //System.out.println(getHeaderString(i));
+         }
          return headerArray;
      }
 

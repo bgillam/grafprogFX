@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 
 
 public class ClipboardHandler implements ClipboardOwner{
+
+	//gets or sets clipboard
 	
 	public void setClipboardContents(String aString){
 	    StringSelection stringSelection = new StringSelection(aString);
