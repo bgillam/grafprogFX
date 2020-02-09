@@ -33,6 +33,7 @@ public class TableColumnGeneratorController {
 
 
 
+
     enum GenType  {RANDOM, FUNCTION, RECURSIVE, HEADER }
     private GenType genType;
 

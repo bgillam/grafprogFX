@@ -279,6 +279,8 @@ public class GrafProg extends Application {
         return grafController;
     }
 
+    public static TableController getTableController(){return tableController;}
+
     public static void resetGraf(){
         grafFile = new File("");  //File associated with the current Graf object
         grafSaved = false;     //has the current graf been saved?

@@ -36,7 +36,7 @@
 
                     </Menu>
                     <Menu fx:id="columnActionTableMenu" text="Column Action">
-                        <MenuItem fx:id="headingTableItem" text="Heading" />
+                        <MenuItem fx:id="headingTableItem" text="Heading" onAction="#onHeading"/>
                         <SeparatorMenuItem/>
                         <MenuItem fx:id="randomTableItem" text="Random" onAction="#onRandom"/>
                         <MenuItem fx:id="functionTableItem" text = "Function" onAction="#onFunction"/>
@@ -58,12 +58,10 @@
     <center>
         <AnchorPane fx:id = "tablePane" xmlns="http://javafx.com/javafx"
                     xmlns:fx="http://javafx.com/fxml">
-
-
-
         </AnchorPane>
-
     </center>
-
+    <bottom>
+        <Label fx:id="tableMessage" text=""/>
+    </bottom>
 
 </BorderPane>

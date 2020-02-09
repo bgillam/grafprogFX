@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 //class header
-class GrafTable  implements ActionListener, KeyListener //extends JDialog implements ActionListener, KeyListener
+class GrafTable  implements KeyListener //ActionListener, KeyListener //extends JDialog implements ActionListener, KeyListener
  {
     private static final long serialVersionUID = 1L;
     //instance variables
@@ -137,8 +137,10 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
             if (choice == ButtonType.OK) {
                 String inputValue = rowInput.getText();
                 if (GrafInputHelpers.isAnInteger(inputValue)) setNumRows(Integer.parseInt(inputValue));
+                else setTableMessage("Bad integer format for rows.");
                 inputValue = colInput.getText();
                 if (GrafInputHelpers.isAnInteger(inputValue)) setNumCols(Integer.valueOf(inputValue));
+                else setTableMessage("Bad integer format for columns");
                 //return new Pair<>(myRows, myCols);
             }
             return null;
@@ -148,16 +150,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
         model.setRowCount(model.getRowCount());
         restoreHeaders(oldHeaders);
         numberTheRows();
-      //String [] oldHeaders = getHeaderArray();
-     /* try{
-          System.out.println("restoring headers");
 
-          restoreHeaders(oldHeaders);
-          numberTheRows();
-         } catch (NumberFormatException e){
-          System.out.println("Error");
-          gSess.setMessage1("bad number format for row or column count");
-      }*/
     }
 
      //Saves Headers in String[] and returns
@@ -223,7 +216,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
                selected.add(i);
                deleteCount++;
            }
-       if (selected.size() == 0) { gSess.setMessage1("No rows selected!"); return;}
+       if (selected.size() == 0) { setTableMessage("No rows selected!"); return;}
        String msgString = "Delete rows ";
        for (int i = 0; i < deleteCount; i++)
             msgString = msgString +(selected.get(i)+1)+" ";
@@ -243,7 +236,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
    public void deleteColumns(){
        ArrayList<Integer> selected = getSelectedColumns();
        int colCount = table.getColumnCount();
-       if (selected.size() == 0) { gSess.setMessage1("No columns selected!"); return;}
+       if (selected.size() == 0) { setTableMessage("No columns selected!"); return;}
        String msgString = "Delete columns ";
        for (int i = 0; i < selected.size(); i++)
             msgString = msgString +(selected.get(i))+" ";
@@ -291,7 +284,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
    
    public void clearColumns(){
        ArrayList<Integer> selected = getSelectedColumns();
-       if (selected.size() == 0) { gSess.setMessage1("No columns selected!"); return;}
+       if (selected.size() == 0) { setTableMessage("No columns selected!"); return;}
        String msgString = "Clear columns ";
        for (int i = 0; i < selected.size(); i++)
             msgString = msgString +(selected.get(i))+" ";
@@ -311,7 +304,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
 
    public void sortColumns(boolean ascending){
        ArrayList<Integer> selected = getSelectedColumns();
-       if (selected.size() == 0) { gSess.setMessage1("No columns selected!"); return;}
+       if (selected.size() == 0) { gSess.getTableController().setTableMessage("No columns selected!"); return;}
        String msgString = "Sort columns";
        for (int i = 0; i < selected.size(); i++)
             msgString = msgString +(selected.get(i))+" ";
@@ -338,7 +331,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
    
    public void zeroColumns(){
        ArrayList<Integer> selected = getSelectedColumns();
-       if (selected.size() == 0) { gSess.setMessage1("No columns selected!"); return;}
+       if (selected.size() == 0) { setTableMessage("No columns selected!"); return;}
        String msgString = "Zero columns ";
        for (int i = 0; i < selected.size(); i++)
             msgString = msgString +(selected.get(i))+" ";
@@ -449,40 +442,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
         }
     }
 
-    //respond to menu commands
-    public void actionPerformed(ActionEvent event)
-   {    //System.out.println(event.getActionCommand().toString());
-        if (event.getActionCommand().equals("Done")) //setVisible(false);
-        if (event.getActionCommand().equals("Resize")) resizeData();
-        if (event.getActionCommand().equals("Delete Row")) deleteRows();
-        if (event.getActionCommand().equals("Delete Column")) deleteColumns(); 
-        if (event.getActionCommand().equals("Cut")) cutValues();
-        if (event.getActionCommand().equals("Copy")) clipper.setClipboardContents(getSelectedData());  
-        if (event.getActionCommand().equals("Paste"))  pasteValues();   
-        if (event.getActionCommand().equals("Heading")){ 
-            headerDialog = new HeaderDialog(this); 
-            headerDialog.setVisible(true); 
-            headerDialog.setModal(true);
-        }
-        if (event.getActionCommand().equals("Random")) { 
-            rd = new RandomDialog(this);
-            rd.showDialog();
-        }
-        if (event.getActionCommand().equals("Function")) { 
-            tfd = new TableFunctionDialog(this); 
-            tfd.showDialog();
-        }  
-        if (event.getActionCommand().equals("Recursion")) { 
-            recDialog = new RecursiveDialog(this); 
-            recDialog.showDialog();
-        }  
-        if (event.getActionCommand().equals("Clear Column")) {  clearColumns(); }
-        if (event.getActionCommand().equals("Zero Column")) {  zeroColumns(); }  
-        if (event.getActionCommand().equals("Ascending")) {  sortColumns(true); }  
-        if (event.getActionCommand().equals("Descending")) { sortColumns(false); }  
-        
-   }
-    
+
      
    //   public getters and setters
     public int getNumRows(){
@@ -506,7 +466,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
         for (int i = 0; i < cols; i++){
             try{
                 returnStringArray[i] = (double)model.getValueAt(row, i);
-            }catch (NumberFormatException e) {gSess.setMessage1("Bad number format in cell "+i+".");}
+            }catch (NumberFormatException e) {setTableMessage("Bad number format in cell "+i+".");}
         }
         return returnStringArray;
     }
@@ -526,7 +486,7 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
                     continue;
                 }
                 returnStringArray[i] = (double)model.getValueAt(i, col); 
-            //}catch (NumberFormatException e) {gSess.setMessage1("Bad number format in cell "+i+".");
+            //}catch (NumberFormatException e) {setTableMessage("Bad number format in cell "+i+".");
             }catch (ClassCastException e) { System.out.println("row "+i+" class cast exception! "+model.getValueAt(i,  col).getClass()); returnStringArray[i] = null;} 
             catch (NullPointerException e) {returnStringArray[i] = null; }
             catch (Exception e) {System.out.println("row "+" "+"some other exception!"); returnStringArray[i] = null;}
@@ -639,5 +599,9 @@ class GrafTable  implements ActionListener, KeyListener //extends JDialog implem
 
     public static Double[] getRidOfNulls(Double[] d){
          return GrafStats.getRidOfNulls(d);
+    }
+
+    private void setTableMessage(String message){
+        gSess.getTableController().setTableMessage(message);
     }
 }

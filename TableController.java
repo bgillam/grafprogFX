@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -9,6 +10,7 @@ import java.util.Random;
 public class TableController {
 
 
+    @FXML    private Label tableMessage;
     @FXML    private AnchorPane tablePane;
 
 
@@ -17,6 +19,12 @@ public class TableController {
 
     public AnchorPane getTablePane(){
         return tablePane;
+    }
+
+    public void onHeading(ActionEvent actionEvent) {
+        HeaderDialog headerDialog = new HeaderDialog(GrafProg.getData());
+        headerDialog.setVisible(true);
+        headerDialog.setModal(true);
     }
 
     public void onRandom(ActionEvent actionEvent) {
@@ -89,4 +97,14 @@ public class TableController {
     public void onResize(ActionEvent actionEvent) {
         GrafProg.getData().resizeData();
     }
+
+    public String getTableMessage() {
+        return tableMessage.getText();
+    }
+
+    public void setTableMessage(String tableMessage) {
+        this.tableMessage.setText(tableMessage);
+    }
+
+
 }
