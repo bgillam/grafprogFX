@@ -150,8 +150,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
             if (result.get().equals(ButtonType.OK)) {
                 //if (headerTextField.isEditable())
                 setHeaderString(headComboBox.getSelectionModel().getSelectedIndex() + 1, headerChangeTextField.getText());
-                GrafProg.getTableStage().hide();
-                GrafProg.getTableStage().show();
+               refreshTable();
                 done = true;
             } else if (result.get().equals(saveButton)) {
                 setHeaderString(headComboBox.getSelectionModel().getSelectedIndex() + 1, headerChangeTextField.getText());
@@ -159,12 +158,14 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
                 headComboBox.getItems().addAll(getHeaderArrayCdr());
                 headComboBox.setValue("Header List");
                 headerChangeTextField.setVisible(false);
-                GrafProg.getTableStage().hide();
-                GrafProg.getTableStage().show();
+                refreshTable();
             }else if (result.get().equals(ButtonType.CANCEL)) done = true;
         }
-
-    }
+   }
+   private void refreshTable(){
+       GrafProg.getTableStage().hide();
+       GrafProg.getTableStage().show();
+   }
 
     //change the table dimensions
     public void resizeData(){
@@ -205,7 +206,6 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
         numberTheRows();
 
     }
-
 
     
      public String[] getHeaderArray(){
