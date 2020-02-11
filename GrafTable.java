@@ -9,9 +9,14 @@
  * Table/spreadsheet object for data input 
  * 
  */
-import javafx.scene.control.ButtonType;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.awt.*;
@@ -24,7 +29,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 //class header
-class GrafTable  implements KeyListener //ActionListener, KeyListener //extends JDialog implements ActionListener, KeyListener
+class GrafTable implements KeyListener //ActionListener, KeyListener //extends JDialog implements ActionListener, KeyListener
  {
     private static final long serialVersionUID = 1L;
     //instance variables
@@ -36,11 +41,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
     private ClipboardHandler clipper = new ClipboardHandler();
     
     //dialogs for data generation
-    private HeaderDialog headerDialog;
     private TableFunctionDialog tfd;
-    private RandomDialog rd;
-    private RecursiveDialog recDialog;
-     
 
     // Constructor of Table
     public GrafTable(int row, int col)              //GrafStage sess, int row, int col)
@@ -113,6 +114,58 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
         setCellValueInteger(i , 0, i );
     }
 
+    public void editHeaders(){
+
+        Dialog headerChangeDialog = new javafx.scene.control.Dialog();
+        headerChangeDialog.setTitle("Edit Column Headers");
+        headerChangeDialog.setHeaderText("Choose Header to Edit:");
+        headerChangeDialog.setContentText("testcontenttext");
+
+        TextField headerChangeTextField = new TextField("");
+        headerChangeTextField.setVisible(false);
+
+        ComboBox headComboBox = new ComboBox();
+        headComboBox.getItems().clear();
+        headComboBox.getItems().addAll(getHeaderArrayCdr());
+        headComboBox.setValue("Header List");
+        headComboBox.valueProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                if (newValue != null)
+                    headerChangeTextField.setText(newValue.toString());
+                headerChangeTextField.setVisible(true);
+            }
+        });
+
+        GridPane gridPane = new GridPane();
+        gridPane.add(headComboBox, 0,0);
+        gridPane.add(headerChangeTextField, 1,0);
+        headerChangeDialog.getDialogPane().setContent(gridPane);
+
+        ButtonType saveButton = new ButtonType("Save");
+        headerChangeDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL, saveButton);
+        boolean done =  false;
+        while (!done) {
+            Optional<ButtonType> result = headerChangeDialog.showAndWait();
+            if (result.get().equals(ButtonType.OK)) {
+                //if (headerTextField.isEditable())
+                setHeaderString(headComboBox.getSelectionModel().getSelectedIndex() + 1, headerChangeTextField.getText());
+                GrafProg.getTableStage().hide();
+                GrafProg.getTableStage().show();
+                done = true;
+            } else if (result.get().equals(saveButton)) {
+                setHeaderString(headComboBox.getSelectionModel().getSelectedIndex() + 1, headerChangeTextField.getText());
+                headComboBox.getItems().clear();
+                headComboBox.getItems().addAll(getHeaderArrayCdr());
+                headComboBox.setValue("Header List");
+                headerChangeTextField.setVisible(false);
+                GrafProg.getTableStage().hide();
+                GrafProg.getTableStage().show();
+            }else if (result.get().equals(ButtonType.CANCEL)) done = true;
+        }
+
+    }
+
     //change the table dimensions
     public void resizeData(){
       String[] oldHeaders = getHeaderArray();
@@ -153,15 +206,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
 
     }
 
-     //Saves Headers in String[] and returns
-     public String[] createHeaderArray() {
-         String[] headerHolder = new String[getNumCols() + 1];
-         int cols = getNumCols();
-         for (int i = 1; i <= cols; i++) {           // don't use index 0 just to keep indexes concurrent with Table calls
-             headerHolder[i] = getHeaderString(i);
-         }
-         return headerHolder;
-     }
+
     
      public String[] getHeaderArray(){
          String[] headerArray = new String[getNumCols()+1];
@@ -186,11 +231,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
          return (String)table.getColumnModel().getColumn(c).getHeaderValue();
      }
 
-     public void setHeaderArray(String[] headers){
-         for (int i=0; i <= getNumCols(); i++)
-             setHeaderString(i , headers[i]);
-     }
-   
+
    private void restoreHeaders(String[] headerHolder){
        int len;
        int colCount = table.getColumnCount();
@@ -247,8 +288,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
             for (int i = selected.size()-1; i >= 0; i--){
                 removeColumn(selected.get(i));
             }
-            //numberTheRows();
-        }   
+       }
    }
    
    private void removeColumn(int toBeRemoved){  
@@ -274,14 +314,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
        return selected;
    }
    
-   private int getFirstSelectedColumn(){
-       int colCount = table.getColumnCount();
-       for (int i = 0; i< colCount; i++)
-        if (table.isColumnSelected(i)) 
-           return i;
-       return 0;
-   }
-   
+
    public void clearColumns(){
        ArrayList<Integer> selected = getSelectedColumns();
        if (selected.size() == 0) { setTableMessage("No columns selected!"); return;}
@@ -297,8 +330,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
                     setCellValueNull(row , selected.get(i));
         
             }
-            //numberTheRows();
-        }   
+       }
    }
 
 
@@ -322,8 +354,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
                 int row;
                 for (int r = 0; r < numRows; r++){
                     if (!ascending) row = (numRows-1) - r; else row = r;
-                    //System.out.println("Row "+row+" col "+col+" value "+columnSorted[row]);
-                    model.setValueAt(columnSorted[r], row, col); 
+                    model.setValueAt(columnSorted[r], row, col);
                 }
             }
        }
@@ -343,15 +374,10 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
                 for (int row = 1; row < getNumRows(); row++)
                     setCellValueDouble(row , selected.get(i) , 0.0);
             }
-            //numberTheRows();
-        }   
+       }
    }
 
-     private void randomColumnValues(){
-        RandomDialog rd = new RandomDialog(this);
-        rd.showDialog();
-    }
-    
+
     
     //cut and paste procedures   
     public void cutValues(){
@@ -404,11 +430,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
         }
     }
     
-    private void charPrint(String passed){
-       for (int i = 0; i < passed.length(); i++)
-           System.out.println((int)passed.charAt(i)+":"+passed.charAt(i));
-       
-   }
+
    
    public String getSelectedData(){
         String copied = "";
@@ -541,11 +563,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
        model.setValueAt(null, row-1,  col); //we are using a starting row of 1 vs zero
     }
     
-    public void setColumnValues(int col, double a[]){
-        for (int i = 1; i<=a.length; i++){
-            setCellValueDouble(i, col, a[i]);
-        }
-    }
+
 
    public Double getMin(Double[] values){
          values = getRidOfNulls(values);
@@ -570,7 +588,7 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
      }
 
 
-    // Key Handling override for paste methods
+    // Key Handling override for paste methods******************************
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V) {
@@ -591,11 +609,8 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
     @Override
     public void keyTyped(KeyEvent e) {   //TODO Auto-generated method stub
          }
+ //*************************************************************************
 
-    public static void main(String[] args){
-        GrafTable table = new GrafTable(10,10);
-
-    }
 
     public static Double[] getRidOfNulls(Double[] d){
          return GrafStats.getRidOfNulls(d);
@@ -604,4 +619,47 @@ class GrafTable  implements KeyListener //ActionListener, KeyListener //extends 
     private void setTableMessage(String message){
         gSess.getTableController().setTableMessage(message);
     }
+
+
+//mainfor testing
+    public static void main(String[] args){
+         GrafTable table = new GrafTable(10,10);
+     }
 }
+
+//written but not used:
+
+/* public void setColumnValues(int col, double a[]){
+        for (int i = 1; i<=a.length; i++){
+            setCellValueDouble(i, col, a[i]);
+        }
+    }*/
+
+/* private void charPrint(String passed){
+       for (int i = 0; i < passed.length(); i++)
+           System.out.println((int)passed.charAt(i)+":"+passed.charAt(i));
+
+   }*/
+
+//Saves Headers in String[] and returns
+     /*public String[] createHeaderArray() {
+         String[] headerHolder = new String[getNumCols() + 1];
+         int cols = getNumCols();
+         for (int i = 1; i <= cols; i++) {           // don't use index 0 just to keep indexes concurrent with Table calls
+             headerHolder[i] = getHeaderString(i);
+         }
+         return headerHolder;
+     }*/
+
+      /*public void setHeaderArray(String[] headers){
+         for (int i=0; i <= getNumCols(); i++)
+             setHeaderString(i , headers[i]);
+     }*/
+
+      /* private int getFirstSelectedColumn(){
+       int colCount = table.getColumnCount();
+       for (int i = 0; i< colCount; i++)
+        if (table.isColumnSelected(i))
+           return i;
+       return 0;
+   }*/

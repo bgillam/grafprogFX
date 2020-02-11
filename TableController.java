@@ -22,9 +22,12 @@ public class TableController {
     }
 
     public void onHeading(ActionEvent actionEvent) {
-        HeaderDialog headerDialog = new HeaderDialog(GrafProg.getData());
+        GrafProg.getData().editHeaders();
+
+
+       /* HeaderDialog headerDialog = new HeaderDialog(GrafProg.getData());
         headerDialog.setVisible(true);
-        headerDialog.setModal(true);
+        headerDialog.setModal(true);*/
     }
 
     public void onRandom(ActionEvent actionEvent) {

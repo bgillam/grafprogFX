@@ -95,7 +95,7 @@ public class GrafProg extends Application {
 
         //Set up column generator Dialog Box
         tableGenController = createScene(genRoot, genStage, genScene,  625, 200, "TableColumnGenerator.fxml", "Column Actions");
-        tableStage.initModality(Modality.APPLICATION_MODAL);
+        //tableStage.initModality(Modality.APPLICATION_MODAL);
 
         //Set up Table
         tableController = createScene(tableRoot, tableStage, tableScene, initWidth, initHeight, "Table.fxml" , "Data");
