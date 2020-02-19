@@ -70,7 +70,7 @@ public class OneVarStatsController {
             clearForm();
             return;
         }
-        Double[] columnValues = GrafProg.getData().getColumnValues(selectedColumn);
+        Double[] columnValues = TableColumnActions.getColumnValues(selectedColumn, getData());
 
 
         textFieldN.setText(""+GrafStats.getN(columnValues));

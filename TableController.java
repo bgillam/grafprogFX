@@ -55,19 +55,19 @@ public class TableController {
     }
 
     public void onClearColumn(ActionEvent actionEvent) {
-        GrafProg.getData().clearColumns();
+        TableColumnActions.clearColumns(getData());
     }
 
     public void onZeroColumn(ActionEvent actionEvent) {
-        GrafProg.getData().zeroColumns();
+        TableColumnActions.zeroColumns(getData());
     }
 
     public void onSortAscend(ActionEvent actionEvent) {
-        GrafProg.getData().sortColumns(true);
+        TableColumnActions.sortColumns(true, getData());
     }
 
     public void onSortDescend(ActionEvent actionEvent) {
-        GrafProg.getData().sortColumns(false);
+        TableColumnActions.sortColumns(false,  getData());
     }
 
     public void onDone(ActionEvent actionEvent) {
@@ -79,23 +79,23 @@ public class TableController {
     }
 
     public void onCut(ActionEvent actionEvent) {
-        GrafProg.getData().cutValues();
+        TableEditActions.cutValues(getData());
     }
 
     public void onCopy(ActionEvent actionEvent) {
-        GrafProg.getData().getClipper().setClipboardContents(GrafProg.getData().getSelectedData());
+        GrafProg.getData().getClipper().setClipboardContents(TableEditActions.getSelectedData(getData()));
     }
 
     public void onPaste(ActionEvent actionEvent) {
-        GrafProg.getData().pasteValues();
+        TableEditActions.pasteValues(getData());
     }
 
     public void onDeleteRow(ActionEvent actionEvent) {
-        GrafProg.getData().deleteRows();
+        TableEditActions.deleteRows(getData());
     }
 
     public void onDeleteColumn(ActionEvent actionEvent) {
-        GrafProg.getData().deleteColumns();
+        TableColumnActions.deleteColumns(getData());
     }
 
     public void onResize(ActionEvent actionEvent) {
@@ -108,6 +108,10 @@ public class TableController {
 
     public void setTableMessage(String tableMessage) {
         this.tableMessage.setText(tableMessage);
+    }
+
+    public GrafTable getData(){
+        return GrafProg.getData();
     }
 
 

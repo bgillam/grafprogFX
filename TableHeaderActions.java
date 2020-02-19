@@ -90,4 +90,37 @@ public class TableHeaderActions {
         fComboBox.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(table)));
     }
 
+
+
+
+    public static void restoreHeaders(String[] headerHolder, GrafTable gTable){
+        int len;
+        int colCount = gTable.getTable().getColumnCount();
+        int oldHeaderLength =  headerHolder.length;
+        if (colCount > oldHeaderLength){
+            len = oldHeaderLength;
+            for (int i = len; i < colCount; i++ )
+                gTable.setHeaderString(i, "Data"+i);
+        }
+        else len = colCount;
+        gTable.setHeaderString(0,"");
+        for (int i=1; i < len; i++)
+            gTable.setHeaderString(i, headerHolder[i]);
+    }
+
 }
+
+//Saves Headers in String[] and returns
+     /*public String[] createHeaderArray() {
+         String[] headerHolder = new String[getNumCols() + 1];
+         int cols = getNumCols();
+         for (int i = 1; i <= cols; i++) {           // don't use index 0 just to keep indexes concurrent with Table calls
+             headerHolder[i] = getHeaderString(i);
+         }
+         return headerHolder;
+     }*/
+
+      /*public void setHeaderArray(String[] headers){
+         for (int i=0; i <= getNumCols(); i++)
+             setHeaderString(i , headers[i]);
+     }*/

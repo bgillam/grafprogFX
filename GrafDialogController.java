@@ -208,7 +208,7 @@ public class GrafDialogController {
     }
 
     public void onMaxMin(ActionEvent actionEvent) {
-        Double[] currentColumn = GrafProg.getData().getColumnValues(getColumn1ChooserColumn());
+        Double[] currentColumn = TableColumnActions.getColumnValues(getColumn1ChooserColumn(), getData());
         setX1(""+GrafStats.getMin(currentColumn));
         setX2(""+GrafStats.getMax(currentColumn));
     }
@@ -1295,6 +1295,10 @@ public class GrafDialogController {
 
     public void setMsg(TextField msg) {
         this.msg = msg;
+    }
+
+    public GrafTable getData(){
+        return GrafProg.getData();
     }
 
 
