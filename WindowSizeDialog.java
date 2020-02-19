@@ -56,7 +56,7 @@ public class WindowSizeDialog extends JDialog implements ActionListener  //, Ser
     private JLabel xMinLabel = new JLabel("xMin");
     private JLabel xMaxLabel = new JLabel("xMax");
     private JLabel yMinLabel = new JLabel("yMin");
-    private JLabel yMaxLabel = new JLabel("yMax");
+    private JLabel yMaxLabel = new JLabel("yMax");  
     private JPanel minMaxPanel = new JPanel();
     private JPanel xMinPanel = new JPanel();
     private JPanel xMaxPanel = new JPanel();

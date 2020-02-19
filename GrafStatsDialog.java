@@ -300,7 +300,7 @@ public class GrafStatsDialog extends JDialog {
                         {
                             functionComboBox = new JComboBox();
                             panel_3_1.add(functionComboBox);
-                            functionComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
+                            functionComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(GrafProg.getData())));
                         }
                     }
                     JButton calcBtn = new JButton("Calc");

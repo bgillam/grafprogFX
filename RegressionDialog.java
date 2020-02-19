@@ -129,7 +129,7 @@ public class RegressionDialog extends JDialog {
                             {
                                 outputComboBox = new JComboBox();
                                 panel_3.add(outputComboBox);
-                                outputComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
+                                outputComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(GrafProg.getData())));
                                
                             }
                         }
@@ -143,7 +143,7 @@ public class RegressionDialog extends JDialog {
                             {
                                 inputComboBox = new JComboBox();
                                 panel_3.add(inputComboBox);
-                                inputComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
+                                inputComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(GrafProg.getData())));
                                 
                               
                             }

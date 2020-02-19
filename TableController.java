@@ -22,7 +22,8 @@ public class TableController {
     }
 
     public void onHeading(ActionEvent actionEvent) {
-        GrafProg.getData().editHeaders();
+       // GrafProg.getData().editHeaders();
+        TableHeaderActions.editHeaders(GrafProg.getData());
 
 
        /* HeaderDialog headerDialog = new HeaderDialog(GrafProg.getData());

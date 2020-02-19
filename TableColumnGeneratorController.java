@@ -74,7 +74,7 @@ public class TableColumnGeneratorController {
         GrafProg.getGenStage().setTitle("Generate Random Values");
         col1ChoiceLabel.setText("Output Column:");
         col1ChoiceLabel.setVisible(true);
-        col1Chooser.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+        col1Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
         col1Chooser.getSelectionModel().select(0);
         col1Chooser.setVisible(true);
         numStart.setVisible(true);
@@ -171,7 +171,7 @@ public class TableColumnGeneratorController {
         anLabel2.setVisible(true);
 
         col1ChoiceLabel.setVisible(true);
-        col1Chooser.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+        col1Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
         col1Chooser.getSelectionModel().select(0);
         col1Chooser.setVisible(true);
 
@@ -250,12 +250,12 @@ public class TableColumnGeneratorController {
 
 
         col1ChoiceLabel.setVisible(true);
-        col1Chooser.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+        col1Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
         col1Chooser.getSelectionModel().select(0);
         col1Chooser.setVisible(true);
 
         col2ChoiceLabel.setVisible(true);
-        col2Chooser.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArray()));
+        col2Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArray(GrafProg.getData())));
         col2Chooser.getSelectionModel().select(0);
         col2Chooser.setVisible(true);
 

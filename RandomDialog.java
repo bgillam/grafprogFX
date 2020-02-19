@@ -67,7 +67,7 @@ public class RandomDialog extends JDialog {
 			panel.add(chooseLabel, BorderLayout.WEST);
 			{
 				headerComboBox = new JComboBox();
-				headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(myDaddy.getHeaderArray()));
+				headerComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(myDaddy)));
 				panel.add(headerComboBox, BorderLayout.CENTER);
 
 				headerComboBox.addItemListener(new ItemListener() {

@@ -209,8 +209,8 @@ public class GrafDialogController {
 
     public void onMaxMin(ActionEvent actionEvent) {
         Double[] currentColumn = GrafProg.getData().getColumnValues(getColumn1ChooserColumn());
-        setX1(""+GrafProg.getData().getMin(currentColumn));
-        setX2(""+GrafProg.getData().getMax(currentColumn));
+        setX1(""+GrafStats.getMin(currentColumn));
+        setX2(""+GrafStats.getMax(currentColumn));
     }
 
 
@@ -618,7 +618,8 @@ public class GrafDialogController {
         functionChoiceHBox.getChildren().add(fChoiceLabel);
         functionChoiceHBox.getChildren().add(fComboBox);
         fComboBox.setOnAction((e) -> { functionChosen();});
-        fComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+        //fComboBox.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
+        TableHeaderActions.setComboBox(fComboBox, GrafProg.getData());
         fChoiceLabel.setText("Choose Column: ");
         fChoiceLabel.setVisible(true);
         fComboBox.setVisible(true);
@@ -633,7 +634,7 @@ public class GrafDialogController {
         functionChoiceHBox.getChildren().add(fComboBox2);
         fComboBox.setOnAction((e) -> { functionChosen();});
 
-        fComboBox2.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+        fComboBox2.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
         fChoiceLabel2.setText("Choose Column: ");
         fChoiceLabel2.setVisible(true);
         fComboBox2.setVisible(true);
@@ -1011,7 +1012,8 @@ public class GrafDialogController {
         }else{
             try {
                 if (!fComboBox.getValue().equals("Column")) {
-                    fComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+                    TableHeaderActions.setComboBox(fComboBox, GrafProg.getData());
+                    //fComboBox.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
 
                 }
             } catch (ClassCastException cce) {
@@ -1021,7 +1023,9 @@ public class GrafDialogController {
         }
     }
 
-
+    /*public void setComboBox(){
+        fComboBox.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
+    }*/
 
 
     /*public void checkForEnter(KeyEvent keyEvent) {

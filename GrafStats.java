@@ -35,8 +35,35 @@ public class GrafStats {
     	 if (nullArray(temp, "GetN()")) return 0;
     	 return temp.length;
      }
+
+
+	public static Double getMin(Double[] values){
+		values = getRidOfNulls(values);
+		if (values.length == 0) return null;
+		Double min = values[0];
+		for(Double d:values){
+			// System.out.println(d+" "+min);
+			if (d < min) min=d;
+		}
+		return min;
+	}
+
+	public static Double getMax(Double[] values){
+		values = getRidOfNulls(values);
+		if (values.length == 0) return null;
+		Double max = values[0];
+		for(Double d:values){
+			if (d > max) max = d;
+			//System.out.println(d+" "+max);
+		}
+		return max;
+	}
+
+
+
+
 	
-	public static double getMin(Double[] dArray)
+	/*public static double getMin(Double[] dArray)
      {   
 		 Double[] temp = getRidOfNulls(dArray);
 		 if (nullArray(temp, "GetMin()")) return 0;
@@ -46,7 +73,7 @@ public class GrafStats {
     		 if (temp[i] < min) min = temp[i];
     	 }
     	 return min;
-     }
+     }*/
 
 	public static double getMin(double[] dArray)
 	{
@@ -59,7 +86,7 @@ public class GrafStats {
 		return min;
 	}
      
-     public static double getMax(Double[] dArray){
+    /* public static double getMax(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray); 
     	 if (nullArray(temp, "GetMax()")) return 0;
     	 double max = temp[0];
@@ -68,7 +95,7 @@ public class GrafStats {
     		 if (temp[i] > max) max = temp[i];
     	 }
     	 return max;
-     }
+     }*/
 
 	public static double getMax(double[] dArray){
 		if (dArray.length == 0) return 0;
@@ -208,7 +235,7 @@ public class GrafStats {
      
          
      public static double[] getFiveNumberSummary(Double[] dArray){
-    	 double[] d = {GrafStats.getMin(dArray) , GrafStats.getQ1(dArray), GrafStats.getMean(dArray), GrafStats.getQ3(dArray), GrafStats.getMax(dArray) };
+    	 double[] d = {getMin(dArray) , GrafStats.getQ1(dArray), GrafStats.getMean(dArray), GrafStats.getQ3(dArray), GrafStats.getMax(dArray) };
     	 return d;
      }
      

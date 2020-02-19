@@ -40,10 +40,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
     private GrafProg gSess;   //owner
     private ClipboardHandler clipper = new ClipboardHandler();
     
-    //dialogs for data generation
-    private TableFunctionDialog tfd;
 
-    // Constructor of Table
     public GrafTable(int row, int col)              //GrafStage sess, int row, int col)
     {
         // Create a panel to hold all other components
@@ -71,7 +68,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
         scrollPane = new JScrollPane( table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         dataPanel.add( scrollPane, BorderLayout.CENTER );
 
-        labelHeaders();
+        TableHeaderActions.labelHeaders(this);
         numberTheRows();
         
         //listeners
@@ -99,14 +96,14 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
     }
       
         
-    //Header and row index procedures 
+  /*  //Header and row index procedures
     private void labelHeaders(){
         setHeaderString(0,"");
         //table.getColumnModel().getColumn(0).setHeaderValue("");
         int cols = getNumCols();
         for (int i = 1; i <= cols; i++) // have adjusted our column count by 1. 
             setHeaderString(i,"Data"+i);
-    }
+    }*/
     
     public void numberTheRows(){
     int rows = getNumRows();
@@ -114,7 +111,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
         setCellValueInteger(i , 0, i );
     }
 
-    public void editHeaders(){
+    /*public void editHeaders(){
 
         Dialog headerChangeDialog = new javafx.scene.control.Dialog();
         headerChangeDialog.setTitle("Edit Column Headers");
@@ -161,15 +158,17 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
                 refreshTable();
             }else if (result.get().equals(ButtonType.CANCEL)) done = true;
         }
-   }
-   private void refreshTable(){
+   }*/
+
+
+   public void refreshTable(){
        GrafProg.getTableStage().hide();
        GrafProg.getTableStage().show();
    }
 
     //change the table dimensions
     public void resizeData(){
-      String[] oldHeaders = getHeaderArray();
+      String[] oldHeaders = TableHeaderActions.getHeaderArray(this);
       for (int i=0; i<oldHeaders.length; i++) System.out.println("-"+oldHeaders[i]);
       //DataSizeDialog dataDialog = new DataSizeDialog(new JFrame(), getNumRows(), getNumCols());
       javafx.scene.control.Dialog<Pair<Integer, Integer>> dataSizeDialog = new javafx.scene.control.Dialog<>();
@@ -208,7 +207,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
     }
 
     
-     public String[] getHeaderArray(){
+     /*public String[] getHeaderArray(){
          String[] headerArray = new String[getNumCols()+1];
          for (int i = 0; i <= getNumCols(); i++) {
              headerArray[i] = getHeaderString(i);
@@ -222,7 +221,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
          for (int i = 1; i <= getNumCols(); i++)
              headerArray[i-1] = getHeaderString(i);
          return headerArray;
-     }
+     }*/
 
      public void setHeaderString(int c, String s){
          table.getColumnModel().getColumn(c).setHeaderValue(s);
@@ -298,7 +297,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
                 model.setValueAt(table.getValueAt(currentRow, currentColumn+1), currentRow, currentColumn);
                 setHeaderString(currentColumn, getHeaderString(currentColumn+1));
             }
-        String[] headerHolder = getHeaderArray();
+        String[] headerHolder = TableHeaderActions.getHeaderArray(this);
         model.setColumnCount(model.getColumnCount()-1);
         restoreHeaders(headerHolder);
           //copy next column into this column and repeat until end of model
@@ -563,29 +562,6 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
        model.setValueAt(null, row-1,  col); //we are using a starting row of 1 vs zero
     }
     
-
-
-   public Double getMin(Double[] values){
-         values = getRidOfNulls(values);
-         if (values.length == 0) return null;
-         Double min = values[0];
-         for(Double d:values){
-            // System.out.println(d+" "+min);
-             if (d < min) min=d;
-         }
-         return min;
-   }
-
-     public Double getMax(Double[] values){
-         values = getRidOfNulls(values);
-         if (values.length == 0) return null;
-         Double max = values[0];
-         for(Double d:values){
-             if (d > max) max = d;
-             //System.out.println(d+" "+max);
-         }
-         return max;
-     }
 
 
     // Key Handling override for paste methods******************************

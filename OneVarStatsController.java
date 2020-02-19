@@ -30,7 +30,7 @@ public class OneVarStatsController {
 
 
     public void initialize(){
-        columnComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+        columnComboBox.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
         columnComboBox.getSelectionModel().select(0);
         textFieldN.setEditable(false);
         textFieldMin.setEditable(false);
@@ -56,7 +56,7 @@ public class OneVarStatsController {
         // setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
         //System.out.println("Headers:"+GrafProg.getData().getHeaderArray()[3]);
 
-        columnComboBox.setItems(FXCollections.observableArrayList(GrafProg.getData().getHeaderArrayCdr()));
+        columnComboBox.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
                 //= new ComboBox(FXCollections.observableArrayList(GrafProg.getData().getHeaderArray()));
     }
 

@@ -127,7 +127,7 @@ public class FrequencyChartDialog extends JDialog {
                             {
                                 columnComboBox = new JComboBox();
                                 panel_3.add(columnComboBox);
-                                columnComboBox.setModel(new javax.swing.DefaultComboBoxModel(GrafProg.getData().getHeaderArray()));
+                                columnComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(GrafProg.getData())));
                                 columnComboBox.addItemListener(new ItemListener() {
                                     public void itemStateChanged(ItemEvent event) {
                                         if (event.getStateChange() == ItemEvent.SELECTED){
