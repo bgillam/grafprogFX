@@ -478,20 +478,20 @@ public class GrafStatsDialog extends JDialog {
 				    JOptionPane.ERROR_MESSAGE);
 					return;
 			}
-			textFieldN.setText(""+GrafStats.getN(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldMin.setText(""+GrafStats.getMin(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldQ1.setText(""+GrafStats.getQ1(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldMedian.setText(""+GrafStats.getMedian(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldQ3.setText(""+GrafStats.getQ3(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldMax.setText(""+GrafStats.getMax(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldRange.setText(""+GrafStats.getRange(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldMean.setText(""+GrafStats.getMean(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldVarP.setText(""+GrafStats.getVarianceOfPopulation(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldVarS.setText(""+GrafStats.getVarianceOfSample(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldStDevP.setText(""+GrafStats.getStandardDeviationOfPopulation(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldStDevS.setText(""+GrafStats.getStandardDeviationOfSample(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			textFieldIQR.setText(""+GrafStats.getIQR(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex())));
-			double[] modes = GrafStats.getModes(GrafProg.getData().getColumnValues(functionComboBox.getSelectedIndex()));
+			textFieldN.setText(""+GrafStats.getN(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldMin.setText(""+GrafStats.getMin(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldQ1.setText(""+GrafStats.getQ1(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldMedian.setText(""+GrafStats.getMedian(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldQ3.setText(""+GrafStats.getQ3(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldMax.setText(""+GrafStats.getMax(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldRange.setText(""+GrafStats.getRange(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldMean.setText(""+GrafStats.getMean(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldVarP.setText(""+GrafStats.getVarianceOfPopulation(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldVarS.setText(""+GrafStats.getVarianceOfSample(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldStDevP.setText(""+GrafStats.getStandardDeviationOfPopulation(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldStDevS.setText(""+GrafStats.getStandardDeviationOfSample(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			textFieldIQR.setText(""+GrafStats.getIQR(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData())));
+			double[] modes = GrafStats.getModes(TableColumnActions.getColumnValues(functionComboBox.getSelectedIndex(), getData()));
 			String modeString = "";
 			for (double m: modes) 
 				modeString = modeString+m+",";
@@ -514,6 +514,10 @@ public class GrafStatsDialog extends JDialog {
         statDialog.setModal(true);
 
 
+    }
+
+    private static GrafTable getData(){
+        return GrafProg.getData();
     }
 	
 	 //private void resetListModels(){

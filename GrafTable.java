@@ -103,8 +103,6 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
         setCellValueInteger(i , 0, i );
     }
 
-
-
    public void refreshTable(){
        GrafProg.getTableStage().hide();
        GrafProg.getTableStage().show();
@@ -151,10 +149,6 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
     }
 
 
-
-
-
-     
    //   public getters and setters
     public int getNumRows(){
         return table.getRowCount();
@@ -171,7 +165,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
         model.setColumnCount(colNum+1);
     }
     
-    public double[] getRowValues(int row){
+    /*public double[] getRowValues(int row){
         int cols = getNumCols();
         double[] returnStringArray = new double[cols];
         for (int i = 0; i < cols; i++){
@@ -180,11 +174,9 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
             }catch (NumberFormatException e) {setTableMessage("Bad number format in cell "+i+".");}
         }
         return returnStringArray;
-    }
+    }*/
     
 
-  
-    
     public Double getCellValue(int row, int col){
         Object o = model.getValueAt(row-1, col);
         if (o == null) return null;

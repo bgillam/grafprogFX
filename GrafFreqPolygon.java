@@ -93,7 +93,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
         @Override
         public void drawGraf(Graphics2D gc){
             gc.setColor(super.getGrafColor());
-            Double[] temp = GrafStats.getRidOfNulls(myOwner.getData().getColumnValues(columnNumber));
+            Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(columnNumber, getData()));
             Arrays.sort(temp);
             int totalCount = 0;
             int numValues = temp.length;
@@ -329,6 +329,10 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
 
         public GrafSettings getGStuff() {
             return gStuff;
+        }
+
+        private static GrafTable getData(){
+            return GrafProg.getData();
         }
     }
 

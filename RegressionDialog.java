@@ -39,6 +39,7 @@ import java.awt.SystemColor;
 import javax.swing.JCheckBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.AbstractTableModel;
@@ -366,8 +367,8 @@ public class RegressionDialog extends JDialog {
                     JOptionPane.ERROR_MESSAGE);
                     return;
             }
-            int inputLength = GrafStats.getRidOfNulls(GrafProg.getData().getColumnValues(input)).length;
-            int outputLength = GrafStats.getRidOfNulls(GrafProg.getData().getColumnValues(output)).length;
+            int inputLength = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(input, getData())).length;
+            int outputLength = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(output, getData())).length;
             if (inputLength != outputLength) { 
                     JOptionPane.showMessageDialog(null, "X and Y columns must have an equal number of items", "Need Paired Data!", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -389,8 +390,8 @@ public class RegressionDialog extends JDialog {
             }
             
                  
-            Vector xVector = new Vector(GrafProg.getData().getColumnValues(inputComboBox.getSelectedIndex())); //takes a Double[]
-            Vector yVector = new Vector(GrafProg.getData().getColumnValues(outputComboBox.getSelectedIndex()));
+            Vector xVector = new Vector(TableColumnActions.getColumnValues(inputComboBox.getSelectedIndex(), getData())); //takes a Double[]
+            Vector yVector = new Vector(TableColumnActions.getColumnValues(outputComboBox.getSelectedIndex(), getData()));
             if (!curveType.equals("exponential")) {
                         
                 RegressionMath rm = new RegressionMath(xVector, yVector, order);
@@ -452,6 +453,10 @@ public class RegressionDialog extends JDialog {
        rd.setVisible(true); 
        rd.setModal(true); 
     
+    }
+
+    public static GrafTable getData(){
+        return GrafProg.getData();
     }
     
             

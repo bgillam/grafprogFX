@@ -103,8 +103,8 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
 
     @Override
     public void autoRange(){
-        GrafProg.getGrafSettings().setYMax(GrafStats.getMax(GrafProg.getData().getColumnValues(getColumnNumber()))+GrafProg.getGrafSettings().getTenthWindowY());
-        GrafProg.getGrafSettings().setYMin(GrafStats.getMin(GrafProg.getData().getColumnValues(getColumnNumber()))-GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafSettings().setYMax(GrafStats.getMax(TableColumnActions  .getColumnValues(getColumnNumber(), getData()))+GrafProg.getGrafSettings().getTenthWindowY());
+        GrafProg.getGrafSettings().setYMin(GrafStats.getMin(TableColumnActions.getColumnValues(getColumnNumber(), getData()))-GrafProg.getGrafSettings().getTenthWindowY());
     }
 
     @Override
@@ -129,7 +129,10 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         return "COLUMNPLOT: Col "+getColumnNumber()+","+", "+getMark();//+", "+ getGrafColor();
     }
     
+    private static GrafTable getData(){
+        return GrafProg.getData();
 
+    }
 
 
 }

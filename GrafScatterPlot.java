@@ -91,8 +91,8 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
 
     @Override
     public void autoRange(){
-        GrafProg.getGrafSettings().setYMax(GrafStats.getMax(GrafProg.getData().getColumnValues(getOutputColumnNumber())));
-        GrafProg.getGrafSettings().setYMin(GrafStats.getMin(GrafProg.getData().getColumnValues(getOutputColumnNumber())));
+        GrafProg.getGrafSettings().setYMax(GrafStats.getMax(TableColumnActions.getColumnValues(getOutputColumnNumber(), getData())));
+        GrafProg.getGrafSettings().setYMin(GrafStats.getMin(TableColumnActions.getColumnValues(getOutputColumnNumber(), getData())));
     }
 
     @Override
@@ -122,6 +122,10 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
     
     public String toString(){
         return "SCATTERPLOT: Col "+getInputColumnNumber()+", Col "+getOutputColumnNumber()+", "+getMark();//+", "+ getGrafColor();
+    }
+
+    public static GrafTable getData(){
+        return GrafProg.getData();
     }
     
 

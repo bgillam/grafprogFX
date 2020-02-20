@@ -66,7 +66,7 @@ public class OneVarStatsController {
         int selectedColumn = columnComboBox.getSelectionModel().getSelectedIndex()+1;
 
         //check for empty column.
-        if (GrafStats.nullArray(GrafStats.getRidOfNulls(GrafProg.getData().getColumnValues(selectedColumn)), "Stats generator")) {
+        if (GrafStats.nullArray(GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(selectedColumn, getData())), "Stats generator")) {
             clearForm();
             return;
         }
@@ -109,6 +109,10 @@ public class OneVarStatsController {
         textFieldStDevS.setText("");
         textFieldIQR.setText("");
         textFieldModes.setText("");
+    }
+
+    public static GrafTable getData(){
+        return GrafProg.getData();
     }
 
 

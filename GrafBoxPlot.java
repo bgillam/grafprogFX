@@ -4,6 +4,8 @@
 *  @author Bill Gillam           *
 *  2/25/15                       *
 **********************************/
+import javafx.scene.control.Tab;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.*;
@@ -63,7 +65,7 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         double plotted = GrafProg.getBoxPlotsPlotted();
         double boxHeight = (gHeight/2)/(numPlots+1);
         double boxCenter = boxHeight + boxHeight*(plotted);
-        double[] fns = GrafStats.getFiveNumberSummary(table.getColumnValues(columnNumber));
+        double[] fns = GrafStats.getFiveNumberSummary(TableColumnActions.getColumnValues(columnNumber, getData()));
         if (!GrafProg.getGrafSettings().getReverseXY()){
             GrafPrimitives.grafLine(gStuff,fns[0], boxCenter-boxHeight/10 , fns[0] ,boxCenter+boxHeight/10 , gc);  // Min tic
             GrafPrimitives.grafLine(gStuff,fns[0], boxCenter , fns[1] , boxCenter , gc);                           //left whisker
@@ -175,6 +177,10 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         roundFNS(1.001);
         roundFNS(0.000023);
         roundFNS(.005);
+    }
+
+    private static GrafTable getData(){
+        return GrafProg.getData();
     }
 
 }
