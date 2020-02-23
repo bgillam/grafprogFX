@@ -86,7 +86,7 @@ public class GrafProg extends Application {
         this.grafStage = grafStage;
 
         //Set up Object Creation Dialog Box
-        dialogController = createScene(dialogRoot, dialogStage, dialogScene, 650, 350, "GrafDialog.fxml", "");
+        dialogController = createScene(dialogRoot, dialogStage, dialogScene, 650, 375, "GrafDialog.fxml", "");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
 
         //Set up One Variable Stats Dialog Box

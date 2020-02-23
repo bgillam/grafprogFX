@@ -216,19 +216,23 @@ public class GrafDialogController {
 
 
     //display appropriate dialog setup for object editing
+
+    private void setTextandTitle(String objectType){
+        objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
+        objectComboBox.setValue(objectType);
+        GrafProg.getDialogStage().setTitle(objectType);
+        chooseObject.setText("Choose "+objectType);
+    }
+
     @FXML
     public void showFxEntryDialog()
     {
+            workingObject = new GrafFunction();
             Platform.runLater(new Runnable() {
             @Override public void run() {
-                //gType = GrafType.FUNCTION;
-                workingObject = new GrafFunction();
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("FUNCTION");
                 fxLabel.setVisible(true);
                 showFunctionString(true);
-                chooseObject.setText("Choose FUNCTION");
-                //pack();
+                setTextandTitle("Function");
             }
         });
     }
@@ -236,18 +240,15 @@ public class GrafDialogController {
     @FXML
     public void showFxValueDialog()
     {
-        //gType = GrafType.FVALUE;
         workingObject = new GrafValue();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("VALUE");
                 showFunctionChooser();
                 showX1();
                 x1Label.setText("x1:");
                 showMarks();
-                chooseObject.setText("Choose VALUE");
+                setTextandTitle("Value");
 
             }
         });
@@ -256,19 +257,15 @@ public class GrafDialogController {
     @FXML
     public void showFxTangentDialog()
     {
-        //gType = GrafType.TANGENT;
         workingObject = new GrafTangent();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-
-                GrafProg.getDialogStage().setTitle("TANGENT");
                 showFunctionChooser();
                 showX1();
                 x1Label.setText("x1:");
                 showMarks();
-                chooseObject.setText("Choose TANGENT");
+                setTextandTitle("Tangent");
             }
         });
     }
@@ -276,19 +273,16 @@ public class GrafDialogController {
     @FXML
     public void showFxChordDialog()
     {
-        //gType = GrafType.CHORD;
         workingObject = new GrafChord();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("FCHORD");
                 showFunctionChooser();
                 showX1X2();
                 x1Label.setText("x1:");
                 x2Label.setText("x2:");
                 showMarks();
-                chooseObject.setText("Choose FCHORD");
+                setTextandTitle("Chord");
 
             }
         });
@@ -297,35 +291,28 @@ public class GrafDialogController {
     @FXML
     public void showFxZerosDialog()
     {
-        //gType = GrafType.FZERO;
         workingObject = new GrafZeros();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("FZEROS");
                 showFunctionChooser();
                 showMarks();
-                //showDx();
                 showX1();
                 x1Label.setText("Start:");
                 showX2();
                 x2Label.setText("End:");
                 showDx();
-                chooseObject.setText("Choose FZEROS");
+                setTextandTitle("Zeros");
             }
         });
     }
     @FXML
     public void showFxIntegralDialog()
     {
-        //gType = GrafType.INTEGRAL;
         workingObject = new GrafIntegral();
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 showFunctionString(false);
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("INTEGRAL");
                 showFunctionChooser();
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
@@ -334,7 +321,7 @@ public class GrafDialogController {
                 showX2();
                 x1Label.setText("Begin:");
                 x2Label.setText("End:");
-                chooseObject.setText("Choose INTEGRAL");
+                setTextandTitle("Integral");
 
             }
         });
@@ -343,16 +330,13 @@ public class GrafDialogController {
     @FXML
     public void showColumnPlotDialog()
     {
-        //gType = GrafType.COLUMN;
         workingObject = new GrafColumnPlot();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("COLUMN PLOT");
                 showColumnChooser();
                 showMarks();
                 showConnectedCheckBox();
-                chooseObject.setText("Choose COLUMN");
+                setTextandTitle("Column");
 
             }
         });
@@ -361,16 +345,13 @@ public class GrafDialogController {
     @FXML
     public void showBoxplotDialog()
     {
-        //gType = GrafType.BOXPLOT;
         workingObject = new GrafBoxPlot();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("BOXPLOT");
                 showColumnChooser();
                 showFNS();
                 setFNS(true);
-                chooseObject.setText("Choose BOXPLOT");
+                setTextandTitle("BoxPlot");
             }
         });
     }
@@ -378,57 +359,44 @@ public class GrafDialogController {
     @FXML
     public void showHistogramDialog()
     {
-        //gType = GrafType.HISTOGRAM;
         workingObject = new GrafHistogram();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("HISTOGRAM");
                 setupHisto();
-                chooseObject.setText("Choose HISTOGRAM");
+                setTextandTitle("Histogram");
             }
         });
     }
 
     public void showFreqPolyDialog() {
-        //gType = GrafType.FREQPOLYGON;
         workingObject = new GrafFreqPolygon();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("Frequency Polygon");
                 setupHisto();
-                chooseObject.setText("Choose Frequency Polygon");
+                setTextandTitle("Frequency Polygon");
             }
         });
     }
 
     public void showOgiveDialog() {
-        //gType = GrafType.OGIVE;
         workingObject = new GrafOgive();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("Ogive");
                 setupHisto();
-                chooseObject.setText("Ogive");
+                setTextandTitle("Ogive");
             }
         });
     }
 
     public void showScatterDialog() {
-        //  gType = GrafType.SCATTER;
         workingObject = new GrafScatterPlot();
-
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("SCATTERPLOT");
                 showColumnChooser();
                 showColumnChooser2();
                 showMarks();
                 showConnectedCheckBox();
-                chooseObject.setText("Choose SCATTERPLOT");
+                setTextandTitle("Scatter Plot");
 
             }
         });
@@ -437,18 +405,14 @@ public class GrafDialogController {
 
 
     public void showPointDialog() {
-        //gType = GrafType.POINT;
         workingObject = new GrafPoint();
-
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("POINT");
                 showMarks();
                 showX1Y1();
                 x1Label.setText("x1:");
                 y1Label.setText("y1:");
-                chooseObject.setText("Choose POINT");
+                setTextandTitle("Point");
 
             }
         });
@@ -457,32 +421,24 @@ public class GrafDialogController {
 
 
     public void showTextDialog() {
-        //gType = GrafType.TEXT;
         workingObject = new GrafText();
-
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("TEXT");
                 showTextAndFontButton();
                 showX1Y1();
                 x1Label.setText("x1:");
                 y1Label.setText("y1:");
                 fontButton.setOnAction((e) -> { onFontButtonClicked(e);});
-                chooseObject.setText("Choose TEXT");
+                setTextandTitle("Text");
 
             }
         });
     }
 
     public void showLineSegmentDialog() {
-        //gType = GrafType.LINESEGMENT;
         workingObject = new GrafSegment();
-
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("LINESEGMENT");
                 showMarks();
                 showX1Y1();
                 showX2Y2();
@@ -490,20 +446,16 @@ public class GrafDialogController {
                 y1Label.setText("y1:");
                 x2Label.setText("x2:");
                 y2Label.setText("y2:");
-                chooseObject.setText("Choose LINESEGMENT");
+                setTextandTitle("Line Segment");
 
             }
         });
     }
 
     public void showRectangleDialog() {
-        //gType = GrafType.RECTANGLE;
         workingObject = new GrafRectangle();
-
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("RECTANGLE");
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
                 showX1Y1();
@@ -512,20 +464,16 @@ public class GrafDialogController {
                 y1Label.setText("y1:");
                 x2Label.setText("width:");
                 y2Label.setText("height:");
-                chooseObject.setText("Choose RECTANGLE");
+                setTextandTitle("Rectangle");
 
             }
         });
     }
 
     public void showEllipseDialog() {
-        //gType = GrafType.ELLIPSE;
         workingObject = new GrafEllipse();
-
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("ELLIPSE");
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
                 showX1Y1();
@@ -534,19 +482,16 @@ public class GrafDialogController {
                 y1Label.setText("y1:");
                 x2Label.setText("width:");
                 y2Label.setText("height:");
-                chooseObject.setText("Choose ELLIPSE");
+                setTextandTitle("Ellipse");
 
             }
         });
     }
 
     public void showCircleDialog() {
-        //gType = GrafType.CIRCLE;
         workingObject = new GrafCircle();
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-                GrafProg.getDialogStage().setTitle("CIRCLE");
                 fillColorPicker.setVisible(true);
                 fillLabel.setVisible(true);
                 showX1Y1();
@@ -554,14 +499,9 @@ public class GrafDialogController {
                 y1Label.setText("y1:");
                 x2Label.setText("r:");
                 showR();
-                chooseObject.setText("Choose CIRCLE");
-
-            }
+                setTextandTitle("Circle");            }
         });
     }
-
-
-
 
 
 
@@ -573,7 +513,6 @@ public class GrafDialogController {
         fontHBox.getChildren().add(fontName);
         fontHBox.getChildren().add(fontStyle);
         fontHBox.getChildren().add(fontSize);
-
         fontHBox.setVisible(true);
         textForDisplay.setVisible(true);
         fontName.setVisible(true);
@@ -601,8 +540,7 @@ public class GrafDialogController {
             fComboBox.setValue("function");
         }
         fxLabel.setVisible(true);
-        //functionString.setVisible(true);
-        //functionString.setEditable(false);
+
     }
 
     private void showFunctionString(boolean editable){
@@ -662,8 +600,6 @@ public class GrafDialogController {
                 oMarkRButton.setVisible(true);
                 charMarkRButton.setVisible(true);
                 charMarkText.setVisible(true);
-                //textLabel.setVisible(true);
-                //textForDisplay.setVisible(true);
             }
         });
     }
@@ -1023,93 +959,7 @@ public class GrafDialogController {
         }
     }
 
-    /*public void setComboBox(){
-        fComboBox.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
-    }*/
 
-
-    /*public void checkForEnter(KeyEvent keyEvent) {
-        if ((keyEvent.getCode() == KeyCode.ENTER) && (functionString.isEditable())){
-            onCreateButtonClicked(new ActionEvent());
-
-        }
-
-    }*/
-
-
-    /*public static GrafObject createGrafObjectFromController(GrafType gType){
-        switch (gType){
-            case TEXT: return new GrafText();
-            case COLUMN: return new GrafColumnPlot();
-            case BOXPLOT: return new GrafBoxPlot();
-            case SCATTER:return new GrafScatterPlot();
-            case HISTOGRAM: return new GrafHistogram();
-            case FREQPOLYGON: return new GrafFreqPolygon();
-            case OGIVE: return new GrafOgive();
-            case POINT: return new GrafPoint();
-            case LINESEGMENT: return new GrafSegment();
-            case RECTANGLE: return new GrafRectangle();
-            case ELLIPSE: return new GrafEllipse();
-            case CIRCLE: return new GrafCircle();
-            //case FUNCTION: return new GrafFunction();
-            case FVALUE: return new GrafValue();
-            case TANGENT: return new GrafTangent();
-            case CHORD: return new GrafChord();
-            case INTEGRAL: return new GrafIntegral();
-            case FZERO: return new GrafZeros();
-            default: return null;
-        }
-    }*/
-
-    /*public GrafObject createGrafObjectFromController(GrafDialogController gdc, GrafType gType){
-        switch (gType){
-            case TEXT: return new GrafText(Double.parseDouble(
-                    gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(), gdc.getDefaultFont(),  gdc.getGrafColor());
-            case COLUMN: return new GrafColumnPlot(gdc.getColumn1ChooserColumn(), gdc.getDialogMark(), gdc.isConnected(), gdc.getGrafColor());
-            case BOXPLOT: return new GrafBoxPlot(gdc.getColumn1ChooserColumn(), gdc.getGrafColor(), gdc.getFNS());
-            case SCATTER:return new GrafScatterPlot(gdc.getColumn1ChooserColumn(), gdc.getColumn2ChooserColumn(), gdc.getGrafColor(), gdc.getDialogMark(), gdc.isConnected());
-            case HISTOGRAM:{
-                if (gdc.getNumClassButton().isSelected())
-                    return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
-                            gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
-                else  return new GrafHistogram(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
-                        Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
-            case FREQPOLYGON: {
-                if (gdc.getNumClassButton().isSelected())
-                    return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
-                            gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
-                else  return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
-                        Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
-            case OGIVE:{
-                if (gdc.getNumClassButton().isSelected())
-                    return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
-                            gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
-                else  return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
-                        Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS()); }
-
-
-            case POINT: return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(), gdc.getDefaultFont(),  gdc.getGrafColor());
-            case LINESEGMENT: return new GrafSegment(Double.parseDouble(gdc.getX1()),
-                    Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()), Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getDialogMark());
-            case RECTANGLE: return new GrafRectangle(Double.parseDouble(gdc.getX1()),
-                    Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
-                    Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
-            case ELLIPSE: return new GrafEllipse(Double.parseDouble(gdc.getX1()),
-                    Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
-                    Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
-            case CIRCLE: return new GrafCircle(Double.parseDouble(gdc.getX1()),
-                    Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2())
-                    , gdc.getGrafColor(), gdc.getFillColor());
-            case FUNCTION: return workingObject.createGrafObjectGFromController(this);
-            case FVALUE: return new GrafValue( gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
-            case TANGENT: return new GrafTangent(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
-            case CHORD: return new GrafChord(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),   gdc.getGrafColor(), gdc.getDialogMark());
-            case INTEGRAL: return new GrafIntegral(gdc.getFunctionString(),Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()), Integer.parseInt(gdc.getNText()), gdc.getGrafColor(), gdc.getFillColor());
-            case FZERO: return new GrafZeros(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),  Double.parseDouble(gdc.getDx()), gdc.getGrafColor(),gdc.getDialogMark() );
-            default: return null;
-
-        }
-    }*/
 
     public String getFunctionString(){return functionString.getText();}
     public void setFunctionString(String s){ functionString.setText(s);}
