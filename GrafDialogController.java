@@ -936,7 +936,7 @@ public class GrafDialogController {
     public void functionChosen() {
         if (functionString.isVisible()) {
             try {
-                System.out.println(fComboBox.getValue());
+                //System.out.println(fComboBox.getValue());
                 if (!fComboBox.getValue().equals("function")) {
                     GrafFunction gf = (GrafFunction) (fComboBox.getValue());
                     functionString.setText(gf.getFunction());
