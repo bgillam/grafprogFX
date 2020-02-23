@@ -44,13 +44,13 @@ public class GrafDialogController {
     @FXML    private Label chooseObject;
     @FXML    private Pane grafPane;
     @FXML    private TextField msg;
-    @FXML    private ComboBox objectComboBox;
+    @FXML    private ComboBox<Object> objectComboBox;
 
     //function/column input/choosing
     private Label fChoiceLabel = new Label("fx:");
-    private ComboBox fComboBox = new ComboBox();
+    private ComboBox<Object> fComboBox = new ComboBox();
     private Label fChoiceLabel2 = new Label("Output Column");
-    private ComboBox fComboBox2 = new ComboBox();
+    private ComboBox<Object> fComboBox2 = new ComboBox();
     private Label fxLabel = new Label("fx:");
     private TextField functionString = new TextField("");
 
@@ -207,7 +207,7 @@ public class GrafDialogController {
 
     }
 
-    public void onMaxMin(ActionEvent actionEvent) {
+    private void onMaxMin(ActionEvent actionEvent) {
         Double[] currentColumn = TableColumnActions.getColumnValues(getColumn1ChooserColumn(), getData());
         setX1(""+GrafStats.getMin(currentColumn));
         setX2(""+GrafStats.getMax(currentColumn));
@@ -225,7 +225,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showFxEntryDialog()
+    void showFxEntryDialog()
     {
             workingObject = new GrafFunction();
             Platform.runLater(new Runnable() {
@@ -238,7 +238,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showFxValueDialog()
+    void showFxValueDialog()
     {
         workingObject = new GrafValue();
         Platform.runLater(new Runnable() {
@@ -255,7 +255,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showFxTangentDialog()
+    void showFxTangentDialog()
     {
         workingObject = new GrafTangent();
         Platform.runLater(new Runnable() {
@@ -271,7 +271,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showFxChordDialog()
+    void showFxChordDialog()
     {
         workingObject = new GrafChord();
         Platform.runLater(new Runnable() {
@@ -289,7 +289,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showFxZerosDialog()
+    void showFxZerosDialog()
     {
         workingObject = new GrafZeros();
         Platform.runLater(new Runnable() {
@@ -307,7 +307,7 @@ public class GrafDialogController {
         });
     }
     @FXML
-    public void showFxIntegralDialog()
+    void showFxIntegralDialog()
     {
         workingObject = new GrafIntegral();
         Platform.runLater(new Runnable() {
@@ -328,7 +328,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showColumnPlotDialog()
+    void showColumnPlotDialog()
     {
         workingObject = new GrafColumnPlot();
         Platform.runLater(new Runnable() {
@@ -343,7 +343,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showBoxplotDialog()
+    void showBoxplotDialog()
     {
         workingObject = new GrafBoxPlot();
         Platform.runLater(new Runnable() {
@@ -357,7 +357,7 @@ public class GrafDialogController {
     }
 
     @FXML
-    public void showHistogramDialog()
+    void showHistogramDialog()
     {
         workingObject = new GrafHistogram();
         Platform.runLater(new Runnable() {
@@ -368,7 +368,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showFreqPolyDialog() {
+    void showFreqPolyDialog() {
         workingObject = new GrafFreqPolygon();
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -378,7 +378,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showOgiveDialog() {
+    void showOgiveDialog() {
         workingObject = new GrafOgive();
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -388,7 +388,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showScatterDialog() {
+    void showScatterDialog() {
         workingObject = new GrafScatterPlot();
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -404,7 +404,7 @@ public class GrafDialogController {
     }
 
 
-    public void showPointDialog() {
+    void showPointDialog() {
         workingObject = new GrafPoint();
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -420,7 +420,7 @@ public class GrafDialogController {
 
 
 
-    public void showTextDialog() {
+    void showTextDialog() {
         workingObject = new GrafText();
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -435,7 +435,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showLineSegmentDialog() {
+    void showLineSegmentDialog() {
         workingObject = new GrafSegment();
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -452,7 +452,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showRectangleDialog() {
+    void showRectangleDialog() {
         workingObject = new GrafRectangle();
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -470,7 +470,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showEllipseDialog() {
+    void showEllipseDialog() {
         workingObject = new GrafEllipse();
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -488,7 +488,7 @@ public class GrafDialogController {
         });
     }
 
-    public void showCircleDialog() {
+    void showCircleDialog() {
         workingObject = new GrafCircle();
         Platform.runLater(new Runnable() {
             @Override public void run() {
@@ -933,7 +933,7 @@ public class GrafDialogController {
         return null;
     }
 
-    public void functionChosen() {
+    private void functionChosen() {
         if (functionString.isVisible()) {
             try {
                 //System.out.println(fComboBox.getValue());
@@ -944,6 +944,7 @@ public class GrafDialogController {
             } catch (ClassCastException cce) {
                 //System.out.println("Choose a Function.");
             } catch (NullPointerException npe) {
+                System.out.println(npe.toString());
             }
         }else{
             try {
@@ -955,7 +956,9 @@ public class GrafDialogController {
             } catch (ClassCastException cce) {
                 //System.out.println("Choose a Function.");
             } catch (NullPointerException npe) {
+                System.out.println(npe.toString());
             }
+
         }
     }
 
@@ -966,12 +969,12 @@ public class GrafDialogController {
     public boolean functionStringIsVisible(){
         return functionString.isVisible();
     }
-    public TextField getFunctionStringTextField(){return functionString;}
+    TextField getFunctionStringTextField(){return functionString;}
 
 
-    public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
+    private ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
     public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = t;}
-    public void initTempGrafList(){ tempGrafList = GrafProg.getGrafList();}
+    private void initTempGrafList(){ tempGrafList = GrafProg.getGrafList();}
 
     public java.awt.Color getGrafColor(){
         //System.out.println(grafColorPicker.getValue());
@@ -986,16 +989,16 @@ public class GrafDialogController {
         return awtColor;}
 
 
-    public void setfillColor(Color awtColor){
+    void setfillColor(Color awtColor){
         javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(getFillColor().getRed(),
                 getGrafColor().getGreen(), getGrafColor().getBlue(), 1);
         getFillColorPicker().setValue(fxColor);
     }
 
-    public ColorPicker getFillColorPicker() {return fillColorPicker; }
+    private ColorPicker getFillColorPicker() {return fillColorPicker; }
     public void setFillColorPicker(ColorPicker fillColorPicker) {  this.fillColorPicker = fillColorPicker; }
 
-    public ColorPicker getGrafColorPicker() { return grafColorPicker; }
+    ColorPicker getGrafColorPicker() { return grafColorPicker; }
     public void setGrafColorPicker(ColorPicker grafColorPicker) {this.grafColorPicker = grafColorPicker; }
 
     public String getX1() { return x1Text.getText(); }
@@ -1008,31 +1011,31 @@ public class GrafDialogController {
 
     public String getY1() { return y1Text.getText(); }
     public void setY1(String x1String) { this.y1Text.setText(x1String); }
-    public TextField getY1TextField(){return y1Text;}
+    TextField getY1TextField(){return y1Text;}
 
     public String getY2(){return y2Text.getText();}
     public void setY2(String x2String){this.y2Text.setText(x2String);}
-    public TextField getY2TextField(){return y2Text;}
+    TextField getY2TextField(){return y2Text;}
 
-    public String getDx(){return nText.getText();}
-    public void setDx(String dx){ nText.setText(dx);}
-    public TextField getDxTextField(){return nText;}
+    String getDx(){return nText.getText();}
+    void setDx(String dx){ nText.setText(dx);}
+    TextField getDxTextField(){return nText;}
 
-    public String getNText(){return nText.getText();}
+    String getNText(){return nText.getText();}
     public void setnText(int n){ nText.setText(""+n);}
-    public TextField getNTextField(){return nText;}
+    private TextField getNTextField(){return nText;}
 
 
 
 
-    public String getDialogMark(){
+    String getDialogMark(){
         if (markToggleGroup.getSelectedToggle().toString().contains(".")) return ".";
         else if (markToggleGroup.getSelectedToggle().toString().contains("x")) return "x";
         else if (markToggleGroup.getSelectedToggle().toString().contains("o")) return "o";
         else return charMarkText.toString();
     }
 
-    public void settDialogMark(String mark){
+    void settDialogMark(String mark){
            if (mark.equals(".")) pointMarkRButton.setSelected(true);
            else if (mark.equals("x")) xMarkRButton.setSelected(true);
            else if (mark.equals("0")) oMarkRButton.setSelected(true);
@@ -1044,7 +1047,7 @@ public class GrafDialogController {
 
     private GrafType getGrafType(){return workingObject.getType();}
 
-    public TextField getTextForDisplay() {
+    TextField getTextForDisplay() {
         return textForDisplay;
     }
 
@@ -1064,7 +1067,7 @@ public class GrafDialogController {
         return this.fontName.getText();
     }
 
-    public void setFontName(String fontNameString) {
+    void setFontName(String fontNameString) {
         this.fontName.setText(fontNameString);
     }
 
@@ -1072,23 +1075,23 @@ public class GrafDialogController {
         return fontStyle.getText();
     }
 
-    public void setFontStyleText(String fontStyle) {
+    void setFontStyleText(String fontStyle) {
         this.fontStyle.setText(fontStyle);
     }
 
-    public void setFontSizeText(String fSize){fontSize.setText(fSize); }
+    void setFontSizeText(String fSize){fontSize.setText(fSize); }
 
-    public boolean getFNS() {
+    boolean getFNS() {
         return fns.isSelected();
     }
-    public void setFNS(boolean fnsFlag) {      this.fns.setSelected(fnsFlag);    }
+    void setFNS(boolean fnsFlag) {      this.fns.setSelected(fnsFlag);    }
 
 
-    public void setColumn1ChooserColumn(int choice){
+    void setColumn1ChooserColumn(int choice){
         fComboBox.getSelectionModel().select(choice);
     }
 
-    public int getColumn1ChooserColumn(){
+    int getColumn1ChooserColumn(){
         return fComboBox.getSelectionModel().getSelectedIndex()+1;
     }
 
@@ -1096,15 +1099,15 @@ public class GrafDialogController {
         fComboBox2.getSelectionModel().select(choice);
     }
 
-    public int getColumn2ChooserColumn(){
+    int getColumn2ChooserColumn(){
         return fComboBox2.getSelectionModel().getSelectedIndex()+1;
     }
 
-    public String getClassWidthText(){        return classWidthText.getText();    }
-    public void setClassWidthText(String s){ classWidthText.setText(s);}
-    public TextField getClassWidthTextField(){return classWidthText;    }
+    String getClassWidthText(){        return classWidthText.getText();    }
+    void setClassWidthText(String s){ classWidthText.setText(s);}
+    TextField getClassWidthTextField(){return classWidthText;    }
 
-    public boolean isConnected(){
+    boolean isConnected(){
         return fns.isSelected();
     }
 
@@ -1112,25 +1115,25 @@ public class GrafDialogController {
         return fComboBox.getValue();
     }
 
-    public CheckBox getCountCheckBox() {        return countCheckBox;    }
+    CheckBox getCountCheckBox() {        return countCheckBox;    }
     public void setCountCheckBox(CheckBox countCheckBox) {        this.countCheckBox = countCheckBox;    }
 
-    public CheckBox getBoundariesCheckBox() {        return boundariesCheckBox;    }
+    CheckBox getBoundariesCheckBox() {        return boundariesCheckBox;    }
     public void setBoundariesCheckBox(CheckBox boundariesCheckBox) {        this.boundariesCheckBox = boundariesCheckBox;    }
 
-    public RadioButton getNumClassButton() {       return numClassButton;    }
+    RadioButton getNumClassButton() {       return numClassButton;    }
     public void setNumClassButton(RadioButton numClassButton) {        this.numClassButton = numClassButton;    }
 
-    public RadioButton getClassSizeButton(){ return classSizeButton;}
+    RadioButton getClassSizeButton(){ return classSizeButton;}
     public void setClassSizeButton(RadioButton classSizeButton) {        this.classSizeButton = classSizeButton;    }
 
-    public int getNumClasses(){
+    int getNumClasses(){
         if (GrafInputHelpers.isInt(numClasses.getText())) return Integer.parseInt(numClasses.getText());
         if (GrafInputHelpers.isDouble((numClasses.getText()))) return (int)(Math.round(Double.parseDouble(numClasses.getText())));
         return 7;
     }
 
-    public java.awt.Font getDefaultFont() {
+    java.awt.Font getDefaultFont() {
            return FontDialog.fxFontToAwtFont(javafx.scene.text.Font.getDefault());
 
     }
