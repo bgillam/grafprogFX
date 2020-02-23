@@ -217,12 +217,14 @@ public class GrafDialogController {
 
     //display appropriate dialog setup for object editing
 
-    private void setTextandTitle(String objectType){
-        objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(getGrafType())));
-        objectComboBox.setValue(objectType);
-        GrafProg.getDialogStage().setTitle(objectType);
-        chooseObject.setText("Choose "+objectType);
-    }
+    /*private void setTextandTitle(GrafObject workingObject){
+        GrafType objectType = workingObject.getType();
+        String objectTypeString = workingObject.getType().toString();
+        objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(objectType)));
+        objectComboBox.setValue(objectTypeString);
+        GrafProg.getDialogStage().setTitle(objectTypeString);
+        chooseObject.setText("Choose "+objectTypeString);
+    }*/
 
     @FXML
     void showFxEntryDialog()
@@ -232,7 +234,7 @@ public class GrafDialogController {
             @Override public void run() {
                 fxLabel.setVisible(true);
                 showFunctionString(true);
-                setTextandTitle("Function");
+                GrafDialogView.setTextandTitle();
             }
         });
     }
@@ -248,7 +250,7 @@ public class GrafDialogController {
                 showX1();
                 x1Label.setText("x1:");
                 showMarks();
-                setTextandTitle("Value");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -265,7 +267,7 @@ public class GrafDialogController {
                 showX1();
                 x1Label.setText("x1:");
                 showMarks();
-                setTextandTitle("Tangent");
+                GrafDialogView.setTextandTitle();
             }
         });
     }
@@ -282,7 +284,7 @@ public class GrafDialogController {
                 x1Label.setText("x1:");
                 x2Label.setText("x2:");
                 showMarks();
-                setTextandTitle("Chord");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -302,7 +304,7 @@ public class GrafDialogController {
                 showX2();
                 x2Label.setText("End:");
                 showDx();
-                setTextandTitle("Zeros");
+                GrafDialogView.setTextandTitle();
             }
         });
     }
@@ -321,7 +323,7 @@ public class GrafDialogController {
                 showX2();
                 x1Label.setText("Begin:");
                 x2Label.setText("End:");
-                setTextandTitle("Integral");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -336,7 +338,7 @@ public class GrafDialogController {
                 showColumnChooser();
                 showMarks();
                 showConnectedCheckBox();
-                setTextandTitle("Column");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -351,7 +353,7 @@ public class GrafDialogController {
                 showColumnChooser();
                 showFNS();
                 setFNS(true);
-                setTextandTitle("BoxPlot");
+                GrafDialogView.setTextandTitle();
             }
         });
     }
@@ -363,7 +365,7 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 setupHisto();
-                setTextandTitle("Histogram");
+                GrafDialogView.setTextandTitle();
             }
         });
     }
@@ -373,7 +375,7 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 setupHisto();
-                setTextandTitle("Frequency Polygon");
+                GrafDialogView.setTextandTitle();
             }
         });
     }
@@ -383,7 +385,7 @@ public class GrafDialogController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 setupHisto();
-                setTextandTitle("Ogive");
+                GrafDialogView.setTextandTitle();
             }
         });
     }
@@ -396,7 +398,7 @@ public class GrafDialogController {
                 showColumnChooser2();
                 showMarks();
                 showConnectedCheckBox();
-                setTextandTitle("Scatter Plot");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -412,7 +414,7 @@ public class GrafDialogController {
                 showX1Y1();
                 x1Label.setText("x1:");
                 y1Label.setText("y1:");
-                setTextandTitle("Point");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -429,7 +431,7 @@ public class GrafDialogController {
                 x1Label.setText("x1:");
                 y1Label.setText("y1:");
                 fontButton.setOnAction((e) -> { onFontButtonClicked(e);});
-                setTextandTitle("Text");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -446,7 +448,7 @@ public class GrafDialogController {
                 y1Label.setText("y1:");
                 x2Label.setText("x2:");
                 y2Label.setText("y2:");
-                setTextandTitle("Line Segment");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -464,7 +466,7 @@ public class GrafDialogController {
                 y1Label.setText("y1:");
                 x2Label.setText("width:");
                 y2Label.setText("height:");
-                setTextandTitle("Rectangle");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -482,7 +484,7 @@ public class GrafDialogController {
                 y1Label.setText("y1:");
                 x2Label.setText("width:");
                 y2Label.setText("height:");
-                setTextandTitle("Ellipse");
+                GrafDialogView.setTextandTitle();
 
             }
         });
@@ -499,7 +501,7 @@ public class GrafDialogController {
                 y1Label.setText("y1:");
                 x2Label.setText("r:");
                 showR();
-                setTextandTitle("Circle");            }
+                GrafDialogView.setTextandTitle();  }
         });
     }
 
@@ -934,6 +936,7 @@ public class GrafDialogController {
     }
 
     private void functionChosen() {
+        //if (fComboBox.getValue().equals(null)) return;
         if (functionString.isVisible()) {
             try {
                 //System.out.println(fComboBox.getValue());
@@ -972,7 +975,7 @@ public class GrafDialogController {
     TextField getFunctionStringTextField(){return functionString;}
 
 
-    private ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
+    public ArrayList<GrafObject> getTempGrafList(){return tempGrafList;}
     public void setTempGrafList(ArrayList<GrafObject> t){ tempGrafList = t;}
     private void initTempGrafList(){ tempGrafList = GrafProg.getGrafList();}
 
@@ -1153,6 +1156,14 @@ public class GrafDialogController {
     public GrafTable getData(){
         return GrafProg.getData();
     }
+
+    public Label getChooseObject() { return chooseObject;  }
+
+    public GrafObject getWorkingObject(){
+        return workingObject;
+    }
+
+
 
 
 
