@@ -95,7 +95,7 @@ public class GrafController {
     public void onFxInput(ActionEvent actionEvent) {
 
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxEntryDialog();
+       GrafDialogController.showFxEntryDialog();
        GrafProg.getDialogStage().show();
 
     }
