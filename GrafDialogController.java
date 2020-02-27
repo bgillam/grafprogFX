@@ -284,7 +284,7 @@ public class GrafDialogController {
         this.fillLabel = fillLabel;
     }
 
-    //Setters for GrafDialogView
+    //Calls to GrafDialog View which handles view changes per context
 
     public static void showFxEntryDialog(){
         GrafDialogView.showFxEntryDialog();
@@ -520,7 +520,9 @@ public class GrafDialogController {
         return GrafDialogView.getNumClasses();
     }
 
-
+    public static TextField getFunctionStringTextField(){
+        return GrafDialogView.getFunctionStringTextField();
+    }
 
 
 
