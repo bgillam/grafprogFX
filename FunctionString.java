@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 
 
 //import java.io.*;
+import javax.naming.NameNotFoundException;
 import javax.swing.JOptionPane;
 import java.util.Scanner;
 
@@ -412,7 +413,7 @@ public class FunctionString {
     
        
      //evaluates each occurence of a passed rightfunction and replace them with a equivalent double. Uses recursion if necessary   
-     private static String replaceRightFunction(String token, String fString) throws DomainViolationException {
+     private static String replaceRightFunction(String token, String fString){  //} throws DomainViolationException {
         
                 int tokenStartPos;
                 int tokenEndPos;
@@ -442,6 +443,7 @@ public class FunctionString {
                    try{ r = Double.parseDouble(fString.substring(tokenEndPos+2, lastRightIndex));}
                    catch (NumberFormatException e){ r = eval(fString.substring(tokenEndPos+2, lastRightIndex));}
                    //boolean domainError = false;
+                   // System.out.println(("token " + token));
                    switch (token){
                            case "ABS": {r = Math.abs(r); break;}
                            case "ARCTAN":{ r = Math.atan(r); break; }
@@ -474,7 +476,7 @@ public class FunctionString {
           }
 
     //  calls sub to evaluate occurences of each right function
-    private static String rightFunctions(String fString) throws DomainViolationException{
+    private static String rightFunctions(String fString){//} throws DomainViolationException{
               boolean alphaFound = false;
               for (int i=0; i < fString.length(); i++){ 
                   //int keyCode = KeyEvent.getExtendedKeyCodeForChar(fString.charAt(i));
@@ -515,7 +517,10 @@ public class FunctionString {
             if (pos == -1) return fString;  //multAndDiv(fString);
             leftNumber = getLeftNum(pos,fString);
             rightNumber = getRightNum(pos,fString);
-            if ((leftNumber <= 0) && ((int)(rightNumber) != rightNumber)){/*dialog or throw exception*/}
+           /* System.out.println("left: "+leftNumber);
+            System.out.println("right: "+rightNumber);*/
+            if (leftNumber == 0) return "0.0";
+            if ((leftNumber < 0) && ((int)(rightNumber) != rightNumber)){return "imaginary number";}
             else  fString = getPreString(pos,fString)+Math.pow(leftNumber, rightNumber)+getPostString(pos,fString);
         }while (true);
         
@@ -525,14 +530,15 @@ public class FunctionString {
          
     //Recursive part called after all spaces removed, unaries changed to *1, multiplication signs added in front of parentheses where needed, 
     //and x replaced with value
-    private static double eval(String fString) throws DomainViolationException{
+    private static double eval(String fString){   // throws DomainViolationException{
         int rp = 0;
         double r = 0;
         String first,fs,middle,last;
         fString = replaceDoubleOperator(fString);
         fString.toLowerCase();
-        fString = FunctionString.rightFunctions(fString);
-        if (fString.equals("domainError")) throw new DomainViolationException();
+        fString = rightFunctions(fString);
+
+        if (fString.equals("domainError")) return Double.NaN; //throw new DomainViolationException();
         int lp = fString.lastIndexOf('(');     //     getInnerLeftParensPos(fString); //find the number of left parentheses
         if (lp != -1){ 
             
@@ -554,16 +560,25 @@ public class FunctionString {
             middle = fString;
             last = "";
         }
+
         middle = doExponents(middle);
+        if (middle.equals("imaginary number")) {
+            GrafDialogView.setMessage("Error: Imaginary Number");
+            return Double.NaN;
+        }
         middle = multAndDiv(middle);
+
         middle = addAndSub(middle);
+
         fs = first+middle+last;
+        //System.out.println(fs);
         try {r = Double.parseDouble(fs);}
         catch (NumberFormatException e) {
             try {
                 r = eval(fs);
             } catch (StackOverflowError stackOverflowError) {
-                return -1;
+                GrafDialogView.setMessage("Error: Stack OverFlow");
+                return Double.NaN;
             }
         }
         return r;
@@ -608,21 +623,33 @@ public class FunctionString {
         fString = replaceMinusParen(fString);
         fString = replaceX(fString,0);  //replace x with its value
         fString = replacePI(fString); //replace pi with its approximation
+        //System.out.println(fString);
         try {
             errorCode = checkErrors(fString);
             //errorMsg(errorCode); //check for non-matching parentheses and other typo errors
-        }catch (Exception e){}
+        }catch (Exception e){System.out.println(e.toString());}
 
         //errorMsg(errorCode);
         if (errorCode != 0) {
             return errorCode; } //possibly do something, but more likely implement a try-catch later
 
-        try{ r=Double.parseDouble(fString); } //if we can't parse what we have to a number,
+        try{
+
+            r=Double.parseDouble(fString);
+
+        } //if we can't parse what we have to a number,
         catch (NumberFormatException e){
-            try{
+
+            r = eval(fString);
+
+            /*try{
+
                 r = eval(fString);
-            } catch (DomainViolationException dve){return 9;}
+
+            }
+            catch (DomainViolationException dve){return 9;}*/
         } //call eval to simplify
+
         return 0 ;
     }
        

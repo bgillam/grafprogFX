@@ -802,7 +802,7 @@ public class GrafDialogView {
             } catch (ClassCastException cce) {
                 //System.out.println("Choose a Function.");
             } catch (NullPointerException npe) {
-                System.out.println(npe.toString());
+                //System.out.println(npe.toString());
             }
         }else{
             try {
@@ -821,14 +821,12 @@ public class GrafDialogView {
     }
 
     static boolean addGrafObject(){
-
         GrafObject newObject = workingObject;
         if (!newObject.isValidInput(GrafProg.getDialogController())) {
             setMessage("Not a valid "+ getGrafType());
             return false;
         }
         newObject = newObject.createGrafObjectFromController(GrafProg.getDialogController());
-
         if (!duplicate(newObject)) getTempGrafList().add(newObject);
         setMessage(newObject.getType()+" added.");
         return true;
@@ -1063,7 +1061,7 @@ public class GrafDialogView {
         return GrafProg.getDialogController().functionChosen();
     }*/
 
-    private static void setMessage(String message){
+    public static void setMessage(String message){
         GrafProg.getDialogController().getMsg().setText(message);
     }
 
