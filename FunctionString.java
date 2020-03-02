@@ -563,7 +563,6 @@ public class FunctionString {
 
         middle = doExponents(middle);
         if (middle.equals("imaginary number")) {
-            GrafDialogView.setMessage("Error: Imaginary Number");
             return Double.NaN;
         }
         middle = multAndDiv(middle);
@@ -571,13 +570,13 @@ public class FunctionString {
         middle = addAndSub(middle);
 
         fs = first+middle+last;
-        //System.out.println(fs);
+
         try {r = Double.parseDouble(fs);}
         catch (NumberFormatException e) {
             try {
                 r = eval(fs);
             } catch (StackOverflowError stackOverflowError) {
-                GrafDialogView.setMessage("Error: Stack OverFlow");
+
                 return Double.NaN;
             }
         }
