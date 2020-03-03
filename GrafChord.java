@@ -43,7 +43,6 @@ public class GrafChord extends GrafObject implements IGrafable
         this(yString, firstX, secondX);
         setGrafColor(c);
         setMark(m);
-        
     }
    
    @Override

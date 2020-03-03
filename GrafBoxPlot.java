@@ -16,10 +16,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 
 
-
-//Class Header
-
-
 public class GrafBoxPlot extends GrafObject implements IGrafable {
     //Instance Variables
     private int columnNumber;
@@ -49,7 +45,6 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         this(column);
         setGrafColor(c);
         setShowFNS(fns);
-
     }
     
     //drawG   raf overriding method in parent GrafObject
@@ -57,7 +52,6 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
     public void drawGraf(Graphics2D gc){
         double xMin = gStuff.getXMin();
         double xMax = gStuff.getXMax();
-      
         double x = xMin;
         gc.setColor(super.getGrafColor());
         double gHeight = GrafProg.getGrafSettings().getGrafHeight();
@@ -118,7 +112,7 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         }
         vd =  vd.setScale(dec, RoundingMode.HALF_UP);
         return vd.doubleValue();
-    };
+    }
 
     @Override
     public boolean isValidInput(GrafDialogController gdf){

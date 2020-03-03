@@ -16,31 +16,21 @@ abstract public class GrafObject implements Serializable, IGrafable
 {
    private GrafType grType;
    private Color grafColor = Color.BLACK; 
-    private boolean moveable;
-    private GrafProg myOwner;
-
-   //protected ColumnChooserPanel columnChooser;
-   //protected ColorRadioMarkPanel mp;
+   private boolean moveable;
+   private GrafProg myOwner;
    protected JDialog jd = new JDialog();
-   //protected PointPanel ptPanel;
 
    public abstract void drawGraf(Graphics2D g2D);
    public abstract void autoRange();
    public abstract GrafObject createGrafObjectFromController(GrafDialogController gdc);
    public abstract boolean isValidInput(GrafDialogController gdf);
-   //{return true;}; //make abstract after refactr
 
-
-
-    public GrafSettings initGrafObject(GrafType gType){
+   public GrafSettings initGrafObject(GrafType gType){
        setGrafType(gType);
        setMoveable(false);
        setGrafColor(Color.BLACK);
        return GrafProg.getGrafSettings();
    }
-
-
-
 
     //load object fields into graf dialog
     public void loadObjectFields(GrafDialogController gdc){
@@ -50,7 +40,7 @@ abstract public class GrafObject implements Serializable, IGrafable
         gdc.getGrafColorPicker().setValue(fxColor);
     }
 
-
+    //see if every field in object equal
     public boolean deepEquals(GrafObject g) {
        if (getType() != g.getType()) return false;
        if (getGrafColor() != g.getGrafColor()) return false;
@@ -71,11 +61,7 @@ abstract public class GrafObject implements Serializable, IGrafable
        return false;
    }
    
-   /*public String[] getColumnsString(){
-       return GrafProg.getData().getHeaderArray();
-   }*/
-   
-   
+   //Getters and Setters
    public void setGrafType(GrafType gt){grType = gt;}
    public GrafType getType(){return grType; }
    

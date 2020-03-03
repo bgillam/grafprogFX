@@ -67,7 +67,7 @@ public class FrequencyChartDialog extends JDialog {
      */
     public FrequencyChartDialog() {
         //gSess=sess;
-        setBounds(100, 100, 543, 359);
+        setBounds(100, 100, 600, 359);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -540,6 +540,12 @@ public class FrequencyChartDialog extends JDialog {
         
        public static GrafTable getData(){
             return GrafProg.getData();
+       }
+
+       public static void main(String[] args){
+
+               FrequencyChartDialog frequencyChartDialog = new FrequencyChartDialog();
+               //frequencyChartDialog.
        }
         
 }

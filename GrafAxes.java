@@ -22,7 +22,6 @@ public class GrafAxes extends GrafObject
     	setGrafType(GrafType.AXES);
     	setGrafColor(Color.BLACK);
     	setMoveable(false); 
-        //setOwner(gFrame);
         gStuff = GrafProg.getGrafSettings();
         
      }
@@ -87,21 +86,4 @@ public class GrafAxes extends GrafObject
     }
 
 
-
-    // Getters and setters
-    /* Defined in the parent class GrafObject
-    public void setGrafType(GrafProg.GrafType gt){grafType = gt;}
-    public GrafProg.GrafType getType(){return grafType; }
-    
-    public boolean isMoveable(){ return moveable; } 
-    public void setMoveable(boolean tf){ moveable = tf;  }
-    public boolean getMoveable(){return moveable;}
-    
-    public void setOwner(GrafProg owner){myOwner = owner;}
-    public GrafProg getOwner(){return myOwner;}
-    
-    public void setGrafColor(Color c){grafColor = Color.BLACK;   }
-    public Color getGrafColor() { return grafColor;}
-    */
-    
 }

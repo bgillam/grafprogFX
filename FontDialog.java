@@ -71,7 +71,7 @@ public class FontDialog extends JDialog {
 		fontSize = chosenFont.getSize();
 		setModal(true);
 		setTitle("Font");
-		setBounds(100, 100, 407, 201);
+		setBounds(100, 100, 500, 201);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -341,5 +341,7 @@ public class FontDialog extends JDialog {
 					FontWeight.BOLD, FontPosture.ITALIC,  fxFont.getSize());
 			String style = fxFont.getStyle();
 			System.out.println(style);
+			FontDialog fontDialog = new FontDialog(fxFontToAwtFont(fxFont));
+			fontDialog.showFontDialog();
 		}
 }
