@@ -14,10 +14,11 @@ public class TableController {
     @FXML    private AnchorPane tablePane;
 
 
+
     public void onMenuChoice(KeyEvent keyEvent) {
     }
 
-    public AnchorPane getTablePane(){
+    AnchorPane getTablePane(){
         return tablePane;
     }
 
@@ -36,7 +37,7 @@ public class TableController {
         GrafProg.getTableGenController().showRandomDialog();
         GrafProg.getGenStage().show();
         /*RandomDialog rd = new RandomDialog(GrafProg.getData());
-        rd.showDialog()*/;
+        rd.showDialog()*/
     }
 
     public void onFunction(ActionEvent actionEvent) {
@@ -82,9 +83,7 @@ public class TableController {
         TableEditActions.cutValues(getData());
     }
 
-    public void onCopy(ActionEvent actionEvent) {
-        GrafProg.getData().getClipper().setClipboardContents(TableEditActions.getSelectedData(getData()));
-    }
+    public void onCopy(ActionEvent actionEvent) {TableEditActions.copyValues(getData());}
 
     public void onPaste(ActionEvent actionEvent) {
         TableEditActions.pasteValues(getData());
@@ -106,7 +105,7 @@ public class TableController {
         return tableMessage.getText();
     }
 
-    public void setTableMessage(String tableMessage) {
+    void setTableMessage(String tableMessage) {
         this.tableMessage.setText(tableMessage);
     }
 

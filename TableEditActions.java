@@ -2,14 +2,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class TableEditActions {
+class TableEditActions {
 
     //row and column manipulations
-    public static void deleteRows(GrafTable gTable){
+    static void deleteRows(GrafTable gTable){
         JTable table = gTable.getTable();
         DefaultTableModel model = gTable.getModel();
         int rowCount = table.getRowCount();
-        ArrayList<Integer> selected = new ArrayList<Integer>();
+        ArrayList<Integer> selected = new ArrayList<>();
         int deleteCount = 0;
         for (int i = 0; i< rowCount; i++)
             if (table.isRowSelected(i)){
@@ -17,12 +17,12 @@ public class TableEditActions {
                 deleteCount++;
             }
         if (selected.size() == 0) { gTable.setTableMessage("No rows selected!"); return;}
-        String msgString = "Delete rows ";
+        StringBuilder msgString = new StringBuilder("Delete rows ");
         for (int i = 0; i < deleteCount; i++)
-            msgString = msgString +(selected.get(i)+1)+" ";
-        msgString = msgString+"?";
+            msgString.append(selected.get(i) + 1).append(" ");
+        msgString.append("?");
         int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(null, msgString, "Delete?" , dialogButton);
+        int dialogResult = JOptionPane.showConfirmDialog(null, msgString.toString(), "Delete?" , dialogButton);
 
         if (dialogResult == JOptionPane.YES_OPTION){
             for (int i = selected.size()-1; i >= 0; i--){
@@ -36,13 +36,17 @@ public class TableEditActions {
 
 
     //cut and paste procedures
-    public static void cutValues(GrafTable gTable){
+    static void cutValues(GrafTable gTable){
         ClipboardHandler clipper = gTable.getClipper();
         gTable.getClipper().setClipboardContents(getSelectedData(gTable));
         deleteSelectedCells(gTable);
     }
 
-    public static void pasteValues(GrafTable gTable){
+    static void copyValues(GrafTable gTable){
+        gTable.getClipper().setClipboardContents(getSelectedData(gTable));
+    }
+
+    static void pasteValues(GrafTable gTable){
         JTable table = gTable.getTable();
         ClipboardHandler clipper = gTable.getClipper();
         String toParse = clipper.getClipboardContents();
@@ -50,11 +54,11 @@ public class TableEditActions {
         int row =table.getSelectedRow();
         int col = table.getSelectedColumn();
         int firstColumn = col;
-        int tIndex = -1;
-        int nlIndex = -1;
-        int index = -1;
-        boolean down = false;
-        String value = "";
+        int tIndex; // = -1;
+        int nlIndex; // = -1;
+        int index; // = -1;
+        boolean down; // = false;
+        String value; // = "";
         while (!toParse.equals("")){
             tIndex = toParse.indexOf('\t');
             nlIndex = toParse.indexOf('\n');
@@ -77,10 +81,10 @@ public class TableEditActions {
             }
             value = toParse.substring(0, index);
             //System.out.println("row: "+row+" "+"col: "+col+" "+"index: "+index+" "+"string: "+"\""+toParse+"\" value:"+value);
-            value = toParse.substring(0, index);
+            //value = toParse.substring(0, index);
             if (value.equals("null")) value = null;
             if ((row < gTable.getNumRows()) && (col <= gTable.getNumCols()))  table.setValueAt(value , row, col);
-            toParse = toParse.substring(index+1, toParse.length());
+            toParse = toParse.substring(index+1);
             if (down) {
                 row++;
                 col = firstColumn;
@@ -91,28 +95,27 @@ public class TableEditActions {
 
 
 
-    public static String getSelectedData(GrafTable gTable){
+    private static String getSelectedData(GrafTable gTable){
         JTable table = gTable.getTable();
         DefaultTableModel model = gTable.getModel();
-        String copied = "";
+        StringBuilder copied = new StringBuilder();
         int rows = gTable.getNumRows();
         int cols = gTable.getNumCols();
-        boolean newRow = false;
-        boolean firstRow = true;
+        boolean itemFound = false;
         for (int currentRow = 0; currentRow < rows; currentRow++){
-            for (int currentCol = 1; currentCol < cols ; currentCol++){
+           for (int currentCol = 1; currentCol < cols ; currentCol++){
                 if (table.isCellSelected(currentRow, currentCol)) {
-                    if (newRow) {
-                        if (!firstRow) copied = copied + "\n"; else firstRow = false;
-                        newRow = false;
-                    }
-                    copied = copied + model.getValueAt(currentRow, currentCol);
-                    copied = copied +"\t";
+                    copied.append(model.getValueAt(currentRow, currentCol));
+                    copied.append("\t");
+                    itemFound = true;
                 }
-            }
-            newRow = true;
+           }
+           if (itemFound) {
+               copied.append("\n");
+               itemFound = false;
+           }
         }
-        return copied;
+        return copied.toString();
     }
 
     private static  void deleteSelectedCells(GrafTable gTable){

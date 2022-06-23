@@ -1,14 +1,12 @@
-/**************************************** 
-*  GrafTable  for GrafProg Project 
-*  Spreadsheet for data used for stat 
-*  calculations and graphs *
-*  @author Bill Gillam                  *
-*  2/25/15    *
-*****************************************/ 
-/** 
- * Table/spreadsheet object for data input 
- * 
- */
+//
+//GrafTable  for GrafProg Project
+// Spreadsheet for data used for stat
+// calculations and graphs
+// @author Bill Gillam
+// 2/25/15
+// Table/spreadsheet object for data input
+//
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
@@ -29,7 +27,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 //class header
-class GrafTable implements KeyListener //ActionListener, KeyListener //extends JDialog implements ActionListener, KeyListener
+class GrafTable<IPasteAble> implements KeyListener, IPasteable  //ActionListener, KeyListener //extends JDialog implements ActionListener, KeyListener
  {
     private static final long serialVersionUID = 1L;
     //instance variables
@@ -92,26 +90,27 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
                }
             }
         });
+
        // table.addKeyListener(this);
     }
       
         
 
-    public void numberTheRows(){
+    void numberTheRows(){
     int rows = getNumRows();
     for (int i = 1; i <= rows; i++)
         setCellValueInteger(i , 0, i );
     }
 
-   public void refreshTable(){
+   void refreshTable(){
        GrafProg.getTableStage().hide();
        GrafProg.getTableStage().show();
    }
 
     //change the table dimensions
-    public void resizeData(){
+    void resizeData(){
       String[] oldHeaders = TableHeaderActions.getHeaderArray(this);
-      for (int i=0; i<oldHeaders.length; i++) System.out.println("-"+oldHeaders[i]);
+        for (String oldHeader : oldHeaders) System.out.println("-" + oldHeader);
       //DataSizeDialog dataDialog = new DataSizeDialog(new JFrame(), getNumRows(), getNumCols());
       javafx.scene.control.Dialog<Pair<Integer, Integer>> dataSizeDialog = new javafx.scene.control.Dialog<>();
         dataSizeDialog.setTitle("Resize Table Dimensions");
@@ -134,7 +133,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
                 if (GrafInputHelpers.isAnInteger(inputValue)) setNumRows(Integer.parseInt(inputValue));
                 else setTableMessage("Bad integer format for rows.");
                 inputValue = colInput.getText();
-                if (GrafInputHelpers.isAnInteger(inputValue)) setNumCols(Integer.valueOf(inputValue));
+                if (GrafInputHelpers.isAnInteger(inputValue)) setNumCols(Integer.parseInt(inputValue));
                 else setTableMessage("Bad integer format for columns");
                 //return new Pair<>(myRows, myCols);
             }
@@ -150,18 +149,18 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
 
 
    //   public getters and setters
-    public int getNumRows(){
+   int getNumRows(){
         return table.getRowCount();
     }
-    public void setNumRows(int rows){
+    private void setNumRows(int rows){
         model.setRowCount(rows);
     }
     
-    public int getNumCols(){
+    int getNumCols(){
         return table.getColumnCount()-1;
     }
     
-    public void setNumCols(int colNum){
+    private void setNumCols(int colNum){
         model.setColumnCount(colNum+1);
     }
     
@@ -177,7 +176,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
     }*/
     
 
-    public Double getCellValue(int row, int col){
+    Double getCellValue(int row, int col){
         Object o = model.getValueAt(row-1, col);
         if (o == null) return null;
         try{
@@ -200,7 +199,7 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
         return null;
     }
 
-    public ClipboardHandler getClipper(){
+    ClipboardHandler getClipper(){
          return clipper;
     }
 
@@ -208,24 +207,24 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
          return table;
      }
 
-    public JPanel getDataPanel(){ return dataPanel; }
+    JPanel getDataPanel(){ return dataPanel; }
 
-    public void setCellValueDouble(int row, int col, double value){
+    void setCellValueDouble(int row, int col, double value){
            model.setValueAt(value, row-1,  col);
     }
     
-    public void setCellValueInteger(int row, int col, int value){
+    private void setCellValueInteger(int row, int col, int value){
        model.setValueAt(value, row-1,  col); //we are using a starting row of 1 vs zero
    }
     
-    public void setCellValueNull(int row, int col){
+    void setCellValueNull(int row, int col){
        model.setValueAt(null, row-1,  col); //we are using a starting row of 1 vs zero
     }
 
-     public void setHeaderString(int c, String s){
+     void setHeaderString(int c, String s){
          table.getColumnModel().getColumn(c).setHeaderValue(s);
      }
-     public String getHeaderString(int c){
+     String getHeaderString(int c){
          return (String)table.getColumnModel().getColumn(c).getHeaderValue();
      }
 
@@ -258,13 +257,17 @@ class GrafTable implements KeyListener //ActionListener, KeyListener //extends J
          return GrafStats.getRidOfNulls(d);
     }
 
-    public void setTableMessage(String message){
-        gSess.getTableController().setTableMessage(message);
+    void setTableMessage(String message){
+        GrafProg.getTableController().setTableMessage(message);
     }
 
-    public DefaultTableModel getModel(){
+    DefaultTableModel getModel(){
         return model;
     }
+
+    public void cut(){TableEditActions.cutValues(this);}
+    public void copy(){TableEditActions.copyValues(this);}
+    public void paste(){TableEditActions.pasteValues(this);}
 
 
 //mainfor testing

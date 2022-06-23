@@ -4,7 +4,9 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
@@ -20,26 +22,43 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
 public class GrafController {
 
         //instance variables shared with fxml file
-    @FXML    private SwingNode testNode;
+    //@FXML    private SwingNode testNode;
     @FXML    private javafx.scene.control.Label message1;
     @FXML    private javafx.scene.control.Label message2;
     @FXML    private javafx.scene.control.Label message3;
     @FXML    private AnchorPane grafPane;
-    //@ FXML  public BorderPane mainPane;
+
+    @ FXML  public BorderPane mainPane;
+
+    @FXML
+    public void showDialog(){
+        javafx.scene.control.Dialog<ButtonType> dialog = new javafx.scene.control.Dialog<>();
+        dialog.initOwner(mainPane.getScene().getWindow());
+        FXMLLoader fxmlLoader= new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("GrafDialog.fxml"));
+        try{
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        }
+        catch (IOException e){
+            System.out.println("No Dialog");
+        }
+        dialog.showAndWait();
+    }
 
     //
     @FXML    private void onMenuChoice(KeyEvent keyEvent) {
     }
 
-    @FXML    private void exitApplicaton(ActionEvent ae){
+/*    @FXML    private void exitApplicaton(ActionEvent ae){
         Platform.exit();
-    }
+    }*/
 
     @FXML
     private void fileNew(ActionEvent actionEvent) {
@@ -69,27 +88,15 @@ public class GrafController {
 
 
     public void setMessage1(String message){
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                message1.setText(message);
-            }
-        });
+        Platform.runLater(() -> message1.setText(message));
     }
 
     public void setMessage2(String message){
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                message2.setText(message);
-            }
-        });
+        Platform.runLater(() -> message2.setText(message));
     }
 
-    public void setMessage3(String message){
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                message3.setText(message);
-            }
-        });
+    void setMessage3(String message){
+        Platform.runLater(() -> message3.setText(message));
     }
 
     public void onFxInput(ActionEvent actionEvent) {
@@ -103,70 +110,70 @@ public class GrafController {
 
     public void onFxValue(ActionEvent actionEvent) {
      GrafProg.getDialogController().hideAll();
-     GrafProg.getDialogController().showFxValueDialog();
+     GrafDialogController.showFxValueDialog();
      GrafProg.getDialogStage().show();
 
     }
 
     public void onFxTangent(ActionEvent actionEvent) {
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxTangentDialog();
+       GrafDialogController.showFxTangentDialog();
        GrafProg.getDialogStage().show();
     }
 
 
     public void onFxChord(ActionEvent actionEvent) {
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxChordDialog();
+       GrafDialogController.showFxChordDialog();
        GrafProg.getDialogStage().show();
 
     }
 
     public void onFxIntegral(ActionEvent actionEvent) {
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxIntegralDialog();
+       GrafDialogController.showFxIntegralDialog();
        GrafProg.getDialogStage().show();
     }
 
     public void onFxZeros(ActionEvent actionEvent) {
        GrafProg.getDialogController().hideAll();
-       GrafProg.getDialogController().showFxZerosDialog();
+       GrafDialogController.showFxZerosDialog();
        GrafProg.getDialogStage().show();
     }
 
     public void onPoint(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showPointDialog();
+        GrafDialogController.showPointDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onText(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showTextDialog();
+        GrafDialogController.showTextDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onLineSegment(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showLineSegmentDialog();
+        GrafDialogController.showLineSegmentDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onRectangle(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showRectangleDialog();
+        GrafDialogController.showRectangleDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onEllipse(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showEllipseDialog();
+        GrafDialogController.showEllipseDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onCircle(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showCircleDialog();
+        GrafDialogController.showCircleDialog();
         GrafProg.getDialogStage().show();
     }
 
@@ -178,32 +185,32 @@ public class GrafController {
 
     public void onColumnPlot(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showColumnPlotDialog();
+        GrafDialogController.showColumnPlotDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onBoxplot(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showBoxplotDialog();
+        GrafDialogController.showBoxplotDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onHistogram(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showHistogramDialog();
+        GrafDialogController.showHistogramDialog();
         GrafProg.getDialogStage().show();
 
     }
 
     public void onFreqPolygon(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showFreqPolyDialog();
+        GrafDialogController.showFreqPolyDialog();
         GrafProg.getDialogStage().show();
     }
 
     public void onOgive(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showOgiveDialog();
+        GrafDialogController.showOgiveDialog();
         GrafProg.getDialogStage().show();
 
 
@@ -211,7 +218,7 @@ public class GrafController {
 
     public void onScatterPlot(ActionEvent actionEvent) {
         GrafProg.getDialogController().hideAll();
-        GrafProg.getDialogController().showScatterDialog();
+        GrafDialogController.showScatterDialog();
         GrafProg.getDialogStage().show();
     }
 
@@ -231,7 +238,7 @@ public class GrafController {
     }
 
 
-    public AnchorPane getGrafPane(){return grafPane;}
+    AnchorPane getGrafPane(){return grafPane;}
 
     public void onCloseGraf(ActionEvent actionEvent) {
         if (GrafProg.closeGraf())
@@ -264,27 +271,25 @@ public class GrafController {
     }
 
     public void onAuto(ActionEvent actionEvent) {
-           Platform.runLater(new Runnable() {
-                @Override public void run() {
-                    ObservableList objectList = FXCollections.observableArrayList(GrafProg.getGrafList());
-                    if (objectList.size() > 1) {
-                        objectList.remove(0);
-                        ChoiceDialog autoDialog = new ChoiceDialog(objectList.get(0), objectList);
-                        autoDialog.setTitle("AutoRange");
-                        autoDialog.setHeaderText("Select Item for AutoRange\n Axes --> Standard Window");
-                        Optional<GrafObject> result = autoDialog.showAndWait();
-                        GrafObject chosenObject = result.get();
-                        chosenObject.autoRange();
-                    }
-                    else {
-                         Alert noObjects = new Alert(Alert.AlertType.ERROR);
-                         noObjects.setTitle("No GrafObjects!");
-                         noObjects.setHeaderText("No GrafObjects have been created. \nCan't AutoRange.");
-                         noObjects.showAndWait();
-                    }
+           Platform.runLater(() -> {
+               ObservableList objectList = FXCollections.observableArrayList(GrafProg.getGrafList());
+               if (objectList.size() > 1) {
+                   objectList.remove(0);
+                   ChoiceDialog autoDialog = new ChoiceDialog(objectList.get(0), objectList);
+                   autoDialog.setTitle("AutoRange");
+                   autoDialog.setHeaderText("Select Item for AutoRange\n Axes --> Standard Window");
+                   Optional<GrafObject> result = autoDialog.showAndWait();
+                   GrafObject chosenObject = result.get();
+                   chosenObject.autoRange();
+               }
+               else {
+                    Alert noObjects = new Alert(Alert.AlertType.ERROR);
+                    noObjects.setTitle("No GrafObjects!");
+                    noObjects.setHeaderText("No GrafObjects have been created. \nCan't AutoRange.");
+                    noObjects.showAndWait();
+               }
 
-                }
-            });
+           });
 
         //Scales.autoRange(GrafProg.getGrafSettings(), );
             }
