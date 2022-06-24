@@ -1,5 +1,5 @@
 
-/**
+/* *
  * Oject for graphing a point
  * 
  * @author Bill Gillam
@@ -16,7 +16,7 @@ import javax.swing.JComboBox;
 public class GrafPoint extends GrafText implements IGrafable
 {
    //Constructors      
-   public GrafPoint(){
+   GrafPoint(){
        super();
        //gStuff = super.initGrafObject(GrafType.POINT);
        setGrafType(GrafType.POINT);
@@ -35,14 +35,14 @@ public class GrafPoint extends GrafText implements IGrafable
         setGrafType(GrafType.POINT);
     }
     
-   public GrafPoint(double x, double y, String t, Color c){
+   GrafPoint(double x, double y, String t, Color c){
         super(x, y, t);
 
         setGrafType(GrafType.POINT);
         setGrafColor(c);
    }
    
-   public GrafPoint(double x, double y, String t, Font f, Color c){
+   private GrafPoint(double x, double y, String t, Font f, Color c){
         super(x, y, t, f, c);
         setGrafType(GrafType.POINT);
    }
@@ -59,14 +59,14 @@ public class GrafPoint extends GrafText implements IGrafable
     @Override
     public boolean isValidInput(GrafDialogController gdf){
        boolean ok = true;
-        if (gdf.getX1().equals("")) return false;
-        if (gdf.getY1().equals("")) return false;
-        if (!GrafInputHelpers.isDouble(gdf.getX1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red" );
+        if (GrafDialogController.getX1().equals("")) return false;
+        if (GrafDialogController.getY1().equals("")) return false;
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX1TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getY1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getY1TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getY1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getY1TextField(), "red" );
             ok = false;
         }
         return ok;
@@ -79,16 +79,15 @@ public class GrafPoint extends GrafText implements IGrafable
         if (!getMark().equals(gp.getMark())) return false;
         if (!getGrafColor().equals(gp.getGrafColor())) return false;
         if (!(getX() == gp.getX())) return false;
-        if (!(getY() == gp.getY())) return false;
-        return true;
+        return getY() == gp.getY();
     }
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
 
-        gdc.setX1(""+getX());
-        gdc.setY1(""+getY());
+        GrafDialogController.setX1(""+getX());
+        GrafDialogController.setY1(""+getY());
         gdc.settDialogMark(getMark());
     }
    
@@ -115,7 +114,7 @@ public class GrafPoint extends GrafText implements IGrafable
 
     @Override
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
-        return new GrafPoint(Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getDialogMark(), gdc.getDefaultFont(),  gdc.getGrafColor());
+        return new GrafPoint(Double.parseDouble(GrafDialogController.getX1()), Double.parseDouble(GrafDialogController.getY1()), gdc.getDialogMark(), gdc.getDefaultFont(),  gdc.getGrafColor());
     }
     
 }

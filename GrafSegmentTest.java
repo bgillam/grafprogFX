@@ -17,10 +17,8 @@ import java.util.ArrayList;
 
 public class GrafSegmentTest
 {
-    private GrafProg  gSess;
     private GrafSegment gSeg;
-    private ArrayList<GrafObject> aList;
-    private ArrayList<Integer> indexList;
+
     /**
      * Default constructor for test class GrafPointTest
      */
@@ -36,18 +34,18 @@ public class GrafSegmentTest
     @Before
     public void setUp()
     {
-       gSess = new GrafProg();
+        GrafProg gSess = new GrafProg();
        gSeg = new GrafSegment(2, 3, 4, 5);
-       aList = MockMaker.createMockObjectList(gSess);
-       indexList = MockMaker.createMockIndexList(aList, GrafType.LINESEGMENT);
+        ArrayList<GrafObject> aList = MockMaker.createMockObjectList(gSess);
+        ArrayList<Integer> indexList = MockMaker.createMockIndexList(aList, GrafType.LINESEGMENT);
     }
     
     @Test
     public void drawGrafTest(){
         assertNotNull(gSeg.getGrafColor());
-        assertNotNull(gSess.getGrafPanel());
-        assertNotNull(gSess.getGrafPanel().getGraphics());
-        Graphics g = gSess.getGrafPanel().getGraphics();
+        assertNotNull(GrafProg.getGrafPanel());
+        assertNotNull(GrafProg.getGrafPanel().getGraphics());
+        Graphics g = GrafProg.getGrafPanel().getGraphics();
         gSeg.drawGraf((Graphics2D)g);
     }
     
@@ -91,7 +89,7 @@ public class GrafSegmentTest
     } 
    
    
-    /**
+    /* *
      * Tears down the test fixture.
      *
      * Called after every test case method.

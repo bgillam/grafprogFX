@@ -5,7 +5,7 @@
  */
 //import javax.swing.*;
 import java.io.*;
-import java.awt.*;;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -22,15 +22,15 @@ public class GrafChord extends GrafObject implements IGrafable
         private double y1 = 0;
         private double x2 = 0;
         private double y2 = 0;
-        boolean segment = true;
+        private boolean segment = true;
         //private String yString = "";
         
-   public GrafChord(){
+   GrafChord(){
         gStuff = super.initGrafObject(GrafType.CHORD);
    }
         
 
-   public GrafChord(String yString, double firstX, double secondX){
+   private GrafChord(String yString, double firstX, double secondX){
         this();
         setFunctionString(yString);
         x1 = firstX;
@@ -39,7 +39,7 @@ public class GrafChord extends GrafObject implements IGrafable
         calcY2();
     }
     
-    public GrafChord(String yString, double firstX, double secondX, Color c, String m){
+    private GrafChord(String yString, double firstX, double secondX, Color c, String m){
         this(yString, firstX, secondX);
         setGrafColor(c);
         setMark(m);
@@ -66,14 +66,14 @@ public class GrafChord extends GrafObject implements IGrafable
     public boolean isValidInput(GrafDialogController gdf){
        boolean ok=true;
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
-        if (gdf.getX1().equals("")) return false;
-        if (gdf.getX2().equals("")) return false;
-        if (!GrafInputHelpers.isDouble(gdf.getX1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red");
+        if (GrafDialogController.getX1().equals("")) return false;
+        if (GrafDialogController.getX2().equals("")) return false;
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX1TextField(), "red");
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getX2())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red");
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX2())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX2TextField(), "red");
             ok = false;
         }
         return ok;
@@ -87,16 +87,15 @@ public class GrafChord extends GrafObject implements IGrafable
         if (!functionString.equals(gc.getFunctionString())) return false;
         if (!(getX1() == gc.getX1())) return false;
         if (!(getX2() == gc.getX2())) return false;
-        if (!getMark().equals(gc.getMark())) return false;
-        return true;
+        return getMark().equals(gc.getMark());
     }
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
         gdc.setFunctionString(getFunctionString());
-        gdc.setX1(""+getX1());
-        gdc.setX2(""+getX2());
+        GrafDialogController.setX1(""+getX1());
+        GrafDialogController.setX2(""+getX2());
         gdc.settDialogMark(getMark());
     }
 
@@ -110,7 +109,7 @@ public class GrafChord extends GrafObject implements IGrafable
 
     @Override
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
-        return new GrafChord(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),   gdc.getGrafColor(), gdc.getDialogMark());
+        return new GrafChord(gdc.getFunctionString(), Double.parseDouble(GrafDialogController.getX1()), Double.parseDouble(GrafDialogController.getX2()),   gdc.getGrafColor(), gdc.getDialogMark());
     }
 
 
@@ -121,22 +120,22 @@ public class GrafChord extends GrafObject implements IGrafable
    public double getX2() { return x2; } 
 
 
-   public void calcY1(){
-       try {
+   private void calcY1(){
+   //    try {
         y1 = FunctionString.fValue(functionString, x1);
-    } catch (DomainViolationException e) {
+    //} catch (DomainViolationException e) {
         JOptionPane.showMessageDialog(null, "Error!", "x1 not in domain of function " , JOptionPane.ERROR_MESSAGE);
         x1 = 0; y1 = 0; x2 = 0; y2 = 0;
-    } catch (FunctionFormatException e) {}   
+    //} catch (FunctionFormatException e) {System.out.println(e.toString());}
        
    }
-   public void calcY2(){
-       try {
+   private void calcY2(){
+   //    try {
         y2 = FunctionString.fValue(functionString, x2);
-    } catch (DomainViolationException e) {
+    //} catch (DomainViolationException e) {
         JOptionPane.showMessageDialog(null, "Error!", "x2 not in domain of function " , JOptionPane.ERROR_MESSAGE);
         x1 = 0; y1 = 0; x2 = 0; y2 = 0;
-    }  catch (FunctionFormatException e) {}    
+    //}  catch (FunctionFormatException e) {System.out.println(e.toString());}
    }
    public void setFunctionString(String fString){ functionString = fString; }
    public String getFunctionString() { return functionString; } 

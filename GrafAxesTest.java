@@ -39,9 +39,9 @@ public class GrafAxesTest
     
     @Test
     public void drawGrafTest(){
-        assertNotNull(gSess.getGrafPanel());
-        assertNotNull(gSess.getGrafPanel().getGraphics());
-        Graphics g = gSess.getGrafPanel().getGraphics();
+        assertNotNull(GrafProg.getGrafPanel());
+        assertNotNull(GrafProg.getGrafPanel().getGraphics());
+        Graphics g = GrafProg.getGrafPanel().getGraphics();
         gAxes.drawGraf((Graphics2D)g);
     }
     

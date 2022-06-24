@@ -46,9 +46,9 @@ public class GrafScatterplotTest
     @Test
     public void drawGrafTest(){
         assertNotNull(gScat.getGrafColor());
-        assertNotNull(gSess.getGrafPanel());
-        assertNotNull(gSess.getGrafPanel().getGraphics());
-        Graphics g = gSess.getGrafPanel().getGraphics();
+        assertNotNull(GrafProg.getGrafPanel());
+        assertNotNull(GrafProg.getGrafPanel().getGraphics());
+        Graphics g = GrafProg.getGrafPanel().getGraphics();
         gScat.drawGraf((Graphics2D)g);
     }
     
@@ -90,7 +90,7 @@ public class GrafScatterplotTest
         gScat.setOutputColumnNumber(2);
         assertEquals(gScat.getOutputColumnNumber(),2);
         gScat.setConnected(true);
-        assertEquals(gScat.getConnected(),true);
+        assertTrue(gScat.getConnected());
     }
 
     /**

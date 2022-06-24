@@ -38,7 +38,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
 
 
         //Constructor
-        public GrafFreqPolygon(){
+        GrafFreqPolygon(){
             gStuff = super.initGrafObject(GrafType.FREQPOLYGON);
             setColumnNumber(1);
             table = GrafProg.getData();
@@ -48,13 +48,13 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
 
 
         //constructor
-        public GrafFreqPolygon(int column){
+        private GrafFreqPolygon(int column){
             this();
             setColumnNumber(column);
             GrafProg.setMessage1("Histogram for Column "+columnNumber);
         }
 
-        public GrafFreqPolygon(int column, double b, double e, int numCl, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
+        private GrafFreqPolygon(int column, double b, double e, int numCl, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
             this(column);
             setFillColor(fillColor);
             setLabelAxisByBoundries(boundries);
@@ -69,7 +69,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
             classWidth = classLimits[1] - classLimits[0];
         }
 
-        public GrafFreqPolygon( int column, double b, double e, double classW, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
+        private GrafFreqPolygon(int column, double b, double e, double classW, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
             this(column);
             setFillColor(fillColor);
             setLabelAxisByBoundries(boundries);
@@ -99,10 +99,10 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
             int numValues = temp.length;
             String formatString = "%."+gStuff.getDecPlaces()+"f";
             double[] counts = getCounts(numValues,temp);
-            if (myOwner.getGrafSettings().getReverseXY()) grafOnY(numValues, counts, gc);
+            if (GrafProg.getGrafSettings().getReverseXY()) grafOnY(numValues, counts, gc);
             else grafOnX(numValues, counts, gc);
-            myOwner.setMessage2("");
-            myOwner.incrementBoxPlotsPlotted();
+            GrafProg.setMessage2("");
+            GrafProg.incrementBoxPlotsPlotted();
             gc.setColor(Color.BLACK);
 
         }
@@ -112,7 +112,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
             double lastCount = 0;
             double lastX = 0;
             double[] x = new double[classLimits.length];
-            double[] y = new double[classLimits.length];;
+            double[] y = new double[classLimits.length];
             for (int j = 0; j < classLimits.length-1; j++) {
                 if (relative) height = counts[j]/numValues; else height = counts[j];
                //implement fill here
@@ -162,8 +162,8 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
                 if (relative) height = counts[j]/numValues; else height = counts[j];
                 //implement fill here
                 gc.setColor(getGrafColor());
-
-                GrafPrimitives.grafRect(gStuff,lastCount, classLimits[j]-0.5*getClassWidth(), height, classLimits[j]+0.5*getClassWidth(), gc);
+                double barW = height;
+                GrafPrimitives.grafRect(gStuff,lastCount, classLimits[j]-0.5*getClassWidth(), barW, classLimits[j]+0.5*getClassWidth(), gc);
                 lastCount = height;
                 lastX = classLimits[j]+0.5*getClassWidth();
 
@@ -176,7 +176,8 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
                 if (displayCounts)  GrafPrimitives.grafString(gStuff,height+gStuff.getGrafHeight()/50,classLimits[j]+classWidth/2, ""+counts[j], gc);
                 //System.out.println(counts[j]);
             }
-            GrafPrimitives.grafLine(gStuff,lastCount, lastX, 0, lastX+getClassWidth(), gc);
+            double barH = lastX;
+            GrafPrimitives.grafLine(gStuff,lastCount, barH, 0, lastX+getClassWidth(), gc);
         }
 
 
@@ -257,9 +258,9 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
 
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
         if (gdc.getNumClassButton().isSelected())
-            return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+            return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(GrafDialogController.getX1()), Double.parseDouble(GrafDialogController.getX2()),
                     gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
-        else  return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+        else  return new GrafFreqPolygon(gdc.getColumn1ChooserColumn(), Double.parseDouble(GrafDialogController.getX1()), Double.parseDouble(GrafDialogController.getX2()),
                 Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS());
     }
 

@@ -27,13 +27,13 @@ public class GrafSegment extends GrafObject implements IGrafable
         //private String yString = "";
         
         
-   public GrafSegment(){
-       gStuff = gStuff = super.initGrafObject(GrafType.LINESEGMENT);
+   GrafSegment(){
+       gStuff = super.initGrafObject(GrafType.LINESEGMENT);
         
        }
         
 
-   public GrafSegment(double x1, double y1, double x2, double y2){
+   GrafSegment(double x1, double y1, double x2, double y2){
         this();
         setX1(x1);
         setY1(y1);
@@ -41,12 +41,12 @@ public class GrafSegment extends GrafObject implements IGrafable
         setY2(y2);
     }
     
-    public GrafSegment(double x1, double y1, double x2, double y2, Color gColor){
+    private GrafSegment(double x1, double y1, double x2, double y2, Color gColor){
         this(x1, y1, x2, y2);
         setGrafColor(gColor);
     }
 
-    public GrafSegment(double x1, double y1, double x2, double y2, Color gColor, String mark){
+    private GrafSegment(double x1, double y1, double x2, double y2, Color gColor, String mark){
         this(x1, y1, x2, y2, gColor);
         setMark(mark);
     }
@@ -65,24 +65,24 @@ public class GrafSegment extends GrafObject implements IGrafable
     public boolean isValidInput(GrafDialogController gdf){
        boolean ok = true;
         //if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
-        if (gdf.getX1().equals("")) return false;
-        if (gdf.getX2().equals("")) return false;
-        if (gdf.getY1().equals("")) return false;
-        if (gdf.getY2().equals("")) return false;
-        if (!GrafInputHelpers.isDouble(gdf.getX1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red" );
+        if (GrafDialogController.getX1().equals("")) return false;
+        if (GrafDialogController.getX2().equals("")) return false;
+        if (GrafDialogController.getY1().equals("")) return false;
+        if (GrafDialogController.getY2().equals("")) return false;
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX1TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getX2())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX2())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX2TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getY1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getY1TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getY1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getY1TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getY2())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getY2TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getY2())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getY2TextField(), "red" );
             ok = false;
         }
         return ok;
@@ -97,16 +97,15 @@ public class GrafSegment extends GrafObject implements IGrafable
         if (!(getX2() == gc.getX2())) return false;
         if (!(getY1() == gc.getY1())) return false;
         if (!(getY2() == gc.getY2())) return false;
-        if (!(getX1() == gc.getX1())) return false;
-        if (!getMark().equals(gc.getMark())) return false;
-        return true;
+        ///if (!(getX1() == gc.getX1())) return false;
+        return getMark().equals(gc.getMark());
     }
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
-        gdc.setX1(""+getX1());
-        gdc.setX2(""+getX2());
+        GrafDialogController.setX1(""+getX1());
+        GrafDialogController.setX2(""+getX2());
         gdc.settDialogMark(getMark());
     }
 
@@ -120,8 +119,8 @@ public class GrafSegment extends GrafObject implements IGrafable
 
     @Override
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
-        return new GrafSegment(Double.parseDouble(gdc.getX1()),
-                Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()), Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getDialogMark());
+        return new GrafSegment(Double.parseDouble(GrafDialogController.getX1()),
+                Double.parseDouble(GrafDialogController.getY1()), Double.parseDouble(GrafDialogController.getX2()), Double.parseDouble(GrafDialogController.getY2()), gdc.getGrafColor(), gdc.getDialogMark());
     }
 
    public void setX1(double xval){ x1 = xval; }

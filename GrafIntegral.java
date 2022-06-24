@@ -21,17 +21,17 @@ public class GrafIntegral extends GrafObject implements IGrafable
         private String mark =".";
         private double x1 = 0;
         private double x2 = 0;
-        int n=100;
-        Color fillColor = Color.WHITE;
+        private int n=100;
+        private Color fillColor = Color.WHITE;
         //private String yString = "";
         
-   public GrafIntegral(){
+   GrafIntegral(){
        gStuff = super.initGrafObject(GrafType.INTEGRAL);
        
        }     
         
 
-       public GrafIntegral(String yString, double firstX, double secondX, int nVal){
+       private GrafIntegral(String yString, double firstX, double secondX, int nVal){
         this();
         setFunctionString(yString);
         x1 = firstX;
@@ -42,7 +42,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
     }
        
        
-   public GrafIntegral(String yString, double firstX, double secondX, int nVal, Color c, Color fillColor){
+   private GrafIntegral(String yString, double firstX, double secondX, int nVal, Color c, Color fillColor){
         this(yString, firstX, secondX, nVal);
         super.setGrafColor(c);
         setFillColor(fillColor);
@@ -55,11 +55,11 @@ public class GrafIntegral extends GrafObject implements IGrafable
        double height;
        double sum=0;
        for (double left = x1; left < x2; left+=dx){
-           try {
+           //try {
                height = (FunctionString.fValue(functionString, left) + FunctionString.fValue(functionString, left+dx))/2;
-           } catch (DomainViolationException e) {
-               height = 0;
-           }catch (FunctionFormatException e) { height = 0; }   
+           //} catch (DomainViolationException | FunctionFormatException e) {
+            //   height = 0;
+           //}
            sum = sum + dx*height;
            if (height >= 0) {
                gc.setColor(getFillColor());
@@ -74,8 +74,8 @@ public class GrafIntegral extends GrafObject implements IGrafable
                GrafPrimitives.grafRect(gStuff,left, 0, dx, height, gc);
            }
           // gStuff.grafRect(left, 0, dx, height, gc);
-           myOwner.setMessage3("Sum = "+sum);
-           myOwner.setMessage2("Area from "+x1+" to "+x2+" estimated with "+n+" rectangles");
+           GrafProg.setMessage3("Sum = "+sum);
+           GrafProg.setMessage2("Area from "+x1+" to "+x2+" estimated with "+n+" rectangles");
        }
        
        gc.setColor(Color.BLACK);
@@ -86,19 +86,19 @@ public class GrafIntegral extends GrafObject implements IGrafable
     public boolean isValidInput(GrafDialogController gdf){
        boolean ok = true;
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
-        if (gdf.getX1().equals("")) return false;
-        if (gdf.getX2().equals("")) return false;
+        if (GrafDialogController.getX1().equals("")) return false;
+        if (GrafDialogController.getX2().equals("")) return false;
         if (gdf.getNText().equals("")) return false;
-        if (!GrafInputHelpers.isDouble(gdf.getX1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX1TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getX2())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX2())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX2TextField(), "red" );
             ok = false;
         }
         if (!GrafInputHelpers.isDouble(gdf.getDx())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getDxTextField(), "red" );
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getDxTextField(), "red" );
             ok = false;
         }
         return ok;
@@ -113,28 +113,27 @@ public class GrafIntegral extends GrafObject implements IGrafable
         if (!functionString.equals(gi.getFunctionString())) return false;
         if (!(getX1() == gi.getX1())) return false;
         if (!(getX2() == gi.getX2())) return false;
-        if (!(getN() == gi.getN())) return false;
-        return true;
+        return getN() == gi.getN();
     }
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
         gdc.setFunctionString(getFunctionString());
-        gdc.setX1(""+getX1());
-        gdc.setX2(""+getX2());
+        GrafDialogController.setX1(""+getX1());
+        GrafDialogController.setX2(""+getX2());
         gdc.setDx(""+getN());
         gdc.setfillColor(getFillColor());
    }
 
     @Override
     public void autoRange(){
-        double y1 = 10;
-        double y2 = -10;
+        double y1;
+        double y2;
         try{
             y1 = FunctionString.fValue(getFunctionString(), getX1());
             y2 = FunctionString.fValue(getFunctionString(),  getX2());
-        }catch(Exception e){JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;};
+        }catch(Exception e){JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;}
         double max, min;
         if (y1<y2){ max = y2; min = y1;} else {max = y1; min = y2; }
         GrafProg.getGrafSettings().setYMax(max+GrafProg.getGrafSettings().getTenthWindowY());
@@ -143,7 +142,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
 
     @Override
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
-        return new GrafIntegral(gdc.getFunctionString(),Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()), Integer.parseInt(gdc.getNText()), gdc.getGrafColor(), gdc.getFillColor());
+        return new GrafIntegral(gdc.getFunctionString(),Double.parseDouble(GrafDialogController.getX1()), Double.parseDouble(GrafDialogController.getX2()), Integer.parseInt(gdc.getNText()), gdc.getGrafColor(), gdc.getFillColor());
     }
 
    public void setX1(double xval){ x1 = xval; }
@@ -158,7 +157,7 @@ public class GrafIntegral extends GrafObject implements IGrafable
    public void setN(int nVal){n = nVal;}
 
    public Color getFillColor(){return fillColor;}
-   public void setFillColor(Color c){this.fillColor=c;}
+   private void setFillColor(Color c){this.fillColor=c;}
    
    public String toString(){
        return "INTEGRAL: "+getFunctionString()+", start: "+x1+" end: "+x2+", n: "+getN()+", ";//+getGrafColor();

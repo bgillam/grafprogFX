@@ -21,27 +21,26 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
     private int columnNumber;
     //private GrafProg myOwner;
     private GrafSettings gStuff;
-    private GrafTable table;
     private String mark =".";
     private boolean showFNS = true;
         
     //Constructor
-    public GrafBoxPlot(){
+    GrafBoxPlot(){
         gStuff = super.initGrafObject(GrafType.BOXPLOT);
         setColumnNumber(1);
-        table = GrafProg.getData();
+        GrafTable table = GrafProg.getData();
         GrafProg.setMessage1("Plotting Column "+columnNumber);
         setShowFNS(true);
     }
     
 
     //constructor 
-    public GrafBoxPlot(int column){
+    private GrafBoxPlot(int column){
         this();
         setColumnNumber(column);
     }
     
-    public GrafBoxPlot( int column, Color c, boolean fns){
+    private GrafBoxPlot(int column, Color c, boolean fns){
         this(column);
         setGrafColor(c);
         setShowFNS(fns);
@@ -52,10 +51,9 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
     public void drawGraf(Graphics2D gc){
         double xMin = gStuff.getXMin();
         double xMax = gStuff.getXMax();
-        double x = xMin;
         gc.setColor(super.getGrafColor());
         double gHeight = GrafProg.getGrafSettings().getGrafHeight();
-        double numPlots = GrafProg.getNumType(GrafType.BOXPLOT);
+        double numPlots = GrafProg.getNumPlots();
         double plotted = GrafProg.getBoxPlotsPlotted();
         double boxHeight = (gHeight/2)/(numPlots+1);
         double boxCenter = boxHeight + boxHeight*(plotted);
@@ -127,8 +125,7 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         if (getType() != o.getType()) return false;
         if (!getGrafColor().equals(gi.getGrafColor())) return false;
         if (!(getColumnNumber() == gi.getColumnNumber())) return false;
-        if (!(getShowFNS() == gi.getShowFNS())) return false;
-        return true;
+        return getShowFNS() == gi.getShowFNS();
     }
 
     @Override
@@ -153,12 +150,12 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
 
 
     //Setters and Getters
-    public void setColumnNumber(int c){ columnNumber = c;}
-    public int getColumnNumber(){ return columnNumber;}
+    private void setColumnNumber(int c){ columnNumber = c;}
+    private int getColumnNumber(){ return columnNumber;}
     public void setMark(String m){mark = m;}
     public String getMark(){return mark;}
-    public void setShowFNS(boolean tf){showFNS = tf;}
-    public boolean getShowFNS(){
+    private void setShowFNS(boolean tf){showFNS = tf;}
+    private boolean getShowFNS(){
         return showFNS;
     }
     

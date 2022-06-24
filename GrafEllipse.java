@@ -25,7 +25,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
     private GrafSettings gStuff;
    
     
-    public GrafEllipse() {
+    GrafEllipse() {
         super();
         gStuff = super.getGrafSettings();
         setGrafType(GrafType.ELLIPSE);
@@ -33,7 +33,7 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
     }
 
 
-     public GrafEllipse(double x1, double y1, double width, double height){
+     GrafEllipse(double x1, double y1, double width, double height){
          this();
          setX(x1);
          setY(y1);
@@ -41,13 +41,13 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
          setHeight(height);
      }
         
-     public GrafEllipse(double x1, double y1, double width, double height, Color gColor){
+     private GrafEllipse(double x1, double y1, double width, double height, Color gColor){
             this(x1, y1, width, height);
             setGrafColor(gColor);
 
      }
 
-     public GrafEllipse(double x1, double y1, double width, double height, Color gColor, Color fColor){
+     private GrafEllipse(double x1, double y1, double width, double height, Color gColor, Color fColor){
         this(x1, y1, width, height, gColor);
         setFillColor(fColor);
      }
@@ -104,9 +104,9 @@ public class GrafEllipse extends GrafRectangle implements IGrafable
     }*/
 
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
-        return new GrafEllipse(Double.parseDouble(gdc.getX1()),
-                Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
-                Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
+        return new GrafEllipse(Double.parseDouble(GrafDialogController.getX1()),
+                Double.parseDouble(GrafDialogController.getY1()), Double.parseDouble(GrafDialogController.getX2()),
+                Double.parseDouble(GrafDialogController.getY2()), gdc.getGrafColor(), gdc.getFillColor());
     }
         
      public String toString(){

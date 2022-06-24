@@ -1,4 +1,4 @@
-/************************************************************* 
+/* ************************************************************
 *  Matrix math. A matrix is an n x m array. n rows, m column.*
 *  matrix is defined with first entry being (1,1) not (0,0); *
 *  @author Bill Gillam                                       *
@@ -34,10 +34,10 @@ import javax.swing.JOptionPane;
 import java.math.*;
 
 public class Matrix {
-    BigDecimal[][] matrix;
+    private BigDecimal[][] matrix;
     
     //test
-    public static void main(String args[]){
+    public static void main(String[] args){
        double[][] ma = {{1, 5, 6, 2.2},      
                        {3.3, 9, 10, 1},
                        {7, 9, 3.2, 5.1},
@@ -66,11 +66,11 @@ public class Matrix {
        
     }
     
-    public Matrix(int rows, int cols){
+    Matrix(int rows, int cols){
         matrix = new BigDecimal[rows][cols];
     }
     
-    public Matrix(BigDecimal[][] m){
+    Matrix(BigDecimal[][] m){
         matrix = m;
     }
     
@@ -83,7 +83,7 @@ public class Matrix {
     
     }
     
-    public Matrix(double[][] m){
+    private Matrix(double[][] m){
     matrix = new BigDecimal[m.length] [m[0].length];
     for (int i = 0; i < m.length; i++)
         for (int j = 0; j < m[0].length; j++){
@@ -100,7 +100,7 @@ public class Matrix {
    //    return m;
    //}
       
-    public static Matrix product(Matrix A, Matrix B){
+    static Matrix product(Matrix A, Matrix B){
         int colsA = A.numCols();
         int rowsB = B.numRows();
         if (colsA != rowsB) JOptionPane.showMessageDialog(null, "Matrix A and B are not compatible for multiplication ", "Error!" , JOptionPane.ERROR_MESSAGE);
@@ -120,7 +120,7 @@ public class Matrix {
         return result;
     }
     
-    public static Matrix product(Matrix A, Vector B){
+    static Matrix product(Matrix A, Vector B){
         return product(A, B.toColMatrix());
     }
     
@@ -143,22 +143,22 @@ public class Matrix {
     return true;
     }
         
-    public BigDecimal getValue(int row, int col){
+    BigDecimal getValue(int row, int col){
         if (checkValidRow(row)&& checkValidColumn(col))
             return matrix[row - 1][col - 1]; 
         else return null;
     }
     
-    public void putValue(int row, int col, BigDecimal val){
+    void putValue(int row, int col, BigDecimal val){
         if (checkValidRow(row)&& checkValidColumn(col))
             matrix[row-1][col-1] = val; 
     }
     
-    public int numRows(){
+    int numRows(){
         return matrix.length;
     }
     
-    public int numCols(){
+    int numCols(){
         return matrix[0].length;
     }
     
@@ -171,7 +171,7 @@ public class Matrix {
         } else return null;
     }
     
-    public Vector columnVector(int col){
+    Vector columnVector(int col){
         if (checkValidColumn(col)){
            Vector v = new Vector(numRows());
            for (int row = 1; row <= numRows(); row++)
@@ -181,7 +181,7 @@ public class Matrix {
     }
     
     
-    public Matrix transpose(){
+    Matrix transpose(){
         int numRows = numRows();
         int numCols = numCols();
         Matrix xT = new Matrix(numCols, numRows);
@@ -191,7 +191,7 @@ public class Matrix {
         return xT;
     }
     
-    public BigDecimal[][] BigDecimalArray(){
+    private BigDecimal[][] BigDecimalArray(){
           BigDecimal[][] newArray = new BigDecimal[numRows()][numCols()]; 
           for (int i = 1; i <= numRows(); i++)
               for (int j = 1; j<=numCols(); j++)
@@ -249,7 +249,7 @@ public class Matrix {
   }
 
     
-    public Matrix inverse(){
+    Matrix inverse(){
        //return Matrix.fromArray(invert(BigDecimalArray()));
        return new Matrix(invert(BigDecimalArray()));
     }
@@ -262,13 +262,13 @@ public class Matrix {
         
     }
     
-    private static BigDecimal[][] invert(BigDecimal a[][]){
+    private static BigDecimal[][] invert(BigDecimal[][] a){
         int n = a.length;
-        BigDecimal x[][] = new BigDecimal[n][n];
+        BigDecimal[][] x = new BigDecimal[n][n];
         x = zeroTwoDimArray(x);
-        BigDecimal b[][] = new BigDecimal[n][n];
+        BigDecimal[][] b = new BigDecimal[n][n];
         b = zeroTwoDimArray(b);
-        int index[] = new int[n];
+        int[] index = new int[n];
         //identity matrix
         for (int i=0; i<n; i++)
                b[i][i] = new BigDecimal(1);
@@ -301,9 +301,9 @@ public class Matrix {
 // Method to carry out the partial-pivoting Gaussian
 // elimination.  Here index[] stores pivoting order.
  
-    private static void gaussian(BigDecimal a[][], int index[]){
+    private static void gaussian(BigDecimal[][] a, int[] index){
         int n = index.length;
-        BigDecimal c[] = new BigDecimal[n];
+        BigDecimal[] c = new BigDecimal[n];
         BigDecimal pi1;
         BigDecimal pi0;
         BigDecimal c1;
@@ -382,14 +382,14 @@ public class Matrix {
     }
     
     public String toString(){
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (int i = 1; i <= numRows(); i++){
-            s = s+"[";
+            s.append("[");
             for (int j = 1; j < numCols(); j++)
-                s = s +getValue(i,j)+", ";
-            s = s +getValue(i, numCols())+"]\n";
+                s.append(getValue(i, j)).append(", ");
+            s.append(getValue(i, numCols())).append("]\n");
         }
-        return s;
+        return s.toString();
     }
     
     

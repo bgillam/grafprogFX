@@ -1,5 +1,5 @@
 
-  /**
+  /* *
  * GrafObject - Abstract parent of all objects to be drawn
  * 
  * @author Bill Gillam
@@ -43,8 +43,7 @@ abstract public class GrafObject implements Serializable, IGrafable
     //see if every field in object equal
     public boolean deepEquals(GrafObject g) {
        if (getType() != g.getType()) return false;
-       if (getGrafColor() != g.getGrafColor()) return false;
-       return true;
+        return getGrafColor() == g.getGrafColor();
     }
    
    public static void createPanel(){}
@@ -62,11 +61,11 @@ abstract public class GrafObject implements Serializable, IGrafable
    }
    
    //Getters and Setters
-   public void setGrafType(GrafType gt){grType = gt;}
+   void setGrafType(GrafType gt){grType = gt;}
    public GrafType getType(){return grType; }
    
    public boolean isMoveable(){ return moveable; } 
-   public void setMoveable(boolean tf){ moveable = tf;  }
+   void setMoveable(boolean tf){ moveable = tf;  }
    public boolean getMoveable(){return moveable;}
    
    public void setOwner(GrafProg owner){myOwner = owner;}

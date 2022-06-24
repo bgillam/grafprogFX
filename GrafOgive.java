@@ -40,7 +40,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     
         
     //Constructor
-    public GrafOgive(){
+    GrafOgive(){
          super();
          gStuff = super.getGStuff();
          setGrafType(GrafType.OGIVE);
@@ -49,7 +49,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     
 
     //constructor 
-    public GrafOgive(int column){
+    private GrafOgive(int column){
         this();
         setColumnNumber(column);
         GrafProg.setMessage1("Histogram for Column "+columnNumber);
@@ -80,7 +80,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     }
 
 
-    public GrafOgive(int column, double b, double e, int numCl, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
+    private GrafOgive(int column, double b, double e, int numCl, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
         this(column);
         setFillColor(fillColor);
         setLabelAxisByBoundries(boundries);
@@ -95,7 +95,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
         classWidth = classLimits[1] - classLimits[0];
     }
 
-    public GrafOgive( int column, double b, double e, double classW, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
+    private GrafOgive(int column, double b, double e, double classW, Color c, Color fillColor, boolean boundries, boolean counts, boolean rel){
         this(column);
         setFillColor(fillColor);
         setLabelAxisByBoundries(boundries);
@@ -144,21 +144,21 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
         
         boolean start = true;       
         double height = 0;
-        double startHeight, endHeight, oldEndHeight, x1, y1, x2, y2, x3, y3, x4, y4;
+        double startH, endH, oldEndHeight, x1, y1, x2, y2, x3, y3, x4, y4;
         for (int j = 0; j < classLimits.length-1; j++){
             gc.setColor(super.getGrafColor());
             if (relative) {
-                startHeight = height/numValues;
-                endHeight = (height+counts[j])/numValues;
+                startH = height/numValues;
+                endH = (height+counts[j])/numValues;
             }
             else{
-                startHeight = height;
-                endHeight = (height+counts[j]);
+                startH = height;
+                endH = (height+counts[j]);
             }
-            if (myOwner.getGrafSettings().getReverseXY()){
-                x1 = startHeight; 
+            if (GrafProg.getGrafSettings().getReverseXY()){
+                x1 = startH;
                 y1 = classLimits[j];
-                x2 = endHeight;
+                x2 = endH;
                 y2 = classLimits[j+1];
                 x3 = gStuff.getGrafHeight()/50;
                 x4 = -x3;
@@ -169,21 +169,21 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
             }
             else{
                 x1 = classLimits[j];
-                y1 = startHeight;
+                y1 = startH;
                 x2 = classLimits[j+1];
-                y2 = endHeight;
+                y2 = endH;
                 x3 = x1;
                 y3 = gStuff.getGrafHeight()/50;
                 x4 = x1;
-                y4 = -y3;;
-                
-                
+                y4 = -y3;
+
+
             }
             
             {
                 GrafPrimitives.grafLine(gStuff,x1, y1, x2, y2, gc);
                 if (displayCounts){
-                    GrafPrimitives.grafString(gStuff,x1, y1, ""+endHeight, gc);
+                    GrafPrimitives.grafString(gStuff,x1, y1, ""+endH, gc);
                }
                if (labelAxisByBoundries){
                   GrafPrimitives.grafLine(gStuff,x3, y3, x4, y4, gc);
@@ -193,8 +193,8 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
            if ((j == classLimits.length - 2) && (counts[j] == 0)) break;
            height = height + counts[j];
         }
-        myOwner.setMessage2("");
-        myOwner.incrementBoxPlotsPlotted();     
+        GrafProg.setMessage2("");
+        GrafProg.incrementBoxPlotsPlotted();
         gc.setColor(Color.BLACK);
     }
 
@@ -202,9 +202,9 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     @Override
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
         if (gdc.getNumClassButton().isSelected())
-            return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+            return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(GrafDialogController.getX1()), Double.parseDouble(GrafDialogController.getX2()),
                     gdc.getNumClasses(), gdc.getGrafColor(),   gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(),  gdc.getFNS());
-        else  return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),
+        else  return new GrafOgive(gdc.getColumn1ChooserColumn(), Double.parseDouble(GrafDialogController.getX1()), Double.parseDouble(GrafDialogController.getX2()),
                 Double.parseDouble(gdc.getClassWidthText()), gdc.getGrafColor(),  gdc.getFillColor(), gdc.getBoundariesCheckBox().isSelected(), gdc.getCountCheckBox().isSelected(), gdc.getFNS());
     }
 

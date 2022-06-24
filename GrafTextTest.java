@@ -45,9 +45,9 @@ public class GrafTextTest
     @Test
     public void drawGrafTest(){
         assertNotNull(gText.getGrafColor());
-        assertNotNull(gSess.getGrafPanel());
-        assertNotNull(gSess.getGrafPanel().getGraphics());
-        Graphics g = gSess.getGrafPanel().getGraphics();
+        assertNotNull(GrafProg.getGrafPanel());
+        assertNotNull(GrafProg.getGrafPanel().getGraphics());
+        Graphics g = GrafProg.getGrafPanel().getGraphics();
         gText.drawGraf((Graphics2D)g);
     }
     
@@ -87,7 +87,7 @@ public class GrafTextTest
     public void setAndGetX1Y1Test(){
         gText.setX(5);
         gText.setY(7);
-        Double d = .000001;
+        double d = 0.000001;
         assertEquals(gText.getX(),5,d);
         assertEquals(gText.getY(),7,d);
         

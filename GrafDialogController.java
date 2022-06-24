@@ -124,22 +124,20 @@ public class GrafDialogController {
     }
 
       //had to make this one public for call from outside - probably should refactor relationship
-    public void hideAll() //change to hide all
+      void hideAll() //change to hide all
     {
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                functionChoiceHBox.getChildren().clear();
-                functionStringBox.getChildren().clear();
-                xy1PointBox.getChildren().clear();
-                xy2PointBox.getChildren().clear();
-                markButtonBox.getChildren().clear();
-                textHBox.getChildren().clear();
-                fontHBox.getChildren().clear();
-                checkboxVBox.getChildren().clear();
-                fillColorPicker.setVisible(false);
-                fillLabel.setVisible(false);
-                GrafDialogView.initTempGrafList();
-            }
+        Platform.runLater(() -> {
+            functionChoiceHBox.getChildren().clear();
+            functionStringBox.getChildren().clear();
+            xy1PointBox.getChildren().clear();
+            xy2PointBox.getChildren().clear();
+            markButtonBox.getChildren().clear();
+            textHBox.getChildren().clear();
+            fontHBox.getChildren().clear();
+            checkboxVBox.getChildren().clear();
+            fillColorPicker.setVisible(false);
+            fillLabel.setVisible(false);
+            GrafDialogView.initTempGrafList();
         });
     }
 
@@ -154,11 +152,11 @@ public class GrafDialogController {
 
 
 
-    public ArrayList<GrafObject> getTempGrafList(){
+    private ArrayList<GrafObject> getTempGrafList(){
         return GrafDialogView.getTempGrafList();
     }
 
-    public boolean addGrafObject(){
+    private boolean addGrafObject(){
         return GrafDialogView.addGrafObject();
     }
 
@@ -169,14 +167,12 @@ public class GrafDialogController {
     public java.awt.Color getGrafColor(){
         //System.out.println(grafColorPicker.getValue());
         javafx.scene.paint.Color fxColor = grafColorPicker.getValue();
-        java.awt.Color awtColor = new java.awt.Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
-        return awtColor;}
+        return new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());}
 
     public java.awt.Color getFillColor(){
         //System.out.println(grafColorPicker.getValue());
         javafx.scene.paint.Color fxColor = fillColorPicker.getValue();
-        java.awt.Color awtColor = new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());
-        return awtColor;}
+        return new Color((float)fxColor.getRed(), (float)fxColor.getGreen(), (float) fxColor.getBlue(), (float)fxColor.getOpacity());}
 
 
     void setfillColor(Color awtColor){
@@ -185,7 +181,7 @@ public class GrafDialogController {
         getFillColorPicker().setValue(fxColor);
     }
 
-    public ColorPicker getFillColorPicker() {return fillColorPicker; }
+    ColorPicker getFillColorPicker() {return fillColorPicker; }
     public void setFillColorPicker(ColorPicker fillColorPicker) {  this.fillColorPicker = fillColorPicker; }
 
     ColorPicker getGrafColorPicker() { return grafColorPicker; }
@@ -198,11 +194,11 @@ public class GrafDialogController {
 
     }
 
-    public ComboBox getObjectComboBox(){
+    ComboBox getObjectComboBox(){
         return objectComboBox;
     }
 
-    public TextField getMsg() {
+    TextField getMsg() {
         return msg;
     }
 
@@ -214,27 +210,27 @@ public class GrafDialogController {
         return GrafProg.getData();
     }
 
-    public Label getChooseObject() { return chooseObject;  }
+    Label getChooseObject() { return chooseObject;  }
 
 
 
-    public HBox getXy1PointBox(){
+    HBox getXy1PointBox(){
         return xy1PointBox;
     }
 
-    public HBox getXy2PointBox(){
+    HBox getXy2PointBox(){
         return xy2PointBox;
     }
 
-    public VBox getCheckboxVBox() {
+    VBox getCheckboxVBox() {
         return checkboxVBox;
     }
 
-    public HBox getMarkButtonBox(){
+    HBox getMarkButtonBox(){
         return markButtonBox;
     }
 
-    public HBox getFunctionChoiceHBox() {
+    HBox getFunctionChoiceHBox() {
         return functionChoiceHBox;
     }
 
@@ -243,7 +239,7 @@ public class GrafDialogController {
     }
 
 
-    public HBox getFunctionStringBox() {
+    HBox getFunctionStringBox() {
         return functionStringBox;
     }
 
@@ -251,7 +247,7 @@ public class GrafDialogController {
         this.functionStringBox = functionStringBox;
     }
 
-    public HBox getTextHBox() {
+    HBox getTextHBox() {
         return textHBox;
     }
 
@@ -261,7 +257,7 @@ public class GrafDialogController {
     public void setMarkButtonBox(HBox markButtonBox) {
         this.markButtonBox = markButtonBox;
     }
-    public HBox getFontHBox() {
+    HBox getFontHBox() {
         return fontHBox;
     }
 
@@ -276,7 +272,7 @@ public class GrafDialogController {
         this.xy1PointBox = xy1PointBox;
     }
 
-    public Label getFillLabel() {
+    Label getFillLabel() {
         return fillLabel;
     }
 
@@ -286,76 +282,76 @@ public class GrafDialogController {
 
     //Calls to GrafDialog View which handles view changes per context
 
-    public static void showFxEntryDialog(){
+    static void showFxEntryDialog(){
         GrafDialogView.showFxEntryDialog();
     }
 
-    public static void showFxValueDialog(){
+    static void showFxValueDialog(){
         GrafDialogView.showFxValueDialog();
     }
 
-    public static void showFxTangentDialog(){
+    static void showFxTangentDialog(){
         GrafDialogView.showFxTangentDialog();
     }
 
-    public static void showFxChordDialog(){
+    static void showFxChordDialog(){
         GrafDialogView.showFxChordDialog();
     }
 
-    public static void showFxIntegralDialog(){
+    static void showFxIntegralDialog(){
         GrafDialogView.showFxIntegralDialog();
     }
 
-    public static void showFxZerosDialog(){
+    static void showFxZerosDialog(){
         GrafDialogView.showFxZerosDialog();
     }
 
-    public static void showPointDialog(){
+    static void showPointDialog(){
         GrafDialogView.showPointDialog();
     }
 
-    public static void showTextDialog(){
+    static void showTextDialog(){
         GrafDialogView.showTextDialog();
     }
 
-    public static void showLineSegmentDialog(){
+    static void showLineSegmentDialog(){
         GrafDialogView.showLineSegmentDialog();
     }
 
-    public static void showRectangleDialog(){
+    static void showRectangleDialog(){
         GrafDialogView.showRectangleDialog();
     }
 
-    public static void showEllipseDialog(){
+    static void showEllipseDialog(){
         GrafDialogView.showEllipseDialog();
     }
 
-    public static void showCircleDialog(){
+    static void showCircleDialog(){
         GrafDialogView.showCircleDialog();
     }
 
-    public static void showColumnPlotDialog(){
+    static void showColumnPlotDialog(){
         GrafDialogView.showColumnPlotDialog();
     }
 
-    public static void showBoxplotDialog(){
+    static void showBoxplotDialog(){
         GrafDialogView.showBoxplotDialog();
     }
 
 
-    public static void showHistogramDialog(){
+    static void showHistogramDialog(){
         GrafDialogView.showHistogramDialog();
     }
 
-    public static void showFreqPolyDialog(){
+    static void showFreqPolyDialog(){
         GrafDialogView.showFreqPolyDialog();
     }
 
-    public static void showOgiveDialog(){
+    static void showOgiveDialog(){
         GrafDialogView.showOgiveDialog();
     }
 
-    public static void showScatterDialog(){
+    static void showScatterDialog(){
         GrafDialogView.showScatterDialog();
     }
 
@@ -399,31 +395,31 @@ public class GrafDialogController {
         return GrafDialogView.getX2TextField();
     }
 
-    public static TextField getY1TextField(){
+    static TextField getY1TextField(){
         return GrafDialogView.getY1TextField();
     }
 
-    public static TextField  getY2TextField(){
+    static TextField  getY2TextField(){
         return GrafDialogView.getY2TextField();
     }
 
-    public static TextField getTextForDisplay(){
+    static TextField getTextForDisplay(){
         return GrafDialogView.getTextForDisplay();
     }
 
-    public void setFontName(String fontNameString){
-        GrafDialogView.setFontName(fontNameString);;
+    void setFontName(String fontNameString){
+        GrafDialogView.setFontName(fontNameString);
     }
 
-    public void setFontStyleText(String fonts){
-        GrafDialogView.setFontStyleText(fonts);;
+    void setFontStyleText(String fonts){
+        GrafDialogView.setFontStyleText(fonts);
     }
 
-    public void setFontSizeText(String fonts){
-        GrafDialogView.setFontSizeText(fonts);;
+    void setFontSizeText(String fonts){
+        GrafDialogView.setFontSizeText(fonts);
     }
 
-    public void settDialogMark(String m){
+    void settDialogMark(String m){
         GrafDialogView.settDialogMark(m);
     }
 
@@ -435,7 +431,7 @@ public class GrafDialogController {
         return GrafDialogView.getFunctionString();
     }
 
-    public String getNText(){
+    String getNText(){
         return GrafDialogView.getNText();
     }
 
@@ -447,28 +443,28 @@ public class GrafDialogController {
         GrafDialogView.setFunctionString(s);
     }
 
-    public static TextField getDxTextField(){
+    static TextField getDxTextField(){
         return GrafDialogView.getDxTextField();
     }
 
-    public String getDx(){
+    String getDx(){
         return GrafDialogView.getDx();
     }
 
-    public void setDx(String s){
+    void setDx(String s){
         GrafDialogView.setDx(s);
 
     }
 
-    public void setColumn1ChooserColumn(int c){
+    void setColumn1ChooserColumn(int c){
         GrafDialogView.setColumn1ChooserColumn(c);
     }
 
-    public int getColumn1ChooserColumn(){
+    int getColumn1ChooserColumn(){
         return GrafDialogView.getColumn1ChooserColumn();
     }
 
-    public int getColumn2ChooserColumn(){
+    int getColumn2ChooserColumn(){
         return GrafDialogView.getColumn2ChooserColumn();
     }
 
@@ -476,51 +472,51 @@ public class GrafDialogController {
         GrafDialogView.setColumn2ChooserColumn(c);
     }
 
-    public boolean getFNS(){
+    boolean getFNS(){
         return GrafDialogView.getFNS();
     }
 
-    public void setFNS(boolean tf){
-        GrafDialogView.setFNS(tf);;
+    void setFNS(boolean tf){
+        GrafDialogView.setFNS(tf);
     }
 
-    public boolean isConnected(){
+    boolean isConnected(){
         return GrafDialogView.isConnected();
     }
 
-    public RadioButton getClassSizeButton(){
+    RadioButton getClassSizeButton(){
         return GrafDialogView.getClassSizeButton();
     }
 
-    public TextField getClassWidthTextField(){
+    TextField getClassWidthTextField(){
         return GrafDialogView.getClassWidthTextField();
     }
 
-    public String getClassWidthText(){
+    String getClassWidthText(){
         return GrafDialogView.getClassWidthText();
     }
 
-    public void setClassWidthText(String s){
-        GrafDialogView.setClassWidthText(s);;
+    void setClassWidthText(String s){
+        GrafDialogView.setClassWidthText(s);
     }
 
-    public CheckBox getCountCheckBox(){
+    CheckBox getCountCheckBox(){
         return GrafDialogView.getCountCheckBox();
     }
 
-    public CheckBox getBoundariesCheckBox(){
+    CheckBox getBoundariesCheckBox(){
         return GrafDialogView.getBoundariesCheckBox();
     }
 
-    public RadioButton getNumClassButton(){
+    RadioButton getNumClassButton(){
         return GrafDialogView.getNumClassButton();
     }
 
-    public int getNumClasses(){
+    int getNumClasses(){
         return GrafDialogView.getNumClasses();
     }
 
-    public static TextField getFunctionStringTextField(){
+    static TextField getFunctionStringTextField(){
         return GrafDialogView.getFunctionStringTextField();
     }
 

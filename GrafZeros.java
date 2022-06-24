@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.plaf.synth.SynthUI;
 
 public class GrafZeros extends GrafObject implements IGrafable
 {
@@ -24,16 +25,16 @@ public class GrafZeros extends GrafObject implements IGrafable
         private double startX = 0;
         private double endX = 0;
         private double dx = .01;
-        private ArrayList<Double> zeroList = new ArrayList<Double>(); 
+        private ArrayList<Double> zeroList = new ArrayList<>();
         //private String yString = "";
         
-        public GrafZeros(){
-        gStuff = gStuff = super.initGrafObject(GrafType.FZERO);
+        GrafZeros(){
+        gStuff = super.initGrafObject(GrafType.FZERO);
 
        }
         
 
-       public GrafZeros(String yString, double firstX, double secondX, double dVal){
+       private GrafZeros(String yString, double firstX, double secondX, double dVal){
         this();
         setFunctionString(yString);
         startX = firstX;
@@ -44,7 +45,7 @@ public class GrafZeros extends GrafObject implements IGrafable
     }
        
        
-   public GrafZeros(String yString, double firstX, double secondX, double dVal, Color c, String m){
+   private GrafZeros(String yString, double firstX, double secondX, double dVal, Color c, String m){
         this(yString, firstX, secondX, dVal);
         mark = m;
         super.setGrafColor(c);
@@ -52,15 +53,15 @@ public class GrafZeros extends GrafObject implements IGrafable
    
    @Override
    public void drawGraf(Graphics2D gc){
-       double y = 0;
+       double y;
        gc.setColor(super.getGrafColor());
        for (double root: zeroList){
-            try {
+            //try {
                 y =  FunctionString.fValue(functionString, root);
-            } catch (DomainViolationException e) {
-                continue;
-            }catch (FunctionFormatException e) {continue;}   
-            GrafPrimitives.grafString(gStuff,root, y, getMark() , gc);   
+          //  } catch (DomainViolationException | FunctionFormatException e) {
+         //       continue;
+        //    }
+           GrafPrimitives.grafString(gStuff,root, y, getMark() , gc);
       }
        gc.setColor(Color.BLACK);
        //gStuff.getGrafPanel().repaint();
@@ -69,12 +70,12 @@ public class GrafZeros extends GrafObject implements IGrafable
 
     @Override
     public void autoRange(){
-        double y1 = 10;
-        double y2 = -10;
+        double y1;
+        double y2;
         try{
             y1 = FunctionString.fValue(getFunctionString(), getX1());
             y2 = FunctionString.fValue(getFunctionString(),  getX2());
-        }catch(Exception e){JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;};
+        }catch(Exception e){JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;}
         double max, min;
         if (y1<y2){ max = y2; min = y1;} else {max = y1; min = y2; }
         GrafProg.getGrafSettings().setYMax(max+GrafProg.getGrafSettings().getTenthWindowY());
@@ -83,7 +84,7 @@ public class GrafZeros extends GrafObject implements IGrafable
 
     @Override
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
-        return new GrafZeros(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), Double.parseDouble(gdc.getX2()),  Double.parseDouble(gdc.getDx()), gdc.getGrafColor(),gdc.getDialogMark() );
+        return new GrafZeros(gdc.getFunctionString(), Double.parseDouble(GrafDialogController.getX1()), Double.parseDouble(GrafDialogController.getX2()),  Double.parseDouble(gdc.getDx()), gdc.getGrafColor(),gdc.getDialogMark() );
     }
 
    public void setStartX(double xval){ startX = xval; }
@@ -94,7 +95,7 @@ public class GrafZeros extends GrafObject implements IGrafable
    public String getFunctionString() { return functionString; } 
    public void setMark(String m){mark = m;}
    public String getMark(){return mark;}
-   public double getDx(){return dx;}
+   private double getDx(){return dx;}
    public void setDx(int nVal){dx = nVal;}
    public ArrayList<Double> getZeroList(){
        return zeroList;
@@ -106,19 +107,19 @@ public class GrafZeros extends GrafObject implements IGrafable
     public boolean isValidInput(GrafDialogController gdf){
         boolean ok = true;
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
-        if (gdf.getX1().equals("")) return false;
-        if (gdf.getX2().equals("")) return false;
+        if (GrafDialogController.getX1().equals("")) return false;
+        if (GrafDialogController.getX2().equals("")) return false;
         if (gdf.getDx().equals("")) return false;
-        if (!GrafInputHelpers.isDouble(gdf.getX1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX1TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getX2())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX2())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX2TextField(), "red" );
             ok = false;
         }
         if (!GrafInputHelpers.isDouble(gdf.getDx())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getDxTextField(), "red" );
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getDxTextField(), "red" );
             ok = false;
         }
         return ok;
@@ -132,16 +133,15 @@ public class GrafZeros extends GrafObject implements IGrafable
         if (!functionString.equals(gz.getFunctionString())) return false;
         if (!(getX1() == gz.getX1())) return false;
         if (!(getX2() == gz.getX2())) return false;
-        if (!(getDx() == gz.getDx())) return false;
-        return true;
+        return getDx() == gz.getDx();
     }
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
         gdc.setFunctionString(getFunctionString());
-        gdc.setX1(""+getX1());
-        gdc.setX2(""+getX2());
+        GrafDialogController.setX1(""+getX1());
+        GrafDialogController.setX2(""+getX2());
         gdc.setDx(""+getDx());
         gdc.settDialogMark(getMark());
     }
@@ -152,25 +152,28 @@ public class GrafZeros extends GrafObject implements IGrafable
         zeroString = "";
         //String functionStr = functionLabel.getText();
         for (double left = startX; left < endX; left=left+dx){
-            try { f1 =  FunctionString.fValue(functionString, left);
-            } catch (DomainViolationException e) {
-                continue;
-            }catch (FunctionFormatException e) {continue;}   
-            try {
+            //try {
+                f1 =  FunctionString.fValue(functionString, left);
+            //} catch (DomainViolationException | FunctionFormatException e) {
+            //    continue;
+          //  }
+          //  try {
                 f2 =  FunctionString.fValue(functionString, left+dx);
-            } catch (DomainViolationException e) {
-                continue;
-            }catch (FunctionFormatException e) {continue;}   
+          //  } catch (DomainViolationException | FunctionFormatException e) {
+         //       continue;
+        //    }
             if (f1 == 0) { 
                 currentRoot = left;
                 zeroList.add(currentRoot);
-                myOwner.setMessage1("Zero located at: "+currentRoot);
+                GrafProg.setMessage1("Zero located at: "+currentRoot);
             }
             if (oppositeSigns(f1,f2)) {
                 currentRoot = getCloseToRoot(functionString, left, left+dx);
                 zeroList.add(currentRoot);
-               myOwner.setMessage2("Zero located at: "+currentRoot);
-               zeroString = zeroString+" "+currentRoot;
+               GrafProg.setMessage2("Zero located at: "+currentRoot);
+               //zeroString = zeroString + " " + currentRoot;
+               zeroString = String.format("%s %s", zeroString, currentRoot);
+               //System.out.println(zeroString+" "+zeroString2);
             }
         }
                 
@@ -178,21 +181,20 @@ public class GrafZeros extends GrafObject implements IGrafable
    
    private boolean oppositeSigns(double f1, double f2){
         if ((f1>0) && (f2<0)) return true;
-        if ((f1<0) && (f2>0)) return true;
-        return false;
-    }
+       return (f1 < 0) && (f2 > 0);
+   }
     
     private double getCloseToRoot(String funct, double rootX1, double rootX2){
         double rootXK;
         double difference;
         do{
             rootXK = (rootX1 + rootX2)/2;
-            try {
+           // try {
                 if (!oppositeSigns(FunctionString.fValue(funct, rootX1), FunctionString.fValue(funct,  rootXK)))
                     rootX1 = rootXK; else rootX2 = rootXK;
-            } catch (DomainViolationException e) {
+          //  } catch (DomainViolationException e) {
                 //need to do something here!
-            } catch (FunctionFormatException e) {}   
+          //  } catch (FunctionFormatException e) {System.out.println(e.toString());}
                 difference = Math.abs(rootX2 - rootX1);
                 if (difference < 1E10) return rootX1;
         }while(true);

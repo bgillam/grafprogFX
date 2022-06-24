@@ -46,9 +46,9 @@ public class GrafColumnplotTest
     @Test
     public void drawGrafTest(){
         assertNotNull(gCPlot.getGrafColor());
-        assertNotNull(gSess.getGrafPanel());
-        assertNotNull(gSess.getGrafPanel().getGraphics());
-        Graphics g = gSess.getGrafPanel().getGraphics();
+        assertNotNull(GrafProg.getGrafPanel());
+        assertNotNull(GrafProg.getGrafPanel().getGraphics());
+        Graphics g = GrafProg.getGrafPanel().getGraphics();
         gCPlot.drawGraf((Graphics2D)g);
     }
     
@@ -90,7 +90,7 @@ public class GrafColumnplotTest
         assertEquals(gCPlot.getColumnNumber(),1);
         
         gCPlot.setConnected(true);
-        assertEquals(gCPlot.getConnected(),true);
+        assertTrue(gCPlot.getConnected());
     }
 
     /**

@@ -1,10 +1,10 @@
-/**************************************** 
+/* **************************************
 *  Scales  for GrafProg Project *
 *  sets scales for axes on graphs
 *  @author Bill Gillam                  *
 *  2/25/15                              *
-*****************************************/
-/**
+*****************************************
+
  * Computes scaling schemes for graphing axes
  */
 import javax.swing.JOptionPane;
@@ -26,7 +26,7 @@ public class Scales  // implements Serializable
 	}
 	
 	//Compute Scale from Range
-	public static void scalesFromRange(GrafSettings stuff){
+	static void scalesFromRange(GrafSettings stuff){
 		gStuff=stuff;
 	//	if (gStuff.getScaleProcedure().equals(GrafSettings.ScaleProcedure.FROM_RANGE)){
 			gStuff.setXAxisScale(xScaleFromRange());
@@ -38,17 +38,17 @@ public class Scales  // implements Serializable
 
 		double tempYMin = 0;
 		double tempYMax = 0;
-		double yVal = 0;
+		double yVal;
 		double stuffMin = stuff.getXMin();
 		double stuffMax = stuff.getXMax();
 
 		double dx = (stuffMax-stuffMin)/100;
 		for (double i = stuffMin; i<stuffMax; i = i + dx){
-			try {
+			//try {
 				yVal = FunctionString.fValue(f, i);
-			} catch (DomainViolationException e) {
+			//} catch (DomainViolationException e) {
 				//ignore for autorange
-			}catch (FunctionFormatException e) {JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;}
+			//;}catch (FunctionFormatException e) {JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;}
 			if (yVal < tempYMin) tempYMin = yVal;
 			else if (yVal > tempYMax) tempYMax = yVal;
 
@@ -61,7 +61,7 @@ public class Scales  // implements Serializable
 	}
 	
 	//compute scales that are powers of 10
-	public static void scalesPowersOfTen(GrafSettings stuff){
+	static void scalesPowersOfTen(GrafSettings stuff){
 		 long p;		 
 	     gStuff = stuff;
 	     

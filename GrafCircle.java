@@ -24,7 +24,7 @@ public class GrafCircle extends GrafEllipse implements IGrafable{
         //private boolean fillFlag = false;
         //private String yString = "";
     
-    public GrafCircle(){
+    GrafCircle(){
         super();
         gStuff = super.getGrafSettings();
         setGrafType(GrafType.CIRCLE);
@@ -32,7 +32,7 @@ public class GrafCircle extends GrafEllipse implements IGrafable{
        }
 
 
-     public GrafCircle(double x, double y, double r){
+     private GrafCircle(double x, double y, double r){
         this();
          setX(x-r);
          setY(y+r);
@@ -41,13 +41,13 @@ public class GrafCircle extends GrafEllipse implements IGrafable{
         
     }
         
-    public GrafCircle(double x1, double y1, double r1, Color gColor){
+    private GrafCircle(double x1, double y1, double r1, Color gColor){
         this(x1, y1, r1);
         setGrafColor(gColor);
                   
     }
 
-    public GrafCircle(double x1, double y1, double r1, Color gColor, Color fColor){
+    private GrafCircle(double x1, double y1, double r1, Color gColor, Color fColor){
         this(x1, y1, r1,gColor);
         setFillColor(fColor);
 
@@ -72,19 +72,19 @@ public class GrafCircle extends GrafEllipse implements IGrafable{
         @Override
     public boolean isValidInput(GrafDialogController gdf) {
         boolean ok = true;
-        if (gdf.getX1().equals("")) return false;
-        if (gdf.getX2().equals("")) return false;
-        if (gdf.getY1().equals("")) return false;
-            if (!GrafInputHelpers.isDouble(gdf.getX1())) {
-                GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red" );
+        if (GrafDialogController.getX1().equals("")) return false;
+        if (GrafDialogController.getX2().equals("")) return false;
+        if (GrafDialogController.getY1().equals("")) return false;
+            if (!GrafInputHelpers.isDouble(GrafDialogController.getX1())) {
+                GrafInputHelpers.setTextFieldColor(GrafDialogController.getX1TextField(), "red" );
                 ok = false;
             }
-            if (!GrafInputHelpers.isDouble(gdf.getX2())) {
-                GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red" );
+            if (!GrafInputHelpers.isDouble(GrafDialogController.getX2())) {
+                GrafInputHelpers.setTextFieldColor(GrafDialogController.getX2TextField(), "red" );
                 ok = false;
             }
-            if (!GrafInputHelpers.isDouble(gdf.getY1())) {
-                GrafInputHelpers.setTextFieldColor(gdf.getY1TextField(), "red" );
+            if (!GrafInputHelpers.isDouble(GrafDialogController.getY1())) {
+                GrafInputHelpers.setTextFieldColor(GrafDialogController.getY1TextField(), "red" );
                 ok = false;
             }
 
@@ -107,16 +107,16 @@ public class GrafCircle extends GrafEllipse implements IGrafable{
     @Override
     public void loadObjectFields(GrafDialogController gdc) {
         super.loadObjectFields(gdc);
-        gdc.setX1("" + getX());
-        gdc.setY1("" + getY());
-        gdc.setX2("" + getR());
+        GrafDialogController.setX1("" + getX());
+        GrafDialogController.setY1("" + getY());
+        GrafDialogController.setX2("" + getR());
         gdc.setfillColor(getFillColor());
 
     }
 
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
-        return new GrafCircle(Double.parseDouble(gdc.getX1()),
-                Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2())
+        return new GrafCircle(Double.parseDouble(GrafDialogController.getX1()),
+                Double.parseDouble(GrafDialogController.getY1()), Double.parseDouble(GrafDialogController.getX2())
                 , gdc.getGrafColor(), gdc.getFillColor());
     }
 
@@ -124,8 +124,8 @@ public class GrafCircle extends GrafEllipse implements IGrafable{
   /* public double getWidth() { return super.getWidth()
    public double getHeight() { return 2*r; }
    public double getDiameter(){return 2*r;}*/
-   public Color getFill(){return fill;}
-   public void setFill(Color f){fill = f;}
+  Color getFill(){return fill;}
+   void setFill(Color f){fill = f;}
    public GrafSettings getGrafSettings(){return gStuff;}
  /*  public void setFillFlag(boolean tf){fillFlag = tf;}
    public boolean getFillFlag(){return fillFlag;}   */

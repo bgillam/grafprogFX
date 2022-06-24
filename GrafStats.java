@@ -1,10 +1,10 @@
-/**************************************** 
+/* ***************************************
 *  GrafStats  for GrafProg Project *
 *  statistical calculation routines
 *  @author Bill Gillam                  *
 *  2/25/15                              *
 *****************************************/
-/**
+/* *
 * Static statistical calculations. 
  */
 
@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
 
 public class GrafStats {
 	
-	 public static boolean nullArray(Double[] dArray, String callerName){
-		  if ((dArray.length == 0) || (dArray == null)) {
+	 static boolean nullArray(Double[] dArray, String callerName){
+		  if (((dArray == null) || dArray.length == 0)) {
 		  	String message = callerName+" was passed an empty column. Returning zero";
 		  	Alert alert = new Alert(Alert.AlertType.ERROR, message);
             alert.showAndWait();
@@ -30,14 +30,14 @@ public class GrafStats {
 		 return false;
 	}
 	
-     public static int getN(Double[] dArray){
+     static int getN(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray); 
     	 if (nullArray(temp, "GetN()")) return 0;
     	 return temp.length;
      }
 
 
-	public static Double getMin(Double[] values){
+	static Double getMin(Double[] values){
 		values = getRidOfNulls(values);
 		if (values.length == 0) return null;
 		Double min = values[0];
@@ -48,7 +48,7 @@ public class GrafStats {
 		return min;
 	}
 
-	public static Double getMax(Double[] values){
+	static Double getMax(Double[] values){
 		values = getRidOfNulls(values);
 		if (values.length == 0) return null;
 		Double max = values[0];
@@ -97,7 +97,7 @@ public class GrafStats {
     	 return max;
      }*/
 
-	public static double getMax(double[] dArray){
+	static double getMax(double[] dArray){
 		if (dArray.length == 0) return 0;
 		double max = dArray[0];
 		for (int i = 1; i < dArray.length; i++){
@@ -107,38 +107,38 @@ public class GrafStats {
 		return max;
 	}
      
-     public static double getMedian(Double[] dArray){
+     static double getMedian(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray);  // Arrays.copyOf(dArray,dArray.length);
     	 if (nullArray(temp, "GetMedian()")) return 0;
     	 Arrays.sort(temp);
     	 if (evenLength(temp)){
-    		 double firstMed = temp[(int)(temp.length/2)-1];
-    		 double secondMed = dArray[ (int) (temp.length/2)];
+    		 double firstMed = temp[(temp.length/2) -1];
+    		 double secondMed = temp[temp.length/2];
     		 return (firstMed+secondMed)/2;
     	 }
     	 else
-    		 return temp[(int) (temp.length/2)]; 
+    		 return temp[temp.length/2];
       } 
      
-     public static double getQ1(Double[] dArray){
+     static double getQ1(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray); 
     	 if (nullArray(temp, "GetQ1()")) return 0;
     	 Arrays.sort(temp);
-    	 temp = Arrays.copyOf(temp, (int) temp.length/2-1);
+    	 temp = Arrays.copyOf(temp, temp.length /2-1);
     	 return getMedian(temp);
      }
      
-     public static double getQ3(Double[] dArray){
+     static double getQ3(Double[] dArray){
     	 //copy array so original is not sorted
     	 Double[] temp = getRidOfNulls(dArray); 
     	 if (nullArray(temp, "GetQ3()")) return 0;
     	 Arrays.sort(temp);
-    	 if (evenLength(temp)) temp = Arrays.copyOfRange(temp, (int) temp.length/2 , temp.length);
-    	 else temp = Arrays.copyOfRange(temp, (int) temp.length/2 + 1, temp.length);
+    	 if (evenLength(temp)) temp = Arrays.copyOfRange(temp, temp.length /2 , temp.length);
+    	 else temp = Arrays.copyOfRange(temp, temp.length /2 + 1, temp.length);
     	 return getMedian(temp);
      }
 
-     public static double[] getModes(Double[] dArray){
+     static double[] getModes(Double[] dArray){
     	//copy array so original is not sorted
     	 Double[] sortedArray = getRidOfNulls(dArray);
 		 double[] returnNull = {};
@@ -185,7 +185,7 @@ public class GrafStats {
 
      }
      
-     public static double getMean(Double[] dArray){
+     static double getMean(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray); 
     	 if (nullArray(temp, "GetMean()")) return 0.0;
     	 double sum = 0;
@@ -194,14 +194,14 @@ public class GrafStats {
     	 return sum/temp.length;
      }
      
-     public static double getRange(Double[] dArray){
+     static double getRange(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray); 
     	 if (nullArray(temp, "GetRange()")) return 0.0;
     	 Arrays.sort(temp);
     	 return temp[temp.length-1] - temp[0];
      }
     
-     public static double getVarianceOfSample(Double[] dArray){
+     static double getVarianceOfSample(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray);
     	 if (nullArray(temp, "GetVariance()")) return 0.0;
     	 double mean = getMean(temp);
@@ -211,7 +211,7 @@ public class GrafStats {
     	 return sum/(temp.length-1);
      }
      
-     public static double getVarianceOfPopulation(Double[] dArray){
+     static double getVarianceOfPopulation(Double[] dArray){
     	 Double[] temp = getRidOfNulls(dArray); 
     	 if (nullArray(temp, "GetVariance()")) return 0.0;
     	 double mean = getMean(temp);
@@ -221,25 +221,28 @@ public class GrafStats {
     	 return sum/(temp.length);
      }
      
-     public static double getStandardDeviationOfSample(Double[] dArray){
+     static double getStandardDeviationOfSample(Double[] dArray){
     	 return Math.sqrt(getVarianceOfSample(dArray));
      }
      
-     public static double getStandardDeviationOfPopulation(Double[] dArray){
+     static double getStandardDeviationOfPopulation(Double[] dArray){
     	 return Math.sqrt(getVarianceOfPopulation(dArray));
      }
      
-     public static double getIQR(Double[] dArray){
+     static double getIQR(Double[] dArray){
     	 return getQ3(dArray) - getQ1(dArray);
      }
      
          
-     public static double[] getFiveNumberSummary(Double[] dArray){
-    	 double[] d = {getMin(dArray) , GrafStats.getQ1(dArray), GrafStats.getMean(dArray), GrafStats.getQ3(dArray), GrafStats.getMax(dArray) };
-    	 return d;
+     static double[] getFiveNumberSummary(Double[] dArray){
+		Double min = getMin(dArray);
+		Double max = getMax(dArray);
+		if(min != null && max != null)
+		 	return new double[]{min , getQ1(dArray), getMean(dArray), getQ3(dArray), max };
+		else return new double[] {0,0,0,0,0};
      }
      
-     public static double[] getClassesByNumber(int numClasses, double min, double max){
+     static double[] getClassesByNumber(int numClasses, double min, double max){
     	 double [] classBoundries = new double[numClasses+1];
          double classSize = (max - min)/numClasses;
          
@@ -257,7 +260,7 @@ public class GrafStats {
     	 return classBoundries;
      }
      
-     public static double[] getClassesByClassSize(double classSize, double min, double max) {
+     static double[] getClassesByClassSize(double classSize, double min, double max) {
     	 int numClasses = 0;
     	   for (double n = min;  n <= max; n = n + classSize)
     		   numClasses++;
@@ -269,8 +272,7 @@ public class GrafStats {
      
      
      private static boolean evenLength(Double[] dArray){
-    	 if ((double) dArray.length/2 == (double) (int) (dArray.length/2)) return true; 
-    	 else return false;
+         return (double) dArray.length / 2 == (double) (dArray.length / 2);
      }
      
     // private static boolean cellIsNull(Double[] dArray, int index){
@@ -280,9 +282,10 @@ public class GrafStats {
     // 	} catch (NullPointerException e){return true;}
     // }
      
-     public static Double[] getRidOfNulls(Double[] dArray){
-    	 if (nullArray(dArray, "GetRidOfNulls()")){ Double[] empty = {}; return empty; }
-    	 ArrayList<Double> tempList = new ArrayList<Double>();  
+     static Double[] getRidOfNulls(Double[] dArray){
+    	 if (nullArray(dArray, "GetRidOfNulls()")){
+			 return new Double[]{}; }
+    	 ArrayList<Double> tempList = new ArrayList<>();
     	 for (Double d: dArray){
     		 if (d != null) tempList.add(d);
     	 }

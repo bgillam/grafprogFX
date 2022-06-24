@@ -18,8 +18,8 @@ public class TableColumnGeneratorController {
     @FXML private Button cancelButton;
     @FXML private Button okButton;
     @FXML private Label col1ChoiceLabel;
-    @FXML private ChoiceBox col1Chooser;
-    @FXML private ChoiceBox col2Chooser;
+    @FXML private ChoiceBox<String> col1Chooser;
+    @FXML private ChoiceBox<String> col2Chooser;
     @FXML private Label col2ChoiceLabel;
     @FXML private Label rowStart;
     @FXML private TextField rowStartText;
@@ -38,7 +38,7 @@ public class TableColumnGeneratorController {
     private GenType genType;
 
 
-    public void hideAll(){
+    void hideAll(){
         ya1.setVisible(false);
         t1.setVisible(false);
         anLabel1.setVisible(false);
@@ -69,7 +69,7 @@ public class TableColumnGeneratorController {
 
     }
 
-    public void showRandomDialog(){
+    void showRandomDialog(){
         hideAll();
         GrafProg.getGenStage().setTitle("Generate Random Values");
         col1ChoiceLabel.setText("Output Column:");
@@ -157,7 +157,7 @@ public class TableColumnGeneratorController {
         //myDaddy.repaint();
     }
 
-    public void showRecursiveDialog() {
+    void showRecursiveDialog() {
         hideAll();
         GrafProg.getGenStage().setTitle("Generate Recursive Values");
         ya1.setText("A1:");
@@ -194,10 +194,10 @@ public class TableColumnGeneratorController {
 
     private boolean generateRecursiveValues(){
         //System.out.println("in");
-        double startA = 1;
-        String functionString = "";
-        int pos = -1;
-        int fLength = -1;
+        double startA;
+        String functionString;
+        int pos;
+        int fLength;
         int beginRow = 1;
         int endRow = myDaddy.getNumRows();
         boolean ok = true;
@@ -214,7 +214,8 @@ public class TableColumnGeneratorController {
             functionString = first+"X"+last;
         }
         if (FunctionString.checkFunctionString(functionString)!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
-        else if (!FunctionString.isValidAtXIgnoreDomainError(functionString, 1)) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
+        else if (!FunctionString.isValidAtX(functionString, 1)) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
+        //else if (!FunctionString.isValidAtXIgnoreDomainError(functionString, 1)) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
         if (!GrafInputHelpers.isInt(rowStartText.getText())) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
         else beginRow = Integer.parseInt(rowStartText.getText());
         if (!GrafInputHelpers.isInt(rowEndText.getText())) {GrafInputHelpers.setTextFieldColor(rowEndText, "red");  ok = false;  }
@@ -228,19 +229,19 @@ public class TableColumnGeneratorController {
         GrafInputHelpers.setTextFieldColor(rowStartText, "black");
         GrafInputHelpers.setTextFieldColor(rowEndText, "black");
         double anMinus1 = startA;
-        double newVal = startA;
-        for (int row = beginRow; row <= endRow; row++)
-            try {
+        double newVal;
+        for (int row = beginRow; row <= endRow; row++) {
+           // try {
                 newVal = FunctionString.fValue(functionString, anMinus1);
                 myDaddy.setCellValueDouble(row, col1Chooser.getSelectionModel().getSelectedIndex()+1, newVal);
-                anMinus1=newVal;
-            } catch (DomainViolationException e) { }  //we know we should not get an exception because tested previously
-            catch (FunctionFormatException e) {}
+                anMinus1=newVal;}
+          //  } catch (DomainViolationException e) { }  //we know we should not get an exception because tested previously
+         //   catch (FunctionFormatException e) {}
         //myDaddy.repaint();
         return true;
     }
 
-    public void showFunctionDialog() {
+    void showFunctionDialog() {
         hideAll();
         GrafProg.getGenStage().setTitle("Generate Function Values");
         ya1.setText("Y1:");
@@ -288,7 +289,8 @@ public class TableColumnGeneratorController {
             endRow = Integer.parseInt(rowEndText.getText());
         if (endRow > myDaddy.getNumRows()) endRow = myDaddy.getNumRows();
         if (FunctionString.checkFunctionString(t1.getText())!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
-        if (!FunctionString.isValidAtXIgnoreDomainError(t1.getText(), 1)) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
+        //if (!FunctionString.isValidAtXIgnoreDomainError(t1.getText(), 1)) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
+        if (!FunctionString.isValidAtX(t1.getText(), 1)) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
         if (!ok) return false;
         //System.out.println("made it here");
         GrafInputHelpers.setTextFieldColor(rowStartText, "black");
@@ -300,9 +302,9 @@ public class TableColumnGeneratorController {
         for (int row = beginRow; row <= endRow; row++)
             try {
                 myDaddy.setCellValueDouble(row, outputColumn, FunctionString.fValue(t1.getText(), myDaddy.getCellValue(row, inputColumn)));
-            } catch (NullPointerException e)  { } //empty cells
-            catch (DomainViolationException e) { }   //we know we will not get an exception because tested in previous if statement
-            catch (FunctionFormatException e) {}
+            } catch (NullPointerException e)  {System.out.println(e.toString()); } //empty cells
+            //catch (DomainViolationException e) { }   //we know we will not get an exception because tested in previous if statement
+            //catch (FunctionFormatException e) {}
         return true;
         //myDaddy.repaint();
     }

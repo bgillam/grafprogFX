@@ -43,9 +43,9 @@ public class GrafCircleTest
     @Test
     public void drawGrafTest(){
         assertNotNull(gCircle.getGrafColor());
-        assertNotNull(gSess.getGrafPanel());
-        assertNotNull(gSess.getGrafPanel().getGraphics());
-        Graphics g = gSess.getGrafPanel().getGraphics();
+        assertNotNull(GrafProg.getGrafPanel());
+        assertNotNull(GrafProg.getGrafPanel().getGraphics());
+        Graphics g = GrafProg.getGrafPanel().getGraphics();
         gCircle.drawGraf((Graphics2D)g);
     }
     

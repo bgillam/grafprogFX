@@ -1,11 +1,11 @@
 
-/********************************* 
+/* ********************************
  * GrafPanel for GrafProg Project *
  * Panel graphs are painted on
  *  @author Bill Gillam           *
  *  2/25/15                       *
  **********************************/
-/**
+/* *
  * Canvas for graphing.
  *
  */
@@ -28,7 +28,7 @@ public class GrafPanel extends JPanel implements Serializable
     /**
      * Constructor for objects of class GrafPanel
      */
-    public GrafPanel()
+    GrafPanel()
     {
 
 
@@ -38,34 +38,24 @@ public class GrafPanel extends JPanel implements Serializable
     public void paintComponent(Graphics g){
         //System.out.println("in paint");
         grafCanvas = (Graphics2D)g;
-        String functionList = "";
         for (GrafObject graf: GrafProg.getGrafList()){
             graf.drawGraf(grafCanvas);
-            if (graf.getType() == GrafType.FUNCTION) {
-                GrafFunction gf = (GrafFunction)graf;
-                functionList=functionList+"y="+gf.getFunction()+"; ";
-                //repaint();
-            }
-            //System.out.println();
         }
         GrafProg.zeroBoxPlotsPlotted();
-        GrafProg.setMessage1(functionList);
-        //repaint();
+        GrafProg.setMessage1(GrafFunction.yFunctionList());
     }
 
-    public void printPanel(){
+    void printPanel(){
         PrinterJob printJob = PrinterJob.getPrinterJob();
         printJob.setJobName("Print GrafPanel");
-        printJob.setPrintable (new Printable() {
-            public int print(Graphics g, PageFormat pf, int pageNum){
-                if (pageNum > 0)  return Printable.NO_SUCH_PAGE;
-                Graphics2D gc = (Graphics2D) g;
-                gc.translate(pf.getImageableX(), pf.getImageableY());
-                paint(gc);
-                return Printable.PAGE_EXISTS;
-            }
+        printJob.setPrintable ((g, pf, pageNum) -> {
+            if (pageNum > 0)  return Printable.NO_SUCH_PAGE;
+            Graphics2D gc = (Graphics2D) g;
+            gc.translate(pf.getImageableX(), pf.getImageableY());
+            paint(gc);
+            return Printable.PAGE_EXISTS;
         });
-        if (printJob.printDialog() != false)
+        if (printJob.printDialog())
             try {
                 printJob.print();
             } catch (PrinterException ex) {

@@ -1,4 +1,4 @@
-/***************************
+/* **************************
  * RegressionMath
  * This object holds and provides access to various values for regression analysis, so that they can be calculated once and accesses from other classes.
  * Bill Gillam 4/23/18
@@ -9,30 +9,31 @@ import java.math.*;
 
 
 public class RegressionMath {
-    //Class computes and holds regression values
-    int numDataPoints; //number of (x,y) pairs
-    Vector x;          // x values
-    Vector y;          //y values
-    boolean pairError = false;   //error if x and y are not same length after nulls are removed;
-    int terms;          // order + 1 
-    Vector beta;       //coefficient vector  
-    Vector yCalc;      //values calculated from model
-    Vector residuals;  //Predicted - actual y values
-    Vector errors;     //
-    double r;          //correlation coefficient
+    private Vector x;          // x values
+    private Vector y;          //y values
+    private Vector beta;       //coefficient vector
+    private Vector yCalc;      //values calculated from model
+    private Vector residuals;  //Predicted - actual y values
+    private Vector errors;     //
+    private double r;          //correlation coefficient
     
-    public static void main(String args[]){
+    public static void main(String[] args){
         System.out.println("two cubed"+getXPower(new BigDecimal(2), 3));
     
     }
        
     //constructor stores x and y vector stripped of nulls
-    public RegressionMath(Vector passedX, Vector passedY, int order){
+    RegressionMath(Vector passedX, Vector passedY, int order){
         y = passedY.stripEndNulls(); //x values
         x = passedX.stripEndNulls(); //y values
-        terms = order+1;             //number of terms in resulting polynomial. linear = 2; quadratic = 3 ... etc
-        numDataPoints = x.length();  //number of ordered pairs
+        // order + 1
+        int terms = order + 1;             //number of terms in resulting polynomial. linear = 2; quadratic = 3 ... etc
+        //Class computes and holds regression values
+        //number of (x,y) pairs
+        int numDataPoints = x.length();  //number of ordered pairs
         //test that data is in correct format
+        //error if x and y are not same length after nulls are removed;
+        boolean pairError = false;
         if (numDataPoints != y.length()){
             JOptionPane.showMessageDialog(null, "X and Y vector lengths vary.", "Error!" , JOptionPane.ERROR_MESSAGE);
             pairError = true;
@@ -43,7 +44,7 @@ public class RegressionMath {
             Matrix xTx = Matrix.product(xMat.transpose(), xMat); //create square matrix for x values.
             beta = calcRegressionCoefficients(xMat, xTx, y); //coefficients of mdoel stored in beta
            
-            yCalc = calcYCalc(numDataPoints,terms, beta, x); //y values calculated from model stored in yCalc
+            yCalc = calcYCalc(numDataPoints, terms, beta, x); //y values calculated from model stored in yCalc
            
             residuals = calcResiduals(numDataPoints,yCalc,y); //differences between actual and predicted values
            
@@ -56,7 +57,7 @@ public class RegressionMath {
     
     
     //computes variables for line/curve of fit. returns r. Saves errors and coefficients
-    public static Vector calcRegressionCoefficients(Matrix xMat, Matrix xTx, Vector y){
+    private static Vector calcRegressionCoefficients(Matrix xMat, Matrix xTx, Vector y){
         Matrix betaMatrix = Matrix.product(Matrix.product(xTx.inverse(),xMat.transpose()),y);
         return betaMatrix.columnVector(1);
     }
@@ -159,31 +160,31 @@ public class RegressionMath {
         return powerValue;
     }
     
-    public Vector getXVector(){
+    Vector getXVector(){
         return x;
     }
     
-    public Vector getYVector(){
+    Vector getYVector(){
         return y;
     }
     
-    public Vector getCoefficients(){
+    Vector getCoefficients(){
         return beta;
     }
     
-    public Vector getResiduals(){
+    Vector getResiduals(){
         return residuals;
     }
     
-    public Vector getYCalc(){
+    Vector getYCalc(){
         return yCalc;
     }
     
-    public double getRValue(){
+    double getRValue(){
         return r;
     }
     
-    public Vector getErrors(){
+    Vector getErrors(){
         return errors;
     }
 }

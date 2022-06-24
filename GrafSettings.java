@@ -1,12 +1,12 @@
 
-/**************************************** 
+/* ***************************************
 *  GrafSettings for GrafProg Project      *
 *  settings for graphing window
 *  and virtual screen conversions
 *  @author Bill Gillam                  *
 *  4/4/18                              *
 *****************************************/
-/**
+/*
 * Created for each GrafProg 
 * Holds info for graphingwindow. 
 */
@@ -44,10 +44,12 @@ public class GrafSettings implements Serializable
    private GrafPanel myPanel;
  
    //enums
-   public enum ScaleFormat {EXP,DEC};
-   private ScaleFormat scaleFormat = ScaleFormat.DEC;
-   public enum ScaleProcedure {TEN_POWER, FROM_RANGE, SET_SCALES };
-   private ScaleProcedure scaleProcedure = ScaleProcedure.SET_SCALES;
+   public enum ScaleFormat {EXP,DEC}
+
+    private ScaleFormat scaleFormat = ScaleFormat.DEC;
+   public enum ScaleProcedure {TEN_POWER, FROM_RANGE, SET_SCALES }
+
+    private ScaleProcedure scaleProcedure = ScaleProcedure.SET_SCALES;
 
    //Constructor for objects of class GrafStuff
     public GrafSettings()
@@ -64,20 +66,20 @@ public class GrafSettings implements Serializable
      } 
     
    //virtual screen math
-   public double getGrafWidth(){return xMax - xMin;} 
-   public double getGrafHeight(){return yMax - yMin;}
-   public int getPanelWidth(){ return myPanel.getWidth();}
-   public int getPanelHeight(){return myPanel.getHeight();}
-   public double getRatioX(){ return myPanel.getWidth()/getGrafWidth();}
-   public double getRatioY(){ return myPanel.getHeight()/getGrafHeight();}
+   private double getGrafWidth(){return xMax - xMin;}
+   double getGrafHeight(){return yMax - yMin;}
+   int getPanelWidth(){ return myPanel.getWidth();}
+   int getPanelHeight(){return myPanel.getHeight();}
+   double getRatioX(){ return myPanel.getWidth()/getGrafWidth();}
+   double getRatioY(){ return myPanel.getHeight()/getGrafHeight();}
    public Point virtToFrame(double x, double y){return new Point((int)((x-xMin)*getRatioX()),(int)((yMax-y)*getRatioY())); } //tab)
-   public int virtToFrameX(double x){return (int)((x-xMin)*getRatioX());}
-   public int virtToFrameY(double y){return (int)((yMax-y)*getRatioY());}
+   int virtToFrameX(double x){return (int)((x-xMin)*getRatioX());}
+   int virtToFrameY(double y){return (int)((yMax-y)*getRatioY());}
        
     //Setters and Getters
     
     //Sets the window to 10 x 10 and scales to 1
-   public void setStandardAxes(){
+    void setStandardAxes(){
        setXMin(-10); setXMax(10); setYMin(-10); setYMax(10); setXAxisScale(1); setYAxisScale(1); 
    }
 
@@ -93,46 +95,58 @@ public class GrafSettings implements Serializable
     public void setOwner(GrafProg g){myStage = g;}
     public void setGrafPanel(GrafPanel gp){myPanel = gp;}
     public GrafPanel getGrafPanel(){return myPanel;}
-    public boolean getShowYAxisScale(){return showYAxisScale;}
-    public boolean getShowXAxisScale(){return showXAxisScale;}
-    public void toggleShowYScale(){if (showYAxisScale) showYAxisScale=false; else showYAxisScale=true;}
-    public void toggleShowXScale(){if (showXAxisScale) showXAxisScale=false; else showXAxisScale=true;}
+    boolean getShowYAxisScale(){return showYAxisScale;}
+    boolean getShowXAxisScale(){return showXAxisScale;}
+    public void toggleShowYScale(){
+        showYAxisScale= !showYAxisScale;
+    }
+    public void toggleShowXScale(){
+        showXAxisScale= !showXAxisScale;
+    }
 
-    public void setShowXAxisScale(boolean tf) {this.showXAxisScale = tf;}
-    public void setShowYAxisScale(boolean tf) {this.showYAxisScale = tf;}
+    void setShowXAxisScale(boolean tf) {this.showXAxisScale = tf;}
+    void setShowYAxisScale(boolean tf) {this.showYAxisScale = tf;}
 
-    public boolean showYAxis(){return showYAxis;}
-    public void setShowYAxis(boolean tf){showYAxis=tf;}
-    public boolean showXAxis(){return showXAxis;}
-    public void setShowXAxis(boolean tf){showXAxis=tf;}
-    public void toggleShowXAxis(){if (showXAxis) showXAxis=false; else showXAxis=true;} 
-    public void toggleShowYAxis(){if (showYAxis) showYAxis=false; else showYAxis=true;} 
-    public boolean getLeftScale(){return leftScale;}
-    public void setLeftScale(boolean tf){leftScale=tf;}
-    public void toggleLeftFlag(){if (leftScale)leftScale=false; else leftScale=true;}
-    public void toggleReverseXY(){ if (reverseXY) reverseXY = false; else reverseXY = true;}
+    boolean showYAxis(){return showYAxis;}
+    void setShowYAxis(boolean tf){showYAxis=tf;}
+    boolean showXAxis(){return showXAxis;}
+    void setShowXAxis(boolean tf){showXAxis=tf;}
+    public void toggleShowXAxis(){
+        showXAxis= !showXAxis;
+    }
+    public void toggleShowYAxis(){
+        showYAxis= !showYAxis;
+    }
+    boolean getLeftScale(){return leftScale;}
+    void setLeftScale(boolean tf){leftScale=tf;}
+    public void toggleLeftFlag(){
+        leftScale= !leftScale;
+    }
+    void toggleReverseXY(){
+        reverseXY = !reverseXY;
+    }
     public double getXMin(){return xMin;}
-    public void setXMin(double x){xMin=x;}
+    void setXMin(double x){xMin=x;}
     public double getXMax() {return xMax;}
-    public void setXMax(double r){xMax=r;}
-    public double getYMin(){return yMin;}
+    void setXMax(double r){xMax=r;}
+    double getYMin(){return yMin;}
     public void setYMin(double r){yMin=r;}
-    public double getYMax(){return yMax;}
+    double getYMax(){return yMax;}
     public void setYMax(double r){yMax = r;}
-    public double getXAxisScale(){return xAxisScale;}
-    public double getYAxisScale(){return yAxisScale;}
-    public void setXAxisScale(double r){xAxisScale=r;}
-    public void setYAxisScale(double r){yAxisScale=r;}
-    public int getDecPlaces(){return decPlaces;}
-    public void setDecPlaces(int dp){decPlaces = dp;}
-    public ScaleFormat getScaleFormat(){return scaleFormat;}
-    public void setScaleFormat(ScaleFormat sf){scaleFormat=sf;}
-    public ScaleProcedure getScaleProcedure(){return scaleProcedure;}
-    public void setScaleProcedure(ScaleProcedure sp){scaleProcedure = sp;}
+    double getXAxisScale(){return xAxisScale;}
+    double getYAxisScale(){return yAxisScale;}
+    void setXAxisScale(double r){xAxisScale=r;}
+    void setYAxisScale(double r){yAxisScale=r;}
+    int getDecPlaces(){return decPlaces;}
+    void setDecPlaces(int dp){decPlaces = dp;}
+    ScaleFormat getScaleFormat(){return scaleFormat;}
+    void setScaleFormat(ScaleFormat sf){scaleFormat=sf;}
+    ScaleProcedure getScaleProcedure(){return scaleProcedure;}
+    void setScaleProcedure(ScaleProcedure sp){scaleProcedure = sp;}
     public boolean getClassesForScale(){return classesForScale;}
     public void setClassesForScale(boolean tf){classesForScale = tf;}
-    public boolean getReverseXY(){return reverseXY;}
-    public void setReversXY(boolean tf) {reverseXY = tf;}
-    public boolean isAutoScale(){return autoScale;}
-    public void setAutoScale(boolean tf){autoScale = tf;}
+    boolean getReverseXY(){return reverseXY;}
+    void setReversXY(boolean tf) {reverseXY = tf;}
+    boolean isAutoScale(){return autoScale;}
+    void setAutoScale(boolean tf){autoScale = tf;}
 }

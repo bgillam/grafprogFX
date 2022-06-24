@@ -11,7 +11,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
@@ -21,23 +20,6 @@ public class GrafProg extends Application {
     private static final long serialVersionUID = 1L;
 
     //Stages, Scenes and Nodes
-    //UI for column data generator
-    private static Stage genStage = new Stage();
-    private static Scene genScene;
-    private static TableColumnGeneratorController tableGenController;
-    private static Parent genRoot;
-
-    //UI for creating GrafObjects
-    private static Stage dialogStage = new Stage();
-    private static Scene dialogScene;
-    private static GrafDialogController dialogController;
-    private static Parent dialogRoot;
-
-    //UI for one variable stats
-    private static Stage statStage = new Stage();
-    private static Scene statScene;
-    private static OneVarStatsController statController;
-    private static Parent statRoot;
 
     //UI for x-y axes and graphs
     private static Stage grafStage = new Stage();
@@ -54,6 +36,29 @@ public class GrafProg extends Application {
     private static Parent tableRoot;
     private static SwingNode swingTableNode = new SwingNode();
     private static GrafTable data = new GrafTable(100,10);  //Swing table for data
+    private static JPanel dataPanel = data.getDataPanel(); //Graphics Panel in swing
+
+    //UI for creating GrafObjects
+    private static Stage dialogStage = new Stage();
+    private static Scene dialogScene;
+    private static GrafDialogController dialogController;
+    private static Parent dialogRoot;
+
+    //UI for column data generator
+    private static Stage dataGenStage = new Stage();
+    private static Scene dataGenScene;
+    private static TableColumnGeneratorController dataGenController;
+    private static Parent dataGenRoot;
+
+    //UI for one variable stats
+    private static Stage statStage = new Stage();
+    private static Scene statScene;
+    private static OneVarStatsController statController;
+    private static Parent statRoot;
+
+
+
+
 
     //static variables
     private static File grafFile = new File("");  //File associated with the current Graf object
@@ -74,28 +79,27 @@ public class GrafProg extends Application {
         GrafProg.grafStage = grafStage;
 
         //Set up Object Creation Dialog Box
-        dialogController = createScene(dialogStage, 650, 375, "GrafDialog.fxml", "");
+        dialogController = createScene(dialogStage, 650, 375, "GrafDialog.fxml", "").getController();
         dialogStage.initModality(Modality.APPLICATION_MODAL);
 
         //Set up One Variable Stats Dialog Box
-        statController = createScene(statStage, 580, 250, "OneVarStats.fxml" , "One-Variable Statistics");
+        statController = createScene(statStage, 580, 250, "OneVarStats.fxml" , "One-Variable Statistics").getController();
         statStage.initModality(Modality.APPLICATION_MODAL);
 
         //Set up column generator Dialog Box
-        tableGenController = createScene(genStage, 625, 200, "TableColumnGenerator.fxml", "Column Actions");
-
+        dataGenController = createScene(dataGenStage, 625, 200, "TableColumnGenerator.fxml", "Column Actions").getController();
         //tableStage.initModality(Modality.APPLICATION_MODAL);
 
         //Set up Table
-        tableController = createScene(tableStage, initWidth, initHeight, "Table.fxml" , "Data");
+        tableController = createScene(tableStage, initWidth, initHeight, "Table.fxml" , "Data").getController();
         swingTableNode.setContent(data.getDataPanel());
         tableController.getTablePane().getChildren().add(swingTableNode);
         anchorSwingNode(swingTableNode);
-        setSizeChangeListener(tableStage, data.getDataPanel());
+        setSizeChangeListener(tableStage, dataPanel);
         EditContextMenu.editContextMenu(tableController.getTablePane(), getData());
 
         //Set up main graf window
-        grafController = createScene(grafStage, initWidth, initHeight, "Graf.fxml", "GrafProg");
+        grafController = createScene(grafStage, initWidth, initHeight, "Graf.fxml", "GrafProg").getController();
         swingGrafNode.setContent(getGrafPanel()); //put grafPanel into a JavaFX node
         grafController.getGrafPane().getChildren().add(swingGrafNode);   //place graphing window node in pane
         anchorSwingNode(swingGrafNode);
@@ -112,16 +116,16 @@ public class GrafProg extends Application {
     }
 
     //creates a scene within passed stage
-    private <T> T createScene(Stage stage, int width, int height, String path, String title) throws IOException {
+    private FXMLLoader createScene(Stage stage, int width, int height, String path, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Parent root = loader.load();
         Scene scene = new Scene(root, width, height);
         stage.setScene(scene);
         stage.setTitle(title);
-        return (T) loader.getController();
+        return loader;
     }
 
-    //anchor a swing node to the pane edges
+        //anchor a swing node to the pane edges
     private void anchorSwingNode(SwingNode node){
         AnchorPane.setTopAnchor(node, 0.0);
         AnchorPane.setLeftAnchor(node, 0.0);
@@ -160,7 +164,7 @@ public class GrafProg extends Application {
         });
     }
 
-    //Set Titles and saved status after saving file
+    /*//Set Titles and saved status after saving file
     private static void setGrafSavedAndTitle(boolean tf){
         if (tf) {
             grafStage.setTitle(grafFile.toString());
@@ -169,7 +173,7 @@ public class GrafProg extends Application {
         }else{
             grafSaved = false;
         }
-    }
+    }*/
 
 
     //Close an open file
@@ -181,18 +185,22 @@ public class GrafProg extends Application {
             if (alert.getResult() == ButtonType.CANCEL) return false;
             if (alert.getResult() == ButtonType.YES) {
                 GrafFiles.saveFile();
-                setGrafSavedAndTitle(true);
+                grafStage.setTitle(grafFile.toString());
+                tableStage.setTitle("Data: " + grafFile.toString());
+                grafSaved = true;
             }
         }
         return true;
     }
 
-    static int getNumType(GrafType gType){
+   /*static int getNumType(GrafType gType){
         int count = 0;
         for (GrafObject o: grafObjectList)
             if (o.getType().equals(gType)) count++;
         return count;
-    }
+    }*/
+
+    static int getNumPlots(){ return grafObjectList.size();}
 
     public static void setMessage1(String message){ grafController.setMessage1(message); }
     public static void setMessage2(String message){ grafController.setMessage2(message); }
@@ -249,14 +257,14 @@ public class GrafProg extends Application {
     }
 
     static TableColumnGeneratorController getTableGenController() {
-        return tableGenController;
+        return dataGenController;
     }
 
     public static void setTableGenController(TableColumnGeneratorController tableGenController) {
-        GrafProg.tableGenController = tableGenController;
+        GrafProg.dataGenController = tableGenController;
     }
 
-    static Stage getGenStage() {return genStage; }
+    static Stage getGenStage() {return dataGenStage; }
 
     static GrafController getGrafController(){
         return grafController;
@@ -264,7 +272,9 @@ public class GrafProg extends Application {
 
     static TableController getTableController(){return tableController;}
 
-
+    public static OneVarStatsController getStatController() {
+        return statController;
+    }
 
     public static void main(String[] args) {
         //new GrafProg().launch(args);

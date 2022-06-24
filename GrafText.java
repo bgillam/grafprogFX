@@ -24,7 +24,7 @@ public class GrafText extends GrafObject implements IGrafable
         
         
         
-   public GrafText(){
+   GrafText(){
        //super();
        gStuff = super.initGrafObject(GrafType.TEXT);
        setText("");
@@ -33,19 +33,19 @@ public class GrafText extends GrafObject implements IGrafable
     }
         
 
-   public GrafText(double x, double y, String t){
+   GrafText(double x, double y, String t){
         this();
         setX(x);
         setY(y);
         setText(t);
    }
 
-    public GrafText(double x, double y, String t, Color c){
+    private GrafText(double x, double y, String t, Color c){
         this(x, y, t);
         setGrafColor(c);
    }
    
-   public GrafText(double x, double y, String t, Font f, Color c){
+   GrafText(double x, double y, String t, Font f, Color c){
         this(x, y, t, c);
         //setGrafColor(c);
         setFont(f);
@@ -66,19 +66,19 @@ public class GrafText extends GrafObject implements IGrafable
     @Override
     public boolean isValidInput(GrafDialogController gdf){
         boolean ok = true;
-        if (gdf.getX1().equals("")) return false;
-        if (gdf.getY1().equals("")) return false;
-        if (gdf.getTextForDisplay().getText().equals("") ) {
-            gdf.getTextForDisplay().setText("Enter Text");
-            GrafInputHelpers.setTextFieldColor(gdf.getTextForDisplay(), "red" );
+        if (GrafDialogController.getX1().equals("")) return false;
+        if (GrafDialogController.getY1().equals("")) return false;
+        if (GrafDialogController.getTextForDisplay().getText().equals("") ) {
+            GrafDialogController.getTextForDisplay().setText("Enter Text");
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getTextForDisplay(), "red" );
             ok =  false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getX1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX1TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getY1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getY1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX2TextField(), "red" );
             ok = false;
         }
 
@@ -95,17 +95,16 @@ public class GrafText extends GrafObject implements IGrafable
         if (getType() != o.getType()) return false;
         if (!getText().equals(gp.getText())) return false;
         if (!(getX() == gp.getX())) return false;
-        if (!(getY() == gp.getY())) return false;
+        return getY() == gp.getY();
         //eventually need to check font here
-        return true;
     }
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
-        gdc.setX1(""+getX());
-        gdc.setY1(""+getY());
-        gdc.getTextForDisplay().setText(getText());
+        GrafDialogController.setX1(""+getX());
+        GrafDialogController.setY1(""+getY());
+        GrafDialogController.getTextForDisplay().setText(getText());
         javafx.scene.text.Font fxFont =  FontDialog.awtFontToFxFont(getFont());
         gdc.setFontName(fxFont.getName());
         gdc.setFontStyleText(fxFont.getStyle());
@@ -122,7 +121,7 @@ public class GrafText extends GrafObject implements IGrafable
     @Override
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
         return new GrafText(Double.parseDouble(
-                gdc.getX1()), Double.parseDouble(gdc.getY1()), gdc.getTextForDisplay().getText(), gdc.getDefaultFont(),  gdc.getGrafColor());
+                GrafDialogController.getX1()), Double.parseDouble(GrafDialogController.getY1()), GrafDialogController.getTextForDisplay().getText(), gdc.getDefaultFont(),  gdc.getGrafColor());
     }
 
    public void setX(double xval){ x = xval; }

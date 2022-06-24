@@ -47,10 +47,9 @@ public class FrequencyChartDialog extends JDialog {
      * 
      */
     private static final long serialVersionUID = 1L;
-    private final JPanel contentPanel = new JPanel();
-    private ArrayList<Integer> boxplotIndex = new ArrayList<Integer>();  // indexes which grafList objects are boxplots
+    private ArrayList<Integer> boxplotIndex = new ArrayList<>();  // indexes which grafList objects are boxplots
     // GrafProg gSess;
-    private JComboBox columnComboBox;
+    private JComboBox<String> columnComboBox;
     private JTable table;
     private JTextField textFieldEnd;
     private JTextField textFieldBegin;
@@ -58,17 +57,16 @@ public class FrequencyChartDialog extends JDialog {
     private JTextField textFieldClassSize;
     private JRadioButton numberOfClassesRadioBtn;
     private JRadioButton classSizeRadioBtn;
-    private JButton chckbxRound;
-    
-    
-        
+
+
     /**
      * Create the dialog.
      */
-    public FrequencyChartDialog() {
+    FrequencyChartDialog() {
         //gSess=sess;
         setBounds(100, 100, 600, 359);
         getContentPane().setLayout(new BorderLayout());
+        JPanel contentPanel = new JPanel();
         contentPanel.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -125,14 +123,12 @@ public class FrequencyChartDialog extends JDialog {
                                 panel_3.add(lblChooseColumnFor);
                             }
                             {
-                                columnComboBox = new JComboBox();
+                                columnComboBox = new JComboBox<>();
                                 panel_3.add(columnComboBox);
-                                columnComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(GrafProg.getData())));
-                                columnComboBox.addItemListener(new ItemListener() {
-                                    public void itemStateChanged(ItemEvent event) {
-                                        if (event.getStateChange() == ItemEvent.SELECTED){
-                                            updateMaxMin();
-                                        }
+                                columnComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(TableHeaderActions.getHeaderArray(GrafProg.getData())));
+                                columnComboBox.addItemListener(event -> {
+                                    if (event.getStateChange() == ItemEvent.SELECTED){
+                                        updateMaxMin();
                                     }
                                 });
                             }
@@ -266,21 +262,19 @@ public class FrequencyChartDialog extends JDialog {
                             JPanel panel_5 = new JPanel();
                             panel_3.add(panel_5, BorderLayout.SOUTH);
                             {
-                                chckbxRound = new JButton("Round Max and Min");
+                                JButton chckbxRound = new JButton("Round Max and Min");
                                 chckbxRound.setForeground(Color.BLUE);
                                 panel_5.add(chckbxRound);
-                                chckbxRound.addActionListener(new ActionListener() {
-                                    public void actionPerformed(ActionEvent arg0) {
-                                        double min,max;
-                                        if (GrafInputHelpers.isADoubleWithMessage(textFieldBegin.getText())) min = Double.parseDouble(textFieldBegin.getText()); else return;
-                                        if (GrafInputHelpers.isADoubleWithMessage(textFieldEnd.getText())) max = Double.parseDouble(textFieldEnd.getText()); else return;
-                                        long p =  -Math.round(Math.log10(Math.abs(min)));
-                                        min = Math.round(min*Math.pow(10,p))/(Math.pow(10, p));
-                                        p =  -Math.round(Math.log10(Math.abs(max)));
-                                        max = Math.round(max*Math.pow(10,p))/(Math.pow(10,p));
-                                        textFieldBegin.setText(""+min);
-                                        textFieldEnd.setText(""+max);
-                                    }
+                                chckbxRound.addActionListener(arg0 -> {
+                                    double min,max;
+                                    if (GrafInputHelpers.isADoubleWithMessage(textFieldBegin.getText())) min = Double.parseDouble(textFieldBegin.getText()); else return;
+                                    if (GrafInputHelpers.isADoubleWithMessage(textFieldEnd.getText())) max = Double.parseDouble(textFieldEnd.getText()); else return;
+                                    long p =  -Math.round(Math.log10(Math.abs(min)));
+                                    min = Math.round(min*Math.pow(10,p))/(Math.pow(10, p));
+                                    p =  -Math.round(Math.log10(Math.abs(max)));
+                                    max = Math.round(max*Math.pow(10,p))/(Math.pow(10,p));
+                                    textFieldBegin.setText(""+min);
+                                    textFieldEnd.setText(""+max);
                                 });
                                                                 
                             }
@@ -316,22 +310,20 @@ public class FrequencyChartDialog extends JDialog {
                             numberOfClassesRadioBtn.setForeground(Color.BLACK);
                             numberOfClassesRadioBtn.setSelected(true);
                             panel_3.add(numberOfClassesRadioBtn, BorderLayout.WEST);
-                            numberOfClassesRadioBtn.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent arg0) {
-                                    if (numberOfClassesRadioBtn.isSelected()) {
-                                        numberOfClassesRadioBtn.setSelected(true);
-                                        textFieldClassNumber.setEditable(true);
-                                        classSizeRadioBtn.setSelected(false);
-                                        textFieldClassSize.setEditable(false);
-                                    }else{
-                                        numberOfClassesRadioBtn.setSelected(false);
-                                        textFieldClassNumber.setEditable(false);
-                                        classSizeRadioBtn.setSelected(true);
-                                        textFieldClassSize.setEditable(true);
-                                    }
+                            numberOfClassesRadioBtn.addActionListener(arg0 -> {
+                                if (numberOfClassesRadioBtn.isSelected()) {
+                                    numberOfClassesRadioBtn.setSelected(true);
+                                    textFieldClassNumber.setEditable(true);
+                                    classSizeRadioBtn.setSelected(false);
+                                    textFieldClassSize.setEditable(false);
+                                }else{
+                                    numberOfClassesRadioBtn.setSelected(false);
+                                    textFieldClassNumber.setEditable(false);
+                                    classSizeRadioBtn.setSelected(true);
+                                    textFieldClassSize.setEditable(true);
                                 }
-                            });;
-                                
+                            });
+
                         }
                         {
                             textFieldClassNumber = new JTextField();
@@ -347,21 +339,19 @@ public class FrequencyChartDialog extends JDialog {
                                 classSizeRadioBtn = new JRadioButton("Class Size");
                                 classSizeRadioBtn.setForeground(Color.BLACK);
                                 panel_3_1.add(classSizeRadioBtn, BorderLayout.WEST);
-                                classSizeRadioBtn.addActionListener(new ActionListener() {
-                                    public void actionPerformed(ActionEvent arg0) {
-                                        if (numberOfClassesRadioBtn.isSelected()) {
-                                            numberOfClassesRadioBtn.setSelected(false);
-                                            textFieldClassNumber.setEditable(false);
-                                            classSizeRadioBtn.setSelected(true);
-                                            textFieldClassSize.setEditable(true);
-                                        }else{
-                                            numberOfClassesRadioBtn.setSelected(true);
-                                            textFieldClassNumber.setEditable(true);
-                                            classSizeRadioBtn.setSelected(false);
-                                            textFieldClassSize.setEditable(false);
-                                        }
+                                classSizeRadioBtn.addActionListener(arg0 -> {
+                                    if (numberOfClassesRadioBtn.isSelected()) {
+                                        numberOfClassesRadioBtn.setSelected(false);
+                                        textFieldClassNumber.setEditable(false);
+                                        classSizeRadioBtn.setSelected(true);
+                                        textFieldClassSize.setEditable(true);
+                                    }else{
+                                        numberOfClassesRadioBtn.setSelected(true);
+                                        textFieldClassNumber.setEditable(true);
+                                        classSizeRadioBtn.setSelected(false);
+                                        textFieldClassSize.setEditable(false);
                                     }
-                                });;
+                                });
                             }
                             {
                                 textFieldClassSize = new JTextField();
@@ -393,18 +383,10 @@ public class FrequencyChartDialog extends JDialog {
                 buttonPane.add(panel, BorderLayout.EAST);
                 {
                     JButton okButton = new JButton("Close");
-                    okButton.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent arg0) {
-                                dispose();  
-                        }
-                    });
+                    okButton.addActionListener(arg0 -> dispose());
                     JButton saveBtn = new JButton("Calc");
                     panel.add(saveBtn);
-                    saveBtn.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent arg0) {
-                            checkForInput();
-                        }
-                    });
+                    saveBtn.addActionListener(arg0 -> checkForInput());
                     panel.add(okButton);
                     okButton.setActionCommand("OK");
                     getRootPane().setDefaultButton(okButton);
@@ -424,8 +406,12 @@ public class FrequencyChartDialog extends JDialog {
                 JOptionPane.showMessageDialog(null, "You chose an empty column.", "I Feel So Empty!" , JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            double min = GrafStats.getMin(columnValues);
-            double max = GrafStats.getMax(columnValues);
+            Double min = GrafStats.getMin(columnValues);
+            if (min != null)
+                min = GrafStats.getMin(columnValues);
+            Double max = GrafStats.getMin(columnValues);
+            if (max != null)
+                max = GrafStats.getMax(columnValues);
             textFieldBegin.setText(""+min);
             textFieldEnd.setText(""+max);
         }

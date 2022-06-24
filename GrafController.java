@@ -103,6 +103,7 @@ public class GrafController {
 
        GrafProg.getDialogController().hideAll();
        GrafDialogController.showFxEntryDialog();
+       //GrafProg.getDialogController().showFxEntryDialog();
        GrafProg.getDialogStage().show();
 
     }

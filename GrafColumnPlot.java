@@ -22,7 +22,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     private boolean connected = false;
         
     //Constructor
-    public GrafColumnPlot(){
+    GrafColumnPlot(){
         gStuff = super.initGrafObject(GrafType.COLUMN);
         setColumnNumber(1);
         table = GrafProg.getData();
@@ -37,7 +37,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         GrafProg.setMessage1("Plotting Column "+columnNumber);
     }
 
-    public GrafColumnPlot(int column, String mark, boolean connected, Color c){
+    private GrafColumnPlot(int column, String mark, boolean connected, Color c){
         this();
         setColumnNumber(column);
         GrafProg.setMessage1("Plotting Column "+columnNumber);
@@ -52,8 +52,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     public void drawGraf(Graphics2D gc){
         double xMin = gStuff.getXMin();
         double xMax = gStuff.getXMax();
-      
-        double x = xMin;
+
         gc.setColor(super.getGrafColor());
         Double val, preval = 0.0;
         for (int i = 1; i < table.getNumRows(); i++){
@@ -89,8 +88,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         if (!getGrafColor().equals(gi.getGrafColor())) return false;
         if (!getMark().equals(gi.getMark())) return false;
         if (!(getColumnNumber() == gi.getColumnNumber())) return false;
-        if (!(getConnected() == gi.getConnected())) return false;
-        return true;
+        return getConnected() == gi.getConnected();
     }
 
     @Override
@@ -103,8 +101,12 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
 
     @Override
     public void autoRange(){
-        GrafProg.getGrafSettings().setYMax(GrafStats.getMax(TableColumnActions  .getColumnValues(getColumnNumber(), getData()))+GrafProg.getGrafSettings().getTenthWindowY());
-        GrafProg.getGrafSettings().setYMin(GrafStats.getMin(TableColumnActions.getColumnValues(getColumnNumber(), getData()))-GrafProg.getGrafSettings().getTenthWindowY());
+            Double max = GrafStats.getMax(TableColumnActions.getColumnValues(getColumnNumber(), getData()));
+            if (max != null)
+                GrafProg.getGrafSettings().setYMax(max + GrafProg.getGrafSettings().getTenthWindowY());
+            Double min =  GrafStats.getMin(TableColumnActions.getColumnValues(getColumnNumber(), getData()));
+            if (min!=null)
+                GrafProg.getGrafSettings().setYMin(min - GrafProg.getGrafSettings().getTenthWindowY());
     }
 
     @Override
@@ -114,14 +116,14 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     
 
     //Setters and Getters
-    public void setColumnNumber(int c){ columnNumber = c;}
-    public int getColumnNumber(){ return columnNumber;}
+    void setColumnNumber(int c){ columnNumber = c;}
+    int getColumnNumber(){ return columnNumber;}
     public void setMark(String m){mark = m;}
     public String getMark(){return mark;}
-    public void setConnected(boolean tf){
+    void setConnected(boolean tf){
         connected = tf;
     }
-    public boolean getConnected(){
+    boolean getConnected(){
         return connected;
     }
     

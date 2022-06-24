@@ -19,13 +19,13 @@ public class GrafTangent extends GrafObject implements IGrafable
         private String mark ="x";
         private double x = 0;
        
-   public GrafTangent(){
+   GrafTangent(){
        gStuff = super.initGrafObject(GrafType.TANGENT);
        }     
         
         
 
-   public GrafTangent(String yString, double x){
+   private GrafTangent(String yString, double x){
         this();
         setX(x);
         setFunctionString(yString);
@@ -33,7 +33,7 @@ public class GrafTangent extends GrafObject implements IGrafable
    }
    
     
-   public GrafTangent(String yString, double x, Color c, String mark){
+   private GrafTangent(String yString, double x, Color c, String mark){
         this(yString, x);
         setGrafColor(c);
         setMark(mark);
@@ -46,26 +46,26 @@ public class GrafTangent extends GrafObject implements IGrafable
        double x1 = x - dx;
        double x2 = x + dx;
        double y1;
-    try {
+    //try {
         y1 = FunctionString.fValue(functionString, x1);
-    } catch (DomainViolationException e) {
-        JOptionPane.showMessageDialog(null, "Error!", x1+" not in domain of function " , JOptionPane.ERROR_MESSAGE);
-        return;
-    }catch (FunctionFormatException e) {return;}   
-       double y2;
-    try {
+    //} catch (DomainViolationException e) {
+    //    JOptionPane.showMessageDialog(null, "Error!", x1+" not in domain of function " , JOptionPane.ERROR_MESSAGE);
+    //    return;
+    //}catch (FunctionFormatException e) {return;}
+    double y2;
+    //try {
         y2 = FunctionString.fValue(functionString, x2);
-    } catch (DomainViolationException e) {
-        JOptionPane.showMessageDialog(null, "Error!", x2+" not in domain of function " , JOptionPane.ERROR_MESSAGE);
-        return;
-    }catch (FunctionFormatException e) {return;}   
+    //} catch (DomainViolationException e) {
+   //    JOptionPane.showMessageDialog(null, "Error!", x2+" not in domain of function " , JOptionPane.ERROR_MESSAGE);
+    //   return;
+    //}catch (FunctionFormatException e) {return;}
        double yX;
-    try {
+    //try {
         yX = FunctionString.fValue(functionString, x);
-    } catch (DomainViolationException e) {
-        JOptionPane.showMessageDialog(null, "Error!", x+" not in domain of function " , JOptionPane.ERROR_MESSAGE);
-        return;
-    }catch (FunctionFormatException e) {return;}   
+    //} catch (DomainViolationException e) {
+      //  JOptionPane.showMessageDialog(null, "Error!", x+" not in domain of function " , JOptionPane.ERROR_MESSAGE);
+       // return;
+   // }catch (FunctionFormatException e) {return;}
        GrafPrimitives.grafString(gStuff,x, yX, getMark() , gc);
        double slope = (y2-y1)/(x2-x1);
        double yForXMin = slope*(gStuff.getXMin()-x1)+y1;
@@ -80,9 +80,9 @@ public class GrafTangent extends GrafObject implements IGrafable
     @Override
     public boolean isValidInput(GrafDialogController gdf){
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
-        if (gdf.getX1().equals("")) return false;
-        if (GrafInputHelpers.isDouble(gdf.getX1())) return true;
-        GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red");
+        if (GrafDialogController.getX1().equals("")) return false;
+        if (GrafInputHelpers.isDouble(GrafDialogController.getX1())) return true;
+        GrafInputHelpers.setTextFieldColor(GrafDialogController.getX1TextField(), "red");
         return false;
 
     }
@@ -93,25 +93,24 @@ public class GrafTangent extends GrafObject implements IGrafable
         if (getType() != o.getType()) return false;
         if (!getGrafColor().equals(gv.getGrafColor())) return false;
         if (!functionString.equals(gv.getFunctionString())) return false;
-        if (!(getX() == gv.getX())) return false;
-        return true;
+        return getX() == gv.getX();
     }
 
     @Override
     public void loadObjectFields(GrafDialogController gdc){
         super.loadObjectFields(gdc);
         gdc.setFunctionString(getFunctionString());
-        gdc.setX1(""+getX());
+        GrafDialogController.setX1(""+getX());
         gdc.settDialogMark(getMark());
 
     }
 
     @Override
     public void autoRange(){
-        double y1 = 0;
+        double y1;
         try{
             y1 = FunctionString.fValue(getFunctionString(), getX());
-        }catch(Exception e){JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;};
+        }catch(Exception e){JOptionPane.showMessageDialog(null, "Invalid function! ", "Error!" , JOptionPane.ERROR_MESSAGE); return;}
         double max, min;
         GrafProg.getGrafSettings().setYMax(y1+GrafProg.getGrafSettings().getTenthWindowY());
         GrafProg.getGrafSettings().setYMin(y1-GrafProg.getGrafSettings().getTenthWindowY());
@@ -119,7 +118,7 @@ public class GrafTangent extends GrafObject implements IGrafable
 
     @Override
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
-        return new GrafTangent(gdc.getFunctionString(), Double.parseDouble(gdc.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
+        return new GrafTangent(gdc.getFunctionString(), Double.parseDouble(GrafDialogController.getX1()), gdc.getGrafColor(), gdc.getDialogMark());
     }
 
    public void setX(double xval){ x = xval; }

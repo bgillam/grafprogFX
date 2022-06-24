@@ -22,13 +22,13 @@ public class GrafRectangle extends GrafObject implements IGrafable {
     //private String yString = "";
 
 
-    public GrafRectangle() {
+    GrafRectangle() {
         gStuff = super.initGrafObject(GrafType.RECTANGLE);
 
     }
 
 
-    public GrafRectangle(double x1, double y1, double width, double height) {
+    GrafRectangle(double x1, double y1, double width, double height) {
         this();
         setX(x1);
         setY(y1);
@@ -36,12 +36,12 @@ public class GrafRectangle extends GrafObject implements IGrafable {
         setHeight(height);
     }
 
-    public GrafRectangle(double x1, double y1, double width, double height, Color gColor) {
+    private GrafRectangle(double x1, double y1, double width, double height, Color gColor) {
         this(x1, y1, width, height);
         setGrafColor(gColor);
     }
 
-    public GrafRectangle(double x1, double y1, double width, double height, Color gColor, Color fColor) {
+    private GrafRectangle(double x1, double y1, double width, double height, Color gColor, Color fColor) {
         this(x1, y1, width, height, gColor);
         setFillColor(fColor);
     }
@@ -65,24 +65,24 @@ public class GrafRectangle extends GrafObject implements IGrafable {
     @Override
     public boolean isValidInput(GrafDialogController gdf) {
         boolean ok = true;
-        if (gdf.getX1().equals("")) return false;
-        if (gdf.getX2().equals("")) return false;
-        if (gdf.getY1().equals("")) return false;
-        if (gdf.getY2().equals("")) return false;
-        if (!GrafInputHelpers.isDouble(gdf.getX1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red" );
+        if (GrafDialogController.getX1().equals("")) return false;
+        if (GrafDialogController.getX2().equals("")) return false;
+        if (GrafDialogController.getY1().equals("")) return false;
+        if (GrafDialogController.getY2().equals("")) return false;
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX1TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getX2())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getX2())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getX2TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getY1())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getY1TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getY1())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getY1TextField(), "red" );
             ok = false;
         }
-        if (!GrafInputHelpers.isDouble(gdf.getY2())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getY2TextField(), "red" );
+        if (!GrafInputHelpers.isDouble(GrafDialogController.getY2())) {
+            GrafInputHelpers.setTextFieldColor(GrafDialogController.getY2TextField(), "red" );
             ok = false;
         }
         return ok;
@@ -97,17 +97,16 @@ public class GrafRectangle extends GrafObject implements IGrafable {
         if (!(getX() == gr.getX())) return false;
         if (!(getY() == gr.getY())) return false;
         if (!(getWidth() == gr.getWidth())) return false;
-        if (!(getHeight() == gr.getHeight())) return false;
-        return true;
+        return getHeight() == gr.getHeight();
     }
 
     @Override
     public void loadObjectFields(GrafDialogController gdc) {
         super.loadObjectFields(gdc);
-        gdc.setX1("" + getX());
-        gdc.setY1("" + getY());
-        gdc.setX2("" + getWidth());
-        gdc.setY2("" + getHeight());
+        GrafDialogController.setX1("" + getX());
+        GrafDialogController.setY1("" + getY());
+        GrafDialogController.setX2("" + getWidth());
+        GrafDialogController.setY2("" + getHeight());
         gdc.setfillColor(getFillColor());
 
     }
@@ -120,9 +119,9 @@ public class GrafRectangle extends GrafObject implements IGrafable {
 
     @Override
     public GrafObject createGrafObjectFromController(GrafDialogController gdc){
-        return new GrafRectangle(Double.parseDouble(gdc.getX1()),
-                Double.parseDouble(gdc.getY1()), Double.parseDouble(gdc.getX2()),
-                Double.parseDouble(gdc.getY2()), gdc.getGrafColor(), gdc.getFillColor());
+        return new GrafRectangle(Double.parseDouble(GrafDialogController.getX1()),
+                Double.parseDouble(GrafDialogController.getY1()), Double.parseDouble(GrafDialogController.getX2()),
+                Double.parseDouble(GrafDialogController.getY2()), gdc.getGrafColor(), gdc.getFillColor());
     }
 
 
@@ -134,11 +133,11 @@ public class GrafRectangle extends GrafObject implements IGrafable {
         return x;
     }
 
-    public void setWidth(double val) {
+    void setWidth(double val) {
         width = val;
     }
 
-    public double getWidth() {
+    double getWidth() {
         return width;
     }
 
@@ -150,11 +149,11 @@ public class GrafRectangle extends GrafObject implements IGrafable {
         return y;
     }
 
-    public void setHeight(double val) {
+    void setHeight(double val) {
         height = val;
     }
 
-    public double getHeight() {
+    double getHeight() {
         return height;
     }
 
@@ -162,7 +161,7 @@ public class GrafRectangle extends GrafObject implements IGrafable {
         return fill;
     }
 
-    public void setFillColor(Color f) {
+    void setFillColor(Color f) {
         fill = f;
     }
 

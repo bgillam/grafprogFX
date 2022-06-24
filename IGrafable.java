@@ -1,5 +1,5 @@
 
-/**
+/* *
  * Write a description of interface IGrafable here.
  *
  * @author (your name)
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public interface IGrafable
 {
     
-    public void drawGraf(Graphics2D gc);
-    public void loadObjectFields(GrafDialogController gdc);
-    public void autoRange();
+    void drawGraf(Graphics2D gc);
+    void loadObjectFields(GrafDialogController gdc);
+    void autoRange();
     
 }

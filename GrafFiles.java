@@ -1,5 +1,5 @@
 
-/**
+/*
  * File Handling Routines for GrafProg
  * @author (Bill Gillam)
  * @version (4/6/18)
@@ -8,8 +8,6 @@ import javafx.stage.FileChooser;
 
 import java.awt.*;
 import java.io.*;
-import javax.swing.*;
-import javax.swing.filechooser.*;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class GrafFiles implements Serializable
     /**
      * Constructor for objects of class GrafFiles
      */
-    public GrafFiles()
+    private GrafFiles()
     {
         // all methods are static. Constructor not used.
         
@@ -57,24 +55,22 @@ public class GrafFiles implements Serializable
   
     
   
-    public static File saveFile(){
+    static void saveFile(){
         File f = GrafProg.getGrafFile();
         if (f.toString().equals("") || !f.exists()) f = getFile();
         if (!(f == null)) {
             GrafFiles gf = new GrafFiles();
             saveObjectToFile(f, gf);
         }
-        return f;
     }
 
 
     
-    public static File saveFileAs(){
-        File f = GrafProg.getGrafFile();
+    static void saveFileAs(){
+        File f;
         f = getFile();
         GrafFiles gf = new GrafFiles();
         saveObjectToFile(f,gf);
-        return f;
     }
 
     private static void saveObjectToFile(File f, Object obj){
@@ -84,7 +80,7 @@ public class GrafFiles implements Serializable
             oos.writeObject(obj);
             oos.close();
         }catch(Exception ex){ GrafProg.setMessage1("File not saved");
-        System.out.println(ex);}
+        System.out.println(ex.toString());}
     } 
      
    
@@ -102,7 +98,7 @@ public class GrafFiles implements Serializable
     }
   
   //read an object from a file - not finished yet
-  public static Object openFileObject(String ext){
+  private static Object openFileObject(String ext){
 
 
       /*JFrame parent = new JFrame();
@@ -135,31 +131,31 @@ public class GrafFiles implements Serializable
    }
     
   
-  public static GrafProg openGrafFromFile(){
+  static GrafProg openGrafFromFile(){
      GrafFiles gf = (GrafFiles)openFileObject("grf");
      GrafProg grafProg = new GrafProg();
-     grafProg.getGrafSettings().setXMin(gf.xMin);
-     grafProg.getGrafSettings().setXMax(gf.xMax);
-     grafProg.getGrafSettings().setYMin(gf.yMin);
-     grafProg.getGrafSettings().setYMax(gf.yMax);
-     grafProg.getGrafSettings().setXAxisScale(gf.xAxisScale);
-     grafProg.getGrafSettings().setYAxisScale(gf.yAxisScale);
-     grafProg.getGrafSettings().setDecPlaces(gf.decPlaces);
-     grafProg.getGrafSettings().setShowYAxis(gf.showYAxis);
-     grafProg.getGrafSettings().setShowXAxis(gf.showXAxis);
-     grafProg.getGrafSettings().setShowXAxisScale(gf.showXAxisScale);
-     grafProg.getGrafSettings().setShowYAxisScale(gf.showYAxisScale);
-      grafProg.getGrafSettings().setReversXY(gf.reverseXY);
-      grafProg.getGrafSettings().setLeftScale(gf.leftScale);
-      grafProg.getGrafSettings().setAutoScale(gf.autoScale);
-      grafProg.getGrafSettings().setScaleFormat(gf.scaleFormat);
-      grafProg.getGrafSettings().setScaleProcedure(gf.scaleProcedure);
-      grafProg.setGrafFile(gf.grafFile);
-      grafProg.setGrafSaved(gf.grafSaved);
-      grafProg.setGrafList(gf.grafObjectList);
-      grafProg.getAxes().setCurrentFont(gf.currentFont);
-      grafProg.setBoxPlotsPlotted(gf.boxPlotsPlotted);
-      grafProg.setData(gf.data);
+     GrafProg.getGrafSettings().setXMin(gf.xMin);
+     GrafProg.getGrafSettings().setXMax(gf.xMax);
+     GrafProg.getGrafSettings().setYMin(gf.yMin);
+     GrafProg.getGrafSettings().setYMax(gf.yMax);
+     GrafProg.getGrafSettings().setXAxisScale(gf.xAxisScale);
+     GrafProg.getGrafSettings().setYAxisScale(gf.yAxisScale);
+     GrafProg.getGrafSettings().setDecPlaces(gf.decPlaces);
+     GrafProg.getGrafSettings().setShowYAxis(gf.showYAxis);
+     GrafProg.getGrafSettings().setShowXAxis(gf.showXAxis);
+     GrafProg.getGrafSettings().setShowXAxisScale(gf.showXAxisScale);
+     GrafProg.getGrafSettings().setShowYAxisScale(gf.showYAxisScale);
+      GrafProg.getGrafSettings().setReversXY(gf.reverseXY);
+      GrafProg.getGrafSettings().setLeftScale(gf.leftScale);
+      GrafProg.getGrafSettings().setAutoScale(gf.autoScale);
+      GrafProg.getGrafSettings().setScaleFormat(gf.scaleFormat);
+      GrafProg.getGrafSettings().setScaleProcedure(gf.scaleProcedure);
+      GrafProg.setGrafFile(grafFile);
+      GrafProg.setGrafSaved(grafSaved);
+      GrafProg.setGrafList(grafObjectList);
+      GrafProg.getAxes().setCurrentFont(gf.currentFont);
+      grafProg.setBoxPlotsPlotted(boxPlotsPlotted);
+      GrafProg.setData(data);
       return grafProg;
   }
 

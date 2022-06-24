@@ -1,9 +1,9 @@
-/********************************* 
-*  GrafCalc for GrafProg Project *
-*  Creates a calculator that can be used to build strings for function input or just as a calculator 
-*  @author Bill Gillam           *
-*  2/25/15                       *
-**********************************/
+/* ******************************
+ GrafCalc for GrafProg Project
+ Creates a calculator that can be used to build strings for function input or just as a calculator
+ @author Bill Gillam
+ 2/25/15
+ */
 
 import java.awt.BorderLayout;
 
@@ -43,10 +43,8 @@ import java.awt.Toolkit;
 import java.io.*;
 
 //Class Header. 
-public class GrafCalc extends JDialog //implements ClipboardOwner  
+class GrafCalc extends JDialog //implements ClipboardOwner
 {
-    //instance vars
-	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -60,10 +58,12 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 	 * Most of the subsections respond to a key/button press on the calculator form to modify the string in the input window by inserting the proper substring
 	 * I did not comment each one, since they are all similar
 	 */
-	public GrafCalc() {
+	GrafCalc() {
 		//gSess = sess;
 		setBounds(100, 100, 350, 500);
 		getContentPane().setLayout(new BorderLayout());
+		//instance vars
+		JPanel contentPanel = new JPanel();
 		contentPanel.setBackground(UIManager.getColor("InternalFrame.activeTitleGradient"));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -96,78 +96,68 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			contentPanel.add(panel);
 			{   //When you press the SIN( key, "SIN(" gets inserted at the caret
 				JButton btnSin = new JButton("Sin(");
-				btnSin.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Sin(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnSin.addActionListener(arg0 -> {
+                    String keyPressed = "Sin(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.setLayout(new GridLayout(0, 5, 0, 0));
 				panel.add(btnSin);
 			}
 			{
 				JButton button = new JButton("Cos(");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Cos(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "Cos(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton btnTan = new JButton("Tan(");
-				btnTan.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Tan(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnTan.addActionListener(arg0 -> {
+                    String keyPressed = "Tan(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnTan);
 			}
 			{
 				JButton btnRtod = new JButton("RtoD");
-				btnRtod.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "RtoD";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnRtod.addActionListener(arg0 -> {
+                    String keyPressed = "RtoD";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnRtod);
 			}
 			{
 				JButton btnAbs = new JButton("Abs(");
-				btnAbs.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Abs(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnAbs.addActionListener(arg0 -> {
+                    String keyPressed = "Abs(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnAbs);
 			}
 		}
@@ -177,78 +167,68 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			contentPanel.add(panel);
 			{
 				JButton btnCsc = new JButton("Csc(");
-				btnCsc.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Csc(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnCsc.addActionListener(arg0 -> {
+                    String keyPressed = "Csc(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.setLayout(new GridLayout(0, 5, 0, 0));
 				panel.add(btnCsc);
 			}
 			{
 				JButton btnSec = new JButton("Sec(");
-				btnSec.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Sec(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnSec.addActionListener(arg0 -> {
+                    String keyPressed = "Sec(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnSec);
 			}
 			{
 				JButton btnDtor = new JButton("DtoR");
-				btnDtor.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "DtoR(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnDtor.addActionListener(arg0 -> {
+                    String keyPressed = "DtoR(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnDtor);
 			}
 			{
 				JButton btnCot = new JButton("Cot(");
-				btnCot.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Cot(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnCot.addActionListener(arg0 -> {
+                    String keyPressed = "Cot(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnCot);
 			}
 			{
 				JButton btnRnd = new JButton("Rnd(");
-				btnRnd.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Rnd(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnRnd.addActionListener(arg0 -> {
+                    String keyPressed = "Rnd(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnRnd);
 			}
 		}
@@ -258,78 +238,68 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			contentPanel.add(panel);
 			{
 				JButton btnAsin = new JButton("ASin(");
-				btnAsin.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "ASin(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnAsin.addActionListener(arg0 -> {
+                    String keyPressed = "ASin(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.setLayout(new GridLayout(0, 5, 0, 0));
 				panel.add(btnAsin);
 			}
 			{
 				JButton btnAcos = new JButton("ACos(");
-				btnAcos.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "ACos(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnAcos.addActionListener(arg0 -> {
+                    String keyPressed = "ACos(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnAcos);
 			}
 			{
 				JButton btnAtan = new JButton("ATan(");
-				btnAtan.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "ATan(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnAtan.addActionListener(arg0 -> {
+                    String keyPressed = "ATan(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnAtan);
 			}
 			{
 				JButton btnPi = new JButton("PI");
-				btnPi.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "PI";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnPi.addActionListener(arg0 -> {
+                    String keyPressed = "PI";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnPi);
 			}
 			{
 				JButton btnSqrt = new JButton("Sqrt(");
-				btnSqrt.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Sqrt(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnSqrt.addActionListener(arg0 -> {
+                    String keyPressed = "Sqrt(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnSqrt);
 			}
 		}
@@ -339,63 +309,55 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			contentPanel.add(panel);
 			{
 				JButton btnExp = new JButton("Exp(");
-				btnExp.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Exp(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnExp.addActionListener(arg0 -> {
+                    String keyPressed = "Exp(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.setLayout(new GridLayout(0, 4, 0, 0));
 				panel.add(btnExp);
 			}
 			{
 				JButton btnLn = new JButton("Ln(");
-				btnLn.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Ln(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnLn.addActionListener(arg0 -> {
+                    String keyPressed = "Ln(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnLn);
 			}
 			{
 				JButton btnLog = new JButton("Log(");
-				btnLog.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "Log(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				btnLog.addActionListener(arg0 -> {
+                    String keyPressed = "Log(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(btnLog);
 			}
 			JButton btnNewButton_1 = new JButton( " X ");
 			panel.add(btnNewButton_1);
-			btnNewButton_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					String keyPressed = "X";
-					int pos = textField.getCaretPosition();
-					String first = textField.getText().substring(0,pos);
-					String last =  textField.getText().substring(pos,textField.getText().length());
-					textField.setText(first+keyPressed+last);
-					textField.requestFocusInWindow();
-					textField.setCaretPosition(pos+keyPressed.length());
-				}
-			});
+			btnNewButton_1.addActionListener(arg0 -> {
+                String keyPressed = "X";
+                int pos = textField.getCaretPosition();
+                String first = textField.getText().substring(0,pos);
+                String last =  textField.getText().substring(pos);
+                textField.setText(first+keyPressed+last);
+                textField.requestFocusInWindow();
+                textField.setCaretPosition(pos+keyPressed.length());
+            });
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -403,55 +365,47 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			contentPanel.add(buttonPane);
 			{   //deletes the character in front of the caret
 				JButton btnNewButton = new JButton("<-bs");
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						if (textField.getCaretPosition() > 0 ){
-							int pos = textField.getCaretPosition();
-							String first = textField.getText().substring(0,pos);
-							String last =  textField.getText().substring(pos,textField.getText().length());
-							textField.setText(first.substring(0,pos-1)+last);
-							textField.requestFocusInWindow();
-							textField.setCaretPosition(pos-1);
-						}
-					}
-				});
+				btnNewButton.addActionListener(arg0 -> {
+                    if (textField.getCaretPosition() > 0 ){
+                        int pos = textField.getCaretPosition();
+                        String first = textField.getText().substring(0,pos);
+                        String last =  textField.getText().substring(pos);
+                        textField.setText(first.substring(0,pos-1)+last);
+                        textField.requestFocusInWindow();
+                        textField.setCaretPosition(pos-1);
+                    }
+                });
 				buttonPane.setLayout(new GridLayout(0, 4, 0, 0));
 				buttonPane.add(btnNewButton);
 			}
 			{   // moves to front of the string
 				JButton btnNewButton_2 = new JButton("Home");
-				btnNewButton_2.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						textField.setCaretPosition(0);
-						textField.requestFocusInWindow();
-					}
-				});
+				btnNewButton_2.addActionListener(arg0 -> {
+                    textField.setCaretPosition(0);
+                    textField.requestFocusInWindow();
+                });
 				{   //deletes the character behind the cursor
 					JButton button = new JButton("Del");
 					buttonPane.add(button);
-					button.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							if (textField.getCaretPosition() < textField.getText().length()){
-								int pos = textField.getCaretPosition();
-								String first = textField.getText().substring(0,pos);
-								String last =  textField.getText().substring(pos+1,textField.getText().length());
-								textField.setText(first.substring(0,pos)+last);
-								textField.setCaretPosition(pos);
-							}
-							textField.requestFocusInWindow();
-						}
-					});
+					button.addActionListener(arg0 -> {
+                        if (textField.getCaretPosition() < textField.getText().length()){
+                            int pos = textField.getCaretPosition();
+                            String first = textField.getText().substring(0,pos);
+                            String last =  textField.getText().substring(pos+1);
+                            textField.setText(first.substring(0,pos)+last);
+                            textField.setCaretPosition(pos);
+                        }
+                        textField.requestFocusInWindow();
+                    });
 				}
 				buttonPane.add(btnNewButton_2);
 			}
 			{   //moves caret to right of string
 				JButton btnEnd_1 = new JButton("End");
-				btnEnd_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						textField.setCaretPosition(textField.getText().length());
-						textField.requestFocusInWindow();
-					}
-				});
+				btnEnd_1.addActionListener(arg0 -> {
+                    textField.setCaretPosition(textField.getText().length());
+                    textField.requestFocusInWindow();
+                });
 				buttonPane.add(btnEnd_1);
 			}
 		}
@@ -462,77 +416,67 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			panel.setLayout(new GridLayout(0, 5, 0, 0));
 			{
 				JButton button = new JButton("  (  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "(";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "(";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  ^  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "^";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "^";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  /  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "/";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "/";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  *  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "*";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "*";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton(" -  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "-";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "-";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 		}
@@ -543,77 +487,67 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			panel.setLayout(new GridLayout(0, 5, 0, 0));
 			{
 				JButton button = new JButton("  )  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = ")";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = ")";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  7  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "7";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "7";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  8  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "8";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "8";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  9  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "9";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "9";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  +  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "+";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "+";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 		}
@@ -623,75 +557,65 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			contentPanel.add(panel);
 			{   //moves the cursor left 
 				JButton button = new JButton(" <-- ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						if (textField.getCaretPosition() > 0){
-						int pos = textField.getCaretPosition();
-						textField.setCaretPosition(pos-1);
-						textField.requestFocusInWindow();
-						}
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    if (textField.getCaretPosition() > 0){
+                    int pos = textField.getCaretPosition();
+                    textField.setCaretPosition(pos-1);
+                    textField.requestFocusInWindow();
+                    }
+                });
 				panel.setLayout(new GridLayout(0, 5, 0, 0));
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  4  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "4";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "4";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  5  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "5";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "5";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  6  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "6";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "6";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			
 			{   //copies highlighted textg
 				JButton btnCopy = new JButton("copy");
 				btnCopy.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				btnCopy.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0){
-						if (mathTextSelected) clipper.setClipboardContents(textField.getSelectedText());   // GrafProg.setCopiedText(textField.getSelectedText());
-						else if (ansTextSelected) clipper.setClipboardContents(textField_1.getSelectedText());     //GrafProg.setCopiedText(textField_1.getSelectedText());
-						else if (xTextSelected) clipper.setClipboardContents(textField_2.getSelectedText());     //GrafProg.setCopiedText(textField_2.getSelectedText());
-						
-					}
-				});
+				btnCopy.addActionListener(arg0 -> {
+                    if (mathTextSelected) clipper.setClipboardContents(textField.getSelectedText());   // GrafProg.setCopiedText(textField.getSelectedText());
+                    else if (ansTextSelected) clipper.setClipboardContents(textField_1.getSelectedText());     //GrafProg.setCopiedText(textField_1.getSelectedText());
+                    else if (xTextSelected) clipper.setClipboardContents(textField_2.getSelectedText());     //GrafProg.setCopiedText(textField_2.getSelectedText());
+
+                });
 				panel.add(btnCopy);
 			}
 		}
@@ -702,78 +626,69 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			panel.setLayout(new GridLayout(0, 5, 0, 0));
 			{   //move the cursor right
 				JButton button = new JButton(" --> ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						if (textField.getCaretPosition() < textField.getText().length()){
-							textField.setCaretPosition(textField.getCaretPosition()+1);
-							
-						}
-						textField.requestFocusInWindow();
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    if (textField.getCaretPosition() < textField.getText().length()){
+                        textField.setCaretPosition(textField.getCaretPosition()+1);
+
+                    }
+                    textField.requestFocusInWindow();
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  1  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "1";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "1";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  2  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "2";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "2";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton button = new JButton("  3  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "3";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "3";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton btnPaste = new JButton("Paste");
 				btnPaste.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				btnPaste.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						JTextField toBePastedInto = textField;
-						if (mathTextSelected) toBePastedInto = textField;
-						else if (ansTextSelected) toBePastedInto =  textField_1;
-							if (xTextSelected) toBePastedInto = textField_2;
-						int pos = toBePastedInto.getCaretPosition();
-						toBePastedInto.setText(toBePastedInto.getText().substring(0,pos)+clipper.getClipboardContents()+toBePastedInto.getText().substring(pos,toBePastedInto.getText().length()));   //textField.getText().substring(0,pos)+GrafProg.getCopiedText()+textField.getText().substring(pos,textField.getText().length()));
-						toBePastedInto.setCaretPosition(pos+clipper.getClipboardContents().length());
-						toBePastedInto.requestFocusInWindow();
-								
-					}
-				});
+				btnPaste.addActionListener(arg0 -> {
+                    JTextField toBePastedInto; // = textField;
+                    if (mathTextSelected) toBePastedInto = textField;
+                    else if (ansTextSelected) toBePastedInto =  textField_1;
+                    else if (xTextSelected) toBePastedInto = textField_2;
+                    else toBePastedInto = textField;
+                    int pos = toBePastedInto.getCaretPosition();
+                    toBePastedInto.setText(toBePastedInto.getText().substring(0,pos)+clipper.getClipboardContents()+toBePastedInto.getText().substring(pos));   //textField.getText().substring(0,pos)+GrafProg.getCopiedText()+textField.getText().substring(pos,textField.getText().length()));
+                    toBePastedInto.setCaretPosition(pos+clipper.getClipboardContents().length());
+                    toBePastedInto.requestFocusInWindow();
+
+                });
 				panel.add(btnPaste);
 			}
 		}
@@ -784,67 +699,52 @@ public class GrafCalc extends JDialog //implements ClipboardOwner
 			panel.setLayout(new GridLayout(0, 5, 0, 0));
 			{
 				JButton btnDone = new JButton("Done");
-				btnDone.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						setVisible(false);
-					}
-				});
+				btnDone.addActionListener(arg0 -> setVisible(false));
 				panel.add(btnDone);
 			}
 			{
 				JButton button = new JButton("  0  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = "0";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = "0";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{
 				JButton btnClear = new JButton("clear");
 				panel.add(btnClear);
-				btnClear.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						textField.setText("");
-					}
-				});
+				btnClear.addActionListener(arg0 -> textField.setText(""));
 			}
 			{
 				JButton button = new JButton("  .  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String keyPressed = ".";
-						int pos = textField.getCaretPosition();
-						String first = textField.getText().substring(0,pos);
-						String last =  textField.getText().substring(pos,textField.getText().length());
-						textField.setText(first+keyPressed+last);
-						textField.requestFocusInWindow();
-						textField.setCaretPosition(pos+keyPressed.length());
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    String keyPressed = ".";
+                    int pos = textField.getCaretPosition();
+                    String first = textField.getText().substring(0,pos);
+                    String last =  textField.getText().substring(pos);
+                    textField.setText(first+keyPressed+last);
+                    textField.requestFocusInWindow();
+                    textField.setCaretPosition(pos+keyPressed.length());
+                });
 				panel.add(button);
 			}
 			{   //evaluates the string as a function, outputs answer
 				JButton button = new JButton("  =  ");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						double x = 1;
-						if (!textField_1.getText().equals("")){
-							try{x = Double.parseDouble(textField_1.getText());}
-							catch (NumberFormatException e){ JOptionPane.showMessageDialog(null,"invalid entry for x! Using 1"); x = 1;}
-						}
-						try {
-							textField_2.setText(""+FunctionString.fValue(textField.getText(),x));
-						} catch (DomainViolationException e) {}
-						catch (FunctionFormatException e)  {}
-					}
-				});
+				button.addActionListener(arg0 -> {
+                    double x = 1;
+                    if (!textField_1.getText().equals("")){
+                        try{x = Double.parseDouble(textField_1.getText());}
+                        catch (NumberFormatException e){ JOptionPane.showMessageDialog(null,"invalid entry for x! Using 1"); x = 1;}
+                    }
+                    //try {
+                        textField_2.setText(""+FunctionString.fValue(textField.getText(),x));
+                    //} catch (FunctionFormatException e) {System.out.println(e.toString());}
+                });
 				panel.add(button);
 			}
 		}
