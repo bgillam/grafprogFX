@@ -57,7 +57,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     GrafHistogram(){
         gStuff = super.initGrafObject(GrafType.HISTOGRAM);
         setColumnNumber(1);
-        table = GrafProg.getData();
+        table = TableUI.getData();
         GrafProg.setMessage1("Plotting Column "+columnNumber);
     }
     
@@ -109,7 +109,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
     @Override
     public void drawGraf(Graphics2D gc){
         gc.setColor(super.getGrafColor());
-        Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(columnNumber, getData()));
+        Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(columnNumber, TableUI.getData()));
         Arrays.sort(temp);
         int totalCount = 0;
         int numValues = temp.length;
@@ -237,7 +237,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
 
     @Override
     public void autoRange(){
-        Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(columnNumber, getData()));
+        Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(columnNumber, TableUI.getData()));
         double[] counts = getCounts(temp.length,temp);
         if (GrafStats.getMax(counts) < 10) GrafProg.getGrafSettings().setYMax(10);
         else GrafProg.getGrafSettings().setYMax(GrafStats.getMax(counts)+GrafProg.getGrafSettings().getTenthWindowY());
@@ -322,7 +322,7 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         return gStuff;
     }
 
-    private static GrafTable getData(){
+    /*private static GrafTable getData(){
         return GrafProg.getData();
-    }
+    }*/
 }

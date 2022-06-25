@@ -55,7 +55,8 @@ public class GrafSettings implements Serializable
     public GrafSettings()
     {
       //myStage = gs;
-      myPanel = GrafProg.getGrafPanel();
+      ////myPanel = GrafProg.getGrafPanel();
+      myPanel = GrafUI.getGrafPanel();
     }
       
     //prints out instance variable values    

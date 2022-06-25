@@ -46,9 +46,13 @@ public class GrafPointTest
     @Test
     public void drawGrafTest(){
         assertNotNull(gPoint.getGrafColor());
-        assertNotNull(GrafProg.getGrafPanel());
+        /*assertNotNull(GrafProg.getGrafPanel());
         assertNotNull(GrafProg.getGrafPanel().getGraphics());
-        Graphics g = GrafProg.getGrafPanel().getGraphics();
+        Graphics g = GrafProg.getGrafPanel().getGraphics();*/
+        assertNotNull(GrafUI.getGrafPanel());
+        assertNotNull(GrafUI.getGrafPanel().getGraphics());
+        Graphics g = GrafUI.getGrafPanel().getGraphics();
+
         gPoint.drawGraf((Graphics2D)g);
     }
     

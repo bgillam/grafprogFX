@@ -46,9 +46,12 @@ public class GrafRectangleTest
     @Test
     public void drawGrafTest(){
         assertNotNull(gRect.getGrafColor());
-        assertNotNull(GrafProg.getGrafPanel());
-        assertNotNull(GrafProg.getGrafPanel().getGraphics());
-        Graphics g = GrafProg.getGrafPanel().getGraphics();
+        ////assertNotNull(GrafProg.getGrafPanel());
+        ////assertNotNull(GrafProg.getGrafPanel().getGraphics());
+        ////Graphics g = GrafProg.getGrafPanel().getGraphics();
+        assertNotNull(GrafUI.getGrafPanel());
+        assertNotNull(GrafUI.getGrafPanel().getGraphics());
+        Graphics g = GrafUI.getGrafPanel().getGraphics();
         gRect.drawGraf((Graphics2D)g);
     }
     

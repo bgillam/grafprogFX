@@ -130,7 +130,7 @@ public class RegressionDialog extends JDialog {
                             {
                                 outputComboBox = new JComboBox();
                                 panel_3.add(outputComboBox);
-                                outputComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(GrafProg.getData())));
+                                outputComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(TableUI.getData())));
                                
                             }
                         }
@@ -144,7 +144,7 @@ public class RegressionDialog extends JDialog {
                             {
                                 inputComboBox = new JComboBox();
                                 panel_3.add(inputComboBox);
-                                inputComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(GrafProg.getData())));
+                                inputComboBox.setModel(new javax.swing.DefaultComboBoxModel(TableHeaderActions.getHeaderArray(TableUI.getData())));
                                 
                               
                             }
@@ -336,7 +336,8 @@ public class RegressionDialog extends JDialog {
                     okButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent arg0) {
                             //GrafProg.repaint();
-                            GrafProg.getGrafPanel().repaint();
+                            //GrafProg.getGrafPanel().repaint();
+                            GrafUI.getGrafPanel().repaint();
                             dispose();
                             }
                     });
@@ -367,8 +368,8 @@ public class RegressionDialog extends JDialog {
                     JOptionPane.ERROR_MESSAGE);
                     return;
             }
-            int inputLength = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(input, getData())).length;
-            int outputLength = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(output, getData())).length;
+            int inputLength = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(input, TableUI.getData())).length;
+            int outputLength = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(output, TableUI.getData())).length;
             if (inputLength != outputLength) { 
                     JOptionPane.showMessageDialog(null, "X and Y columns must have an equal number of items", "Need Paired Data!", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -390,8 +391,8 @@ public class RegressionDialog extends JDialog {
             }
             
                  
-            Vector xVector = new Vector(TableColumnActions.getColumnValues(inputComboBox.getSelectedIndex(), getData())); //takes a Double[]
-            Vector yVector = new Vector(TableColumnActions.getColumnValues(outputComboBox.getSelectedIndex(), getData()));
+            Vector xVector = new Vector(TableColumnActions.getColumnValues(inputComboBox.getSelectedIndex(), TableUI.getData())); //takes a Double[]
+            Vector yVector = new Vector(TableColumnActions.getColumnValues(outputComboBox.getSelectedIndex(), TableUI.getData()));
             if (!curveType.equals("exponential")) {
                         
                 RegressionMath rm = new RegressionMath(xVector, yVector, order);
@@ -455,9 +456,9 @@ public class RegressionDialog extends JDialog {
     
     }
 
-    public static GrafTable getData(){
+    /*public static GrafTable getData(){
         return GrafProg.getData();
-    }
+    }*/
     
             
 }

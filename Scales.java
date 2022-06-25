@@ -57,7 +57,7 @@ public class Scales  // implements Serializable
 		stuff.setYMin(tempYMin-GrafProg.getGrafSettings().getTenthWindowY());
 		stuff.setYMax(tempYMax+GrafProg.getGrafSettings().getTenthWindowY());
 		scalesFromRange(stuff);
-		GrafProg.repaintGraf();
+		GrafUI.repaintGraf();
 	}
 	
 	//compute scales that are powers of 10

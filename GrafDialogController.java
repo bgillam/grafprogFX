@@ -70,7 +70,8 @@ public class GrafDialogController {
     private void onDiscardButtonClicked(ActionEvent e){
         GrafProg.setMessage2("Changes Discarded");
         resetDialog();
-        GrafProg.getGrafPanel().repaint();
+        //GrafProg.getGrafPanel().repaint();
+        GrafUI.getGrafPanel().repaint();
     }
 
     @FXML
@@ -206,9 +207,9 @@ public class GrafDialogController {
         this.msg = msg;
     }
 
-    public GrafTable getData(){
+   /* public GrafTable getData(){
         return GrafProg.getData();
-    }
+    }*/
 
     Label getChooseObject() { return chooseObject;  }
 

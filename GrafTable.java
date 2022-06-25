@@ -103,8 +103,8 @@ class GrafTable<IPasteAble> implements KeyListener, IPasteable  //ActionListener
     }
 
    void refreshTable(){
-       GrafProg.getTableStage().hide();
-       GrafProg.getTableStage().show();
+       TableUI.getTableStage().hide();
+       TableUI.getTableStage().show();
    }
 
     //change the table dimensions
@@ -258,7 +258,7 @@ class GrafTable<IPasteAble> implements KeyListener, IPasteable  //ActionListener
     }
 
     void setTableMessage(String message){
-        GrafProg.getTableController().setTableMessage(message);
+        TableUI.getTableController().setTableMessage(message);
     }
 
     DefaultTableModel getModel(){

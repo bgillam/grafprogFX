@@ -43,9 +43,12 @@ public class GrafSegmentTest
     @Test
     public void drawGrafTest(){
         assertNotNull(gSeg.getGrafColor());
-        assertNotNull(GrafProg.getGrafPanel());
+     /*   assertNotNull(GrafProg.getGrafPanel());
         assertNotNull(GrafProg.getGrafPanel().getGraphics());
-        Graphics g = GrafProg.getGrafPanel().getGraphics();
+        Graphics g = GrafProg.getGrafPanel().getGraphics();*/
+        assertNotNull(GrafUI.getGrafPanel());
+        assertNotNull(GrafUI.getGrafPanel().getGraphics());
+        Graphics g = GrafUI.getGrafPanel().getGraphics();
         gSeg.drawGraf((Graphics2D)g);
     }
     

@@ -27,7 +27,7 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
     //Constructor
     public GrafScatterPlot(){
        gStuff = super.initGrafObject(GrafType.COLUMN);
-       table = GrafProg.getData();
+       table = TableUI.getData();
        setGrafType(GrafType.SCATTER);
        setMoveable(false);
        setGrafColor(Color.BLACK);
@@ -125,7 +125,7 @@ public class GrafScatterPlot extends GrafObject implements IGrafable{
     }
 
     public static GrafTable getData(){
-        return GrafProg.getData();
+        return TableUI.getData();
     }
     
 

@@ -96,8 +96,8 @@ public class WindowSizeDialog extends JDialog implements ActionListener  //, Ser
         grafSet = GrafProg.getGrafSettings();    //pointer to graph information
         myScaleFormat = grafSet.getScaleFormat();
         myScaleProcedure = grafSet.getScaleProcedure();
-        setLocationRelativeTo(GrafProg.getGrafPanel());
-        
+        ////setLocationRelativeTo(GrafProg.getGrafPanel());
+        setLocationRelativeTo(GrafUI.getGrafPanel());
         //Set up Yes/No button panel at bottem of Dialog
         buttonPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));        
         buttonPanel.add(okButton);
@@ -232,10 +232,11 @@ public class WindowSizeDialog extends JDialog implements ActionListener  //, Ser
   private void OKStuff(){
         if (saveValues()){ 
               setVisible(false);
-              GrafProg.getGrafPanel().repaint();
+              //GrafProg.getGrafPanel().repaint();
+              GrafUI.getGrafPanel().repaint();
 
               dispose();
-              GrafProg.repaintGraf();
+              GrafUI.repaintGraf();
 
 
         }

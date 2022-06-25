@@ -36,7 +36,7 @@ public class GrafFiles implements Serializable
     private static ArrayList<GrafObject> grafObjectList = GrafProg.getGrafList();
     private Font currentFont = GrafProg.getAxes().getCurrentFont();
     private static int boxPlotsPlotted = GrafProg.getBoxPlotsPlotted();
-    private static GrafTable data = GrafProg.getData();
+    private static GrafTable data = TableUI.getData();
 
     /**
      * Constructor for objects of class GrafFiles
@@ -88,7 +88,8 @@ public class GrafFiles implements Serializable
         FileChooser saveChooser = new FileChooser();
         saveChooser.setTitle("Save CurrentGraf");
         saveChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
-        File file = saveChooser.showSaveDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
+        //File file = saveChooser.showSaveDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
+        File file = saveChooser.showSaveDialog(GrafUI.getGrafController().getGrafPane().getScene().getWindow());
         if (file == null) return null;
         String filePath = file.getAbsolutePath();
         if(!filePath.endsWith(".grf")){
@@ -114,7 +115,8 @@ public class GrafFiles implements Serializable
       FileChooser openChooser = new FileChooser();
       openChooser.setTitle("Open Graf");
       openChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Graf File, .grf", "*.grf"));
-      File file = openChooser.showOpenDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
+      ////File file = openChooser.showOpenDialog(GrafProg.getGrafController().getGrafPane().getScene().getWindow());
+      File file = openChooser.showOpenDialog(GrafUI.getGrafController().getGrafPane().getScene().getWindow());
       //if (file == null) return null;
       //String filePath = file.getAbsolutePath();
       Object obj = null;
@@ -155,7 +157,7 @@ public class GrafFiles implements Serializable
       GrafProg.setGrafList(grafObjectList);
       GrafProg.getAxes().setCurrentFont(gf.currentFont);
       grafProg.setBoxPlotsPlotted(boxPlotsPlotted);
-      GrafProg.setData(data);
+      TableUI.setData(data);
       return grafProg;
   }
 

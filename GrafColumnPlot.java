@@ -25,7 +25,7 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
     GrafColumnPlot(){
         gStuff = super.initGrafObject(GrafType.COLUMN);
         setColumnNumber(1);
-        table = GrafProg.getData();
+        table = TableUI.getData();
         GrafProg.setMessage1("Plotting Column "+columnNumber);
     }
     
@@ -101,10 +101,10 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
 
     @Override
     public void autoRange(){
-            Double max = GrafStats.getMax(TableColumnActions.getColumnValues(getColumnNumber(), getData()));
+            Double max = GrafStats.getMax(TableColumnActions.getColumnValues(getColumnNumber(), TableUI.getData()));
             if (max != null)
                 GrafProg.getGrafSettings().setYMax(max + GrafProg.getGrafSettings().getTenthWindowY());
-            Double min =  GrafStats.getMin(TableColumnActions.getColumnValues(getColumnNumber(), getData()));
+            Double min =  GrafStats.getMin(TableColumnActions.getColumnValues(getColumnNumber(), TableUI.getData()));
             if (min!=null)
                 GrafProg.getGrafSettings().setYMin(min - GrafProg.getGrafSettings().getTenthWindowY());
     }
@@ -131,10 +131,10 @@ public class GrafColumnPlot extends GrafObject implements IGrafable{
         return "COLUMNPLOT: Col "+getColumnNumber()+","+", "+getMark();//+", "+ getGrafColor();
     }
     
-    private static GrafTable getData(){
+   /* private static GrafTable getData(){
         return GrafProg.getData();
 
-    }
+    }*/
 
 
 }

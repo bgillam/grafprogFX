@@ -46,9 +46,12 @@ public class GrafColumnplotTest
     @Test
     public void drawGrafTest(){
         assertNotNull(gCPlot.getGrafColor());
-        assertNotNull(GrafProg.getGrafPanel());
+        /*assertNotNull(GrafProg.getGrafPanel());
         assertNotNull(GrafProg.getGrafPanel().getGraphics());
-        Graphics g = GrafProg.getGrafPanel().getGraphics();
+        Graphics g = GrafProg.getGrafPanel().getGraphics();*/
+        assertNotNull(GrafUI.getGrafPanel());
+        assertNotNull(GrafUI.getGrafPanel().getGraphics());
+        Graphics g = GrafUI.getGrafPanel().getGraphics();
         gCPlot.drawGraf((Graphics2D)g);
     }
     

@@ -74,7 +74,7 @@ public class TableColumnActions {
         DefaultTableModel model = gTable.getModel();
         ArrayList<Integer> selected = getSelectedColumns(gTable);
         if (selected.size() == 0) {
-            GrafProg.getTableController().setTableMessage("No columns selected!");
+            TableUI.getTableController().setTableMessage("No columns selected!");
             return;
         }
         String msgString = "Sort columns ";
@@ -89,7 +89,7 @@ public class TableColumnActions {
             int col;
             for (int i = selected.size()-1; i >= 0; i--){
                 col = selected.get(i);
-                columnSorted = getColumnValues(col, getData());
+                columnSorted = getColumnValues(col, TableUI.getData());
                 Arrays.sort(columnSorted);
                 int row;
                 for (int r = 0; r < numRows; r++){
@@ -142,9 +142,9 @@ public class TableColumnActions {
         return returnStringArray;
     }
 
-    public static GrafTable getData(){
+   /* public static GrafTable getData(){
         return GrafProg.getData();
-    }
+    }*/
 
 }
 

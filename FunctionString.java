@@ -142,7 +142,7 @@ public class FunctionString {
             return Double.parseDouble(leftSubstr);
         } catch (NumberFormatException e){
             
-            System.out.println("number format exception: "+fString);
+            //System.out.println("number format exception in function string: "+fString);
             
             
             return 0;
@@ -367,7 +367,8 @@ public class FunctionString {
                 Double.parseDouble(middle); 
                 return middle; 
             }
-            catch (NumberFormatException e){System.out.println(e.toString());}
+            catch (NumberFormatException e){//System.out.println(e.toString()+"in addandsub");
+                }
                 if (middle.charAt(counter) == '+') {
                     middle = getPreString(counter, middle)+  (getLeftNum(counter,middle)+getRightNum(counter,middle)) +getPostString(counter, middle);
                     counter = 1;
@@ -391,7 +392,8 @@ public class FunctionString {
                 Double.parseDouble(middle); 
                 return middle; 
             }
-            catch (NumberFormatException e){System.out.println(e.toString()); }
+            catch (NumberFormatException e){//System.out.println(e.toString()+"in multanddiv");
+                }
             
             if (middle.charAt(counter) == '*') {
                 middle = getPreString(counter, middle)+(getLeftNum(counter,middle)*getRightNum(counter,middle))+getPostString(counter, middle);
@@ -421,7 +423,8 @@ public class FunctionString {
                 double r;
                 int i;
                 do{
-                    try{ return ""+Double.parseDouble(fString); } catch (NumberFormatException e){ System.out.println(e.toString());} //return if a single number
+                    try{ return ""+Double.parseDouble(fString); } catch (NumberFormatException e){ //
+                         } //return if a single number
                     tokenStartPos = fString.indexOf(token);
                     if (tokenStartPos == -1) return fString;                                         // return if token not found
                     tokenEndPos = tokenStartPos + token.length()-1;

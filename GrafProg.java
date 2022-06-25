@@ -19,46 +19,13 @@ import java.util.ArrayList;
 public class GrafProg extends Application {
     private static final long serialVersionUID = 1L;
 
-    //Stages, Scenes and Nodes
-
-    //UI for x-y axes and graphs
-    private static Stage grafStage = new Stage();
-    private static Scene grafScene;
-    private static GrafController grafController;
-    private static Parent grafRoot;
-    private static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
-    private static GrafPanel grafPanel = new GrafPanel(); //Graphics Panel in swing
-
-    //Data table for statistics
-    private static Stage tableStage = new Stage();
-    private static Scene tableScene;
-    private static TableController tableController;
-    private static Parent tableRoot;
-    private static SwingNode swingTableNode = new SwingNode();
-    private static GrafTable data = new GrafTable(100,10);  //Swing table for data
-    private static JPanel dataPanel = data.getDataPanel(); //Graphics Panel in swing
-
-    //UI for creating GrafObjects
-    private static Stage dialogStage = new Stage();
-    private static Scene dialogScene;
-    private static GrafDialogController dialogController;
-    private static Parent dialogRoot;
-
-    //UI for column data generator
-    private static Stage dataGenStage = new Stage();
-    private static Scene dataGenScene;
-    private static TableColumnGeneratorController dataGenController;
-    private static Parent dataGenRoot;
-
-    //UI for one variable stats
-    private static Stage statStage = new Stage();
-    private static Scene statScene;
-    private static OneVarStatsController statController;
-    private static Parent statRoot;
-
-
-
-
+    //Create GUI's for graph, table, objects, data generation and statistics
+    private static GrafUI grafUI = new GrafUI();
+    private static TableUI tableUI = new TableUI();
+    private static ObjectUI objectUI = new ObjectUI();
+    private static DataGenUI dataGenUI = new DataGenUI();
+    private static StatUI statUI = new StatUI();
+    private static GrafCalc calc;
 
     //static variables
     private static File grafFile = new File("");  //File associated with the current Graf object
@@ -71,48 +38,50 @@ public class GrafProg extends Application {
     private static String copiedText = "";
     private static JPanel messagePanel;
     private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
-    private static GrafCalc calc;                 //calculator for enteriung expressions
+
+    public static void main(String[] args) {
+        //new GrafProg().launch(args);
+        launch(args);
+    }
 
     //UI thread start
     @Override
-    public void start(Stage grafStage) throws Exception{
-        GrafProg.grafStage = grafStage;
-
-        //Set up Object Creation Dialog Box
-        dialogController = createScene(dialogStage, 650, 375, "GrafDialog.fxml", "").getController();
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-
-        //Set up One Variable Stats Dialog Box
-        statController = createScene(statStage, 580, 250, "OneVarStats.fxml" , "One-Variable Statistics").getController();
-        statStage.initModality(Modality.APPLICATION_MODAL);
-
-        //Set up column generator Dialog Box
-        dataGenController = createScene(dataGenStage, 625, 200, "TableColumnGenerator.fxml", "Column Actions").getController();
-        //tableStage.initModality(Modality.APPLICATION_MODAL);
-
-        //Set up Table
-        tableController = createScene(tableStage, initWidth, initHeight, "Table.fxml" , "Data").getController();
-        swingTableNode.setContent(data.getDataPanel());
-        tableController.getTablePane().getChildren().add(swingTableNode);
-        anchorSwingNode(swingTableNode);
-        setSizeChangeListener(tableStage, dataPanel);
-        EditContextMenu.editContextMenu(tableController.getTablePane(), getData());
+    public void start(Stage gs) throws Exception{
 
         //Set up main graf window
-        grafController = createScene(grafStage, initWidth, initHeight, "Graf.fxml", "GrafProg").getController();
-        swingGrafNode.setContent(getGrafPanel()); //put grafPanel into a JavaFX node
-        grafController.getGrafPane().getChildren().add(swingGrafNode);   //place graphing window node in pane
-        anchorSwingNode(swingGrafNode);
-        setSizeChangeListener(grafStage, grafPanel);
+        GrafUI.setGrafStage(gs);
+        GrafUI.setGrafController(createScene(GrafUI.getGrafStage(), initWidth, initHeight, "Graf.fxml", "GrafProg").getController());
+        GrafUI.getSwingGrafNode().setContent(GrafUI.getGrafPanel()); //put grafPanel into a JavaFX node
+        GrafUI.getGrafController().getGrafPane().getChildren().add(GrafUI.getSwingGrafNode());   //place graphing window node in pane
+        anchorSwingNode(GrafUI.getSwingGrafNode());
+        setSizeChangeListener(GrafUI.getGrafStage(), GrafUI.getGrafPanel());
         grafObjectList.add(axes);
+        GrafUI.getGrafStage().show();
+        GrafUI.getGrafStage().setOnCloseRequest(event -> {
+            if (closeGraf()) System.exit(0);
+            else
+                event.consume();
+        });
 
-        grafStage.show();
+        //Set up Object Creation Dialog Box
+        ObjectUI.setDialogController(createScene(ObjectUI.getDialogStage(), 650, 375, "GrafDialog.fxml", "").getController());
+        ObjectUI.getDialogStage().initModality(Modality.APPLICATION_MODAL);
 
-        grafStage.setOnCloseRequest(event -> {
-           if (closeGraf()) System.exit(0);
-           else
-               event.consume();
-           });
+        //Set up One Variable Stats Dialog Box
+        StatUI.setStatController(createScene(StatUI.getStatStage(), 580, 250, "OneVarStats.fxml" , "One-Variable Statistics").getController());
+        StatUI.getStatStage().initModality(Modality.APPLICATION_MODAL);
+
+        //Set up column generator Dialog Box
+        DataGenUI.setDataGenController(createScene(DataGenUI.getDataGenStage(), 625, 200, "TableColumnGenerator.fxml", "Column Actions").getController());
+        //tableStage.initModality(Modality.APPLICATION_MODAL);
+
+        ///Set up Table
+        TableUI.setTableController(createScene(TableUI.getTableStage(), initWidth, initHeight, "Table.fxml" , "Data").getController());
+        TableUI.getSwingTableNode().setContent(TableUI.getData().getDataPanel());
+        TableUI.getTableController().getTablePane().getChildren().add(TableUI.getSwingTableNode());
+        anchorSwingNode(TableUI.getSwingTableNode());
+        setSizeChangeListener(TableUI.getTableStage(), TableUI.getDataPanel());
+        EditContextMenu.editContextMenu(TableUI.getTableController().getTablePane(), TableUI.getData());
     }
 
     //creates a scene within passed stage
@@ -125,7 +94,7 @@ public class GrafProg extends Application {
         return loader;
     }
 
-        //anchor a swing node to the pane edges
+    //anchor a swing node to the pane edges
     private void anchorSwingNode(SwingNode node){
         AnchorPane.setTopAnchor(node, 0.0);
         AnchorPane.setLeftAnchor(node, 0.0);
@@ -137,7 +106,6 @@ public class GrafProg extends Application {
     private void setSizeChangeListener(Stage stage, JPanel gPanel){
         stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(gPanel::repaint));
         stage.heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(gPanel::repaint));
-
     }
 
     static void resetGraf(){
@@ -152,28 +120,8 @@ public class GrafProg extends Application {
         setMessage2("");
         setMessage3("");
         boxPlotsPlotted = 0;              //for formatting multiple boxplots
-        repaintGraf();
+        GrafUI.repaintGraf();
     }
-
-    //because sometimes just repainting grafPanel doesn't work. Another hack I should not need
-    static void repaintGraf(){
-        Platform.runLater(() -> {
-            grafStage.hide();
-            grafPanel.repaint();
-            grafStage.show();
-        });
-    }
-
-    /*//Set Titles and saved status after saving file
-    private static void setGrafSavedAndTitle(boolean tf){
-        if (tf) {
-            grafStage.setTitle(grafFile.toString());
-            tableStage.setTitle("Data: " + grafFile.toString());
-            grafSaved = true;
-        }else{
-            grafSaved = false;
-        }
-    }*/
 
 
     //Close an open file
@@ -185,47 +133,27 @@ public class GrafProg extends Application {
             if (alert.getResult() == ButtonType.CANCEL) return false;
             if (alert.getResult() == ButtonType.YES) {
                 GrafFiles.saveFile();
-                grafStage.setTitle(grafFile.toString());
-                tableStage.setTitle("Data: " + grafFile.toString());
+                ////grafStage.setTitle(grafFile.toString());
+                GrafUI.getGrafStage().setTitle(grafFile.toString());
+                TableUI.getTableStage().setTitle("Data: " + grafFile.toString());
                 grafSaved = true;
             }
         }
         return true;
     }
 
-   /*static int getNumType(GrafType gType){
-        int count = 0;
-        for (GrafObject o: grafObjectList)
-            if (o.getType().equals(gType)) count++;
-        return count;
-    }*/
 
     static int getNumPlots(){ return grafObjectList.size();}
 
-    public static void setMessage1(String message){ grafController.setMessage1(message); }
-    public static void setMessage2(String message){ grafController.setMessage2(message); }
-    static void setMessage3(String message){ grafController.setMessage3(message); }
-
-    public static Stage getGrafStage(){ return grafStage;  }
-    static Stage getDialogStage(){return dialogStage;}
-    static Stage getTableStage() { return tableStage; }
-    static Stage getStatStage(){
-        return statStage;
-    }
-
-    static GrafDialogController getDialogController(){return dialogController;}
-
-    public static void setData(GrafTable dt) { data = dt; }
-    public static GrafTable getData(){return data;}
+    public static void setMessage1(String message){ GrafUI.getGrafController().setMessage1(message); }
+    public static void setMessage2(String message){ GrafUI.getGrafController().setMessage2(message); }
+    static void setMessage3(String message){ GrafUI.getGrafController().setMessage3(message); }
 
     static File getGrafFile(){return grafFile;}
     static void setGrafFile(File f) {grafFile = f;}
 
     static void setGrafSaved(boolean tf){grafSaved = tf;}
     static boolean getGrafSaved(){return grafSaved;}
-
-    public static GrafPanel getGrafPanel(){return grafPanel;}
-    public static void setPanel(GrafPanel gp) {grafPanel = gp;}
 
     static GrafAxes getAxes(){return axes;}
     public static void setAxes(GrafAxes ga){axes = ga;}
@@ -239,9 +167,7 @@ public class GrafProg extends Application {
     static void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
     static ArrayList<GrafObject> getGrafList(){return grafObjectList;}
 
-    static int getBoxPlotsPlotted(){
-        return boxPlotsPlotted;
-    }
+    static int getBoxPlotsPlotted(){ return boxPlotsPlotted; }
     void setBoxPlotsPlotted(int numBoxPlots){boxPlotsPlotted=numBoxPlots;}
 
     static void incrementBoxPlotsPlotted(){
@@ -255,33 +181,6 @@ public class GrafProg extends Application {
     static void zeroBoxPlotsPlotted(){
         boxPlotsPlotted = 0;
     }
-
-    static TableColumnGeneratorController getTableGenController() {
-        return dataGenController;
-    }
-
-    public static void setTableGenController(TableColumnGeneratorController tableGenController) {
-        GrafProg.dataGenController = tableGenController;
-    }
-
-    static Stage getGenStage() {return dataGenStage; }
-
-    static GrafController getGrafController(){
-        return grafController;
-    }
-
-    static TableController getTableController(){return tableController;}
-
-    public static OneVarStatsController getStatController() {
-        return statController;
-    }
-
-    public static void main(String[] args) {
-        //new GrafProg().launch(args);
-        launch(args);
-
-    }
-
 }
 
 

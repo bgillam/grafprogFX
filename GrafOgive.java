@@ -115,7 +115,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     @Override
     public void drawGraf(Graphics2D gc){
         gc.setColor(super.getGrafColor());
-        Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(columnNumber, getData()));
+        Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(columnNumber, TableUI.getData()));
         Arrays.sort(temp);
         int binCount = 0;
         int totalCount = 0;
@@ -263,7 +263,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
     }
     
 
-    private static GrafTable getData(){
+    /*private static GrafTable getData(){
         return GrafProg.getData();
-    }
+    }*/
 }

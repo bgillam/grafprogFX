@@ -29,7 +29,7 @@ public class TableColumnGeneratorController {
     @FXML private TextField t2;
     @FXML private Label anLabel2;
 
-    private GrafTable myDaddy = GrafProg.getData();
+    private GrafTable myDaddy = TableUI.getData();
 
 
 
@@ -71,10 +71,10 @@ public class TableColumnGeneratorController {
 
     void showRandomDialog(){
         hideAll();
-        GrafProg.getGenStage().setTitle("Generate Random Values");
+        DataGenUI.getDataGenStage().setTitle("Generate Random Values");
         col1ChoiceLabel.setText("Output Column:");
         col1ChoiceLabel.setVisible(true);
-        col1Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
+        col1Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(TableUI.getData())));
         col1Chooser.getSelectionModel().select(0);
         col1Chooser.setVisible(true);
         numStart.setVisible(true);
@@ -90,13 +90,13 @@ public class TableColumnGeneratorController {
         rowEnd.setVisible(true);
         rowEndText.setVisible(true);
         rowEndText.setEditable(true);
-        rowEndText.setText(GrafProg.getData().getNumRows()+"");
+        rowEndText.setText(TableUI.getData().getNumRows()+"");
         rdbtnDoubles.setVisible(true);
         rdbtnIntegers.setVisible(true);
         okButton.setVisible(true);
         cancelButton.setVisible(true);
-        GrafProg.getTableStage().setAlwaysOnTop(false);
-        GrafProg.getGenStage().setAlwaysOnTop(true);
+        TableUI.getTableStage().setAlwaysOnTop(false);
+        DataGenUI.getDataGenStage().setAlwaysOnTop(true);
         //resetChooser();
         genType = GenType.RANDOM;
 
@@ -159,7 +159,7 @@ public class TableColumnGeneratorController {
 
     void showRecursiveDialog() {
         hideAll();
-        GrafProg.getGenStage().setTitle("Generate Recursive Values");
+        DataGenUI.getDataGenStage().setTitle("Generate Recursive Values");
         ya1.setText("A1:");
         ya1.setVisible(true);
         t1.setVisible(true);
@@ -171,7 +171,7 @@ public class TableColumnGeneratorController {
         anLabel2.setVisible(true);
 
         col1ChoiceLabel.setVisible(true);
-        col1Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
+        col1Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(TableUI.getData())));
         col1Chooser.getSelectionModel().select(0);
         col1Chooser.setVisible(true);
 
@@ -180,12 +180,12 @@ public class TableColumnGeneratorController {
         rowStartText.setText("1");
         rowEnd.setVisible(true);
         rowEndText.setVisible(true);
-        rowEndText.setText(GrafProg.getData().getNumRows()+"");
+        rowEndText.setText(TableUI.getData().getNumRows()+"");
 
         okButton.setVisible(true);
         cancelButton.setVisible(true);
-        GrafProg.getTableStage().setAlwaysOnTop(false);
-        GrafProg.getGenStage().setAlwaysOnTop(true);
+        TableUI.getTableStage().setAlwaysOnTop(false);
+        DataGenUI.getDataGenStage().setAlwaysOnTop(true);
         //resetChooser();
         genType = GenType.RECURSIVE;
     }
@@ -243,7 +243,7 @@ public class TableColumnGeneratorController {
 
     void showFunctionDialog() {
         hideAll();
-        GrafProg.getGenStage().setTitle("Generate Function Values");
+        DataGenUI.getDataGenStage().setTitle("Generate Function Values");
         ya1.setText("Y1:");
         ya1.setVisible(true);
         t1.setVisible(true);
@@ -251,12 +251,12 @@ public class TableColumnGeneratorController {
 
 
         col1ChoiceLabel.setVisible(true);
-        col1Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
+        col1Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(TableUI.getData())));
         col1Chooser.getSelectionModel().select(0);
         col1Chooser.setVisible(true);
 
         col2ChoiceLabel.setVisible(true);
-        col2Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArray(GrafProg.getData())));
+        col2Chooser.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArray(TableUI.getData())));
         col2Chooser.getSelectionModel().select(0);
         col2Chooser.setVisible(true);
 
@@ -265,12 +265,12 @@ public class TableColumnGeneratorController {
         rowStartText.setText("1");
         rowEnd.setVisible(true);
         rowEndText.setVisible(true);
-        rowEndText.setText(GrafProg.getData().getNumRows()+"");
+        rowEndText.setText(TableUI.getData().getNumRows()+"");
 
         okButton.setVisible(true);
         cancelButton.setVisible(true);
-        GrafProg.getTableStage().setAlwaysOnTop(false);
-        GrafProg.getGenStage().setAlwaysOnTop(true);
+        TableUI.getTableStage().setAlwaysOnTop(false);
+        DataGenUI.getDataGenStage().setAlwaysOnTop(true);
         //resetChooser();
         genType = GenType.FUNCTION;
     }
@@ -330,7 +330,7 @@ public class TableColumnGeneratorController {
 
 
     public void onCancel(ActionEvent actionEvent) {
-        GrafProg.getGenStage().hide();
+        DataGenUI.getDataGenStage().hide();
     }
 
     public void onOK(ActionEvent actionEvent) {
@@ -342,6 +342,6 @@ public class TableColumnGeneratorController {
             case HEADER:
         }
 
-        if (ok) GrafProg.getGenStage().hide();
+        if (ok) DataGenUI.getDataGenStage().hide();
     }
 }

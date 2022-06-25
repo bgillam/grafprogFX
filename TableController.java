@@ -24,7 +24,7 @@ public class TableController {
 
     public void onHeading(ActionEvent actionEvent) {
        // GrafProg.getData().editHeaders();
-        TableHeaderActions.editHeaders(GrafProg.getData());
+        TableHeaderActions.editHeaders(TableUI.getData());
 
 
        /* HeaderDialog headerDialog = new HeaderDialog(GrafProg.getData());
@@ -33,23 +33,23 @@ public class TableController {
     }
 
     public void onRandom(ActionEvent actionEvent) {
-        GrafProg.getTableGenController().hideAll();
-        GrafProg.getTableGenController().showRandomDialog();
-        GrafProg.getGenStage().show();
+        DataGenUI.getDataGenController().hideAll();
+        DataGenUI.getDataGenController().showRandomDialog();
+        DataGenUI.getDataGenStage().show();
         /*RandomDialog rd = new RandomDialog(GrafProg.getData());
         rd.showDialog()*/
     }
 
     public void onFunction(ActionEvent actionEvent) {
-        GrafProg.getTableGenController().hideAll();
-        GrafProg.getTableGenController().showFunctionDialog();
-        GrafProg.getGenStage().show();
+        DataGenUI.getDataGenController().hideAll();
+        DataGenUI.getDataGenController().showFunctionDialog();
+        DataGenUI.getDataGenStage().show();
     }
 
     public void onRecursion(ActionEvent actionEvent) {
-        GrafProg.getTableGenController().hideAll();
-        GrafProg.getTableGenController().showRecursiveDialog();
-        GrafProg.getGenStage().show();
+        DataGenUI.getDataGenController().hideAll();
+        DataGenUI.getDataGenController().showRecursiveDialog();
+        DataGenUI.getDataGenStage().show();
 
         /*RecursiveDialog recDialog = new RecursiveDialog(GrafProg.getData());
         recDialog.showDialog();*/
@@ -71,12 +71,10 @@ public class TableController {
         TableColumnActions.sortColumns(false,  getData());
     }
 
-    public void onDone(ActionEvent actionEvent) {
-        GrafProg.getTableStage().hide();
-    }
+    public void onDone(ActionEvent actionEvent) {  TableUI.getTableStage().hide();  }
 
     public void onNewClear(ActionEvent actionEvent) {
-        GrafProg.setData(new GrafTable(100,10));
+        TableUI.setData(new GrafTable(100,10));
     }
 
     public void onCut(ActionEvent actionEvent) {
@@ -97,8 +95,7 @@ public class TableController {
         TableColumnActions.deleteColumns(getData());
     }
 
-    public void onResize(ActionEvent actionEvent) {
-        GrafProg.getData().resizeData();
+    public void onResize(ActionEvent actionEvent){ TableUI.getData().resizeData();
     }
 
     public String getTableMessage() {
@@ -110,7 +107,7 @@ public class TableController {
     }
 
     public GrafTable getData(){
-        return GrafProg.getData();
+        return TableUI.getData();
     }
 
 

@@ -125,7 +125,7 @@ public class FrequencyChartDialog extends JDialog {
                             {
                                 columnComboBox = new JComboBox<>();
                                 panel_3.add(columnComboBox);
-                                columnComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(TableHeaderActions.getHeaderArray(GrafProg.getData())));
+                                columnComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(TableHeaderActions.getHeaderArray(TableUI.getData())));
                                 columnComboBox.addItemListener(event -> {
                                     if (event.getStateChange() == ItemEvent.SELECTED){
                                         updateMaxMin();
@@ -400,7 +400,7 @@ public class FrequencyChartDialog extends JDialog {
         int chosen = columnComboBox.getSelectedIndex();
         if (chosen != 0) 
         {   
-            Double[] columnValues = TableColumnActions.getColumnValues(chosen, getData());
+            Double[] columnValues = TableColumnActions.getColumnValues(chosen, TableUI.getData());
             columnValues = GrafStats.getRidOfNulls(columnValues);
             if (columnValues.length == 0){  
                 JOptionPane.showMessageDialog(null, "You chose an empty column.", "I Feel So Empty!" , JOptionPane.ERROR_MESSAGE);
@@ -441,7 +441,7 @@ public class FrequencyChartDialog extends JDialog {
         int numClasses = classArray.length-1;               //don't count max
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(numClasses+2);                    //+2 for header and total rows
-        Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(column, getData()));
+        Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(column, TableUI.getData()));
         Arrays.sort(temp);
                     
         int binCount = 0;
@@ -524,9 +524,9 @@ public class FrequencyChartDialog extends JDialog {
         
        }
         
-       public static GrafTable getData(){
+       /*//public static GrafTable getData(){
             return GrafProg.getData();
-       }
+       }*/
 
        public static void main(String[] args){
 

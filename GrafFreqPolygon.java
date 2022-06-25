@@ -41,7 +41,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
         GrafFreqPolygon(){
             gStuff = super.initGrafObject(GrafType.FREQPOLYGON);
             setColumnNumber(1);
-            table = GrafProg.getData();
+            table = TableUI.getData();
             GrafProg.setMessage1("Plotting Column "+columnNumber);
         }
 
@@ -93,7 +93,7 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
         @Override
         public void drawGraf(Graphics2D gc){
             gc.setColor(super.getGrafColor());
-            Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(columnNumber, getData()));
+            Double[] temp = GrafStats.getRidOfNulls(TableColumnActions.getColumnValues(columnNumber, TableUI.getData()));
             Arrays.sort(temp);
             int totalCount = 0;
             int numValues = temp.length;
@@ -331,10 +331,10 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
         public GrafSettings getGStuff() {
             return gStuff;
         }
-
+/*
         private static GrafTable getData(){
             return GrafProg.getData();
-        }
+        }*/
     }
 
 

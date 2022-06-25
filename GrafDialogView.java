@@ -459,7 +459,7 @@ public class GrafDialogView {
         functionChoiceHBox.getChildren().add(fComboBox);
         fComboBox.setOnAction((e) -> { functionChosen();});
         //fComboBox.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
-        TableHeaderActions.setComboBox(fComboBox, GrafProg.getData());
+        TableHeaderActions.setComboBox(fComboBox, TableUI.getData());
         fChoiceLabel.setText("Choose Column: ");
         fChoiceLabel.setVisible(true);
         fComboBox.setVisible(true);
@@ -475,7 +475,7 @@ public class GrafDialogView {
         functionChoiceHBox.getChildren().add(fComboBox2);
         fComboBox.setOnAction((e) -> { functionChosen();});
 
-        fComboBox2.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
+        fComboBox2.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(TableUI.getData())));
         fChoiceLabel2.setText("Choose Column: ");
         fChoiceLabel2.setVisible(true);
         fComboBox2.setVisible(true);
@@ -490,7 +490,7 @@ public class GrafDialogView {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                HBox markButtonBox = GrafProg.getDialogController().getMarkButtonBox();
+                HBox markButtonBox = ObjectUI.getDialogController().getMarkButtonBox();
                 markButtonBox.getChildren().add(markLabel);
                 markButtonBox.getChildren().add(pointMarkRButton);
                 markButtonBox.getChildren().add(xMarkRButton);
@@ -543,7 +543,7 @@ public class GrafDialogView {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                HBox xy2PointBox = GrafProg.getDialogController().getXy2PointBox();
+                HBox xy2PointBox = ObjectUI.getDialogController().getXy2PointBox();
                 //xy2PointBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
                 xy2PointBox.getChildren().add(x2Label);
                 //x2Label.setText("X2:");
@@ -559,7 +559,7 @@ public class GrafDialogView {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-                HBox xy2PointBox = GrafProg.getDialogController().getXy2PointBox();
+                HBox xy2PointBox = ObjectUI.getDialogController().getXy2PointBox();
                 xy2PointBox.getChildren().add(new Separator(Orientation.VERTICAL));
                 xy2PointBox.getChildren().add(y2Label);
                 //y2Label.setText("Y2:");
@@ -704,21 +704,21 @@ public class GrafDialogView {
     }
 
     private static void setTextandTitle(){
-        ComboBox objectComboBox = GrafProg.getDialogController().getObjectComboBox();
-        Label chooseObject = GrafProg.getDialogController().getChooseObject();
+        ComboBox objectComboBox = ObjectUI.getDialogController().getObjectComboBox();
+        Label chooseObject = ObjectUI.getDialogController().getChooseObject();
         GrafObject workingObject = getWorkingObject();
         GrafType objectType = workingObject.getType();
         String objectTypeString = workingObject.getType().toString();
         objectComboBox.setItems(FXCollections.observableArrayList(createObjectList(objectType)));
         objectComboBox.setValue(objectTypeString);
-        GrafProg.getDialogStage().setTitle(objectTypeString);
+        ObjectUI.getDialogStage().setTitle(objectTypeString);
         chooseObject.setText("Choose "+objectTypeString);
 
 
     }
 
     static void resetDialog(){
-        GrafProg.getDialogStage().hide();
+        ObjectUI.getDialogStage().hide();
         functionString.setText("");
         x1Text.setText("");
         GrafInputHelpers.setTextFieldColor(getX1TextField(), "black");
@@ -736,7 +736,8 @@ public class GrafDialogView {
         getFillColorPicker().setValue(javafx.scene.paint.Color.BLACK);
         msg.setText("");
         hideAll();*/
-        GrafProg.getGrafPanel().repaint();
+        ////GrafProg.getGrafPanel().repaint();
+        GrafUI.getGrafPanel().repaint();
         //setTempGrafList(new ArrayList<>());
     }
 
@@ -807,7 +808,7 @@ public class GrafDialogView {
         }else{
             try {
                 if (!fComboBox.getValue().equals("Column")) {
-                    TableHeaderActions.setComboBox(fComboBox, GrafProg.getData());
+                    TableHeaderActions.setComboBox(fComboBox, TableUI.getData());
                     //fComboBox.setItems(FXCollections.observableArrayList(TableHeaderActions.getHeaderArrayCdr(GrafProg.getData())));
 
                 }
@@ -822,11 +823,11 @@ public class GrafDialogView {
 
     static boolean addGrafObject(){
         GrafObject newObject = workingObject;
-        if (!newObject.isValidInput(GrafProg.getDialogController())) {
+        if (!newObject.isValidInput(ObjectUI.getDialogController())) {
             setMessage("Not a valid "+ getGrafType());
             return false;
         }
-        newObject = newObject.createGrafObjectFromController(GrafProg.getDialogController());
+        newObject = newObject.createGrafObjectFromController(ObjectUI.getDialogController());
         if (!duplicate(newObject)) getTempGrafList().add(newObject);
         setMessage(newObject.getType()+" added.");
         return true;
@@ -1046,7 +1047,7 @@ public class GrafDialogView {
     }
 
     private static GrafTable getData(){
-        return GrafProg.getData();
+        return TableUI.getData();
     }
 
     /*private void showFunctionString(boolean tf){
@@ -1054,7 +1055,7 @@ public class GrafDialogView {
     }*/
 
     private static HBox getFunctionChoiceBox(){
-        return GrafProg.getDialogController().getFunctionChoiceHBox();
+        return ObjectUI.getDialogController().getFunctionChoiceHBox();
     }
 
     /*private String getFunctionChosen(){
@@ -1062,15 +1063,15 @@ public class GrafDialogView {
     }*/
 
     public static void setMessage(String message){
-        GrafProg.getDialogController().getMsg().setText(message);
+        ObjectUI.getDialogController().getMsg().setText(message);
     }
 
     private static ColorPicker getFillColorPicker(){
-        return GrafProg.getDialogController().getFillColorPicker();
+        return ObjectUI.getDialogController().getFillColorPicker();
     }
 
     private static Label getFillLabel(){
-        return GrafProg.getDialogController().getFillLabel();
+        return ObjectUI.getDialogController().getFillLabel();
     }
 
     public static void setCharMarkText(String s){
@@ -1082,31 +1083,31 @@ public class GrafDialogView {
     }
 
     private static HBox getXy1PointBox(){
-        return GrafProg.getDialogController().getXy1PointBox();
+        return ObjectUI.getDialogController().getXy1PointBox();
     }
 
     private static HBox getXy2PointBox(){
-        return GrafProg.getDialogController().getXy2PointBox();
+        return ObjectUI.getDialogController().getXy2PointBox();
     }
 
     private static VBox getCheckboxVBox(){
-        return GrafProg.getDialogController().getCheckboxVBox();
+        return ObjectUI.getDialogController().getCheckboxVBox();
     }
 
     private static HBox getTextHBox(){
-        return GrafProg.getDialogController().getTextHBox();
+        return ObjectUI.getDialogController().getTextHBox();
     }
 
     private static HBox getFontHBox(){
-        return GrafProg.getDialogController().getFontHBox();
+        return ObjectUI.getDialogController().getFontHBox();
     }
 
     private static HBox getFunctionStringBox(){
-        return GrafProg.getDialogController().getFunctionStringBox();
+        return ObjectUI.getDialogController().getFunctionStringBox();
     }
 
     private static HBox getFunctionChoicHBox(){
-        return GrafProg.getDialogController().getFunctionChoiceHBox();
+        return ObjectUI.getDialogController().getFunctionChoiceHBox();
     }
 
 

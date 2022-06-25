@@ -101,81 +101,81 @@ public class GrafController {
 
     public void onFxInput(ActionEvent actionEvent) {
 
-       GrafProg.getDialogController().hideAll();
+       ObjectUI.getDialogController().hideAll();
        GrafDialogController.showFxEntryDialog();
        //GrafProg.getDialogController().showFxEntryDialog();
-       GrafProg.getDialogStage().show();
+       ObjectUI.getDialogStage().show();
 
     }
 
 
     public void onFxValue(ActionEvent actionEvent) {
-     GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
      GrafDialogController.showFxValueDialog();
-     GrafProg.getDialogStage().show();
+     ObjectUI.getDialogStage().show();
 
     }
 
     public void onFxTangent(ActionEvent actionEvent) {
-       GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
        GrafDialogController.showFxTangentDialog();
-       GrafProg.getDialogStage().show();
+       ObjectUI.getDialogStage().show();
     }
 
 
     public void onFxChord(ActionEvent actionEvent) {
-       GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
        GrafDialogController.showFxChordDialog();
-       GrafProg.getDialogStage().show();
+       ObjectUI.getDialogStage().show();
 
     }
 
     public void onFxIntegral(ActionEvent actionEvent) {
-       GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
        GrafDialogController.showFxIntegralDialog();
-       GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onFxZeros(ActionEvent actionEvent) {
-       GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
        GrafDialogController.showFxZerosDialog();
-       GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onPoint(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showPointDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onText(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showTextDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onLineSegment(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showLineSegmentDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onRectangle(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showRectangleDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onEllipse(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showEllipseDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onCircle(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showCircleDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onFreqTable(ActionEvent actionEvent) {
@@ -185,42 +185,42 @@ public class GrafController {
 
 
     public void onColumnPlot(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showColumnPlotDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onBoxplot(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showBoxplotDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onHistogram(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showHistogramDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
 
     }
 
     public void onFreqPolygon(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showFreqPolyDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
     public void onOgive(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showOgiveDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
 
 
     }
 
     public void onScatterPlot(ActionEvent actionEvent) {
-        GrafProg.getDialogController().hideAll();
+        ObjectUI.getDialogController().hideAll();
         GrafDialogController.showScatterDialog();
-        GrafProg.getDialogStage().show();
+        ObjectUI.getDialogStage().show();
     }
 
         public void onRegression(ActionEvent actionEvent) {
@@ -231,11 +231,10 @@ public class GrafController {
 
     public void onTable(ActionEvent actionEvent) {
         //GrafStage.showData();
-       GrafProg.getTableStage().show();
+        TableUI.getTableStage().show();
     }
 
-    public void oneVStats(ActionEvent actionEvent) {
-       GrafProg.getStatStage().show();
+    public void oneVStats(ActionEvent actionEvent) {StatUI.getStatStage().show();
     }
 
 
@@ -268,7 +267,8 @@ public class GrafController {
 
     public void onStandard(ActionEvent actionEvent) {
         GrafProg.getGrafSettings().setStandardAxes();
-        GrafProg.getGrafPanel().repaint();
+        //GrafProg.getGrafPanel().repaint();
+        GrafUI.getGrafPanel().repaint();
     }
 
     public void onAuto(ActionEvent actionEvent) {

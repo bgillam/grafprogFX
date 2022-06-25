@@ -46,9 +46,12 @@ public class GrafScatterplotTest
     @Test
     public void drawGrafTest(){
         assertNotNull(gScat.getGrafColor());
-        assertNotNull(GrafProg.getGrafPanel());
+      /*  assertNotNull(GrafProg.getGrafPanel());
         assertNotNull(GrafProg.getGrafPanel().getGraphics());
-        Graphics g = GrafProg.getGrafPanel().getGraphics();
+        Graphics g = GrafProg.getGrafPanel().getGraphics();*/
+        assertNotNull(GrafUI.getGrafPanel());
+        assertNotNull(GrafUI.getGrafPanel().getGraphics());
+        Graphics g = GrafUI.getGrafPanel().getGraphics();
         gScat.drawGraf((Graphics2D)g);
     }
     
