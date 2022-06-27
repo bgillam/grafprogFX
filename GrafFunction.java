@@ -19,8 +19,7 @@ import java.util.ArrayList;
 public class GrafFunction extends GrafObject implements IGrafable {
     //Instance Variables
     private String functionString;
-    private int segLength = 200;
-    //private GrafProg myOwner;
+    private static final int numSegments = 200;
     private GrafSettings gStuff;
 
     //Constructors
@@ -30,7 +29,7 @@ public class GrafFunction extends GrafObject implements IGrafable {
 
     private GrafFunction(String fString) {
         this();
-        setFunction(fString);
+        this.functionString = fString;
         GrafProg.setMessage1(functionString);
     }
 
@@ -45,30 +44,23 @@ public class GrafFunction extends GrafObject implements IGrafable {
     public void drawGraf(Graphics2D gc) {
         double xMin = gStuff.getXMin();
         double xMax = gStuff.getXMax();
-        double dx = (xMax - xMin) / segLength;
+        double dx = (xMax - xMin) / numSegments;
         double x = xMin;
         gc.setColor(super.getGrafColor());
         while (x < xMax) {
-            //try {
-                GrafPrimitives.grafLine(gStuff, x, FunctionString.fValue(functionString, x), x + dx, FunctionString.fValue(functionString, x + dx), gc);
-           // } catch (DomainViolationException | FunctionFormatException e) {System.out.println(e.toString());            }
-            x = x + dx;
+            GrafPrimitives.grafLine(gStuff, x, FunctionString.fValue(functionString, x), x + dx, FunctionString.fValue(functionString, x + dx), gc);
+          x = x + dx;
         }
-        //try {
-            GrafPrimitives.grafLine(gStuff, x - dx, FunctionString.fValue(functionString, x), xMax, FunctionString.fValue(functionString, x + dx), gc);
-        //} catch (DomainViolationException | FunctionFormatException e) {System.out.println(e.toString());       }
+        GrafPrimitives.grafLine(gStuff, x - dx, FunctionString.fValue(functionString, x), xMax, FunctionString.fValue(functionString, x + dx), gc);
         gc.setColor(Color.BLACK);
-
     }
 
     @Override
     public boolean isValidInput(GrafDialogController gdf) {
         if (gdf.getFunctionString().equals("") && gdf.functionStringIsVisible()) return false;
 
-        int errorCode = FunctionString.checkFunctionString(gdf.getFunctionString());
-        //System.out.println("made it here");
+        int errorCode = FunctionStringErrorChecks.checkFunctionString(gdf.getFunctionString());
         if (errorCode != 0) {
-            //FunctionString.errorMsg(errorCode);
             GrafInputHelpers.setTextFieldColor(GrafDialogController.getFunctionStringTextField(), "red");
             return false;
         }
@@ -113,14 +105,6 @@ public class GrafFunction extends GrafObject implements IGrafable {
 
     public String getFunction() {
         return functionString;
-    }
-
-    public void setSegLength(int sl) {
-        segLength = sl;
-    }
-
-    public int getSegLength() {
-        return segLength;
     }
 
     public String toString() {

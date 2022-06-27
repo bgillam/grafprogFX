@@ -4,6 +4,8 @@
  * @author (Bill Gillam)
  * @version (4/6/18)
  */
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 
 import java.awt.*;
@@ -35,7 +37,7 @@ public class GrafFiles implements Serializable
     private static boolean grafSaved = GrafProg.getGrafSaved();
     private static ArrayList<GrafObject> grafObjectList = GrafProg.getGrafList();
     private Font currentFont = GrafProg.getAxes().getCurrentFont();
-    private static int boxPlotsPlotted = GrafProg.getBoxPlotsPlotted();
+    //private static int boxPlotsPlotted = GrafProg.getBoxPlotsPlotted();
     private static GrafTable data = TableUI.getData();
 
     /**
@@ -97,6 +99,8 @@ public class GrafFiles implements Serializable
         }
     return file;
     }
+
+
   
   //read an object from a file - not finished yet
   private static Object openFileObject(String ext){
@@ -156,11 +160,42 @@ public class GrafFiles implements Serializable
       GrafProg.setGrafSaved(grafSaved);
       GrafProg.setGrafList(grafObjectList);
       GrafProg.getAxes().setCurrentFont(gf.currentFont);
-      grafProg.setBoxPlotsPlotted(boxPlotsPlotted);
+      //grafProg.setBoxPlotsPlotted(boxPlotsPlotted);
       TableUI.setData(data);
       return grafProg;
   }
 
+    static void resetGraf(){
+        grafFile = new File("");  //File associated with the current Graf object
+        grafSaved = false;     //has the current graf been saved?
+        GrafProg.setGrafSettings(new GrafSettings());  //Stores window settings
+        grafObjectList = new ArrayList<>();
+        GrafProg.setAxes(new GrafAxes());   //axes object
+        grafObjectList.add(GrafProg.getAxes());
+        GrafProg.setCopiedText("");
+        GrafProg.setMessage1("");
+        GrafProg.setMessage2("");
+        GrafProg.setMessage3("");
+        //boxPlotsPlotted = 0;              //for formatting multiple boxplots
+        GrafUI.repaintGraf();
+    }
 
+    //Close an open file
+    static boolean closeGraf(){
+        if (!grafSaved) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Graf?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.CANCEL) return false;
+            if (alert.getResult() == ButtonType.YES) {
+                GrafFiles.saveFile();
+                ////grafStage.setTitle(grafFile.toString());
+                GrafUI.getGrafStage().setTitle(grafFile.toString());
+                TableUI.getTableStage().setTitle("Data: " + grafFile.toString());
+                grafSaved = true;
+            }
+        }
+        return true;
+    }
 
 }

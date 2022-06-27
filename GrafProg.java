@@ -1,13 +1,10 @@
 //package sample;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -23,8 +20,8 @@ public class GrafProg extends Application {
     private static GrafUI grafUI = new GrafUI();
     private static TableUI tableUI = new TableUI();
     private static ObjectUI objectUI = new ObjectUI();
-    private static DataGenUI dataGenUI = new DataGenUI();
     private static StatUI statUI = new StatUI();
+    private static DataGenUI dataGenUI = new DataGenUI();
     private static GrafCalc calc;
 
     //static variables
@@ -37,7 +34,7 @@ public class GrafProg extends Application {
     private static GrafAxes axes = new GrafAxes();   //axes object
     private static String copiedText = "";
     private static JPanel messagePanel;
-    private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
+    //private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
 
     public static void main(String[] args) {
         //new GrafProg().launch(args);
@@ -54,11 +51,11 @@ public class GrafProg extends Application {
         GrafUI.getSwingGrafNode().setContent(GrafUI.getGrafPanel()); //put grafPanel into a JavaFX node
         GrafUI.getGrafController().getGrafPane().getChildren().add(GrafUI.getSwingGrafNode());   //place graphing window node in pane
         anchorSwingNode(GrafUI.getSwingGrafNode());
-        setSizeChangeListener(GrafUI.getGrafStage(), GrafUI.getGrafPanel());
+        ////setSizeChangeListener(GrafUI.getGrafStage(), GrafUI.getGrafPanel());
         grafObjectList.add(axes);
         GrafUI.getGrafStage().show();
         GrafUI.getGrafStage().setOnCloseRequest(event -> {
-            if (closeGraf()) System.exit(0);
+            if (GrafFiles.closeGraf()) System.exit(0);
             else
                 event.consume();
         });
@@ -73,14 +70,14 @@ public class GrafProg extends Application {
 
         //Set up column generator Dialog Box
         DataGenUI.setDataGenController(createScene(DataGenUI.getDataGenStage(), 625, 200, "TableColumnGenerator.fxml", "Column Actions").getController());
-        //tableStage.initModality(Modality.APPLICATION_MODAL);
+        DataGenUI.getDataGenStage().initModality(Modality.APPLICATION_MODAL);
 
-        ///Set up Table
+        //Set up Table
         TableUI.setTableController(createScene(TableUI.getTableStage(), initWidth, initHeight, "Table.fxml" , "Data").getController());
         TableUI.getSwingTableNode().setContent(TableUI.getData().getDataPanel());
         TableUI.getTableController().getTablePane().getChildren().add(TableUI.getSwingTableNode());
         anchorSwingNode(TableUI.getSwingTableNode());
-        setSizeChangeListener(TableUI.getTableStage(), TableUI.getDataPanel());
+        ////setSizeChangeListener(TableUI.getTableStage(), TableUI.getDataPanel());
         EditContextMenu.editContextMenu(TableUI.getTableController().getTablePane(), TableUI.getData());
     }
 
@@ -102,52 +99,11 @@ public class GrafProg extends Application {
         AnchorPane.setBottomAnchor(node, 0.0);
     }
 
-    //should not need these listeners, but do. Sort of a hack.
-    private void setSizeChangeListener(Stage stage, JPanel gPanel){
-        stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(gPanel::repaint));
-        stage.heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(gPanel::repaint));
-    }
-
-    static void resetGraf(){
-        grafFile = new File("");  //File associated with the current Graf object
-        grafSaved = false;     //has the current graf been saved?
-        grafSet = new GrafSettings();  //Stores window settings
-        grafObjectList = new ArrayList<>();
-        axes = new GrafAxes();   //axes object
-        grafObjectList.add(axes);
-        copiedText = "";
-        setMessage1("");
-        setMessage2("");
-        setMessage3("");
-        boxPlotsPlotted = 0;              //for formatting multiple boxplots
-        GrafUI.repaintGraf();
-    }
-
-
-    //Close an open file
-    static boolean closeGraf(){
-        if (!grafSaved) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Graf?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-            alert.showAndWait();
-
-            if (alert.getResult() == ButtonType.CANCEL) return false;
-            if (alert.getResult() == ButtonType.YES) {
-                GrafFiles.saveFile();
-                ////grafStage.setTitle(grafFile.toString());
-                GrafUI.getGrafStage().setTitle(grafFile.toString());
-                TableUI.getTableStage().setTitle("Data: " + grafFile.toString());
-                grafSaved = true;
-            }
-        }
-        return true;
-    }
-
-
     static int getNumPlots(){ return grafObjectList.size();}
 
     public static void setMessage1(String message){ GrafUI.getGrafController().setMessage1(message); }
     public static void setMessage2(String message){ GrafUI.getGrafController().setMessage2(message); }
-    static void setMessage3(String message){ GrafUI.getGrafController().setMessage3(message); }
+    public static void setMessage3(String message){ GrafUI.getGrafController().setMessage3(message); }
 
     static File getGrafFile(){return grafFile;}
     static void setGrafFile(File f) {grafFile = f;}
@@ -156,31 +112,23 @@ public class GrafProg extends Application {
     static boolean getGrafSaved(){return grafSaved;}
 
     static GrafAxes getAxes(){return axes;}
-    public static void setAxes(GrafAxes ga){axes = ga;}
+    static void setAxes(GrafAxes ga){axes = ga;}
 
     public static GrafSettings getGrafSettings() {return grafSet;}
     public static void setGrafSettings(GrafSettings gs) { grafSet = gs; }
 
-    public String getCopiedText(){return copiedText;}
-    public void setCopiedText(String s){ copiedText = s;}
+    public static String getCopiedText(){return copiedText;}
+    public static void setCopiedText(String s){ copiedText = s;}
 
     static void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
     static ArrayList<GrafObject> getGrafList(){return grafObjectList;}
 
-    static int getBoxPlotsPlotted(){ return boxPlotsPlotted; }
-    void setBoxPlotsPlotted(int numBoxPlots){boxPlotsPlotted=numBoxPlots;}
 
-    static void incrementBoxPlotsPlotted(){
-        boxPlotsPlotted++;
-    }
-
-    public void decrementBoxPlotsPlotted(){
-        boxPlotsPlotted--;
-    }
-
-    static void zeroBoxPlotsPlotted(){
-        boxPlotsPlotted = 0;
-    }
 }
 
 
+//should not need these listeners, but had to use them at one point. Sort of a hack. Breaking up UI's seems to have fixed it.
+   /* private void setSizeChangeListener(Stage stage, JPanel gPanel){
+        stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(gPanel::repaint));
+        stage.heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(gPanel::repaint));
+    }*/

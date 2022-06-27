@@ -118,7 +118,8 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         if (GrafProg.getGrafSettings().getReverseXY()) grafOnY(numValues, counts, gc);
         else grafOnX(numValues, counts, gc);
         GrafProg.setMessage2("");
-        GrafProg.incrementBoxPlotsPlotted();
+        //GrafProg.incrementBoxPlotsPlotted();
+        GrafBoxPlot.numBoxPlots++;
         gc.setColor(Color.BLACK);
 
     }

@@ -194,7 +194,7 @@ public class GrafOgive extends GrafHistogram implements IGrafable{
            height = height + counts[j];
         }
         GrafProg.setMessage2("");
-        GrafProg.incrementBoxPlotsPlotted();
+        GrafBoxPlot.numBoxPlots++;
         gc.setColor(Color.BLACK);
     }
 

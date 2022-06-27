@@ -23,6 +23,7 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
     private GrafSettings gStuff;
     private String mark =".";
     private boolean showFNS = true;
+    static int numBoxPlots = 0;
         
     //Constructor
     GrafBoxPlot(){
@@ -31,6 +32,7 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         GrafTable table = TableUI.getData();
         GrafProg.setMessage1("Plotting Column "+columnNumber);
         setShowFNS(true);
+        //numBoxPlots++;
     }
     
 
@@ -54,7 +56,7 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         gc.setColor(super.getGrafColor());
         double gHeight = GrafProg.getGrafSettings().getGrafHeight();
         double numPlots = GrafProg.getNumPlots();
-        double plotted = GrafProg.getBoxPlotsPlotted();
+        double plotted = getBoxPlotsPlotted();
         double boxHeight = (gHeight/2)/(numPlots+1);
         double boxCenter = boxHeight + boxHeight*(plotted);
         double[] fns = GrafStats.getFiveNumberSummary(TableColumnActions.getColumnValues(columnNumber, TableUI.getData()));
@@ -98,7 +100,8 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
         }
             //GrafPrimitives.grafLine(gStuff,GrafStats.getMin(table.getColumnValues(columnNumber)), , x2, y2, gc);
         GrafProg.setMessage2("FNS: "+fns[0]+", "+fns[1]+", "+fns[2]+", "+fns[3]+", "+fns[4]);
-        GrafProg.incrementBoxPlotsPlotted();
+        //GrafProg.incrementBoxPlotsPlotted();
+        numBoxPlots++;
         gc.setColor(Color.BLACK);
     }
 
@@ -139,7 +142,7 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
 
     @Override
     public void autoRange(){
-        GrafProg.getGrafSettings().setYMax(GrafProg.getBoxPlotsPlotted()*5);
+        GrafProg.getGrafSettings().setYMax(getBoxPlotsPlotted()*5);
         GrafProg.getGrafSettings().setYMin(-5);
     }
 
@@ -158,7 +161,8 @@ public class GrafBoxPlot extends GrafObject implements IGrafable {
     private boolean getShowFNS(){
         return showFNS;
     }
-    
+
+    private static int getBoxPlotsPlotted(){return numBoxPlots;}
 
     public String toString(){
         return "BOXPLOT: Col "+getColumnNumber()+", "+getMark();//+", "+ getGrafColor();

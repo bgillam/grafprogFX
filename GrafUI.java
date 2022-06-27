@@ -21,18 +21,21 @@ public class GrafUI {
 
     static void repaintGraf(){
         Platform.runLater(() -> {
-            getGrafStage().hide();
+            //getGrafStage().hide();
+            //getGrafStage().show();
             getGrafPanel().repaint();
-            getGrafStage().show();
+
         });
     }
 
 
-    public static Stage getGrafStage() {
+
+
+    static Stage getGrafStage() {
         return grafStage;
     }
 
-    public static void setGrafStage(Stage grafStage) {
+    static void setGrafStage(Stage grafStage) {
         GrafUI.grafStage = grafStage;
     }
 
@@ -44,11 +47,11 @@ public class GrafUI {
         GrafUI.grafScene = grafScene;
     }
 
-    public static GrafController getGrafController() {
+    static GrafController getGrafController() {
         return grafController;
     }
 
-    public static void setGrafController(GrafController grafController) {
+    static void setGrafController(GrafController grafController) {
         GrafUI.grafController = grafController;
     }
 
@@ -60,7 +63,7 @@ public class GrafUI {
         GrafUI.grafRoot = grafRoot;
     }
 
-    public static SwingNode getSwingGrafNode() {
+    static SwingNode getSwingGrafNode() {
         return swingGrafNode;
     }
 

@@ -213,8 +213,8 @@ public class TableColumnGeneratorController {
             if (pos+1 == fLength) last = ""; else  last = functionString.substring(pos+1, fLength);
             functionString = first+"X"+last;
         }
-        if (FunctionString.checkFunctionString(functionString)!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
-        else if (!FunctionString.isValidAtX(functionString, 1)) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
+        if (FunctionStringErrorChecks.checkFunctionString(functionString)!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
+        else if (!FunctionStringErrorChecks.isValidAtX(functionString, 1)) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
         //else if (!FunctionString.isValidAtXIgnoreDomainError(functionString, 1)) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
         if (!GrafInputHelpers.isInt(rowStartText.getText())) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
         else beginRow = Integer.parseInt(rowStartText.getText());
@@ -288,9 +288,9 @@ public class TableColumnGeneratorController {
         else
             endRow = Integer.parseInt(rowEndText.getText());
         if (endRow > myDaddy.getNumRows()) endRow = myDaddy.getNumRows();
-        if (FunctionString.checkFunctionString(t1.getText())!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
+        if (FunctionStringErrorChecks.checkFunctionString(t1.getText())!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
         //if (!FunctionString.isValidAtXIgnoreDomainError(t1.getText(), 1)) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
-        if (!FunctionString.isValidAtX(t1.getText(), 1)) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
+        if (!FunctionStringErrorChecks.isValidAtX(t1.getText(), 1)) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
         if (!ok) return false;
         //System.out.println("made it here");
         GrafInputHelpers.setTextFieldColor(rowStartText, "black");

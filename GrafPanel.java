@@ -41,7 +41,8 @@ public class GrafPanel extends JPanel implements Serializable
         for (GrafObject graf: GrafProg.getGrafList()){
             graf.drawGraf(grafCanvas);
         }
-        GrafProg.zeroBoxPlotsPlotted();
+        //GrafProg.zeroBoxPlotsPlotted();
+        GrafBoxPlot.numBoxPlots = 0;
         GrafProg.setMessage1(GrafFunction.yFunctionList());
     }
 

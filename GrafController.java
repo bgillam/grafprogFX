@@ -62,8 +62,8 @@ public class GrafController {
 
     @FXML
     private void fileNew(ActionEvent actionEvent) {
-       GrafProg.closeGraf();
-       GrafProg.resetGraf();
+       GrafFiles.closeGraf();
+       GrafFiles.resetGraf();
     }
 
     public void fileOpen(ActionEvent actionEvent) {
@@ -241,7 +241,7 @@ public class GrafController {
     AnchorPane getGrafPane(){return grafPane;}
 
     public void onCloseGraf(ActionEvent actionEvent) {
-        if (GrafProg.closeGraf())
+        if (GrafFiles.closeGraf())
             System.exit(0);
 
     }
