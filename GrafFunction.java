@@ -4,6 +4,8 @@
 *  @author Bill Gillam           *
 *  2/25/15                       *
 **********************************/
+import javafx.scene.Group;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -52,6 +54,9 @@ public class GrafFunction extends GrafObject implements IGrafable {
           x = x + dx;
         }
         GrafPrimitives.grafLine(gStuff, x - dx, FunctionString.fValue(functionString, x), xMax, FunctionString.fValue(functionString, x + dx), gc);
+
+        //GrafFX.drawLineFX(10,20,25, 50);
+
         gc.setColor(Color.BLACK);
     }
 

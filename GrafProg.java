@@ -3,6 +3,7 @@
 import javafx.application.Application;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +25,8 @@ public class GrafProg extends Application {
     private static DataGenUI dataGenUI = new DataGenUI();
     private static GrafCalc calc;
 
+    private static GrafUIFX grafUIFX = new GrafUIFX();;
+
     //static variables
     private static File grafFile = new File("");  //File associated with the current Graf object
     private static boolean grafSaved = false;     //has the current graf been saved?
@@ -36,22 +39,33 @@ public class GrafProg extends Application {
     private static JPanel messagePanel;
     //private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
 
+
+
     public static void main(String[] args) {
         //new GrafProg().launch(args);
         launch(args);
     }
 
+
+
     //UI thread start
     @Override
     public void start(Stage gs) throws Exception{
 
+
+
+
         //Set up main graf window
         GrafUI.setGrafStage(gs);
         GrafUI.setGrafController(createScene(GrafUI.getGrafStage(), initWidth, initHeight, "Graf.fxml", "GrafProg").getController());
+
+
+        //java swing stuff. Need to replace with FX
         GrafUI.getSwingGrafNode().setContent(GrafUI.getGrafPanel()); //put grafPanel into a JavaFX node
         GrafUI.getGrafController().getGrafPane().getChildren().add(GrafUI.getSwingGrafNode());   //place graphing window node in pane
         anchorSwingNode(GrafUI.getSwingGrafNode());
-        ////setSizeChangeListener(GrafUI.getGrafStage(), GrafUI.getGrafPanel());
+
+
         grafObjectList.add(axes);
         GrafUI.getGrafStage().show();
         GrafUI.getGrafStage().setOnCloseRequest(event -> {
@@ -81,7 +95,7 @@ public class GrafProg extends Application {
         EditContextMenu.editContextMenu(TableUI.getTableController().getTablePane(), TableUI.getData());
     }
 
-    //creates a scene within passed stage
+
     private FXMLLoader createScene(Stage stage, int width, int height, String path, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Parent root = loader.load();

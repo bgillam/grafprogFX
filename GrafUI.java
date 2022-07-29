@@ -1,5 +1,6 @@
 import javafx.application.Platform;
 import javafx.embed.swing.SwingNode;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,12 +15,15 @@ public class GrafUI {
     private static SwingNode swingGrafNode = new SwingNode();   //swing holder for grafPanel
     private static GrafPanel grafPanel = new GrafPanel(); //Graphics Panel in swing
 
-    public GrafUI() {
 
+
+    public GrafUI() {
 
     }
 
-    static void repaintGraf(){
+
+
+    static void repaintGraf() {
         Platform.runLater(() -> {
             //getGrafStage().hide();
             //getGrafStage().show();
@@ -27,8 +31,6 @@ public class GrafUI {
 
         });
     }
-
-
 
 
     static Stage getGrafStage() {
@@ -78,9 +80,6 @@ public class GrafUI {
     public static void setGrafPanel(GrafPanel grafPanel) {
         GrafUI.grafPanel = grafPanel;
     }
-
-
-
 
 
 
