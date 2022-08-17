@@ -1,3 +1,5 @@
+import GrafUtils.GrafInputHelpers;
+
 //Orignal class FunctionString was large, so it has been broken into FunctionString, FunctionStringSubstring, FunctionShring Replacers, FunctionStringOperators and FunctionStringErrorChecks.
 class FunctionStringSubstring {
     // checks from counter-1 to left and returns the left boundry of a numeric substring

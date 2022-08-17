@@ -185,7 +185,7 @@ public class GrafDialogController {
     ColorPicker getFillColorPicker() {return fillColorPicker; }
     public void setFillColorPicker(ColorPicker fillColorPicker) {  this.fillColorPicker = fillColorPicker; }
 
-    ColorPicker getGrafColorPicker() { return grafColorPicker; }
+    public ColorPicker getGrafColorPicker() { return grafColorPicker; }
     public void setGrafColorPicker(ColorPicker grafColorPicker) {this.grafColorPicker = grafColorPicker; }
 
 

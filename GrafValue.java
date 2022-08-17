@@ -4,16 +4,10 @@
  * @version 1/27/17]
  */
 //import javax.swing.*;
-import java.io.*;
+import GrafUtils.GrafInputHelpers;
+
 import java.awt.*;
 import javax.swing.JOptionPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
-import java.awt.BorderLayout;
-import javax.swing.border.*;
-import javax.swing.UIManager;
-import java.util.ArrayList;
 
 public class GrafValue extends GrafObject implements IGrafable{
         private String functionString="";

@@ -116,7 +116,7 @@ public class FunctionString {
                 time = time2;
             }
             System.out.println("done");
-            //for (int i=0; i<8; i++) System.out.println(i+" "+GrafInputHelpers.isAnAlphaChar(test,i));
+            //for (int i=0; i<8; i++) System.out.println(i+" "+GrafUtils.GrafInputHelpers.isAnAlphaChar(test,i));
             //System.out.println(fValue("X",-1.0));
             //System.out.println(fValue("x-(-2)",-1.0));
             //System.out.println(fValue("x^2", -0.1000000000000188));

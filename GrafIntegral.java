@@ -4,14 +4,10 @@
  * @version 1-31-17
  */
 //import javax.swing.*;
-import java.io.*;
+import GrafUtils.GrafInputHelpers;
+
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class GrafIntegral extends GrafObject implements IGrafable
 {

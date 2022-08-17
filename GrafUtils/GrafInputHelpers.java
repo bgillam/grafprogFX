@@ -1,10 +1,10 @@
-/* ***************************************
+package GrafUtils;/* ***************************************
 *  GrafProg  for GrafProg Project *
 *  @author Bill Gillam                  *
 *  2/25/15                              *
 *****************************************/
 /* ***************************************
-*  GrafInputHelpers  for GrafProg  
+*  GrafUtils.GrafInputHelpers  for GrafProg
 *  Data Entry Helpers
 *  @author Bill Gillam                  *
 *  2/25/15                              *
@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
 
 public class GrafInputHelpers {
     
-    static boolean isAnInteger(String str){ return isInt(str);}
+    public static boolean isAnInteger(String str){ return isInt(str);}
     
-    static boolean isInt(String str){
+    public static boolean isInt(String str){
     try {Integer.parseInt(str);}catch (NumberFormatException e){return false;} return true;
        
     }
@@ -33,7 +33,7 @@ public class GrafInputHelpers {
     }
 	
     
-	static boolean isAnIntegerWithMessage(String s){
+	public static boolean isAnIntegerWithMessage(String s){
     	try{
     			Integer.parseInt(s);
     			return true;
@@ -43,7 +43,7 @@ public class GrafInputHelpers {
     	return false;
     }
 	
-	static boolean isADoubleWithMessage(String s){
+	public static boolean isADoubleWithMessage(String s){
     	try{
     			Double.parseDouble(s);
     			return true;
@@ -53,7 +53,7 @@ public class GrafInputHelpers {
     	return false;
     }
 	
-	static boolean isANumberChar(String fString, int counter) {
+	public static boolean isANumberChar(String fString, int counter) {
 		int keyCode;
 		if ((counter < 0) || (counter > fString.length() - 1)) return false;
 		keyCode = KeyEvent.getExtendedKeyCodeForChar(fString.charAt(counter));
@@ -61,7 +61,7 @@ public class GrafInputHelpers {
     }
 	
 	 //checks to see if char at position counter is an alphtebetic character
-    static boolean isAnAlphaChar(String fString, int counter){
+    public static boolean isAnAlphaChar(String fString, int counter){
     	 int keyCode;
     	 if (  (counter <0) || (counter >fString.length()-1) ) return false;
     	 keyCode = KeyEvent.getExtendedKeyCodeForChar(fString.charAt(counter));

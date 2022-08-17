@@ -61,11 +61,11 @@ abstract public class GrafObject implements Serializable, IGrafable
    }
    
    //Getters and Setters
-   void setGrafType(GrafType gt){grType = gt;}
+   public void setGrafType(GrafType gt){grType = gt;}
    public GrafType getType(){return grType; }
    
    public boolean isMoveable(){ return moveable; } 
-   void setMoveable(boolean tf){ moveable = tf;  }
+   public void setMoveable(boolean tf){ moveable = tf;  }
    public boolean getMoveable(){return moveable;}
    
    public void setOwner(GrafProg owner){myOwner = owner;}

@@ -7,23 +7,16 @@
 // Table/spreadsheet object for data input
 //
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import GrafUtils.GrafInputHelpers;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 
 //class header

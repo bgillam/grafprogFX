@@ -4,13 +4,10 @@
  * @2-3-17
  */
 //import javax.swing.*;
-import java.io.*;
+import GrafUtils.GrafInputHelpers;
+
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class GrafChord extends GrafObject implements IGrafable
 {

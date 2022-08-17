@@ -9,19 +9,11 @@
 
 
 
+import GrafUtils.GrafInputHelpers;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.io.*;
 import java.util.Arrays;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-
-import java.awt.BorderLayout;
-
-import javax.swing.UIManager;
-
-import javax.swing.border.BevelBorder;
 
 import java.lang.*;
 
@@ -195,8 +187,8 @@ public class GrafHistogram extends GrafObject implements IGrafable{
         if (gdf.getClassSizeButton().isSelected() && !GrafInputHelpers.isDouble(gdf.getClassWidthText())) {
             GrafInputHelpers.setTextFieldColor(gdf.getClassWidthTextField(), "red");
             return false;}
-        /*if (gdf.getNumClassButton().isSelected() && !GrafInputHelpers.isAnInteger(gdf.getNumClasses())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getClassWidthTextField(), "red");
+        /*if (gdf.getNumClassButton().isSelected() && !GrafUtils.GrafInputHelpers.isAnInteger(gdf.getNumClasses())) {
+            GrafUtils.GrafInputHelpers.setTextFieldColor(gdf.getClassWidthTextField(), "red");
             return false;}*/
         return true;
     }

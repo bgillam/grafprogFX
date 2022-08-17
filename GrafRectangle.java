@@ -3,11 +3,9 @@
  * @author Bill Gillam
  * @version 1/27/17]
  */
-import java.io.*;
+import GrafUtils.GrafInputHelpers;
+
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 
 public class GrafRectangle extends GrafObject implements IGrafable {
     private String functionString = "";

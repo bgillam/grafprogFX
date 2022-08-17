@@ -205,17 +205,17 @@ public class GrafFreqPolygon extends GrafHistogram implements IGrafable{
 
         /*@Override
         public boolean isValidInput(GrafDialogController gdf){
-            if (!GrafInputHelpers.isDouble(gdf.getX1())) {
-                GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red");
+            if (!GrafUtils.GrafInputHelpers.isDouble(gdf.getX1())) {
+                GrafUtils.GrafInputHelpers.setTextFieldColor(gdf.getX1TextField(), "red");
                 return false;}
-            if (!GrafInputHelpers.isDouble(gdf.getX2())) {
-                GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red");
+            if (!GrafUtils.GrafInputHelpers.isDouble(gdf.getX2())) {
+                GrafUtils.GrafInputHelpers.setTextFieldColor(gdf.getX2TextField(), "red");
                 return false;}
-            if (gdf.getClassSizeButton().isSelected() && !GrafInputHelpers.isDouble(gdf.getClassWidthText())) {
-                GrafInputHelpers.setTextFieldColor(gdf.getClassWidthTextField(), "red");
+            if (gdf.getClassSizeButton().isSelected() && !GrafUtils.GrafInputHelpers.isDouble(gdf.getClassWidthText())) {
+                GrafUtils.GrafInputHelpers.setTextFieldColor(gdf.getClassWidthTextField(), "red");
                 return false;}
-        *//*if (gdf.getNumClassButton().isSelected() && !GrafInputHelpers.isAnInteger(gdf.getNumClasses())) {
-            GrafInputHelpers.setTextFieldColor(gdf.getClassWidthTextField(), "red");
+        *//*if (gdf.getNumClassButton().isSelected() && !GrafUtils.GrafInputHelpers.isAnInteger(gdf.getNumClasses())) {
+            GrafUtils.GrafInputHelpers.setTextFieldColor(gdf.getClassWidthTextField(), "red");
             return false;}*//*
             return true;
         }

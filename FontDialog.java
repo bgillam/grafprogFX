@@ -6,6 +6,7 @@
 /**
 * Dialog for choosing a font 
  */
+import GrafUtils.GrafInputHelpers;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
@@ -23,7 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JCheckBox;
 import javax.swing.AbstractListModel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;

@@ -1,9 +1,8 @@
+import GrafUtils.GrafInputHelpers;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import javax.swing.*;
 
 public class TableColumnGeneratorController {
 
@@ -201,7 +200,8 @@ public class TableColumnGeneratorController {
         int beginRow = 1;
         int endRow = myDaddy.getNumRows();
         boolean ok = true;
-        if (!GrafInputHelpers.isAnInteger(t1.getText())) 	{GrafInputHelpers.setTextFieldColor(t1, "red");  ok = false;  }
+        if (!GrafInputHelpers.isAnInteger(t1.getText())) 	{
+            GrafInputHelpers.setTextFieldColor(t1, "red");  ok = false;  }
         startA = Integer.parseInt(t1.getText());
         functionString =  t2.getText();
         fLength = functionString.length();
@@ -215,7 +215,7 @@ public class TableColumnGeneratorController {
         }
         if (FunctionStringErrorChecks.checkFunctionString(functionString)!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
         else if (!FunctionStringErrorChecks.isValidAtX(functionString, 1)) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
-        //else if (!FunctionString.isValidAtXIgnoreDomainError(functionString, 1)) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
+        //else if (!FunctionString.isValidAtXIgnoreDomainError(functionString, 1)) {GrafUtils.GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
         if (!GrafInputHelpers.isInt(rowStartText.getText())) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
         else beginRow = Integer.parseInt(rowStartText.getText());
         if (!GrafInputHelpers.isInt(rowEndText.getText())) {GrafInputHelpers.setTextFieldColor(rowEndText, "red");  ok = false;  }
@@ -289,7 +289,7 @@ public class TableColumnGeneratorController {
             endRow = Integer.parseInt(rowEndText.getText());
         if (endRow > myDaddy.getNumRows()) endRow = myDaddy.getNumRows();
         if (FunctionStringErrorChecks.checkFunctionString(t1.getText())!= 0) {GrafInputHelpers.setTextFieldColor(t2, "red");  ok = false;  }
-        //if (!FunctionString.isValidAtXIgnoreDomainError(t1.getText(), 1)) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
+        //if (!FunctionString.isValidAtXIgnoreDomainError(t1.getText(), 1)) {GrafUtils.GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
         if (!FunctionStringErrorChecks.isValidAtX(t1.getText(), 1)) {GrafInputHelpers.setTextFieldColor(rowStartText, "red");  ok = false;  }
         if (!ok) return false;
         //System.out.println("made it here");

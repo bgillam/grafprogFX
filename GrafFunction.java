@@ -4,18 +4,9 @@
 *  @author Bill Gillam           *
 *  2/25/15                       *
 **********************************/
-import javafx.scene.Group;
-import javafx.scene.shape.Line;
-import javafx.stage.Stage;
+import GrafUtils.GrafInputHelpers;
 
 import java.awt.*;
-import java.io.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
-import javax.swing.border.*;
-import javax.swing.UIManager;
-import java.util.ArrayList;
 
 //Class Header
 public class GrafFunction extends GrafObject implements IGrafable {

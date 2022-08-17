@@ -5,13 +5,11 @@
  * @author Bill Gillam
  * @version 2/25/15   
  */
+import GrafUtils.GrafInputHelpers;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import javax.swing.JComboBox;
 
 public class GrafPoint extends GrafText implements IGrafable
 {

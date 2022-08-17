@@ -3,13 +3,9 @@
  * @author Bill Gillam
  * @version 1/27/17]
  */
-import javax.swing.*;
-import java.io.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+import GrafUtils.GrafInputHelpers;
 
+import java.awt.*;
 
 
 public class GrafSegment extends GrafObject implements IGrafable

@@ -5,8 +5,9 @@
 *  @author Bill Gillam                   *
 *  2/25/15                               *
 *****************************************/
+import GrafUtils.GrafInputHelpers;
+
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -22,10 +23,6 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JToggleButton;
-
-import java.awt.Dialog.ModalityType;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JRadioButton;

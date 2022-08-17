@@ -5,12 +5,9 @@
  * @version j1.0]
  */
 //import javax.swing.*;
-import java.io.*;
+import GrafUtils.GrafInputHelpers;
+
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import javax.swing.JComboBox;
 
 
 public class GrafText extends GrafObject implements IGrafable
