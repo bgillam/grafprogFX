@@ -9,7 +9,7 @@
 <?import javafx.geometry.Insets?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="TableColumnGeneratorController"
+            fx:controller="GrafProg.GrafTable.TableColumnGeneratorController"
             prefHeight="400.0" prefWidth="600.0">
     <VBox>
         <padding>

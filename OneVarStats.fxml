@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="OneVarStatsController">
+          fx:controller="GrafProg.CalcStats.OneVarStatsController">
 <!--          maxHeight="300.0"-->
 <!--          maxWidth="500.0"-->
 <!--          prefHeight="300.0" prefWidth="500.0">-->

@@ -2,7 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.Color?>
-<BorderPane fx:controller="GrafDialogController"
+<BorderPane fx:controller="GrafProg.GrafObjects.Dialog.GrafDialogController"
             xmlns:fx="http://javafx.com/fxml" >
 
         <top>
