@@ -1,15 +1,27 @@
-//package sample;
+package GrafProg;
 
+import GrafProg.CalcStats.StatUI;
+import GrafProg.GrafCalc.GrafCalc;
+import GrafProg.GrafObjects.GrafAxes;
+import GrafProg.GrafObjects.GrafList;
+import GrafProg.GrafObjects.GrafObject;
+import GrafProg.GrafTable.DataGenUI;
+import GrafProg.GrafTable.TableUI;
+import GrafProg.GrafUI.GrafSettings;
+import GrafProg.GrafUI.GrafUI;
+import GrafProg.GrafUI.GrafUIFX;
+import GrafProg.GrafUI.ObjectUI;
+
+import GrafProg.GrafUtils.GrafFiles;
 import javafx.application.Application;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.swing.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,16 +45,19 @@ public class GrafProg extends Application {
     private static final int initWidth = 750;
     private static final int initHeight = 750;
     private static GrafSettings grafSet = new GrafSettings();  //Stores window settings
-    private static ArrayList<GrafObject> grafObjectList = new ArrayList<>(); //should make this class and use here and in DialogController
-    private static GrafAxes axes = new GrafAxes();   //axes object
+    //private static GrafProg.GrafObjects.GrafList grafObjectList = new GrafProg.GrafObjects.GrafList();
+    private static GrafList grafObjectList = GrafList.getInstance();
+
+    //private static ArrayList<GrafProg.GrafObjects.GrafObject> grafObjectList = new ArrayList<>(); //should make this class and use here and in DialogController
+    //private static GrafProg.GrafObjects.GrafAxes axes = new GrafProg.GrafObjects.GrafAxes();   //axes object
     private static String copiedText = "";
-    private static JPanel messagePanel;
+    //private static JPanel messagePanel;
     //private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
 
 
 
     public static void main(String[] args) {
-        //new GrafProg().launch(args);
+        //new GrafProg.GrafProg().launch(args);
         launch(args);
     }
 
@@ -57,7 +72,7 @@ public class GrafProg extends Application {
 
         //Set up main graf window
         GrafUI.setGrafStage(gs);
-        GrafUI.setGrafController(createScene(GrafUI.getGrafStage(), initWidth, initHeight, "Graf.fxml", "GrafProg").getController());
+        GrafUI.setGrafController(createScene(GrafUI.getGrafStage(), initWidth, initHeight, "/Graf.fxml", "GrafProg").getController());
 
 
         //java swing stuff. Need to replace with FX
@@ -66,7 +81,7 @@ public class GrafProg extends Application {
         anchorSwingNode(GrafUI.getSwingGrafNode());
 
 
-        grafObjectList.add(axes);
+        grafObjectList.add(grafObjectList.getAxes());
         GrafUI.getGrafStage().show();
         GrafUI.getGrafStage().setOnCloseRequest(event -> {
             if (GrafFiles.closeGraf()) System.exit(0);
@@ -75,23 +90,23 @@ public class GrafProg extends Application {
         });
 
         //Set up Object Creation Dialog Box
-        ObjectUI.setDialogController(createScene(ObjectUI.getDialogStage(), 650, 375, "GrafDialog.fxml", "").getController());
+        ObjectUI.setDialogController(createScene(ObjectUI.getDialogStage(), 650, 375, "/GrafDialog.fxml", "").getController());
         ObjectUI.getDialogStage().initModality(Modality.APPLICATION_MODAL);
 
         //Set up One Variable Stats Dialog Box
-        StatUI.setStatController(createScene(StatUI.getStatStage(), 580, 250, "OneVarStats.fxml" , "One-Variable Statistics").getController());
+        StatUI.setStatController(createScene(StatUI.getStatStage(), 580, 250, "/OneVarStats.fxml" , "One-Variable Statistics").getController());
         StatUI.getStatStage().initModality(Modality.APPLICATION_MODAL);
 
         //Set up column generator Dialog Box
-        DataGenUI.setDataGenController(createScene(DataGenUI.getDataGenStage(), 625, 200, "TableColumnGenerator.fxml", "Column Actions").getController());
+        DataGenUI.setDataGenController(createScene(DataGenUI.getDataGenStage(), 625, 200, "/TableColumnGenerator.fxml", "Column Actions").getController());
         DataGenUI.getDataGenStage().initModality(Modality.APPLICATION_MODAL);
 
         //Set up Table
-        TableUI.setTableController(createScene(TableUI.getTableStage(), initWidth, initHeight, "Table.fxml" , "Data").getController());
+        TableUI.setTableController(createScene(TableUI.getTableStage(), initWidth, initHeight, "/Table.fxml" , "Data").getController());
         TableUI.getSwingTableNode().setContent(TableUI.getData().getDataPanel());
         TableUI.getTableController().getTablePane().getChildren().add(TableUI.getSwingTableNode());
         anchorSwingNode(TableUI.getSwingTableNode());
-        ////setSizeChangeListener(TableUI.getTableStage(), TableUI.getDataPanel());
+        ////setSizeChangeListener(GrafProg.GrafTable.TableUI.getTableStage(), GrafProg.GrafTable.TableUI.getDataPanel());
         EditContextMenu.editContextMenu(TableUI.getTableController().getTablePane(), TableUI.getData());
     }
 
@@ -113,20 +128,21 @@ public class GrafProg extends Application {
         AnchorPane.setBottomAnchor(node, 0.0);
     }
 
-    static int getNumPlots(){ return grafObjectList.size();}
+    public static int getNumPlots(){ return grafObjectList.size();}
 
     public static void setMessage1(String message){ GrafUI.getGrafController().setMessage1(message); }
     public static void setMessage2(String message){ GrafUI.getGrafController().setMessage2(message); }
     public static void setMessage3(String message){ GrafUI.getGrafController().setMessage3(message); }
 
-    static File getGrafFile(){return grafFile;}
-    static void setGrafFile(File f) {grafFile = f;}
+    public static File getGrafFile(){return grafFile;}
+    public static void setGrafFile(File f) {grafFile = f;}
 
-    static void setGrafSaved(boolean tf){grafSaved = tf;}
-    static boolean getGrafSaved(){return grafSaved;}
+    public static void setGrafSaved(boolean tf){grafSaved = tf;}
+    public static boolean getGrafSaved(){return grafSaved;}
 
-    static GrafAxes getAxes(){return axes;}
-    static void setAxes(GrafAxes ga){axes = ga;}
+    public static GrafAxes getAxes(){return GrafList.getAxes();}
+    public static void setAxes(GrafAxes ga){
+        GrafList.setAxes(ga);}
 
     public static GrafSettings getGrafSettings() {return grafSet;}
     public static void setGrafSettings(GrafSettings gs) { grafSet = gs; }
@@ -134,8 +150,8 @@ public class GrafProg extends Application {
     public static String getCopiedText(){return copiedText;}
     public static void setCopiedText(String s){ copiedText = s;}
 
-    static void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
-    static ArrayList<GrafObject> getGrafList(){return grafObjectList;}
+    public static void setGrafList(ArrayList<GrafObject> al){grafObjectList.setGrafList(al);}
+    public static ArrayList<GrafObject> getGrafList(){return grafObjectList.getGrafList();}
 
 
 }
