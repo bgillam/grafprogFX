@@ -63,6 +63,7 @@ public class GrafController {
     private void fileNew(ActionEvent actionEvent) {
        GrafFiles.closeGraf();
        GrafFiles.resetGraf();
+
     }
 
     public void fileOpen(ActionEvent actionEvent) {

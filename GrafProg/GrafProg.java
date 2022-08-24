@@ -1,7 +1,6 @@
 package GrafProg;
 
 import GrafProg.CalcStats.StatUI;
-import GrafProg.GrafCalc.GrafCalc;
 import GrafProg.GrafObjects.GrafAxes;
 import GrafProg.GrafObjects.GrafList;
 import GrafProg.GrafObjects.GrafObject;
@@ -9,16 +8,18 @@ import GrafProg.GrafTable.DataGenUI;
 import GrafProg.GrafTable.TableUI;
 import GrafProg.GrafUI.GrafSettings;
 import GrafProg.GrafUI.GrafUI;
-import GrafProg.GrafUI.GrafUIFX;
 import GrafProg.GrafUI.ObjectUI;
 
 import GrafProg.GrafUtils.GrafFiles;
 import javafx.application.Application;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -30,14 +31,14 @@ public class GrafProg extends Application {
     private static final long serialVersionUID = 1L;
 
     //Create GUI's for graph, table, objects, data generation and statistics
-    private static GrafUI grafUI = new GrafUI();
+/*    private static GrafUI grafUI = new GrafUI();
     private static TableUI tableUI = new TableUI();
     private static ObjectUI objectUI = new ObjectUI();
     private static StatUI statUI = new StatUI();
     private static DataGenUI dataGenUI = new DataGenUI();
-    private static GrafCalc calc;
+    private static GrafCalc calc;*/
 
-    private static GrafUIFX grafUIFX = new GrafUIFX();;
+    //private static GrafUIFX grafUIFX = new GrafUIFX();;
 
     //static variables
     private static File grafFile = new File("");  //File associated with the current Graf object
@@ -46,27 +47,17 @@ public class GrafProg extends Application {
     private static final int initHeight = 750;
     private static GrafSettings grafSet = new GrafSettings();  //Stores window settings
     //private static GrafProg.GrafObjects.GrafList grafObjectList = new GrafProg.GrafObjects.GrafList();
-    private static GrafList grafObjectList = GrafList.getInstance();
-
-    //private static ArrayList<GrafProg.GrafObjects.GrafObject> grafObjectList = new ArrayList<>(); //should make this class and use here and in DialogController
-    //private static GrafProg.GrafObjects.GrafAxes axes = new GrafProg.GrafObjects.GrafAxes();   //axes object
+    private static GrafList grafObjectList = GrafList.getInstance();  //singleton class
     private static String copiedText = "";
-    //private static JPanel messagePanel;
-    //private static int boxPlotsPlotted = 0;              //for formatting multiple boxplots
-
-
 
     public static void main(String[] args) {
         //new GrafProg.GrafProg().launch(args);
         launch(args);
     }
 
-
-
     //UI thread start
     @Override
     public void start(Stage gs) throws Exception{
-
 
 
 
@@ -80,6 +71,15 @@ public class GrafProg extends Application {
         GrafUI.getGrafController().getGrafPane().getChildren().add(GrafUI.getSwingGrafNode());   //place graphing window node in pane
         anchorSwingNode(GrafUI.getSwingGrafNode());
 
+
+      /*  //test code for FX graph
+        Line line = new Line(10,20,25, 50);;
+        GrafUI.getGrafController().getGrafPane().getChildren().add(line);
+        Rectangle fxRect = new Rectangle(200,150,300,500);
+        GrafUI.getGrafController().getGrafPane().getChildren().add(fxRect);
+        //GrafUI.getGrafController().getGrafPane().getChildren().remove(fxRect);
+        //gs.setScene(grafScene2);
+        gs.show();*/
 
         grafObjectList.add(grafObjectList.getAxes());
         GrafUI.getGrafStage().show();
