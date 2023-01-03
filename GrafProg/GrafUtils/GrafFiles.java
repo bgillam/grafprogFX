@@ -186,14 +186,15 @@ public class GrafFiles implements Serializable
     //Close an open file
     public static boolean closeGraf(){
         //return true if not cancelled.
+        System.out.println(grafSaved+" "+ GrafProg.getGrafList().isEmpty());
         if (grafSaved) return true;
         if (GrafProg.getGrafList().isEmpty()) return true;
-        System.out.println(grafSaved+" "+ GrafProg.getGrafList().isEmpty());
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Graf?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.CANCEL) return false;
         if (alert.getResult() == ButtonType.YES) {
-            GrafFiles.saveFile(); //returns false if did not save.
+            if (!GrafFiles.saveFile()) return false; //returns false if did not save.
             ////grafStage.setTitle(grafFile.toString());
             GrafUI.getGrafStage().setTitle(grafFile.toString());
             TableUI.getTableStage().setTitle("Data: " + grafFile.toString());
