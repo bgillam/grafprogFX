@@ -5,6 +5,7 @@ package GrafProg.GrafUtils;
  * @version (4/6/18)
  */
 import GrafProg.GrafObjects.GrafAxes;
+import GrafProg.GrafObjects.GrafList;
 import GrafProg.GrafObjects.GrafObject;
 import GrafProg.GrafProg;
 import GrafProg.GrafTable.GrafTable;
@@ -186,9 +187,9 @@ public class GrafFiles implements Serializable
     //Close an open file
     public static boolean closeGraf(){
         //return true if not cancelled.
-        //System.out.println(grafSaved+" "+ GrafProg.getGrafList().isEmpty());
+        //System.out.println(grafSaved+" "+ GrafList.getInstance().isEmpty());
         if (grafSaved) return true;
-        if (GrafProg.getGrafList().isEmpty()) return true;
+        if (GrafList.getInstance().isEmpty()) return true;
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Graf?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();
@@ -202,5 +203,6 @@ public class GrafFiles implements Serializable
         }
         return true;
     }
+
 
 }
