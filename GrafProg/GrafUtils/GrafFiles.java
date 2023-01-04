@@ -186,7 +186,7 @@ public class GrafFiles implements Serializable
     //Close an open file
     public static boolean closeGraf(){
         //return true if not cancelled.
-        System.out.println(grafSaved+" "+ GrafProg.getGrafList().isEmpty());
+        //System.out.println(grafSaved+" "+ GrafProg.getGrafList().isEmpty());
         if (grafSaved) return true;
         if (GrafProg.getGrafList().isEmpty()) return true;
 
