@@ -65,12 +65,14 @@ public class GrafFiles implements Serializable
   
     
   
-    public static void saveFile(){
+    public static boolean saveFile(){
         File f = GrafProg.getGrafFile();
         if (f.toString().equals("") || !f.exists()) f = getFile();
-        if (!(f == null)) {
+        if (f == null) return false;
+        else{
             GrafFiles gf = new GrafFiles();
-            saveObjectToFile(f, gf);
+            if (saveObjectToFile(f, gf)) GrafProg.setGrafSaved(true);
+            return true;
         }
     }
 
@@ -79,18 +81,21 @@ public class GrafFiles implements Serializable
     public static void saveFileAs(){
         File f;
         f = getFile();
+        //if (f==null) return
         GrafFiles gf = new GrafFiles();
-        saveObjectToFile(f,gf);
+        if (saveObjectToFile(f,gf)) GrafProg.setGrafSaved(true);
     }
 
-    private static void saveObjectToFile(File f, Object obj){
+    private static boolean saveObjectToFile(File f, Object obj){
         try{
             FileOutputStream fout = new FileOutputStream(f.toString());
             ObjectOutputStream oos = new ObjectOutputStream(fout);   
             oos.writeObject(obj);
             oos.close();
+            return true;
         }catch(Exception ex){ GrafProg.setMessage1("File not saved");
-        System.out.println(ex.toString());}
+        System.out.println(ex.toString());
+        return false;}
     } 
      
    
@@ -113,16 +118,6 @@ public class GrafFiles implements Serializable
   //read an object from a file - not finished yet
   private static Object openFileObject(String ext){
 
-
-      /*JFrame parent = new JFrame();
-      File file;
-      int typeCheck;
-      JFileChooser openChooser = new JFileChooser();
-      String extLow = ext.toLowerCase();
-      String extHigh = ext.toUpperCase();
-      FileNameExtensionFilter filter = new FileNameExtensionFilter(extLow, extHigh);
-      openChooser.setFileFilter(filter);
-      typeCheck = openChooser.showOpenDialog(parent);*/
 
       FileChooser openChooser = new FileChooser();
       openChooser.setTitle("Open Graf");
@@ -190,18 +185,20 @@ public class GrafFiles implements Serializable
 
     //Close an open file
     public static boolean closeGraf(){
-        if (!grafSaved) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Graf?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-            alert.showAndWait();
+        //return true if not cancelled.
+        //System.out.println(grafSaved+" "+ GrafProg.getGrafList().isEmpty());
+        if (grafSaved) return true;
+        if (GrafProg.getGrafList().isEmpty()) return true;
 
-            if (alert.getResult() == ButtonType.CANCEL) return false;
-            if (alert.getResult() == ButtonType.YES) {
-                GrafFiles.saveFile();
-                ////grafStage.setTitle(grafFile.toString());
-                GrafUI.getGrafStage().setTitle(grafFile.toString());
-                TableUI.getTableStage().setTitle("Data: " + grafFile.toString());
-                grafSaved = true;
-            }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save Graf?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.CANCEL) return false;
+        if (alert.getResult() == ButtonType.YES) {
+            if (!GrafFiles.saveFile()) return false; //returns false if did not save.
+            ////grafStage.setTitle(grafFile.toString());
+            GrafUI.getGrafStage().setTitle(grafFile.toString());
+            TableUI.getTableStage().setTitle("Data: " + grafFile.toString());
+            grafSaved = true;
         }
         return true;
     }
