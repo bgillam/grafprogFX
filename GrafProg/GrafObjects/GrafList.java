@@ -46,4 +46,8 @@ public class GrafList {
     public static void setGrafList(ArrayList<GrafObject> al){grafObjectList = al;}
     public static ArrayList<GrafObject> getGrafList(){return grafObjectList;}
 
+//    public boolean isEmpty(){
+//        if (grafObjectList.size()==1) return true; else return false;
+//    }
+
 }
